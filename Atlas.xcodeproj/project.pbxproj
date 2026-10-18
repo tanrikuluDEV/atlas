@@ -1,0 +1,775 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		00113AA244B9C57F1702BB9B /* AtlasApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B039968FC134F8A1AC6E2337 /* AtlasApp.swift */; };
+		086C260022A7779A6697E782 /* Platform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8966DBC817BE95BE90215875 /* Platform.swift */; };
+		0D158FA61CE680B78634FED9 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 274F0CF7EF58B24307CCED4E /* SettingsView.swift */; };
+		0E2C954889AE78439B391A96 /* Progression.swift in Sources */ = {isa = PBXBuildFile; fileRef = C55E6A3830AF4CC7BC91B879 /* Progression.swift */; };
+		13093D1922628596FC94E1A5 /* TurkishText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 014482CAB6307BA9B93C46B9 /* TurkishText.swift */; };
+		1510FE831157913B7E8C2414 /* Brand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B0329F2374D6A94596CD083 /* Brand.swift */; };
+		160A261EDA47F94B7A1E8854 /* GameModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B15A1DFC23AFA60D626F836E /* GameModel.swift */; };
+		17D87F2B60356E26E020E48D /* Hints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A9553E85063A5FB584EAB42 /* Hints.swift */; };
+		181445AC1130F774F702E588 /* Place.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CD371632A6A96D14BA6F66C /* Place.swift */; };
+		1CCC5A4C2B31BCBAF70F5269 /* MapGeometry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E2B96D3406A1130DE2C723A /* MapGeometry.swift */; };
+		1D7D1496C343A9E1029EE5FD /* Progression.swift in Sources */ = {isa = PBXBuildFile; fileRef = C55E6A3830AF4CC7BC91B879 /* Progression.swift */; };
+		1D883C8A83495FE5C6B84C3C /* BricolageGrotesque-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 12B972CBC916EE61EDF6790C /* BricolageGrotesque-ExtraBold.ttf */; };
+		21317B473DC86BB83DA39A12 /* Sheets.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0D6074433BEC2769D35BEC6 /* Sheets.swift */; };
+		228091EC9E31E765C035611B /* provinces.json in Resources */ = {isa = PBXBuildFile; fileRef = AD19E18DF83948FAC8D87A4B /* provinces.json */; };
+		22E5267F721D6AB6AE976E17 /* DebugSnapshots.swift in Sources */ = {isa = PBXBuildFile; fileRef = F30335D55EA0CC3488A6727A /* DebugSnapshots.swift */; };
+		281ABB335BD23E0D75F3AEB6 /* VoiceRemoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D8B429A21D1DE3357DAB066 /* VoiceRemoteView.swift */; };
+		28FF4376C4E3B315A6B81465 /* TVViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C452AC98790E815E93B523 /* TVViews.swift */; };
+		2E1565BD03D665DFD101B7DD /* Brand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B0329F2374D6A94596CD083 /* Brand.swift */; };
+		3404ED83B07179C04BE11FE8 /* StatsExtras.swift in Sources */ = {isa = PBXBuildFile; fileRef = 073C1EFD6EA624FB5CA27129 /* StatsExtras.swift */; };
+		341257B7E34D2611511D3252 /* DebugSnapshots.swift in Sources */ = {isa = PBXBuildFile; fileRef = F30335D55EA0CC3488A6727A /* DebugSnapshots.swift */; };
+		35ACA5CC77B371822C812FC1 /* AtlasApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B039968FC134F8A1AC6E2337 /* AtlasApp.swift */; };
+		3D1D792E8C1B61151BD72252 /* VoiceRemoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D8B429A21D1DE3357DAB066 /* VoiceRemoteView.swift */; };
+		429A5686948A61A427A6A76A /* Localization.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC6C2DE8F8024958218613EE /* Localization.swift */; };
+		44BAD8C2072CDA153F319915 /* TVViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C452AC98790E815E93B523 /* TVViews.swift */; };
+		451E2CB64FB20E05AF55D331 /* TurkishText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 014482CAB6307BA9B93C46B9 /* TurkishText.swift */; };
+		452E12BF48A62930C6FE0988 /* StatsExtras.swift in Sources */ = {isa = PBXBuildFile; fileRef = 073C1EFD6EA624FB5CA27129 /* StatsExtras.swift */; };
+		4B8276E96EE4017B133DC335 /* VoiceLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B8E0FCE8B21CCBBE19E3D7 /* VoiceLink.swift */; };
+		4CFA038B1168FB47DE9E2FE6 /* Sheets.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0D6074433BEC2769D35BEC6 /* Sheets.swift */; };
+		4EC32720EECC3E33EA635272 /* Place.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CD371632A6A96D14BA6F66C /* Place.swift */; };
+		57469922407804A950347D8F /* hints.json in Resources */ = {isa = PBXBuildFile; fileRef = E0A9FEAB54207168722BE498 /* hints.json */; };
+		57541F5560DD69991E0B2FB0 /* provinces.json in Resources */ = {isa = PBXBuildFile; fileRef = AD19E18DF83948FAC8D87A4B /* provinces.json */; };
+		5812964D02223C6272680A7B /* provinces.json in Resources */ = {isa = PBXBuildFile; fileRef = AD19E18DF83948FAC8D87A4B /* provinces.json */; };
+		59D2622C7949138F9EEFE3F6 /* Hints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A9553E85063A5FB584EAB42 /* Hints.swift */; };
+		663323FC22C01E47BE80BB70 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AA986E23356244005C7DA505 /* Assets.xcassets */; };
+		6827FDD02F4B78605B70C6B8 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54BB62A20AA41137A8520563 /* MapView.swift */; };
+		6D66F9166F11647FC52293FD /* strings.json in Resources */ = {isa = PBXBuildFile; fileRef = A38F86C82521E6D9DE6E1419 /* strings.json */; };
+		70FFDEF088629C00FC0F99B3 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 274F0CF7EF58B24307CCED4E /* SettingsView.swift */; };
+		729A9C72E9997F815736A635 /* BricolageGrotesque-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 12B972CBC916EE61EDF6790C /* BricolageGrotesque-ExtraBold.ttf */; };
+		73FBE2118A78488E818997BB /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AEBDC7BEE7D554C7FA18D29 /* ContentView.swift */; };
+		77A7CCAEA4F6C21875D87DCD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AA986E23356244005C7DA505 /* Assets.xcassets */; };
+		804E4F473D2725520708B399 /* ColorScale.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8356D25827C690014A991AE8 /* ColorScale.swift */; };
+		82893E684D2475DE99F105E5 /* VoiceLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B8E0FCE8B21CCBBE19E3D7 /* VoiceLink.swift */; };
+		83BA462B140CAFE54B9BD6B3 /* Progression.swift in Sources */ = {isa = PBXBuildFile; fileRef = C55E6A3830AF4CC7BC91B879 /* Progression.swift */; };
+		843771A12DEE87E93B78639A /* world.json in Resources */ = {isa = PBXBuildFile; fileRef = 9BB43DB9C755082BFFA2AA5E /* world.json */; };
+		8C765C596682AE3FFE304DE8 /* Hints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A9553E85063A5FB584EAB42 /* Hints.swift */; };
+		8D28FE030C7EE76B688E65BB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AA986E23356244005C7DA505 /* Assets.xcassets */; };
+		8E6D03DECB33D33E28845AA6 /* Platform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8966DBC817BE95BE90215875 /* Platform.swift */; };
+		915C0C9C4936D26DBA708C44 /* MapGeometry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E2B96D3406A1130DE2C723A /* MapGeometry.swift */; };
+		91F6B06BC7B81A4144751808 /* ProgressSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E8DB256F31E768D1AD48E46 /* ProgressSection.swift */; };
+		923C03A157077833EAB89E82 /* Platform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8966DBC817BE95BE90215875 /* Platform.swift */; };
+		97F64F47C99747F2D425C52B /* AtlasApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B039968FC134F8A1AC6E2337 /* AtlasApp.swift */; };
+		98A2A17C550A7EE37E55681C /* GameModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B15A1DFC23AFA60D626F836E /* GameModel.swift */; };
+		A74AB6B12C5356D3D8470196 /* ColorScale.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8356D25827C690014A991AE8 /* ColorScale.swift */; };
+		A7BECAC1CCA30211337290F7 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54BB62A20AA41137A8520563 /* MapView.swift */; };
+		A97C500F2B501AE325483EA8 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AEBDC7BEE7D554C7FA18D29 /* ContentView.swift */; };
+		AA6CB36CCAE29A699F0C9A1D /* VoiceRemoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D8B429A21D1DE3357DAB066 /* VoiceRemoteView.swift */; };
+		AA81D0A8A7DE4CBFFB410C92 /* Brand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B0329F2374D6A94596CD083 /* Brand.swift */; };
+		AB6E170245C08D19CE081947 /* ColorScale.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8356D25827C690014A991AE8 /* ColorScale.swift */; };
+		AC1932FDE9AF0DFE8E11BC04 /* TurkishText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 014482CAB6307BA9B93C46B9 /* TurkishText.swift */; };
+		AFF4112DCEF21E8A10E2769A /* Stats.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E994E13C63287E0B942955 /* Stats.swift */; };
+		B6A61987BDA6C9C70A6E22AA /* Localization.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC6C2DE8F8024958218613EE /* Localization.swift */; };
+		B73C20ABB8AA6D2F960D39A2 /* VoiceLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B8E0FCE8B21CCBBE19E3D7 /* VoiceLink.swift */; };
+		B80C722609F80A67F6AF5EC1 /* DebugSnapshots.swift in Sources */ = {isa = PBXBuildFile; fileRef = F30335D55EA0CC3488A6727A /* DebugSnapshots.swift */; };
+		BFF944916531F1AB5106B3D2 /* ConfettiView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B0AEE80F05E5E3789F2D638 /* ConfettiView.swift */; };
+		CAE21F86B4ECD84C4BAA3952 /* Stats.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E994E13C63287E0B942955 /* Stats.swift */; };
+		CD7347FAB205B1B3CB466656 /* Stats.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E994E13C63287E0B942955 /* Stats.swift */; };
+		CE24624743C5A1BDB1ADE257 /* GameModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B15A1DFC23AFA60D626F836E /* GameModel.swift */; };
+		D63B904B098C41F41A09E9A5 /* MapGeometry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E2B96D3406A1130DE2C723A /* MapGeometry.swift */; };
+		D7948AF7A9ED61B600FABA95 /* world.json in Resources */ = {isa = PBXBuildFile; fileRef = 9BB43DB9C755082BFFA2AA5E /* world.json */; };
+		DC4D6D8DA5663ECCB81656A4 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AEBDC7BEE7D554C7FA18D29 /* ContentView.swift */; };
+		DEC81627DDBCB0E427C4A9F4 /* strings.json in Resources */ = {isa = PBXBuildFile; fileRef = A38F86C82521E6D9DE6E1419 /* strings.json */; };
+		E271EB8E5C52C711E2041654 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54BB62A20AA41137A8520563 /* MapView.swift */; };
+		E42E83E311A854D9BAE9CB9C /* ConfettiView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B0AEE80F05E5E3789F2D638 /* ConfettiView.swift */; };
+		E5CC26E1EC2B25DCD27AE35E /* strings.json in Resources */ = {isa = PBXBuildFile; fileRef = A38F86C82521E6D9DE6E1419 /* strings.json */; };
+		E9172833CD8EAA276874D69E /* world.json in Resources */ = {isa = PBXBuildFile; fileRef = 9BB43DB9C755082BFFA2AA5E /* world.json */; };
+		E9D5C147E68129A0CB8B3A76 /* Place.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CD371632A6A96D14BA6F66C /* Place.swift */; };
+		ECB67DBA54126742BAF31580 /* TVViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C452AC98790E815E93B523 /* TVViews.swift */; };
+		F11E0111D93C36F3790C8958 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 274F0CF7EF58B24307CCED4E /* SettingsView.swift */; };
+		F20115CCFFB06A8F0C029570 /* BricolageGrotesque-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 12B972CBC916EE61EDF6790C /* BricolageGrotesque-ExtraBold.ttf */; };
+		F24BB8B3912FD2B74A9AB086 /* hints.json in Resources */ = {isa = PBXBuildFile; fileRef = E0A9FEAB54207168722BE498 /* hints.json */; };
+		F2621F89323ABFA03E84847F /* ConfettiView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B0AEE80F05E5E3789F2D638 /* ConfettiView.swift */; };
+		F34E1A2CF43E101F41CEDD15 /* Sheets.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0D6074433BEC2769D35BEC6 /* Sheets.swift */; };
+		F3DE2499A2D6F4CCB26C8EC2 /* Localization.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC6C2DE8F8024958218613EE /* Localization.swift */; };
+		F63EDC1EB44C676FF7DF997B /* StatsExtras.swift in Sources */ = {isa = PBXBuildFile; fileRef = 073C1EFD6EA624FB5CA27129 /* StatsExtras.swift */; };
+		F65FCD1227CF717453BC55A7 /* hints.json in Resources */ = {isa = PBXBuildFile; fileRef = E0A9FEAB54207168722BE498 /* hints.json */; };
+		F730002126C53E0C5A4BE5B8 /* ProgressSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E8DB256F31E768D1AD48E46 /* ProgressSection.swift */; };
+		FF87E2BC14829973408245DB /* ProgressSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E8DB256F31E768D1AD48E46 /* ProgressSection.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		014482CAB6307BA9B93C46B9 /* TurkishText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TurkishText.swift; sourceTree = "<group>"; };
+		02C452AC98790E815E93B523 /* TVViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVViews.swift; sourceTree = "<group>"; };
+		073C1EFD6EA624FB5CA27129 /* StatsExtras.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsExtras.swift; sourceTree = "<group>"; };
+		12B972CBC916EE61EDF6790C /* BricolageGrotesque-ExtraBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "BricolageGrotesque-ExtraBold.ttf"; sourceTree = "<group>"; };
+		1CD371632A6A96D14BA6F66C /* Place.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Place.swift; sourceTree = "<group>"; };
+		1D8B429A21D1DE3357DAB066 /* VoiceRemoteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceRemoteView.swift; sourceTree = "<group>"; };
+		1E2B96D3406A1130DE2C723A /* MapGeometry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapGeometry.swift; sourceTree = "<group>"; };
+		1F749FAC464160859B496BA6 /* AtlasTV.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = AtlasTV.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		22B8E0FCE8B21CCBBE19E3D7 /* VoiceLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceLink.swift; sourceTree = "<group>"; };
+		274F0CF7EF58B24307CCED4E /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		2B0AEE80F05E5E3789F2D638 /* ConfettiView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfettiView.swift; sourceTree = "<group>"; };
+		413A56C9FFE04C7BBD65B964 /* Atlas.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Atlas.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		54BB62A20AA41137A8520563 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
+		5A9553E85063A5FB584EAB42 /* Hints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hints.swift; sourceTree = "<group>"; };
+		6AEBDC7BEE7D554C7FA18D29 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		6B0329F2374D6A94596CD083 /* Brand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Brand.swift; sourceTree = "<group>"; };
+		7E8DB256F31E768D1AD48E46 /* ProgressSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressSection.swift; sourceTree = "<group>"; };
+		8356D25827C690014A991AE8 /* ColorScale.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorScale.swift; sourceTree = "<group>"; };
+		8966DBC817BE95BE90215875 /* Platform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Platform.swift; sourceTree = "<group>"; };
+		9BB43DB9C755082BFFA2AA5E /* world.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = world.json; sourceTree = "<group>"; };
+		A38F86C82521E6D9DE6E1419 /* strings.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = strings.json; sourceTree = "<group>"; };
+		AA986E23356244005C7DA505 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		AC6C2DE8F8024958218613EE /* Localization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Localization.swift; sourceTree = "<group>"; };
+		AD19E18DF83948FAC8D87A4B /* provinces.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = provinces.json; sourceTree = "<group>"; };
+		B039968FC134F8A1AC6E2337 /* AtlasApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AtlasApp.swift; sourceTree = "<group>"; };
+		B15A1DFC23AFA60D626F836E /* GameModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameModel.swift; sourceTree = "<group>"; };
+		BDB5719EADB665CF4D17B334 /* AtlasiOS.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = AtlasiOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		C55E6A3830AF4CC7BC91B879 /* Progression.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Progression.swift; sourceTree = "<group>"; };
+		E0A9FEAB54207168722BE498 /* hints.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = hints.json; sourceTree = "<group>"; };
+		E0D6074433BEC2769D35BEC6 /* Sheets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sheets.swift; sourceTree = "<group>"; };
+		E0E994E13C63287E0B942955 /* Stats.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stats.swift; sourceTree = "<group>"; };
+		F30335D55EA0CC3488A6727A /* DebugSnapshots.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugSnapshots.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		071B3FB99E139970DF18CBA2 /* Atlas */ = {
+			isa = PBXGroup;
+			children = (
+				AA986E23356244005C7DA505 /* Assets.xcassets */,
+				B039968FC134F8A1AC6E2337 /* AtlasApp.swift */,
+				CEF0F8922A1A681679210B66 /* Game */,
+				DFAAF301FCF545AF3AFFED9B /* Models */,
+				D31C3F19C9E477535FFFB67D /* Resources */,
+				EAAD681EBA3C656695756971 /* Views */,
+				ED50A51D80A8A1997582DB4C /* Voice */,
+			);
+			path = Atlas;
+			sourceTree = "<group>";
+		};
+		70A20106B8807AFCC4851B2C = {
+			isa = PBXGroup;
+			children = (
+				071B3FB99E139970DF18CBA2 /* Atlas */,
+				8BC05A2DCB0F814BEC46CBFF /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		8BC05A2DCB0F814BEC46CBFF /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				413A56C9FFE04C7BBD65B964 /* Atlas.app */,
+				BDB5719EADB665CF4D17B334 /* AtlasiOS.app */,
+				1F749FAC464160859B496BA6 /* AtlasTV.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		CEF0F8922A1A681679210B66 /* Game */ = {
+			isa = PBXGroup;
+			children = (
+				B15A1DFC23AFA60D626F836E /* GameModel.swift */,
+				C55E6A3830AF4CC7BC91B879 /* Progression.swift */,
+				E0E994E13C63287E0B942955 /* Stats.swift */,
+			);
+			path = Game;
+			sourceTree = "<group>";
+		};
+		D31C3F19C9E477535FFFB67D /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				12B972CBC916EE61EDF6790C /* BricolageGrotesque-ExtraBold.ttf */,
+				E0A9FEAB54207168722BE498 /* hints.json */,
+				AD19E18DF83948FAC8D87A4B /* provinces.json */,
+				A38F86C82521E6D9DE6E1419 /* strings.json */,
+				9BB43DB9C755082BFFA2AA5E /* world.json */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		DFAAF301FCF545AF3AFFED9B /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				5A9553E85063A5FB584EAB42 /* Hints.swift */,
+				AC6C2DE8F8024958218613EE /* Localization.swift */,
+				1CD371632A6A96D14BA6F66C /* Place.swift */,
+				014482CAB6307BA9B93C46B9 /* TurkishText.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		EAAD681EBA3C656695756971 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				6B0329F2374D6A94596CD083 /* Brand.swift */,
+				8356D25827C690014A991AE8 /* ColorScale.swift */,
+				2B0AEE80F05E5E3789F2D638 /* ConfettiView.swift */,
+				6AEBDC7BEE7D554C7FA18D29 /* ContentView.swift */,
+				F30335D55EA0CC3488A6727A /* DebugSnapshots.swift */,
+				1E2B96D3406A1130DE2C723A /* MapGeometry.swift */,
+				54BB62A20AA41137A8520563 /* MapView.swift */,
+				8966DBC817BE95BE90215875 /* Platform.swift */,
+				7E8DB256F31E768D1AD48E46 /* ProgressSection.swift */,
+				274F0CF7EF58B24307CCED4E /* SettingsView.swift */,
+				E0D6074433BEC2769D35BEC6 /* Sheets.swift */,
+				073C1EFD6EA624FB5CA27129 /* StatsExtras.swift */,
+				02C452AC98790E815E93B523 /* TVViews.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		ED50A51D80A8A1997582DB4C /* Voice */ = {
+			isa = PBXGroup;
+			children = (
+				22B8E0FCE8B21CCBBE19E3D7 /* VoiceLink.swift */,
+				1D8B429A21D1DE3357DAB066 /* VoiceRemoteView.swift */,
+			);
+			path = Voice;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		B3672B8F2C4C779F01D13958 /* AtlasTV */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3F9C25C0DD4CA4C3A2C0811A /* Build configuration list for PBXNativeTarget "AtlasTV" */;
+			buildPhases = (
+				38D71E8CA943C6393276BBFE /* Sources */,
+				143DC96903F863640C03E1AE /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = AtlasTV;
+			packageProductDependencies = (
+			);
+			productName = AtlasTV;
+			productReference = 1F749FAC464160859B496BA6 /* AtlasTV.app */;
+			productType = "com.apple.product-type.application";
+		};
+		BEE0910772920D84B133CC47 /* Atlas */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 22181CD7CED82AE7DBD59B1A /* Build configuration list for PBXNativeTarget "Atlas" */;
+			buildPhases = (
+				5F00E980EC462CB5A8421B1C /* Sources */,
+				AEB035FE95E36701E46D468A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Atlas;
+			packageProductDependencies = (
+			);
+			productName = Atlas;
+			productReference = 413A56C9FFE04C7BBD65B964 /* Atlas.app */;
+			productType = "com.apple.product-type.application";
+		};
+		FB103A927A595B90306F99DD /* AtlasiOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 790B0F9F42C26AB3963C610A /* Build configuration list for PBXNativeTarget "AtlasiOS" */;
+			buildPhases = (
+				51394002E1E47AF5684D61A8 /* Sources */,
+				ED4FB52C6A534C18DE5E8943 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = AtlasiOS;
+			packageProductDependencies = (
+			);
+			productName = AtlasiOS;
+			productReference = BDB5719EADB665CF4D17B334 /* AtlasiOS.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		43D55555CA7BCC7C87E44A39 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1430;
+				TargetAttributes = {
+					B3672B8F2C4C779F01D13958 = {
+						DevelopmentTeam = DR8AY52TR6;
+						ProvisioningStyle = Automatic;
+					};
+					BEE0910772920D84B133CC47 = {
+						DevelopmentTeam = "";
+						ProvisioningStyle = Manual;
+					};
+					FB103A927A595B90306F99DD = {
+						DevelopmentTeam = DR8AY52TR6;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = 7EC0B782DE33925870958060 /* Build configuration list for PBXProject "Atlas" */;
+			developmentRegion = tr;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				tr,
+			);
+			mainGroup = 70A20106B8807AFCC4851B2C;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = 8BC05A2DCB0F814BEC46CBFF /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				BEE0910772920D84B133CC47 /* Atlas */,
+				B3672B8F2C4C779F01D13958 /* AtlasTV */,
+				FB103A927A595B90306F99DD /* AtlasiOS */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		143DC96903F863640C03E1AE /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				663323FC22C01E47BE80BB70 /* Assets.xcassets in Resources */,
+				729A9C72E9997F815736A635 /* BricolageGrotesque-ExtraBold.ttf in Resources */,
+				57469922407804A950347D8F /* hints.json in Resources */,
+				228091EC9E31E765C035611B /* provinces.json in Resources */,
+				E5CC26E1EC2B25DCD27AE35E /* strings.json in Resources */,
+				E9172833CD8EAA276874D69E /* world.json in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AEB035FE95E36701E46D468A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8D28FE030C7EE76B688E65BB /* Assets.xcassets in Resources */,
+				1D883C8A83495FE5C6B84C3C /* BricolageGrotesque-ExtraBold.ttf in Resources */,
+				F65FCD1227CF717453BC55A7 /* hints.json in Resources */,
+				5812964D02223C6272680A7B /* provinces.json in Resources */,
+				DEC81627DDBCB0E427C4A9F4 /* strings.json in Resources */,
+				D7948AF7A9ED61B600FABA95 /* world.json in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		ED4FB52C6A534C18DE5E8943 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				77A7CCAEA4F6C21875D87DCD /* Assets.xcassets in Resources */,
+				F20115CCFFB06A8F0C029570 /* BricolageGrotesque-ExtraBold.ttf in Resources */,
+				F24BB8B3912FD2B74A9AB086 /* hints.json in Resources */,
+				57541F5560DD69991E0B2FB0 /* provinces.json in Resources */,
+				6D66F9166F11647FC52293FD /* strings.json in Resources */,
+				843771A12DEE87E93B78639A /* world.json in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		38D71E8CA943C6393276BBFE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				35ACA5CC77B371822C812FC1 /* AtlasApp.swift in Sources */,
+				1510FE831157913B7E8C2414 /* Brand.swift in Sources */,
+				AB6E170245C08D19CE081947 /* ColorScale.swift in Sources */,
+				F2621F89323ABFA03E84847F /* ConfettiView.swift in Sources */,
+				73FBE2118A78488E818997BB /* ContentView.swift in Sources */,
+				341257B7E34D2611511D3252 /* DebugSnapshots.swift in Sources */,
+				CE24624743C5A1BDB1ADE257 /* GameModel.swift in Sources */,
+				8C765C596682AE3FFE304DE8 /* Hints.swift in Sources */,
+				B6A61987BDA6C9C70A6E22AA /* Localization.swift in Sources */,
+				D63B904B098C41F41A09E9A5 /* MapGeometry.swift in Sources */,
+				A7BECAC1CCA30211337290F7 /* MapView.swift in Sources */,
+				181445AC1130F774F702E588 /* Place.swift in Sources */,
+				8E6D03DECB33D33E28845AA6 /* Platform.swift in Sources */,
+				FF87E2BC14829973408245DB /* ProgressSection.swift in Sources */,
+				83BA462B140CAFE54B9BD6B3 /* Progression.swift in Sources */,
+				0D158FA61CE680B78634FED9 /* SettingsView.swift in Sources */,
+				21317B473DC86BB83DA39A12 /* Sheets.swift in Sources */,
+				CAE21F86B4ECD84C4BAA3952 /* Stats.swift in Sources */,
+				F63EDC1EB44C676FF7DF997B /* StatsExtras.swift in Sources */,
+				ECB67DBA54126742BAF31580 /* TVViews.swift in Sources */,
+				AC1932FDE9AF0DFE8E11BC04 /* TurkishText.swift in Sources */,
+				4B8276E96EE4017B133DC335 /* VoiceLink.swift in Sources */,
+				281ABB335BD23E0D75F3AEB6 /* VoiceRemoteView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		51394002E1E47AF5684D61A8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				00113AA244B9C57F1702BB9B /* AtlasApp.swift in Sources */,
+				AA81D0A8A7DE4CBFFB410C92 /* Brand.swift in Sources */,
+				A74AB6B12C5356D3D8470196 /* ColorScale.swift in Sources */,
+				BFF944916531F1AB5106B3D2 /* ConfettiView.swift in Sources */,
+				DC4D6D8DA5663ECCB81656A4 /* ContentView.swift in Sources */,
+				B80C722609F80A67F6AF5EC1 /* DebugSnapshots.swift in Sources */,
+				98A2A17C550A7EE37E55681C /* GameModel.swift in Sources */,
+				59D2622C7949138F9EEFE3F6 /* Hints.swift in Sources */,
+				F3DE2499A2D6F4CCB26C8EC2 /* Localization.swift in Sources */,
+				1CCC5A4C2B31BCBAF70F5269 /* MapGeometry.swift in Sources */,
+				6827FDD02F4B78605B70C6B8 /* MapView.swift in Sources */,
+				E9D5C147E68129A0CB8B3A76 /* Place.swift in Sources */,
+				086C260022A7779A6697E782 /* Platform.swift in Sources */,
+				F730002126C53E0C5A4BE5B8 /* ProgressSection.swift in Sources */,
+				1D7D1496C343A9E1029EE5FD /* Progression.swift in Sources */,
+				F11E0111D93C36F3790C8958 /* SettingsView.swift in Sources */,
+				F34E1A2CF43E101F41CEDD15 /* Sheets.swift in Sources */,
+				AFF4112DCEF21E8A10E2769A /* Stats.swift in Sources */,
+				3404ED83B07179C04BE11FE8 /* StatsExtras.swift in Sources */,
+				28FF4376C4E3B315A6B81465 /* TVViews.swift in Sources */,
+				13093D1922628596FC94E1A5 /* TurkishText.swift in Sources */,
+				82893E684D2475DE99F105E5 /* VoiceLink.swift in Sources */,
+				3D1D792E8C1B61151BD72252 /* VoiceRemoteView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5F00E980EC462CB5A8421B1C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				97F64F47C99747F2D425C52B /* AtlasApp.swift in Sources */,
+				2E1565BD03D665DFD101B7DD /* Brand.swift in Sources */,
+				804E4F473D2725520708B399 /* ColorScale.swift in Sources */,
+				E42E83E311A854D9BAE9CB9C /* ConfettiView.swift in Sources */,
+				A97C500F2B501AE325483EA8 /* ContentView.swift in Sources */,
+				22E5267F721D6AB6AE976E17 /* DebugSnapshots.swift in Sources */,
+				160A261EDA47F94B7A1E8854 /* GameModel.swift in Sources */,
+				17D87F2B60356E26E020E48D /* Hints.swift in Sources */,
+				429A5686948A61A427A6A76A /* Localization.swift in Sources */,
+				915C0C9C4936D26DBA708C44 /* MapGeometry.swift in Sources */,
+				E271EB8E5C52C711E2041654 /* MapView.swift in Sources */,
+				4EC32720EECC3E33EA635272 /* Place.swift in Sources */,
+				923C03A157077833EAB89E82 /* Platform.swift in Sources */,
+				91F6B06BC7B81A4144751808 /* ProgressSection.swift in Sources */,
+				0E2C954889AE78439B391A96 /* Progression.swift in Sources */,
+				70FFDEF088629C00FC0F99B3 /* SettingsView.swift in Sources */,
+				4CFA038B1168FB47DE9E2FE6 /* Sheets.swift in Sources */,
+				CD7347FAB205B1B3CB466656 /* Stats.swift in Sources */,
+				452E12BF48A62930C6FE0988 /* StatsExtras.swift in Sources */,
+				44BAD8C2072CDA153F319915 /* TVViews.swift in Sources */,
+				451E2CB64FB20E05AF55D331 /* TurkishText.swift in Sources */,
+				B73C20ABB8AA6D2F960D39A2 /* VoiceLink.swift in Sources */,
+				AA6CB36CCAE29A699F0C9A1D /* VoiceRemoteView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		029C1E75BDB5AB72B37C1D73 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = TVAppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = DR8AY52TR6;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Config/Voice-Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = Atlas;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.puzzle-games";
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.atanrikulu.atlas.tv;
+				PRODUCT_NAME = Atlas;
+				SDKROOT = appletvos;
+				TARGETED_DEVICE_FAMILY = 3;
+			};
+			name = Debug;
+		};
+		0357C3208ED930145396B664 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Manual;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_HARDENED_RUNTIME = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = Atlas;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.puzzle-games";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.atlas.ilbulmaca;
+				PRODUCT_NAME = Atlas;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		518D7E4B2680000A4A0FDAD6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = DR8AY52TR6;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Config/Voice-Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = Atlas;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.puzzle-games";
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UIRequiresFullScreen = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.atanrikulu.atlas;
+				PRODUCT_NAME = Atlas;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		62AA757F5F4A0698E93FE223 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = DR8AY52TR6;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Config/Voice-Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = Atlas;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.puzzle-games";
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UIRequiresFullScreen = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.atanrikulu.atlas;
+				PRODUCT_NAME = Atlas;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+		6C075FD071D9C4DB3D554A55 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MARKETING_VERSION = 1.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+				TVOS_DEPLOYMENT_TARGET = 17.0;
+			};
+			name = Release;
+		};
+		804FE0C9BF065A009759B8FF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Manual;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_HARDENED_RUNTIME = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = Atlas;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.puzzle-games";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.atlas.ilbulmaca;
+				PRODUCT_NAME = Atlas;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		8D21ED53AFB54A8F40E5E443 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MARKETING_VERSION = 1.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TVOS_DEPLOYMENT_TARGET = 17.0;
+			};
+			name = Debug;
+		};
+		D41930EE46B3ADCAE35AC90B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = TVAppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = DR8AY52TR6;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Config/Voice-Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = Atlas;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.puzzle-games";
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.atanrikulu.atlas.tv;
+				PRODUCT_NAME = Atlas;
+				SDKROOT = appletvos;
+				TARGETED_DEVICE_FAMILY = 3;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		22181CD7CED82AE7DBD59B1A /* Build configuration list for PBXNativeTarget "Atlas" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				804FE0C9BF065A009759B8FF /* Debug */,
+				0357C3208ED930145396B664 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		3F9C25C0DD4CA4C3A2C0811A /* Build configuration list for PBXNativeTarget "AtlasTV" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				029C1E75BDB5AB72B37C1D73 /* Debug */,
+				D41930EE46B3ADCAE35AC90B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		790B0F9F42C26AB3963C610A /* Build configuration list for PBXNativeTarget "AtlasiOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				518D7E4B2680000A4A0FDAD6 /* Debug */,
+				62AA757F5F4A0698E93FE223 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		7EC0B782DE33925870958060 /* Build configuration list for PBXProject "Atlas" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8D21ED53AFB54A8F40E5E443 /* Debug */,
+				6C075FD071D9C4DB3D554A55 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 43D55555CA7BCC7C87E44A39 /* Project object */;
+}

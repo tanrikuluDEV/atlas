@@ -1,0 +1,330 @@
+{
+"41": {
+ "tr": ["Marmara'da, ülkenin en sanayileşmiş illerinden biridir.", "1999'daki büyük depremin merkez üssü bu ildeki Gölcük'tü.", "İzmit Körfezi'nin çevresindedir; pişmaniye tatlısıyla ünlüdür."],
+ "en": ["One of the most industrialised provinces of the country, in the Marmara region.", "The epicentre of the great 1999 earthquake was at Gölcük, in this province.", "It surrounds the Gulf of İzmit and is famous for pişmaniye, a cotton-candy-like sweet."],
+ "de": ["Eine der am stärksten industrialisierten Provinzen des Landes, in der Marmararegion.", "Das Epizentrum des großen Erdbebens von 1999 lag bei Gölcük in dieser Provinz.", "Sie liegt rund um den Golf von İzmit und ist für Pişmaniye, eine Art Zuckerwatte, berühmt."],
+ "fr": ["L'une des provinces les plus industrialisées du pays, dans la région de Marmara.", "L'épicentre du grand séisme de 1999 se trouvait à Gölcük, dans cette province.", "Elle entoure le golfe d'İzmit et est célèbre pour la pişmaniye, une sorte de barbe à papa."],
+ "es": ["Una de las provincias más industrializadas del país, en la región de Mármara.", "El epicentro del gran terremoto de 1999 estuvo en Gölcük, en esta provincia.", "Rodea el golfo de İzmit y es famosa por la pişmaniye, un dulce parecido al algodón de azúcar."],
+ "it": ["Una delle province più industrializzate del paese, nella regione di Marmara.", "L'epicentro del grande terremoto del 1999 fu a Gölcük, in questa provincia.", "Circonda il golfo di İzmit ed è famosa per la pişmaniye, un dolce simile allo zucchero filato."]
+},
+"42": {
+ "tr": ["Yüzölçümü en büyük ildir.", "Anadolu Selçuklularının başkentiydi; Çatalhöyük bu ildedir.", "Mevlana'nın türbesi ve semazenleriyle, etli ekmeğiyle ünlüdür."],
+ "en": ["It is the largest province by area.", "It was the capital of the Anatolian Seljuks; Çatalhöyük is in this province.", "Famous for the tomb of Rumi, whirling dervishes and etli ekmek, a long meat flatbread."],
+ "de": ["Sie ist flächenmäßig die größte Provinz.", "Sie war die Hauptstadt der Rum-Seldschuken; Çatalhöyük liegt in dieser Provinz.", "Berühmt für das Grab von Rumi (Mevlana), tanzende Derwische und Etli Ekmek, ein langes Fleischfladenbrot."],
+ "fr": ["C'est la plus grande province par sa superficie.", "Ce fut la capitale des Seldjoukides de Roum ; Çatalhöyük est dans cette province.", "Célèbre pour le tombeau de Rûmî, les derviches tourneurs et l'etli ekmek, une longue galette à la viande."],
+ "es": ["Es la provincia más extensa.", "Fue la capital de los selyúcidas de Rum; Çatalhöyük está en esta provincia.", "Famosa por la tumba de Rumi, los derviches giróvagos y el etli ekmek, un pan largo con carne."],
+ "it": ["È la provincia più estesa.", "Fu la capitale dei Selgiuchidi di Rum; Çatalhöyük è in questa provincia.", "Famosa per la tomba di Rumi, i dervisci rotanti e l'etli ekmek, una lunga focaccia con carne."]
+},
+"43": {
+ "tr": ["Ege Bölgesi'nin iç kesiminde yer alır.", "Zeus Tapınağı'yla antik Aizanoi kenti bu ildeki Çavdarhisar'dadır.", "Çini ve porselen üretimiyle ünlüdür; Evliya Çelebi'nin ailesi buralıdır."],
+ "en": ["It lies in the interior of the Aegean region.", "Ancient Aezani, with its Temple of Zeus, is at Çavdarhisar in this province.", "Famous for tiles and porcelain; the family of the traveller Evliya Çelebi came from here."],
+ "de": ["Es liegt im Inneren der Ägäisregion.", "Das antike Aizanoi mit seinem Zeustempel liegt bei Çavdarhisar in dieser Provinz.", "Berühmt für Fliesen und Porzellan; die Familie des Reisenden Evliya Çelebi stammte von hier."],
+ "fr": ["Elle se trouve à l'intérieur de la région égéenne.", "L'antique Aizanoi et son temple de Zeus sont à Çavdarhisar, dans cette province.", "Célèbre pour ses céramiques et sa porcelaine ; la famille du voyageur Evliya Çelebi en était originaire."],
+ "es": ["Está en el interior de la región del Egeo.", "La antigua Aizanoi, con su templo de Zeus, está en Çavdarhisar, en esta provincia.", "Famosa por sus azulejos y su porcelana; la familia del viajero Evliya Çelebi procedía de aquí."],
+ "it": ["Si trova nell'interno della regione egea.", "L'antica Aizanoi, con il tempio di Zeus, è a Çavdarhisar, in questa provincia.", "Famosa per le maioliche e la porcellana; la famiglia del viaggiatore Evliya Çelebi veniva da qui."]
+},
+"44": {
+ "tr": ["Doğu Anadolu'da, Fırat Nehri yakınındadır.", "Arslantepe Höyüğü UNESCO Dünya Mirası listesindedir.", "Kayısısıyla dünyaca ünlüdür."],
+ "en": ["It lies in eastern Anatolia, near the Euphrates.", "The Arslantepe mound is a UNESCO World Heritage Site.", "It is world-famous for its apricots."],
+ "de": ["Es liegt in Ostanatolien, nahe dem Euphrat.", "Der Siedlungshügel Arslantepe ist UNESCO-Welterbe.", "Es ist weltberühmt für seine Aprikosen."],
+ "fr": ["Elle se trouve en Anatolie orientale, près de l'Euphrate.", "Le tell d'Arslantepe est inscrit au patrimoine mondial de l'UNESCO.", "Elle est mondialement célèbre pour ses abricots."],
+ "es": ["Está en Anatolia oriental, cerca del Éufrates.", "El montículo de Arslantepe es Patrimonio de la Humanidad de la UNESCO.", "Es famosa en todo el mundo por sus albaricoques."],
+ "it": ["Si trova nell'Anatolia orientale, vicino all'Eufrate.", "Il tell di Arslantepe è Patrimonio dell'Umanità UNESCO.", "È famosa in tutto il mondo per le albicocche."]
+},
+"45": {
+ "tr": ["Ege'de, Gediz Ovası'ndadır.", "Osmanlı şehzadelerinin yetiştiği şehirlerdendir; Lidya başkenti Sardes bu ildedir.", "Mesir macunu festivali ve çekirdeksiz üzümüyle ünlüdür."],
+ "en": ["It lies in the Aegean region, on the Gediz plain.", "Ottoman princes were trained here; Sardis, the Lydian capital, is in this province.", "Famous for the Mesir paste festival and its seedless grapes."],
+ "de": ["Es liegt in der Ägäisregion in der Gediz-Ebene.", "Hier wurden osmanische Prinzen ausgebildet; Sardes, die Hauptstadt Lydiens, liegt in dieser Provinz.", "Berühmt für das Mesir-Paste-Fest und kernlose Trauben."],
+ "fr": ["Elle se trouve dans la région égéenne, dans la plaine du Gediz.", "Des princes ottomans y étaient formés ; Sardes, capitale de la Lydie, est dans cette province.", "Célèbre pour la fête de la pâte de Mesir et ses raisins sans pépins."],
+ "es": ["Está en la región del Egeo, en la llanura del Gediz.", "Aquí se formaban príncipes otomanos; Sardes, la capital lidia, está en esta provincia.", "Famosa por la fiesta de la pasta Mesir y sus uvas sin pepitas."],
+ "it": ["Si trova nella regione egea, nella pianura del Gediz.", "Qui si formavano i principi ottomani; Sardi, capitale della Lidia, è in questa provincia.", "Famosa per la festa della pasta di Mesir e per l'uva senza semi."]
+},
+"46": {
+ "tr": ["Akdeniz ile Güneydoğu arasında yer alır; Şubat 2023 depremlerinin merkeziydi.", "Kurtuluş Savaşı'ndaki direnişi nedeniyle adına bir kahramanlık unvanı eklendi.", "Dövülerek yapılan sakızlı dondurması, tarhanası ve pul biberiyle ünlüdür."],
+ "en": ["It lies between the Mediterranean and the southeast; it was the epicentre of the February 2023 earthquakes.", "A title meaning 'heroic' was added to its name for its resistance in the War of Independence.", "Famous for its stretchy, beaten mastic ice cream, tarhana and red pepper flakes."],
+ "de": ["Es liegt zwischen Mittelmeer und Südosten; hier lag das Epizentrum der Erdbeben vom Februar 2023.", "Für seinen Widerstand im Unabhängigkeitskrieg erhielt es einen Ehrentitel („heldenhaft“) im Namen.", "Berühmt für zähes, geschlagenes Mastix-Eis, Tarhana und Paprikaflocken."],
+ "fr": ["Elle se trouve entre la Méditerranée et le sud-est ; ce fut l'épicentre des séismes de février 2023.", "Un titre signifiant « héroïque » a été ajouté à son nom pour sa résistance pendant la guerre d'indépendance.", "Célèbre pour sa glace au mastic battue et élastique, le tarhana et le piment en flocons."],
+ "es": ["Está entre el Mediterráneo y el sureste; fue el epicentro de los terremotos de febrero de 2023.", "A su nombre se añadió un título que significa «heroica» por su resistencia en la guerra de independencia.", "Famosa por su helado de almáciga elástico y batido, el tarhana y la guindilla en copos."],
+ "it": ["Si trova tra il Mediterraneo e il sud-est; fu l'epicentro dei terremoti del febbraio 2023.", "Al suo nome fu aggiunto un titolo che significa «eroica» per la resistenza nella guerra d'indipendenza.", "Famosa per il gelato al mastice battuto ed elastico, il tarhana e il peperoncino in fiocchi."]
+},
+"47": {
+ "tr": ["Suriye sınırında, Mezopotamya ovasına bakan bir tepeye kuruludur.", "Mor Gabriel Manastırı ve Midyat bu ildedir.", "Bal rengi taş evleri, Süryani kültürü ve telkari gümüş işçiliğiyle ünlüdür."],
+ "en": ["Near the Syrian border, its old town sits on a hill overlooking the Mesopotamian plain.", "The Mor Gabriel Monastery and the town of Midyat are in this province.", "Famous for honey-coloured stone houses, Syriac culture and filigree silverwork."],
+ "de": ["Nahe der syrischen Grenze liegt ihre Altstadt auf einem Hügel über der mesopotamischen Ebene.", "Das Kloster Mor Gabriel und die Stadt Midyat liegen in dieser Provinz.", "Berühmt für honigfarbene Steinhäuser, die aramäische (syrische) Kultur und Filigranschmuck aus Silber."],
+ "fr": ["Près de la frontière syrienne, sa vieille ville domine la plaine mésopotamienne depuis une colline.", "Le monastère de Mor Gabriel et la ville de Midyat sont dans cette province.", "Célèbre pour ses maisons de pierre couleur miel, la culture syriaque et le filigrane d'argent."],
+ "es": ["Cerca de la frontera siria, su casco antiguo está en una colina sobre la llanura mesopotámica.", "El monasterio de Mor Gabriel y la ciudad de Midyat están en esta provincia.", "Famosa por sus casas de piedra color miel, la cultura siríaca y la filigrana de plata."],
+ "it": ["Vicino al confine siriano, il centro storico sorge su una collina che domina la pianura mesopotamica.", "Il monastero di Mor Gabriel e la città di Midyat sono in questa provincia.", "Famosa per le case di pietra color miele, la cultura siriaca e la filigrana d'argento."]
+},
+"48": {
+ "tr": ["Ege ile Akdeniz'in buluştuğu yerdedir; en uzun kıyı şeridine sahip illerdendir.", "Dünyanın yedi harikasından Halikarnas Mozolesi bu ildeydi.", "Bodrum, Marmaris, Fethiye ve Ölüdeniz bu ildedir."],
+ "en": ["It lies where the Aegean meets the Mediterranean and has one of the longest coastlines of any province.", "The Mausoleum at Halicarnassus, one of the Seven Wonders, stood in this province.", "Bodrum, Marmaris, Fethiye and Ölüdeniz are in this province."],
+ "de": ["Es liegt dort, wo die Ägäis aufs Mittelmeer trifft, und hat eine der längsten Küsten aller Provinzen.", "Das Mausoleum von Halikarnassos, eines der sieben Weltwunder, stand in dieser Provinz.", "Bodrum, Marmaris, Fethiye und Ölüdeniz liegen in dieser Provinz."],
+ "fr": ["Elle se trouve à la rencontre de l'Égée et de la Méditerranée, avec l'un des plus longs littoraux du pays.", "Le mausolée d'Halicarnasse, l'une des sept merveilles du monde, se dressait dans cette province.", "Bodrum, Marmaris, Fethiye et Ölüdeniz sont dans cette province."],
+ "es": ["Está donde el Egeo se une al Mediterráneo y tiene una de las costas más largas del país.", "El Mausoleo de Halicarnaso, una de las siete maravillas, estaba en esta provincia.", "Bodrum, Marmaris, Fethiye y Ölüdeniz están en esta provincia."],
+ "it": ["Si trova dove l'Egeo incontra il Mediterraneo e ha una delle coste più lunghe del paese.", "Il Mausoleo di Alicarnasso, una delle sette meraviglie, sorgeva in questa provincia.", "Bodrum, Marmaris, Fethiye e Ölüdeniz sono in questa provincia."]
+},
+"49": {
+ "tr": ["Doğu Anadolu'da, geniş ve verimli bir ova üzerindedir.", "Türkülerine konu olan ovası ve adını taşıyan endemik lalesiyle bilinir.", "1071'deki Malazgirt Muharebesi bu ilin topraklarında yaşandı."],
+ "en": ["It lies on a wide, fertile plain in eastern Anatolia.", "It is known for a plain celebrated in folk songs and an endemic tulip that bears its name.", "The Battle of Manzikert (1071) was fought on the lands of this province."],
+ "de": ["Es liegt auf einer weiten, fruchtbaren Ebene in Ostanatolien.", "Bekannt für eine in Volksliedern besungene Ebene und eine endemische Tulpe, die seinen Namen trägt.", "Die Schlacht von Manzikert (1071) fand auf dem Gebiet dieser Provinz statt."],
+ "fr": ["Elle se trouve sur une vaste plaine fertile d'Anatolie orientale.", "Elle est connue pour une plaine chantée dans les chansons populaires et une tulipe endémique qui porte son nom.", "La bataille de Manzikert (1071) s'est déroulée sur les terres de cette province."],
+ "es": ["Está en una llanura amplia y fértil de Anatolia oriental.", "Es conocida por una llanura cantada en canciones populares y un tulipán endémico que lleva su nombre.", "La batalla de Manzikert (1071) se libró en las tierras de esta provincia."],
+ "it": ["Si trova su una pianura ampia e fertile dell'Anatolia orientale.", "È nota per una pianura cantata nelle canzoni popolari e per un tulipano endemico che porta il suo nome.", "La battaglia di Manzikert (1071) fu combattuta nelle terre di questa provincia."]
+},
+"50": {
+ "tr": ["İç Anadolu'da, volkanik tüf kayalardan oluşan bir arazidedir.", "Derinkuyu ve Kaymaklı yeraltı şehirleri bu ildedir.", "Peri bacaları ve sıcak hava balonlarıyla Kapadokya'nın kalbidir."],
+ "en": ["It lies in central Anatolia, on a landscape of soft volcanic tuff.", "The underground cities of Derinkuyu and Kaymaklı are in this province.", "With its fairy chimneys and hot-air balloons, it is the heart of Cappadocia."],
+ "de": ["Es liegt in Zentralanatolien in einer Landschaft aus weichem Vulkantuff.", "Die unterirdischen Städte Derinkuyu und Kaymaklı liegen in dieser Provinz.", "Mit Feenkaminen und Heißluftballons ist es das Herz Kappadokiens."],
+ "fr": ["Elle se trouve en Anatolie centrale, sur un paysage de tuf volcanique tendre.", "Les villes souterraines de Derinkuyu et Kaymaklı sont dans cette province.", "Avec ses cheminées de fées et ses montgolfières, c'est le cœur de la Cappadoce."],
+ "es": ["Está en Anatolia central, en un paisaje de toba volcánica blanda.", "Las ciudades subterráneas de Derinkuyu y Kaymaklı están en esta provincia.", "Con sus chimeneas de hadas y sus globos aerostáticos, es el corazón de Capadocia."],
+ "it": ["Si trova nell'Anatolia centrale, in un paesaggio di tufo vulcanico.", "Le città sotterranee di Derinkuyu e Kaymaklı sono in questa provincia.", "Con i camini delle fate e le mongolfiere, è il cuore della Cappadocia."]
+},
+"51": {
+ "tr": ["İç Anadolu'nun güneyinde, Toroslar'ın eteğindedir.", "Aladağlar'ın tırmanış rotaları ve kayaya oyulmuş Gümüşler Manastırı bu ildedir.", "Elması ve patatesiyle ünlüdür."],
+ "en": ["It lies in southern central Anatolia, at the foot of the Taurus Mountains.", "The climbing routes of the Aladağlar range and the rock-cut Gümüşler Monastery are in this province.", "It is famous for its apples and potatoes."],
+ "de": ["Es liegt im Süden Zentralanatoliens am Fuß des Taurus.", "Die Kletterrouten des Aladağlar-Gebirges und das Felsenkloster Gümüşler liegen in dieser Provinz.", "Es ist für Äpfel und Kartoffeln berühmt."],
+ "fr": ["Elle se trouve au sud de l'Anatolie centrale, au pied du Taurus.", "Les voies d'escalade des Aladağlar et le monastère rupestre de Gümüşler sont dans cette province.", "Elle est célèbre pour ses pommes et ses pommes de terre."],
+ "es": ["Está en el sur de Anatolia central, al pie de los montes Tauro.", "Las rutas de escalada de los Aladağlar y el monasterio rupestre de Gümüşler están en esta provincia.", "Es famosa por sus manzanas y sus patatas."],
+ "it": ["Si trova nel sud dell'Anatolia centrale, ai piedi del Tauro.", "Le vie d'arrampicata degli Aladağlar e il monastero rupestre di Gümüşler sono in questa provincia.", "È famosa per le mele e le patate."]
+},
+"52": {
+ "tr": ["Orta Karadeniz kıyısında bir ildir.", "Boztepe'ye çıkan teleferiği ve şehir manzarasıyla bilinir.", "Fındık üretiminde ülkenin en büyük illerindendir; komşusuyla paylaştığı havalimanı denize dolgu üzerine kurulmuştur."],
+ "en": ["A province on the central Black Sea coast.", "It is known for the cable car up to Boztepe and its city views.", "One of the country's largest hazelnut producers; the airport it shares with its neighbour is built on land reclaimed from the sea."],
+ "de": ["Eine Provinz an der mittleren Schwarzmeerküste.", "Bekannt für die Seilbahn auf den Boztepe und den Blick über die Stadt.", "Einer der größten Haselnussproduzenten des Landes; der mit dem Nachbarn geteilte Flughafen steht auf aufgeschüttetem Meeresgrund."],
+ "fr": ["Une province du centre de la côte de la mer Noire.", "Elle est connue pour son téléphérique vers Boztepe et la vue sur la ville.", "L'un des plus grands producteurs de noisettes ; l'aéroport partagé avec sa voisine est construit sur la mer."],
+ "es": ["Una provincia de la costa central del mar Negro.", "Es conocida por el teleférico a Boztepe y sus vistas de la ciudad.", "Uno de los mayores productores de avellanas; el aeropuerto que comparte con su vecina está construido sobre el mar."],
+ "it": ["Una provincia della costa centrale del Mar Nero.", "È nota per la funivia sul Boztepe e il panorama sulla città.", "Uno dei maggiori produttori di nocciole; l'aeroporto condiviso con la vicina è costruito su terreno strappato al mare."]
+},
+"53": {
+ "tr": ["Doğu Karadeniz'dedir; ülkenin en yağışlı ilidir.", "Ayder Yaylası ve Kaçkar Dağları bu ildedir.", "Ülkedeki çay tarımının merkezidir."],
+ "en": ["It lies on the eastern Black Sea and is the rainiest province in the country.", "The Ayder plateau and the Kaçkar Mountains are in this province.", "It is the centre of tea growing in the country."],
+ "de": ["Es liegt am östlichen Schwarzen Meer und ist die regenreichste Provinz des Landes.", "Die Ayder-Alm und das Kaçkar-Gebirge liegen in dieser Provinz.", "Es ist das Zentrum des Teeanbaus im Land."],
+ "fr": ["Elle se trouve sur la mer Noire orientale ; c'est la province la plus pluvieuse du pays.", "Le plateau d'Ayder et les monts Kaçkar sont dans cette province.", "C'est le centre de la culture du thé dans le pays."],
+ "es": ["Está en el mar Negro oriental y es la provincia más lluviosa del país.", "La meseta de Ayder y los montes Kaçkar están en esta provincia.", "Es el centro del cultivo de té del país."],
+ "it": ["Si trova sul Mar Nero orientale ed è la provincia più piovosa del paese.", "L'altopiano di Ayder e i monti Kaçkar sono in questa provincia.", "È il centro della coltivazione del tè nel paese."]
+},
+"54": {
+ "tr": ["Marmara'nın doğusunda, otomotiv fabrikalarıyla bilinen bir ildir.", "Sapanca Gölü'nün güney kıyısı ve Karasu sahili bu ildedir.", "Islama köftesiyle ünlüdür; Kurtuluş Savaşı'ndaki büyük meydan muharebesine adını veren nehir buradan geçer."],
+ "en": ["A province in the east of the Marmara region, known for its car factories.", "The southern shore of Lake Sapanca and the Karasu coast are in this province.", "Famous for ıslama köfte; the river that gave its name to a major battle of the War of Independence flows through it."],
+ "de": ["Eine Provinz im Osten der Marmararegion, bekannt für ihre Autofabriken.", "Das Südufer des Sapanca-Sees und die Küste von Karasu liegen in dieser Provinz.", "Berühmt für Islama Köfte; der Fluss, nach dem eine große Schlacht des Unabhängigkeitskriegs benannt ist, fließt hindurch."],
+ "fr": ["Une province à l'est de la région de Marmara, connue pour ses usines automobiles.", "La rive sud du lac de Sapanca et la côte de Karasu sont dans cette province.", "Célèbre pour les ıslama köfte ; le fleuve qui a donné son nom à une grande bataille de la guerre d'indépendance la traverse."],
+ "es": ["Una provincia al este de la región de Mármara, conocida por sus fábricas de coches.", "La orilla sur del lago Sapanca y la costa de Karasu están en esta provincia.", "Famosa por el ıslama köfte; la atraviesa el río que dio nombre a una gran batalla de la guerra de independencia."],
+ "it": ["Una provincia nell'est della regione di Marmara, nota per le fabbriche di automobili.", "La sponda sud del lago di Sapanca e la costa di Karasu sono in questa provincia.", "Famosa per l'ıslama köfte; la attraversa il fiume che diede il nome a una grande battaglia della guerra d'indipendenza."]
+},
+"55": {
+ "tr": ["Orta Karadeniz'in en büyük şehridir.", "Kızılırmak ve Yeşilırmak deltaları bu ildedir.", "Atatürk, Kurtuluş Savaşı'nı başlatmak için 19 Mayıs 1919'da buraya çıktı."],
+ "en": ["The largest city on the central Black Sea coast.", "The deltas of the Kızılırmak and Yeşilırmak rivers are in this province.", "Atatürk landed here on 19 May 1919 to start the War of Independence."],
+ "de": ["Die größte Stadt an der mittleren Schwarzmeerküste.", "Die Deltas von Kızılırmak und Yeşilırmak liegen in dieser Provinz.", "Atatürk landete hier am 19. Mai 1919, um den Unabhängigkeitskrieg zu beginnen."],
+ "fr": ["La plus grande ville du centre de la côte de la mer Noire.", "Les deltas du Kızılırmak et du Yeşilırmak sont dans cette province.", "Atatürk y débarqua le 19 mai 1919 pour lancer la guerre d'indépendance."],
+ "es": ["La mayor ciudad de la costa central del mar Negro.", "Los deltas de los ríos Kızılırmak y Yeşilırmak están en esta provincia.", "Atatürk desembarcó aquí el 19 de mayo de 1919 para iniciar la guerra de independencia."],
+ "it": ["La città più grande della costa centrale del Mar Nero.", "I delta del Kızılırmak e dello Yeşilırmak sono in questa provincia.", "Atatürk sbarcò qui il 19 maggio 1919 per avviare la guerra d'indipendenza."]
+},
+"56": {
+ "tr": ["Güneydoğu'da, Dicle'nin kollarının buluştuğu dağlık bir ildir.", "Battaniyeleri ve büryan kebabıyla bilinir.", "Fıstığı ülkenin en iri fıstığı sayılır; İbrahim Hakkı'nın Tillo'su bu ildedir."],
+ "en": ["A mountainous province in the southeast, where tributaries of the Tigris meet.", "It is known for its woollen blankets and büryan, a pit-roasted lamb.", "Its pistachios are said to be the largest in the country; İbrahim Hakkı's town of Tillo is here."],
+ "de": ["Eine bergige Provinz im Südosten, wo Nebenflüsse des Tigris zusammenfließen.", "Bekannt für Wolldecken und Büryan, im Erdofen gegartes Lamm.", "Ihre Pistazien gelten als die größten des Landes; Tillo, der Ort von İbrahim Hakkı, liegt hier."],
+ "fr": ["Une province montagneuse du sud-est, au confluent d'affluents du Tigre.", "Elle est connue pour ses couvertures en laine et le büryan, un agneau rôti en fosse.", "Ses pistaches passent pour les plus grosses du pays ; Tillo, la ville d'İbrahim Hakkı, est ici."],
+ "es": ["Una provincia montañosa del sureste, donde confluyen afluentes del Tigris.", "Es conocida por sus mantas de lana y el büryan, cordero asado en un pozo.", "Sus pistachos pasan por ser los más grandes del país; Tillo, la ciudad de İbrahim Hakkı, está aquí."],
+ "it": ["Una provincia montuosa del sud-est, dove confluiscono affluenti del Tigri.", "È nota per le coperte di lana e il büryan, agnello cotto in una fossa.", "I suoi pistacchi sono considerati i più grandi del paese; qui c'è Tillo, la città di İbrahim Hakkı."]
+},
+"57": {
+ "tr": ["Türkiye'nin en kuzey ucunda yer alır.", "Filozof Diogenes buralıdır.", "Tarihî cezaevi ve doğal limanıyla ünlüdür; nokul ve mantısı meşhurdur."],
+ "en": ["It lies at the northernmost tip of Türkiye.", "The philosopher Diogenes was born here.", "Famous for its historic prison and natural harbour; its nokul pastry and mantı are well known."],
+ "de": ["Es liegt am nördlichsten Punkt der Türkei.", "Der Philosoph Diogenes wurde hier geboren.", "Berühmt für sein historisches Gefängnis und den Naturhafen; Nokul-Gebäck und Mantı sind bekannt."],
+ "fr": ["Elle se trouve à la pointe la plus septentrionale de la Türkiye.", "Le philosophe Diogène y est né.", "Célèbre pour sa prison historique et son port naturel ; son nokul et ses mantı sont réputés."],
+ "es": ["Está en el extremo más septentrional de Türkiye.", "El filósofo Diógenes nació aquí.", "Famosa por su prisión histórica y su puerto natural; su nokul y sus mantı son conocidos."],
+ "it": ["Si trova all'estremità più settentrionale della Türkiye.", "Il filosofo Diogene nacque qui.", "Famosa per il carcere storico e il porto naturale; il nokul e i mantı locali sono rinomati."]
+},
+"58": {
+ "tr": ["İç Anadolu'nun doğusundadır; yüzölçümüyle ikinci büyük ildir.", "1919'daki önemli kongreye ev sahipliği yaptı; Divriği Ulu Camii bu ildedir.", "Kangal çoban köpeği ve balıklı kaplıcası buradandır; Âşık Veysel buralıdır."],
+ "en": ["It lies in eastern central Anatolia and is the second-largest province by area.", "It hosted an important congress in 1919; the Great Mosque of Divriği is in this province.", "The Kangal shepherd dog and the 'doctor fish' hot spring come from here; the bard Âşık Veysel was born here."],
+ "de": ["Es liegt im Osten Zentralanatoliens und ist flächenmäßig die zweitgrößte Provinz.", "1919 fand hier ein wichtiger Kongress statt; die Große Moschee von Divriği liegt in dieser Provinz.", "Der Kangal-Hirtenhund und die „Doktorfisch“-Therme stammen von hier; der Barde Âşık Veysel wurde hier geboren."],
+ "fr": ["Elle se trouve à l'est de l'Anatolie centrale ; c'est la deuxième province par sa superficie.", "Elle accueillit un congrès important en 1919 ; la grande mosquée de Divriği est dans cette province.", "Le chien de berger kangal et la source chaude aux « poissons docteurs » viennent d'ici ; le barde Âşık Veysel y est né."],
+ "es": ["Está en el este de Anatolia central y es la segunda provincia más extensa.", "Acogió un congreso importante en 1919; la Gran Mezquita de Divriği está en esta provincia.", "El perro pastor kangal y las termas de los «peces doctores» son de aquí; el bardo Âşık Veysel nació aquí."],
+ "it": ["Si trova nell'est dell'Anatolia centrale ed è la seconda provincia per superficie.", "Ospitò un congresso importante nel 1919; la Grande Moschea di Divriği è in questa provincia.", "Il cane pastore kangal e le terme dei «pesci dottore» sono di qui; il bardo Âşık Veysel vi nacque."]
+},
+"59": {
+ "tr": ["Trakya'da, Marmara Denizi kıyısındadır.", "Macar prensi Rákóczi'nin sürgünde yaşadığı ev burada müzedir; Namık Kemal buralıdır.", "Köftesi ve Şarköy bağlarıyla ünlüdür."],
+ "en": ["It lies in Thrace, on the Sea of Marmara.", "The house where the Hungarian prince Rákóczi lived in exile is a museum here; the poet Namık Kemal was born here.", "Famous for its köfte and the vineyards of Şarköy."],
+ "de": ["Es liegt in Thrakien am Marmarameer.", "Das Haus, in dem der ungarische Fürst Rákóczi im Exil lebte, ist hier ein Museum; der Dichter Namık Kemal wurde hier geboren.", "Berühmt für seine Köfte und die Weinberge von Şarköy."],
+ "fr": ["Elle se trouve en Thrace, au bord de la mer de Marmara.", "La maison d'exil du prince hongrois Rákóczi y est un musée ; le poète Namık Kemal y est né.", "Célèbre pour ses köfte et les vignobles de Şarköy."],
+ "es": ["Está en Tracia, a orillas del mar de Mármara.", "La casa donde vivió exiliado el príncipe húngaro Rákóczi es aquí un museo; el poeta Namık Kemal nació aquí.", "Famosa por sus köfte y los viñedos de Şarköy."],
+ "it": ["Si trova in Tracia, sul Mar di Marmara.", "La casa dove visse in esilio il principe ungherese Rákóczi è qui un museo; il poeta Namık Kemal vi nacque.", "Famosa per le sue köfte e i vigneti di Şarköy."]
+},
+"60": {
+ "tr": ["İç Karadeniz'de, Yeşilırmak vadisindedir.", "Ballıca Mağarası ve antik Komana kenti bu ildedir.", "Adını taşıyan patlıcanlı kebabı, yazma baskı yemenileri ve asma yaprağıyla ünlüdür."],
+ "en": ["It lies in the inland Black Sea region, in the Yeşilırmak valley.", "Ballıca Cave and ancient Comana are in this province.", "Famous for a kebab with aubergine named after it, hand-printed headscarves and vine leaves."],
+ "de": ["Es liegt im Binnenland der Schwarzmeerregion, im Tal des Yeşilırmak.", "Die Ballıca-Höhle und das antike Komana liegen in dieser Provinz.", "Berühmt für einen gleichnamigen Kebab mit Aubergine, handbedruckte Kopftücher und Weinblätter."],
+ "fr": ["Elle se trouve dans l'arrière-pays de la mer Noire, dans la vallée du Yeşilırmak.", "La grotte de Ballıca et l'antique Comana sont dans cette province.", "Célèbre pour un kebab à l'aubergine qui porte son nom, ses foulards imprimés à la main et ses feuilles de vigne."],
+ "es": ["Está en el interior del mar Negro, en el valle del Yeşilırmak.", "La cueva de Ballıca y la antigua Comana están en esta provincia.", "Famosa por un kebab con berenjena que lleva su nombre, pañuelos estampados a mano y hojas de parra."],
+ "it": ["Si trova nell'entroterra del Mar Nero, nella valle dello Yeşilırmak.", "La grotta di Ballıca e l'antica Comana sono in questa provincia.", "Famosa per un kebab con melanzane che porta il suo nome, foulard stampati a mano e foglie di vite."]
+},
+"61": {
+ "tr": ["Doğu Karadeniz'in en büyük şehridir.", "Komnenos hanedanının imparatorluğunun başkentiydi; Kanuni Sultan Süleyman burada doğdu.", "Kayalara kurulmuş Sümela Manastırı ve Uzungöl bu ildedir."],
+ "en": ["The largest city of the eastern Black Sea region.", "It was the capital of an empire of the Komnenos dynasty; Suleiman the Magnificent was born here.", "The cliffside Sumela Monastery and Lake Uzungöl are in this province."],
+ "de": ["Die größte Stadt der östlichen Schwarzmeerregion.", "Sie war Hauptstadt eines Kaiserreichs der Komnenen; Süleyman der Prächtige wurde hier geboren.", "Das an eine Felswand gebaute Sumela-Kloster und der Uzungöl liegen in dieser Provinz."],
+ "fr": ["La plus grande ville de la mer Noire orientale.", "Ce fut la capitale d'un empire des Comnènes ; Soliman le Magnifique y est né.", "Le monastère de Sumela accroché à la falaise et le lac Uzungöl sont dans cette province."],
+ "es": ["La mayor ciudad del mar Negro oriental.", "Fue la capital de un imperio de la dinastía Comneno; Solimán el Magnífico nació aquí.", "El monasterio de Sumela, colgado de un acantilado, y el lago Uzungöl están en esta provincia."],
+ "it": ["La città più grande del Mar Nero orientale.", "Fu la capitale di un impero della dinastia dei Comneni; Solimano il Magnifico vi nacque.", "Il monastero di Sumela, aggrappato alla roccia, e il lago Uzungöl sono in questa provincia."]
+},
+"62": {
+ "tr": ["Doğu Anadolu'da, nüfusu en az illerden biridir.", "Munzur Vadisi Milli Parkı bu ildedir.", "Eski adı Dersim'dir; Pülümür ve Ovacık bu ildedir."],
+ "en": ["One of the least populated provinces, in eastern Anatolia.", "Munzur Valley National Park is in this province.", "Its former name is Dersim; Pülümür and Ovacık are in this province."],
+ "de": ["Eine der am dünnsten besiedelten Provinzen, in Ostanatolien.", "Der Nationalpark Munzur-Tal liegt in dieser Provinz.", "Ihr früherer Name ist Dersim; Pülümür und Ovacık liegen hier."],
+ "fr": ["L'une des provinces les moins peuplées, en Anatolie orientale.", "Le parc national de la vallée de Munzur est dans cette province.", "Son ancien nom est Dersim ; Pülümür et Ovacık sont dans cette province."],
+ "es": ["Una de las provincias menos pobladas, en Anatolia oriental.", "El parque nacional del valle de Munzur está en esta provincia.", "Su antiguo nombre es Dersim; Pülümür y Ovacık están en esta provincia."],
+ "it": ["Una delle province meno popolate, nell'Anatolia orientale.", "Il parco nazionale della valle di Munzur è in questa provincia.", "Il suo antico nome è Dersim; Pülümür e Ovacık sono in questa provincia."]
+},
+"63": {
+ "tr": ["Güneydoğu'da, Harran Ovası'nda yer alır.", "Dünyanın bilinen en eski tapınağı Göbeklitepe bu ildedir.", "Balıklıgöl, sıra geceleri ve isot biberiyle ünlüdür."],
+ "en": ["It lies in the southeast, on the Harran plain.", "Göbekli Tepe, the oldest known temple in the world, is in this province.", "Famous for the sacred fish pool Balıklıgöl, 'sıra' music nights and isot pepper."],
+ "de": ["Es liegt im Südosten in der Harran-Ebene.", "Göbekli Tepe, der älteste bekannte Tempel der Welt, liegt in dieser Provinz.", "Berühmt für den heiligen Fischteich Balıklıgöl, Sıra-Musikabende und Isot-Pfeffer."],
+ "fr": ["Elle se trouve dans le sud-est, sur la plaine de Harran.", "Göbekli Tepe, le plus ancien temple connu au monde, est dans cette province.", "Célèbre pour le bassin aux poissons sacrés Balıklıgöl, les soirées musicales « sıra » et le piment isot."],
+ "es": ["Está en el sureste, en la llanura de Harrán.", "Göbekli Tepe, el templo más antiguo conocido del mundo, está en esta provincia.", "Famosa por el estanque de peces sagrados Balıklıgöl, las veladas musicales «sıra» y el pimiento isot."],
+ "it": ["Si trova nel sud-est, sulla piana di Harran.", "Göbekli Tepe, il tempio più antico conosciuto al mondo, è in questa provincia.", "Famosa per la vasca dei pesci sacri Balıklıgöl, le serate musicali «sıra» e il peperoncino isot."]
+},
+"64": {
+ "tr": ["Ege'nin iç kesiminde, halı ve battaniye üretimiyle bilinir.", "Lidya kralı Karun'un hazinesi buradaki müzede sergilenir.", "Ulubey Kanyonu bu ildedir; ülkenin ilk şeker fabrikası 1926'da burada açıldı."],
+ "en": ["In the inner Aegean, it is known for carpets and blankets.", "The 'Croesus treasure' of the Lydian king is displayed in its museum.", "Ulubey Canyon is here; the country's first sugar factory opened here in 1926."],
+ "de": ["Im inneren Ägäisgebiet, bekannt für Teppiche und Decken.", "Der „Krösus-Schatz“ des lydischen Königs ist in ihrem Museum ausgestellt.", "Hier liegt der Ulubey-Canyon; die erste Zuckerfabrik des Landes wurde hier 1926 eröffnet."],
+ "fr": ["Dans l'Égée intérieure, elle est connue pour ses tapis et ses couvertures.", "Le « trésor de Crésus » du roi lydien est exposé dans son musée.", "Le canyon d'Ulubey est ici ; la première sucrerie du pays y a ouvert en 1926."],
+ "es": ["En el Egeo interior, es conocida por sus alfombras y mantas.", "El «tesoro de Creso» del rey lidio se exhibe en su museo.", "Aquí está el cañón de Ulubey; la primera azucarera del país abrió aquí en 1926."],
+ "it": ["Nell'Egeo interno, è nota per tappeti e coperte.", "Il «tesoro di Creso» del re lidio è esposto nel suo museo.", "Qui c'è il canyon di Ulubey; il primo zuccherificio del paese aprì qui nel 1926."]
+},
+"65": {
+ "tr": ["İran sınırında, ülkenin en büyük gölünün kıyısındadır.", "Urartu başkenti Tuşpa ve Akdamar Kilisesi bu ildedir.", "Zengin kahvaltısı ve gözleri farklı renkli beyaz kedisiyle ünlüdür."],
+ "en": ["On the border with Iran, on the shore of the country's largest lake.", "Tushpa, the Urartian capital, and the Akdamar Church are in this province.", "Famous for its lavish breakfast and its white cats with odd-coloured eyes."],
+ "de": ["An der Grenze zum Iran, am Ufer des größten Sees des Landes.", "Tušpa, die Hauptstadt Urartus, und die Kirche von Akdamar liegen in dieser Provinz.", "Berühmt für sein üppiges Frühstück und seine weißen Katzen mit verschiedenfarbigen Augen."],
+ "fr": ["À la frontière iranienne, au bord du plus grand lac du pays.", "Tushpa, la capitale de l'Urartu, et l'église d'Akdamar sont dans cette province.", "Célèbre pour son copieux petit-déjeuner et ses chats blancs aux yeux vairons."],
+ "es": ["En la frontera con Irán, a orillas del mayor lago del país.", "Tushpa, la capital de Urartu, y la iglesia de Akdamar están en esta provincia.", "Famosa por su abundante desayuno y sus gatos blancos con ojos de distinto color."],
+ "it": ["Al confine con l'Iran, sulla riva del lago più grande del paese.", "Tushpa, capitale dell'Urartu, e la chiesa di Akdamar sono in questa provincia.", "Famosa per la ricca colazione e i gatti bianchi con gli occhi di colore diverso."]
+},
+"66": {
+ "tr": ["İç Anadolu'da, Kızılırmak havzasında yer alır.", "Ülkenin ilk milli parkı olan Çamlık Milli Parkı bu ildedir.", "Eski adı Bozok'tur; Çapanoğulları'nın merkeziydi ve Çapanoğlu Camii buradadır."],
+ "en": ["It lies in central Anatolia, in the Kızılırmak basin.", "Çamlık National Park, the country's first national park, is in this province.", "Its old name is Bozok; it was the seat of the Çapanoğlu family, whose mosque stands here."],
+ "de": ["Es liegt in Zentralanatolien im Becken des Kızılırmak.", "Der Çamlık-Nationalpark, der erste Nationalpark des Landes, liegt in dieser Provinz.", "Ihr alter Name ist Bozok; sie war Sitz der Familie Çapanoğlu, deren Moschee hier steht."],
+ "fr": ["Elle se trouve en Anatolie centrale, dans le bassin du Kızılırmak.", "Le parc national de Çamlık, premier parc national du pays, est dans cette province.", "Son ancien nom est Bozok ; ce fut le siège de la famille Çapanoğlu, dont la mosquée s'y dresse."],
+ "es": ["Está en Anatolia central, en la cuenca del Kızılırmak.", "El parque nacional de Çamlık, el primero del país, está en esta provincia.", "Su antiguo nombre es Bozok; fue la sede de la familia Çapanoğlu, cuya mezquita está aquí."],
+ "it": ["Si trova nell'Anatolia centrale, nel bacino del Kızılırmak.", "Il parco nazionale di Çamlık, il primo del paese, è in questa provincia.", "Il suo antico nome è Bozok; fu la sede della famiglia Çapanoğlu, la cui moschea sorge qui."]
+},
+"67": {
+ "tr": ["Batı Karadeniz kıyısında yer alır.", "Gökgöl Mağarası ve Karadeniz Ereğli bu ildedir.", "Ülkedeki taş kömürü madenciliğinin merkezidir."],
+ "en": ["It lies on the western Black Sea coast.", "Gökgöl Cave and the town of Ereğli are in this province.", "It is the centre of the country's hard-coal mining."],
+ "de": ["Es liegt an der westlichen Schwarzmeerküste.", "Die Gökgöl-Höhle und die Stadt Ereğli liegen in dieser Provinz.", "Es ist das Zentrum des Steinkohlebergbaus im Land."],
+ "fr": ["Elle se trouve sur la côte occidentale de la mer Noire.", "La grotte de Gökgöl et la ville d'Ereğli sont dans cette province.", "C'est le centre de l'extraction de houille du pays."],
+ "es": ["Está en la costa occidental del mar Negro.", "La cueva de Gökgöl y la ciudad de Ereğli están en esta provincia.", "Es el centro de la minería de hulla del país."],
+ "it": ["Si trova sulla costa occidentale del Mar Nero.", "La grotta di Gökgöl e la città di Ereğli sono in questa provincia.", "È il centro dell'estrazione di carbon fossile del paese."]
+},
+"68": {
+ "tr": ["İç Anadolu'da, Tuz Gölü'nün güneydoğusundadır.", "Kayalara oyulmuş kiliseleriyle Ihlara Vadisi bu ildedir.", "Hasan Dağı ve Selçuklu dönemi Sultanhanı Kervansarayı bu ildedir."],
+ "en": ["It lies in central Anatolia, southeast of the great Salt Lake (Tuz Gölü).", "The Ihlara Valley, with its rock-cut churches, is in this province.", "Mount Hasan and the Seljuk-era Sultanhanı caravanserai are in this province."],
+ "de": ["Es liegt in Zentralanatolien, südöstlich des großen Salzsees (Tuz Gölü).", "Das Ihlara-Tal mit seinen Felsenkirchen liegt in dieser Provinz.", "Der Hasan Dağı und die seldschukische Karawanserei Sultanhanı liegen in dieser Provinz."],
+ "fr": ["Elle se trouve en Anatolie centrale, au sud-est du grand lac Salé (Tuz Gölü).", "La vallée d'Ihlara et ses églises rupestres sont dans cette province.", "Le mont Hasan et le caravansérail seldjoukide de Sultanhanı sont dans cette province."],
+ "es": ["Está en Anatolia central, al sureste del gran Lago Salado (Tuz Gölü).", "El valle de Ihlara, con sus iglesias excavadas en la roca, está en esta provincia.", "El monte Hasan y el caravasar selyúcida de Sultanhanı están en esta provincia."],
+ "it": ["Si trova nell'Anatolia centrale, a sud-est del grande Lago Salato (Tuz Gölü).", "La valle di Ihlara, con le sue chiese rupestri, è in questa provincia.", "Il monte Hasan e il caravanserraglio selgiuchide di Sultanhanı sono in questa provincia."]
+},
+"69": {
+ "tr": ["Ülkenin nüfusu en az ilidir.", "Çoruh Nehri kıyısındadır; Dede Korkut'un memleketi sayılır.", "Tarihî kalesi, tel helvası ve lor dolmasıyla bilinir."],
+ "en": ["It is the least populated province in the country.", "It lies on the Çoruh River and is considered the homeland of the bard Dede Korkut.", "It is known for its historic castle, tel helva and lor dolması."],
+ "de": ["Sie ist die am dünnsten besiedelte Provinz des Landes.", "Sie liegt am Çoruh und gilt als Heimat des Barden Dede Korkut.", "Bekannt für die historische Burg, Tel Helva und Lor Dolması."],
+ "fr": ["C'est la province la moins peuplée du pays.", "Elle se trouve sur le Çoruh et passe pour la patrie du barde Dede Korkut.", "Elle est connue pour son château historique, le tel helva et le lor dolması."],
+ "es": ["Es la provincia menos poblada del país.", "Está a orillas del Çoruh y se considera la patria del bardo Dede Korkut.", "Es conocida por su castillo histórico, el tel helva y el lor dolması."],
+ "it": ["È la provincia meno popolata del paese.", "Si trova sul fiume Çoruh ed è considerata la patria del bardo Dede Korkut.", "È nota per il castello storico, il tel helva e il lor dolması."]
+},
+"70": {
+ "tr": ["İç Anadolu'nun güneyinde, Toroslar'a yaslanır.", "1277'de Türkçeyi resmî dil ilan eden beyliğin merkeziydi.", "Yunus Emre'nin mezarının burada olduğuna inanılır; Binbir Kilise bu ildedir."],
+ "en": ["It lies in southern central Anatolia, against the Taurus Mountains.", "It was the seat of the principality that declared Turkish the official language in 1277.", "The poet Yunus Emre is believed to be buried here; the 'Thousand and One Churches' are in this province."],
+ "de": ["Es liegt im Süden Zentralanatoliens am Rand des Taurus.", "Es war Sitz des Fürstentums, das 1277 Türkisch zur Amtssprache erklärte.", "Der Dichter Yunus Emre soll hier begraben sein; die „Tausendundeine Kirche“ liegt in dieser Provinz."],
+ "fr": ["Elle se trouve au sud de l'Anatolie centrale, adossée au Taurus.", "Ce fut le siège de la principauté qui déclara le turc langue officielle en 1277.", "Le poète Yunus Emre y serait enterré ; les « Mille et une églises » sont dans cette province."],
+ "es": ["Está en el sur de Anatolia central, junto a los montes Tauro.", "Fue la sede del principado que declaró el turco lengua oficial en 1277.", "Se cree que el poeta Yunus Emre está enterrado aquí; las «Mil y una iglesias» están en esta provincia."],
+ "it": ["Si trova nel sud dell'Anatolia centrale, a ridosso del Tauro.", "Fu la sede del principato che nel 1277 dichiarò il turco lingua ufficiale.", "Si crede che il poeta Yunus Emre sia sepolto qui; le «Mille e una chiesa» sono in questa provincia."]
+},
+"71": {
+ "tr": ["Ankara'nın doğusunda, Kızılırmak kıyısındadır.", "Silah ve mühimmat sanayisiyle bilinir.", "Ülkenin büyük rafinerilerinden biri buradadır; 1989'da il oldu."],
+ "en": ["It lies east of Ankara, on the Kızılırmak river.", "It is known for its arms and ammunition industry.", "One of the country's major oil refineries is here; it became a province in 1989."],
+ "de": ["Es liegt östlich von Ankara am Kızılırmak.", "Es ist für seine Waffen- und Munitionsindustrie bekannt.", "Hier steht eine der großen Raffinerien des Landes; 1989 wurde es Provinz."],
+ "fr": ["Elle se trouve à l'est d'Ankara, sur le Kızılırmak.", "Elle est connue pour son industrie d'armement et de munitions.", "L'une des grandes raffineries du pays est ici ; elle est devenue province en 1989."],
+ "es": ["Está al este de Ankara, a orillas del Kızılırmak.", "Es conocida por su industria de armas y munición.", "Aquí está una de las grandes refinerías del país; se convirtió en provincia en 1989."],
+ "it": ["Si trova a est di Ankara, sul fiume Kızılırmak.", "È nota per l'industria di armi e munizioni.", "Qui c'è una delle grandi raffinerie del paese; è diventata provincia nel 1989."]
+},
+"72": {
+ "tr": ["Güneydoğu'da, Dicle Nehri kıyısındadır.", "Tarihî Hasankeyf bu ildedir.", "Ülkenin ilk petrol rafinerisi buradadır; petrol Raman Dağı'nda bulundu."],
+ "en": ["It lies in the southeast, on the Tigris.", "Historic Hasankeyf is in this province.", "The country's first oil refinery is here; oil was found on Mount Raman."],
+ "de": ["Es liegt im Südosten am Tigris.", "Das historische Hasankeyf liegt in dieser Provinz.", "Hier steht die erste Ölraffinerie des Landes; Öl wurde am Berg Raman gefunden."],
+ "fr": ["Elle se trouve dans le sud-est, sur le Tigre.", "La ville historique de Hasankeyf est dans cette province.", "La première raffinerie de pétrole du pays est ici ; le pétrole fut découvert sur le mont Raman."],
+ "es": ["Está en el sureste, a orillas del Tigris.", "La histórica Hasankeyf está en esta provincia.", "Aquí está la primera refinería de petróleo del país; el petróleo se halló en el monte Raman."],
+ "it": ["Si trova nel sud-est, sul Tigri.", "La storica Hasankeyf è in questa provincia.", "Qui c'è la prima raffineria di petrolio del paese; il petrolio fu trovato sul monte Raman."]
+},
+"73": {
+ "tr": ["Irak ve Suriye sınırında, dağlık bir ildir.", "Cizre bu ildedir; Nuh'un Gemisi'nin Cudi Dağı'na oturduğuna da inanılır.", "Irak'a açılan Habur Sınır Kapısı bu ildedir."],
+ "en": ["A mountainous province on the borders with Iraq and Syria.", "Cizre is here; some traditions say Noah's Ark came to rest on Mount Cudi.", "The Habur border crossing to Iraq is in this province."],
+ "de": ["Eine bergige Provinz an den Grenzen zum Irak und zu Syrien.", "Hier liegt Cizre; einer Überlieferung nach landete die Arche Noah auf dem Berg Cudi.", "Der Grenzübergang Habur in den Irak liegt in dieser Provinz."],
+ "fr": ["Une province montagneuse aux frontières de l'Irak et de la Syrie.", "Cizre est ici ; selon une tradition, l'arche de Noé se serait posée sur le mont Cudi.", "Le poste-frontière de Habur vers l'Irak est dans cette province."],
+ "es": ["Una provincia montañosa en las fronteras con Irak y Siria.", "Aquí está Cizre; según una tradición, el arca de Noé se posó en el monte Cudi.", "El paso fronterizo de Habur hacia Irak está en esta provincia."],
+ "it": ["Una provincia montuosa ai confini con Iraq e Siria.", "Qui c'è Cizre; secondo una tradizione l'arca di Noè si posò sul monte Cudi.", "Il valico di Habur verso l'Iraq è in questa provincia."]
+},
+"74": {
+ "tr": ["Batı Karadeniz'de küçük bir kıyı ilidir.", "Küre Dağları'nın bir kısmı ve Güzelcehisar'ın lav sütunları bu ildedir.", "Tarihî kalesiyle Amasra bu ildedir."],
+ "en": ["A small coastal province in the western Black Sea region.", "Part of the Küre Mountains and the basalt columns of Güzelcehisar are in this province.", "Amasra, with its historic castle, is in this province."],
+ "de": ["Eine kleine Küstenprovinz am westlichen Schwarzen Meer.", "Ein Teil des Küre-Gebirges und die Basaltsäulen von Güzelcehisar liegen in dieser Provinz.", "Amasra mit seiner historischen Burg liegt in dieser Provinz."],
+ "fr": ["Une petite province côtière de l'ouest de la mer Noire.", "Une partie des monts Küre et les orgues basaltiques de Güzelcehisar sont dans cette province.", "Amasra et son château historique sont dans cette province."],
+ "es": ["Una pequeña provincia costera del oeste del mar Negro.", "Parte de los montes Küre y las columnas basálticas de Güzelcehisar están en esta provincia.", "Amasra, con su castillo histórico, está en esta provincia."],
+ "it": ["Una piccola provincia costiera del Mar Nero occidentale.", "Parte dei monti Küre e le colonne basaltiche di Güzelcehisar sono in questa provincia.", "Amasra, con il suo castello storico, è in questa provincia."]
+},
+"75": {
+ "tr": ["Gürcistan sınırında, kuzeydoğunun çok soğuk bir ilidir.", "Kaz eti ve gravyer peyniriyle bilinir.", "Çıldır Gölü'nde kışın atlı kızaklar buzun üzerinde gezer."],
+ "en": ["A very cold province in the northeast, on the border with Georgia.", "It is known for goose meat and gruyère-style cheese.", "In winter, horse-drawn sleighs glide across frozen Lake Çıldır."],
+ "de": ["Eine sehr kalte Provinz im Nordosten an der Grenze zu Georgien.", "Bekannt für Gänsefleisch und Käse nach Greyerzer Art.", "Im Winter fahren Pferdeschlitten über den zugefrorenen Çıldır-See."],
+ "fr": ["Une province très froide du nord-est, à la frontière géorgienne.", "Elle est connue pour l'oie et un fromage de type gruyère.", "En hiver, des traîneaux tirés par des chevaux glissent sur le lac gelé de Çıldır."],
+ "es": ["Una provincia muy fría del noreste, en la frontera con Georgia.", "Es conocida por la carne de oca y un queso tipo gruyer.", "En invierno, trineos tirados por caballos recorren el lago helado de Çıldır."],
+ "it": ["Una provincia molto fredda del nord-est, al confine con la Georgia.", "È nota per la carne d'oca e un formaggio tipo gruviera.", "D'inverno le slitte trainate da cavalli scivolano sul lago ghiacciato di Çıldır."]
+},
+"76": {
+ "tr": ["Ermenistan, Azerbaycan (Nahçıvan) ve İran ile sınırı olan tek ildir.", "Aras Nehri kıyısındadır; kayısısıyla bilinir.", "Ağrı Dağı'nın kuzey eteğindeki sıcak ve alçak bir ovadadır."],
+ "en": ["The only province bordering Armenia, Azerbaijan (Nakhchivan) and Iran.", "It lies on the Aras River and is known for its apricots.", "It sits on a warm, low plain at the northern foot of Mount Ararat."],
+ "de": ["Die einzige Provinz, die an Armenien, Aserbaidschan (Nachitschewan) und den Iran grenzt.", "Sie liegt am Aras und ist für Aprikosen bekannt.", "Sie liegt in einer warmen, tiefen Ebene am Nordfuß des Ararat."],
+ "fr": ["La seule province frontalière de l'Arménie, de l'Azerbaïdjan (Nakhitchevan) et de l'Iran.", "Elle se trouve sur l'Araxe et est connue pour ses abricots.", "Elle s'étend sur une plaine basse et chaude au pied nord du mont Ararat."],
+ "es": ["La única provincia que limita con Armenia, Azerbaiyán (Najicheván) e Irán.", "Está a orillas del río Aras y es conocida por sus albaricoques.", "Está en una llanura baja y cálida al pie norte del monte Ararat."],
+ "it": ["L'unica provincia che confina con Armenia, Azerbaigian (Naxçıvan) e Iran.", "Si trova sul fiume Aras ed è nota per le albicocche.", "Si estende su una pianura bassa e calda ai piedi settentrionali del monte Ararat."]
+},
+"77": {
+ "tr": ["Marmara'nın en küçük illerinden biridir.", "Termal kaplıcaları ve Atatürk Köşkü bu ildedir.", "Çiçekçiliğiyle ünlüdür; İstanbul'dan feribotla ulaşılır."],
+ "en": ["One of the smallest provinces in the Marmara region.", "Its thermal baths and the Atatürk Mansion are in this province.", "Famous for flower growing; it is reached from Istanbul by ferry."],
+ "de": ["Eine der kleinsten Provinzen der Marmararegion.", "Ihre Thermalbäder und der Atatürk-Pavillon liegen in dieser Provinz.", "Berühmt für Blumenzucht; von Istanbul erreicht man sie mit der Fähre."],
+ "fr": ["L'une des plus petites provinces de la région de Marmara.", "Ses thermes et le pavillon d'Atatürk sont dans cette province.", "Célèbre pour l'horticulture ; on y accède d'Istanbul en ferry."],
+ "es": ["Una de las provincias más pequeñas de la región de Mármara.", "Sus termas y el pabellón de Atatürk están en esta provincia.", "Famosa por el cultivo de flores; desde Estambul se llega en ferri."],
+ "it": ["Una delle province più piccole della regione di Marmara.", "Le sue terme e il padiglione di Atatürk sono in questa provincia.", "Famosa per la floricoltura; da Istanbul si raggiunge in traghetto."]
+},
+"78": {
+ "tr": ["Batı Karadeniz'in iç kesimindedir.", "Ülkenin ilk demir-çelik fabrikası burada kuruldu (1937).", "UNESCO listesindeki Safranbolu evleri bu ildedir."],
+ "en": ["It lies in the interior of the western Black Sea region.", "The country's first iron and steel works was founded here (1937).", "The UNESCO-listed Ottoman houses of Safranbolu are in this province."],
+ "de": ["Es liegt im Hinterland der westlichen Schwarzmeerregion.", "Das erste Eisen- und Stahlwerk des Landes wurde hier gegründet (1937).", "Die osmanischen Häuser von Safranbolu (UNESCO-Welterbe) liegen in dieser Provinz."],
+ "fr": ["Elle se trouve dans l'arrière-pays de l'ouest de la mer Noire.", "La première aciérie du pays y a été fondée (1937).", "Les maisons ottomanes de Safranbolu, classées par l'UNESCO, sont dans cette province."],
+ "es": ["Está en el interior del oeste del mar Negro.", "La primera siderúrgica del país se fundó aquí (1937).", "Las casas otomanas de Safranbolu, Patrimonio de la UNESCO, están en esta provincia."],
+ "it": ["Si trova nell'entroterra del Mar Nero occidentale.", "La prima acciaieria del paese fu fondata qui (1937).", "Le case ottomane di Safranbolu, patrimonio UNESCO, sono in questa provincia."]
+},
+"79": {
+ "tr": ["Suriye sınırında, ülkenin en küçük illerinden biridir.", "Zeytini ve zeytinyağıyla bilinir.", "1995'te Gaziantep'ten ayrılarak il oldu."],
+ "en": ["One of the smallest provinces in the country, on the Syrian border.", "It is known for its olives and olive oil.", "It split from Gaziantep and became a province in 1995."],
+ "de": ["Eine der kleinsten Provinzen des Landes, an der syrischen Grenze.", "Sie ist für Oliven und Olivenöl bekannt.", "Sie wurde 1995 von Gaziantep abgetrennt und Provinz."],
+ "fr": ["L'une des plus petites provinces du pays, à la frontière syrienne.", "Elle est connue pour ses olives et son huile d'olive.", "Elle s'est séparée de Gaziantep pour devenir province en 1995."],
+ "es": ["Una de las provincias más pequeñas del país, en la frontera siria.", "Es conocida por sus aceitunas y su aceite de oliva.", "Se separó de Gaziantep y se convirtió en provincia en 1995."],
+ "it": ["Una delle province più piccole del paese, al confine siriano.", "È nota per le olive e l'olio d'oliva.", "Si è separata da Gaziantep diventando provincia nel 1995."]
+},
+"80": {
+ "tr": ["Çukurova'nın doğu ucunda yer alır.", "Hitit dönemine ait Karatepe-Aslantaş Açık Hava Müzesi bu ildedir.", "Yer fıstığıyla ünlüdür; 1996'da Adana'dan ayrılarak il oldu."],
+ "en": ["It lies at the eastern edge of the Çukurova plain.", "The Neo-Hittite open-air museum of Karatepe-Aslantaş is in this province.", "Famous for peanuts; it split from Adana and became a province in 1996."],
+ "de": ["Es liegt am östlichen Rand der Çukurova-Ebene.", "Das späthethitische Freilichtmuseum Karatepe-Aslantaş liegt in dieser Provinz.", "Berühmt für Erdnüsse; 1996 wurde es von Adana abgetrennt und Provinz."],
+ "fr": ["Elle se trouve à l'extrémité est de la plaine de Çukurova.", "Le musée en plein air néo-hittite de Karatepe-Aslantaş est dans cette province.", "Célèbre pour ses cacahuètes ; elle s'est séparée d'Adana pour devenir province en 1996."],
+ "es": ["Está en el extremo oriental de la llanura de Çukurova.", "El museo al aire libre neohitita de Karatepe-Aslantaş está en esta provincia.", "Famosa por los cacahuetes; se separó de Adana y se convirtió en provincia en 1996."],
+ "it": ["Si trova all'estremità orientale della pianura di Çukurova.", "Il museo all'aperto neo-ittita di Karatepe-Aslantaş è in questa provincia.", "Famosa per le arachidi; si è separata da Adana diventando provincia nel 1996."]
+},
+"81": {
+ "tr": ["Batı Karadeniz'de, İstanbul–Ankara otoyolu üzerindedir.", "Akçakoca sahili ve Güzeldere Şelalesi bu ildedir.", "1999 depremlerinden sonra Bolu'dan ayrılarak il oldu; fındığıyla bilinir."],
+ "en": ["It lies in the western Black Sea region, on the Istanbul–Ankara motorway.", "The Akçakoca coast and Güzeldere waterfall are in this province.", "It split from Bolu after the 1999 earthquakes to become a province; it is known for hazelnuts."],
+ "de": ["Es liegt am westlichen Schwarzen Meer an der Autobahn Istanbul–Ankara.", "Die Küste von Akçakoca und der Güzeldere-Wasserfall liegen in dieser Provinz.", "Nach den Erdbeben von 1999 wurde es von Bolu abgetrennt und Provinz; bekannt für Haselnüsse."],
+ "fr": ["Elle se trouve dans l'ouest de la mer Noire, sur l'autoroute Istanbul–Ankara.", "La côte d'Akçakoca et la cascade de Güzeldere sont dans cette province.", "Elle s'est séparée de Bolu après les séismes de 1999 ; elle est connue pour ses noisettes."],
+ "es": ["Está en el oeste del mar Negro, en la autopista Estambul–Ankara.", "La costa de Akçakoca y la cascada de Güzeldere están en esta provincia.", "Se separó de Bolu tras los terremotos de 1999; es conocida por sus avellanas."],
+ "it": ["Si trova nel Mar Nero occidentale, sull'autostrada Istanbul–Ankara.", "La costa di Akçakoca e la cascata di Güzeldere sono in questa provincia.", "Si è separata da Bolu dopo i terremoti del 1999; è nota per le nocciole."]
+}
+}

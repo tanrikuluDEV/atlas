@@ -1,0 +1,1458 @@
+{
+ "lang.name": {
+  "tr": "Türkçe",
+  "en": "English",
+  "de": "Deutsch",
+  "fr": "Français",
+  "es": "Español",
+  "it": "Italiano"
+ },
+ "app.tagline": {
+  "tr": "İl ve Ülke Bulmaca",
+  "en": "Province & Country Puzzle",
+  "de": "Provinz- & Länderrätsel",
+  "fr": "Jeu des provinces et pays",
+  "es": "Juego de provincias y países",
+  "it": "Gioco di province e paesi"
+ },
+ "cat.turkey": {
+  "tr": "Türkiye",
+  "en": "Türkiye",
+  "de": "Türkei",
+  "fr": "Turquie",
+  "es": "Turquía",
+  "it": "Turchia"
+ },
+ "cat.europe": {
+  "tr": "Avrupa",
+  "en": "Europe",
+  "de": "Europa",
+  "fr": "Europe",
+  "es": "Europa",
+  "it": "Europa"
+ },
+ "cat.asia": {
+  "tr": "Asya",
+  "en": "Asia",
+  "de": "Asien",
+  "fr": "Asie",
+  "es": "Asia",
+  "it": "Asia"
+ },
+ "cat.africa": {
+  "tr": "Afrika",
+  "en": "Africa",
+  "de": "Afrika",
+  "fr": "Afrique",
+  "es": "África",
+  "it": "Africa"
+ },
+ "cat.northAmerica": {
+  "tr": "Kuzey Amerika",
+  "en": "North America",
+  "de": "Nordamerika",
+  "fr": "Amérique du Nord",
+  "es": "América del Norte",
+  "it": "Nord America"
+ },
+ "cat.southAmerica": {
+  "tr": "Güney Amerika",
+  "en": "South America",
+  "de": "Südamerika",
+  "fr": "Amérique du Sud",
+  "es": "América del Sur",
+  "it": "Sud America"
+ },
+ "cat.oceania": {
+  "tr": "Okyanusya",
+  "en": "Oceania",
+  "de": "Ozeanien",
+  "fr": "Océanie",
+  "es": "Oceanía",
+  "it": "Oceania"
+ },
+ "cat.world": {
+  "tr": "Dünya",
+  "en": "World",
+  "de": "Welt",
+  "fr": "Monde",
+  "es": "Mundo",
+  "it": "Mondo"
+ },
+ "subtitle.turkey": {
+  "tr": "Türkiye'nin {n} ilinden birini bul.",
+  "en": "Find one of Türkiye's {n} provinces.",
+  "de": "Finde eine der {n} Provinzen der Türkei.",
+  "fr": "Trouve l'une des {n} provinces de Turquie.",
+  "es": "Encuentra una de las {n} provincias de Turquía.",
+  "it": "Trova una delle {n} province della Turchia."
+ },
+ "subtitle.world": {
+  "tr": "Dünyadaki {n} ülkeden birini bul.",
+  "en": "Find one of the world's {n} countries.",
+  "de": "Finde eines der {n} Länder der Welt.",
+  "fr": "Trouve l'un des {n} pays du monde.",
+  "es": "Encuentra uno de los {n} países del mundo.",
+  "it": "Trova uno dei {n} paesi del mondo."
+ },
+ "subtitle.continent": {
+  "tr": "{continent} kıtasındaki {n} ülkeden birini bul.",
+  "en": "Find one of the {n} countries in {continent}.",
+  "de": "Finde eines der {n} Länder in {continent}.",
+  "fr": "{continent} : trouve l'un des {n} pays.",
+  "es": "Encuentra uno de los {n} países de {continent}.",
+  "it": "{continent}: trova uno dei {n} paesi."
+ },
+ "mode": {
+  "tr": "Mod",
+  "en": "Mode",
+  "de": "Modus",
+  "fr": "Mode",
+  "es": "Modo",
+  "it": "Modalità"
+ },
+ "mode.daily": {
+  "tr": "Günlük",
+  "en": "Daily",
+  "de": "Täglich",
+  "fr": "Du jour",
+  "es": "Diario",
+  "it": "Oggi"
+ },
+ "mode.practice": {
+  "tr": "Alıştırma",
+  "en": "Practice",
+  "de": "Übung",
+  "fr": "Libre",
+  "es": "Práctica",
+  "it": "Libera"
+ },
+ "category": {
+  "tr": "Kategori",
+  "en": "Category",
+  "de": "Kategorie",
+  "fr": "Catégorie",
+  "es": "Categoría",
+  "it": "Categoria"
+ },
+ "language": {
+  "tr": "Dil",
+  "en": "Language",
+  "de": "Sprache",
+  "fr": "Langue",
+  "es": "Idioma",
+  "it": "Lingua"
+ },
+ "stats": {
+  "tr": "İstatistikler",
+  "en": "Statistics",
+  "de": "Statistik",
+  "fr": "Statistiques",
+  "es": "Estadísticas",
+  "it": "Statistiche"
+ },
+ "settings": {
+  "tr": "Ayarlar",
+  "en": "Settings",
+  "de": "Einstellungen",
+  "fr": "Réglages",
+  "es": "Ajustes",
+  "it": "Impostazioni"
+ },
+ "help": {
+  "tr": "Nasıl oynanır?",
+  "en": "How to play?",
+  "de": "Spielanleitung",
+  "fr": "Comment jouer ?",
+  "es": "¿Cómo se juega?",
+  "it": "Come si gioca?"
+ },
+ "menu": {
+  "tr": "Menü",
+  "en": "Menu",
+  "de": "Menü",
+  "fr": "Menu",
+  "es": "Menú",
+  "it": "Menu"
+ },
+ "newGame": {
+  "tr": "Yeni oyun",
+  "en": "New game",
+  "de": "Neues Spiel",
+  "fr": "Nouvelle partie",
+  "es": "Nueva partida",
+  "it": "Nuova partita"
+ },
+ "newPractice": {
+  "tr": "Yeni alıştırma oyunu",
+  "en": "New practice game",
+  "de": "Neues Übungsspiel",
+  "fr": "Nouvelle partie d'entraînement",
+  "es": "Nueva partida de práctica",
+  "it": "Nuova partita di allenamento"
+ },
+ "dailyPuzzle": {
+  "tr": "Günlük bulmaca",
+  "en": "Daily puzzle",
+  "de": "Tagesrätsel",
+  "fr": "Énigme du jour",
+  "es": "Reto diario",
+  "it": "Sfida del giorno"
+ },
+ "game": {
+  "tr": "Oyun",
+  "en": "Game",
+  "de": "Spiel",
+  "fr": "Jeu",
+  "es": "Juego",
+  "it": "Gioco"
+ },
+ "theme.toggle": {
+  "tr": "Aydınlık / karanlık tema",
+  "en": "Light / dark theme",
+  "de": "Helles / dunkles Design",
+  "fr": "Thème clair / sombre",
+  "es": "Tema claro / oscuro",
+  "it": "Tema chiaro / scuro"
+ },
+ "panel.daily.province": {
+  "tr": "Bugünün gizli ili",
+  "en": "Today's hidden province",
+  "de": "Die geheime Provinz von heute",
+  "fr": "La province mystère du jour",
+  "es": "La provincia secreta de hoy",
+  "it": "La provincia segreta di oggi"
+ },
+ "panel.daily.country": {
+  "tr": "Bugünün gizli ülkesi",
+  "en": "Today's hidden country",
+  "de": "Das geheime Land von heute",
+  "fr": "Le pays mystère du jour",
+  "es": "El país secreto de hoy",
+  "it": "Il paese segreto di oggi"
+ },
+ "placeholder.province": {
+  "tr": "İl adı ya da plaka yaz…",
+  "en": "Type a province or plate code…",
+  "de": "Provinz oder Kennzeichen eingeben…",
+  "fr": "Saisis une province ou un code…",
+  "es": "Escribe una provincia o matrícula…",
+  "it": "Scrivi una provincia o una targa…"
+ },
+ "placeholder.country": {
+  "tr": "Ülke adı yaz…",
+  "en": "Type a country…",
+  "de": "Land eingeben…",
+  "fr": "Saisis un pays…",
+  "es": "Escribe un país…",
+  "it": "Scrivi un paese…"
+ },
+ "guess": {
+  "tr": "Tahmin et",
+  "en": "Guess",
+  "de": "Raten",
+  "fr": "Deviner",
+  "es": "Adivinar",
+  "it": "Indovina"
+ },
+ "msg.notFound.province": {
+  "tr": "\"{text}\" diye bir il bulunamadı.",
+  "en": "No province called \"{text}\".",
+  "de": "Keine Provinz namens „{text}“ gefunden.",
+  "fr": "Aucune province nommée « {text} ».",
+  "es": "No hay ninguna provincia llamada «{text}».",
+  "it": "Nessuna provincia chiamata «{text}»."
+ },
+ "msg.notFound.country": {
+  "tr": "\"{text}\" diye bir ülke bulunamadı.",
+  "en": "No country called \"{text}\".",
+  "de": "Kein Land namens „{text}“ gefunden.",
+  "fr": "Aucun pays nommé « {text} ».",
+  "es": "No hay ningún país llamado «{text}».",
+  "it": "Nessun paese chiamato «{text}»."
+ },
+ "msg.already": {
+  "tr": "{name} zaten tahmin edildi.",
+  "en": "{name} was already guessed.",
+  "de": "{name} wurde schon geraten.",
+  "fr": "{name} a déjà été proposé.",
+  "es": "{name} ya se ha probado.",
+  "it": "{name} è già stato provato."
+ },
+ "feedback.neighbor.province": {
+  "tr": "{name} gizli ile komşu!",
+  "en": "{name} borders the hidden province!",
+  "de": "{name} grenzt an die geheime Provinz!",
+  "fr": "{name} touche la province mystère !",
+  "es": "¡{name} limita con la provincia secreta!",
+  "it": "{name} confina con la provincia segreta!"
+ },
+ "feedback.neighbor.country": {
+  "tr": "{name} gizli ülkeye komşu!",
+  "en": "{name} borders the hidden country!",
+  "de": "{name} grenzt an das geheime Land!",
+  "fr": "{name} touche le pays mystère !",
+  "es": "¡{name} limita con el país secreto!",
+  "it": "{name} confina con il paese segreto!"
+ },
+ "feedback.colored": {
+  "tr": "{name} haritada renklendi.",
+  "en": "{name} is now colored on the map.",
+  "de": "{name} ist jetzt auf der Karte eingefärbt.",
+  "fr": "{name} est coloré sur la carte.",
+  "es": "{name} se ha coloreado en el mapa.",
+  "it": "{name} è ora colorato sulla mappa."
+ },
+ "feedback.distance.province": {
+  "tr": "{name}: gizli ile en yakın sınır {km}",
+  "en": "{name}: {km} from the hidden province's border",
+  "de": "{name}: {km} bis zur Grenze der geheimen Provinz",
+  "fr": "{name} : {km} de la frontière de la province mystère",
+  "es": "{name}: a {km} de la frontera de la provincia secreta",
+  "it": "{name}: a {km} dal confine della provincia segreta"
+ },
+ "feedback.distance.country": {
+  "tr": "{name}: gizli ülkeye en yakın sınır {km}",
+  "en": "{name}: {km} from the hidden country's border",
+  "de": "{name}: {km} bis zur Grenze des geheimen Landes",
+  "fr": "{name} : {km} de la frontière du pays mystère",
+  "es": "{name}: a {km} de la frontera del país secreto",
+  "it": "{name}: a {km} dal confine del paese segreto"
+ },
+ "closest": {
+  "tr": "En yakın tahmin",
+  "en": "Closest guess",
+  "de": "Nächster Tipp",
+  "fr": "Essai le plus proche",
+  "es": "Intento más cercano",
+  "it": "Tentativo più vicino"
+ },
+ "neighbor": {
+  "tr": "komşu",
+  "en": "neighbor",
+  "de": "Nachbar",
+  "fr": "voisin",
+  "es": "vecino",
+  "it": "confinante"
+ },
+ "Neighbor": {
+  "tr": "Komşu",
+  "en": "Neighbor",
+  "de": "Nachbar",
+  "fr": "Voisin",
+  "es": "Vecino",
+  "it": "Confinante"
+ },
+ "found": {
+  "tr": "Bulundu",
+  "en": "Found",
+  "de": "Gefunden",
+  "fr": "Trouvé",
+  "es": "Encontrado",
+  "it": "Trovato"
+ },
+ "guesses": {
+  "tr": "{n} tahmin",
+  "en": "{n} guesses",
+  "de": "{n} Versuche",
+  "fr": "{n} essais",
+  "es": "{n} intentos",
+  "it": "{n} tentativi"
+ },
+ "guesses.one": {
+  "tr": "{n} tahmin",
+  "en": "{n} guess",
+  "de": "{n} Versuch",
+  "fr": "{n} essai",
+  "es": "{n} intento",
+  "it": "{n} tentativo"
+ },
+ "giveUp": {
+  "tr": "Pes et",
+  "en": "Give up",
+  "de": "Aufgeben",
+  "fr": "Abandonner",
+  "es": "Rendirse",
+  "it": "Arrenditi"
+ },
+ "over.won": {
+  "tr": "Buldun!",
+  "en": "You found it!",
+  "de": "Gefunden!",
+  "fr": "Trouvé !",
+  "es": "¡Lo encontraste!",
+  "it": "Trovato!"
+ },
+ "over.hidden.province": {
+  "tr": "Gizli il:",
+  "en": "Hidden province:",
+  "de": "Geheime Provinz:",
+  "fr": "Province mystère :",
+  "es": "Provincia secreta:",
+  "it": "Provincia segreta:"
+ },
+ "over.hidden.country": {
+  "tr": "Gizli ülke:",
+  "en": "Hidden country:",
+  "de": "Geheimes Land:",
+  "fr": "Pays mystère :",
+  "es": "País secreto:",
+  "it": "Paese segreto:"
+ },
+ "result": {
+  "tr": "Sonuç",
+  "en": "Result",
+  "de": "Ergebnis",
+  "fr": "Résultat",
+  "es": "Resultado",
+  "it": "Risultato"
+ },
+ "empty.province": {
+  "tr": "Henüz tahmin yok. İlk tahminini yap; harita, gizli ile ne kadar yakın olduğunu renklerle gösterecek.",
+  "en": "No guesses yet. Make your first guess; the map will show with colors how close you are to the hidden province.",
+  "de": "Noch keine Tipps. Gib deinen ersten Tipp ab; die Karte zeigt farbig, wie nah du der geheimen Provinz bist.",
+  "fr": "Aucun essai pour l'instant. Fais ta première proposition ; la carte montrera en couleurs à quel point tu es proche de la province mystère.",
+  "es": "Aún no hay intentos. Haz el primero; el mapa mostrará con colores lo cerca que estás de la provincia secreta.",
+  "it": "Nessun tentativo per ora. Fai il primo; la mappa mostrerà con i colori quanto sei vicino alla provincia segreta."
+ },
+ "empty.country": {
+  "tr": "Henüz tahmin yok. İlk tahminini yap; harita, gizli ülke ile ne kadar yakın olduğunu renklerle gösterecek.",
+  "en": "No guesses yet. Make your first guess; the map will show with colors how close you are to the hidden country.",
+  "de": "Noch keine Tipps. Gib deinen ersten Tipp ab; die Karte zeigt farbig, wie nah du dem geheimen Land bist.",
+  "fr": "Aucun essai pour l'instant. Fais ta première proposition ; la carte montrera en couleurs à quel point tu es proche du pays mystère.",
+  "es": "Aún no hay intentos. Haz el primero; el mapa mostrará con colores lo cerca que estás del país secreto.",
+  "it": "Nessun tentativo per ora. Fai il primo; la mappa mostrerà con i colori quanto sei vicino al paese segreto."
+ },
+ "guesses.header": {
+  "tr": "Tahminler (yakından uzağa)",
+  "en": "Guesses (closest first)",
+  "de": "Tipps (nächste zuerst)",
+  "fr": "Essais (du plus proche au plus loin)",
+  "es": "Intentos (de más cerca a más lejos)",
+  "it": "Tentativi (dal più vicino)"
+ },
+ "highlight.remove": {
+  "tr": "Vurguyu kaldır",
+  "en": "Remove highlight",
+  "de": "Markierung entfernen",
+  "fr": "Retirer la surbrillance",
+  "es": "Quitar resaltado",
+  "it": "Rimuovi evidenziazione"
+ },
+ "highlight.show": {
+  "tr": "Haritada göster",
+  "en": "Show on map",
+  "de": "Auf der Karte zeigen",
+  "fr": "Afficher sur la carte",
+  "es": "Mostrar en el mapa",
+  "it": "Mostra sulla mappa"
+ },
+ "map": {
+  "tr": "Harita",
+  "en": "Map",
+  "de": "Karte",
+  "fr": "Carte",
+  "es": "Mapa",
+  "it": "Mappa"
+ },
+ "map.reset": {
+  "tr": "Haritayı sıfırla",
+  "en": "Reset map",
+  "de": "Karte zurücksetzen",
+  "fr": "Réinitialiser la carte",
+  "es": "Restablecer mapa",
+  "it": "Reimposta mappa"
+ },
+ "map.zoomIn": {
+  "tr": "Yakınlaştır",
+  "en": "Zoom in",
+  "de": "Vergrößern",
+  "fr": "Zoom avant",
+  "es": "Acercar",
+  "it": "Ingrandisci"
+ },
+ "map.zoomOut": {
+  "tr": "Uzaklaştır",
+  "en": "Zoom out",
+  "de": "Verkleinern",
+  "fr": "Zoom arrière",
+  "es": "Alejar",
+  "it": "Riduci"
+ },
+ "map.legend": {
+  "tr": "Renk skalası",
+  "en": "Color scale",
+  "de": "Farbskala",
+  "fr": "Échelle de couleurs",
+  "es": "Escala de colores",
+  "it": "Scala dei colori"
+ },
+ "map.loading": {
+  "tr": "Harita yükleniyor…",
+  "en": "Loading map…",
+  "de": "Karte wird geladen…",
+  "fr": "Chargement de la carte…",
+  "es": "Cargando mapa…",
+  "it": "Caricamento mappa…"
+ },
+ "map.failed": {
+  "tr": "Harita yüklenemedi. Sayfayı yenilemeyi dene.",
+  "en": "The map couldn't load. Try reloading the page.",
+  "de": "Die Karte konnte nicht geladen werden. Lade die Seite neu.",
+  "fr": "Impossible de charger la carte. Recharge la page.",
+  "es": "No se pudo cargar el mapa. Prueba a recargar la página.",
+  "it": "Impossibile caricare la mappa. Prova a ricaricare la pagina."
+ },
+ "near": {
+  "tr": "yakın",
+  "en": "near",
+  "de": "nah",
+  "fr": "proche",
+  "es": "cerca",
+  "it": "vicino"
+ },
+ "far": {
+  "tr": "uzak",
+  "en": "far",
+  "de": "fern",
+  "fr": "loin",
+  "es": "lejos",
+  "it": "lontano"
+ },
+ "congrats": {
+  "tr": "Tebrikler!",
+  "en": "Congratulations!",
+  "de": "Glückwunsch!",
+  "fr": "Bravo !",
+  "es": "¡Enhorabuena!",
+  "it": "Complimenti!"
+ },
+ "nextTime": {
+  "tr": "Bir dahaki sefere!",
+  "en": "Next time!",
+  "de": "Nächstes Mal!",
+  "fr": "La prochaine fois !",
+  "es": "¡La próxima vez!",
+  "it": "Sarà per la prossima!"
+ },
+ "result.won.province": {
+  "tr": "Gizli il: {name}",
+  "en": "Hidden province: {name}",
+  "de": "Geheime Provinz: {name}",
+  "fr": "Province mystère : {name}",
+  "es": "Provincia secreta: {name}",
+  "it": "Provincia segreta: {name}"
+ },
+ "result.won.country": {
+  "tr": "Gizli ülke: {name}",
+  "en": "Hidden country: {name}",
+  "de": "Geheimes Land: {name}",
+  "fr": "Pays mystère : {name}",
+  "es": "País secreto: {name}",
+  "it": "Paese segreto: {name}"
+ },
+ "result.foundIn": {
+  "tr": "{n} tahminde buldun.",
+  "en": "You found it in {n} guesses.",
+  "de": "In {n} Versuchen gefunden.",
+  "fr": "Trouvé en {n} essais.",
+  "es": "Lo encontraste en {n} intentos.",
+  "it": "Trovato in {n} tentativi."
+ },
+ "result.foundIn.one": {
+  "tr": "{n} tahminde buldun.",
+  "en": "You found it in {n} guess.",
+  "de": "In {n} Versuch gefunden.",
+  "fr": "Trouvé en {n} essai.",
+  "es": "Lo encontraste en {n} intento.",
+  "it": "Trovato in {n} tentativo."
+ },
+ "result.lost.province": {
+  "tr": "Gizli il {name} idi.",
+  "en": "The hidden province was {name}.",
+  "de": "Die geheime Provinz war {name}.",
+  "fr": "La province mystère était {name}.",
+  "es": "La provincia secreta era {name}.",
+  "it": "La provincia segreta era {name}."
+ },
+ "result.lost.country": {
+  "tr": "Gizli ülke {name} idi.",
+  "en": "The hidden country was {name}.",
+  "de": "Das geheime Land war {name}.",
+  "fr": "Le pays mystère était {name}.",
+  "es": "El país secreto era {name}.",
+  "it": "Il paese segreto era {name}."
+ },
+ "nextPuzzle": {
+  "tr": "Yeni bulmaca gece yarısı geliyor.",
+  "en": "A new puzzle arrives at midnight.",
+  "de": "Das nächste Rätsel kommt um Mitternacht.",
+  "fr": "Une nouvelle énigme arrive à minuit.",
+  "es": "El próximo reto llega a medianoche.",
+  "it": "La nuova sfida arriva a mezzanotte."
+ },
+ "share": {
+  "tr": "Sonucu paylaş",
+  "en": "Share result",
+  "de": "Ergebnis teilen",
+  "fr": "Partager le résultat",
+  "es": "Compartir resultado",
+  "it": "Condividi risultato"
+ },
+ "copy": {
+  "tr": "Sonucu kopyala",
+  "en": "Copy result",
+  "de": "Ergebnis kopieren",
+  "fr": "Copier le résultat",
+  "es": "Copiar resultado",
+  "it": "Copia risultato"
+ },
+ "copied": {
+  "tr": "Kopyalandı",
+  "en": "Copied",
+  "de": "Kopiert",
+  "fr": "Copié",
+  "es": "Copiado",
+  "it": "Copiato"
+ },
+ "copied.toast": {
+  "tr": "Sonuç panoya kopyalandı",
+  "en": "Result copied to clipboard",
+  "de": "Ergebnis in die Zwischenablage kopiert",
+  "fr": "Résultat copié dans le presse-papiers",
+  "es": "Resultado copiado al portapapeles",
+  "it": "Risultato copiato negli appunti"
+ },
+ "copy.failed": {
+  "tr": "Kopyalanamadı",
+  "en": "Couldn't copy",
+  "de": "Kopieren fehlgeschlagen",
+  "fr": "Copie impossible",
+  "es": "No se pudo copiar",
+  "it": "Copia non riuscita"
+ },
+ "close": {
+  "tr": "Kapat",
+  "en": "Close",
+  "de": "Schließen",
+  "fr": "Fermer",
+  "es": "Cerrar",
+  "it": "Chiudi"
+ },
+ "share.practice": {
+  "tr": "alıştırma",
+  "en": "practice",
+  "de": "Übung",
+  "fr": "entraînement",
+  "es": "práctica",
+  "it": "allenamento"
+ },
+ "share.won": {
+  "tr": "{n} tahminde buldum!",
+  "en": "Found it in {n} guesses!",
+  "de": "In {n} Versuchen gefunden!",
+  "fr": "Trouvé en {n} essais !",
+  "es": "¡Lo encontré en {n} intentos!",
+  "it": "Trovato in {n} tentativi!"
+ },
+ "share.won.one": {
+  "tr": "{n} tahminde buldum!",
+  "en": "Found it in {n} guess!",
+  "de": "In {n} Versuch gefunden!",
+  "fr": "Trouvé en {n} essai !",
+  "es": "¡Lo encontré en {n} intento!",
+  "it": "Trovato in {n} tentativo!"
+ },
+ "share.lost": {
+  "tr": "Bulamadım 😔",
+  "en": "Didn't find it 😔",
+  "de": "Nicht gefunden 😔",
+  "fr": "Pas trouvé 😔",
+  "es": "No lo encontré 😔",
+  "it": "Non l'ho trovato 😔"
+ },
+ "stats.played": {
+  "tr": "Oynanan",
+  "en": "Played",
+  "de": "Gespielt",
+  "fr": "Parties",
+  "es": "Jugadas",
+  "it": "Giocate"
+ },
+ "stats.winRate": {
+  "tr": "Kazanma",
+  "en": "Win rate",
+  "de": "Gewonnen",
+  "fr": "Victoires",
+  "es": "Victorias",
+  "it": "Vittorie"
+ },
+ "stats.streak": {
+  "tr": "Seri",
+  "en": "Streak",
+  "de": "Serie",
+  "fr": "Série",
+  "es": "Racha",
+  "it": "Serie"
+ },
+ "stats.streakDays": {
+  "tr": "Seri (gün)",
+  "en": "Streak (days)",
+  "de": "Serie (Tage)",
+  "fr": "Série (jours)",
+  "es": "Racha (días)",
+  "it": "Serie (giorni)"
+ },
+ "stats.maxStreak": {
+  "tr": "En uzun seri",
+  "en": "Best streak",
+  "de": "Längste Serie",
+  "fr": "Meilleure série",
+  "es": "Mejor racha",
+  "it": "Serie migliore"
+ },
+ "stats.distribution": {
+  "tr": "Tahmin dağılımı",
+  "en": "Guess distribution",
+  "de": "Verteilung der Versuche",
+  "fr": "Répartition des essais",
+  "es": "Distribución de intentos",
+  "it": "Distribuzione dei tentativi"
+ },
+ "stats.average": {
+  "tr": "Ortalama tahmin: {v}",
+  "en": "Average guesses: {v}",
+  "de": "Durchschnittliche Versuche: {v}",
+  "fr": "Essais en moyenne : {v}",
+  "es": "Media de intentos: {v}",
+  "it": "Tentativi medi: {v}"
+ },
+ "stats.footer.daily": {
+  "tr": "Her gün yalnızca günlük bulmaca sayılır.",
+  "en": "Only the daily puzzle counts, once per day.",
+  "de": "Pro Tag zählt nur das Tagesrätsel.",
+  "fr": "Seule l'énigme du jour compte, une fois par jour.",
+  "es": "Solo cuenta el reto diario, una vez al día.",
+  "it": "Conta solo la sfida del giorno, una volta al giorno."
+ },
+ "stats.footer.practice": {
+  "tr": "Bitirilen her alıştırma oyunu sayılır.",
+  "en": "Every finished practice game counts.",
+  "de": "Jedes beendete Übungsspiel zählt.",
+  "fr": "Chaque partie d'entraînement terminée compte.",
+  "es": "Cuenta cada partida de práctica terminada.",
+  "it": "Conta ogni partita di allenamento conclusa."
+ },
+ "stats.footer.browser": {
+  "tr": "İstatistikler bu cihazdaki tarayıcıda saklanır.",
+  "en": "Statistics are stored in this browser on this device.",
+  "de": "Die Statistik wird in diesem Browser auf diesem Gerät gespeichert.",
+  "fr": "Les statistiques sont enregistrées dans ce navigateur, sur cet appareil.",
+  "es": "Las estadísticas se guardan en este navegador, en este dispositivo.",
+  "it": "Le statistiche sono salvate in questo browser, su questo dispositivo."
+ },
+ "cal.title": {
+  "tr": "Takvim",
+  "en": "Calendar",
+  "de": "Kalender",
+  "fr": "Calendrier",
+  "es": "Calendario",
+  "it": "Calendario"
+ },
+ "cal.summary": {
+  "tr": "son {w} haftada {n} gün",
+  "en": "{n} days in the last {w} weeks",
+  "de": "{n} Tage in den letzten {w} Wochen",
+  "fr": "{n} jours sur les {w} dernières semaines",
+  "es": "{n} días en las últimas {w} semanas",
+  "it": "{n} giorni nelle ultime {w} settimane"
+ },
+ "cal.summary.one": {
+  "tr": "son {w} haftada {n} gün",
+  "en": "{n} day in the last {w} weeks",
+  "de": "{n} Tag in den letzten {w} Wochen",
+  "fr": "{n} jour sur les {w} dernières semaines",
+  "es": "{n} día en las últimas {w} semanas",
+  "it": "{n} giorno nelle ultime {w} settimane"
+ },
+ "cal.notPlayed": {
+  "tr": "{date}: oynanmadı",
+  "en": "{date}: not played",
+  "de": "{date}: nicht gespielt",
+  "fr": "{date} : pas joué",
+  "es": "{date}: sin jugar",
+  "it": "{date}: non giocato"
+ },
+ "cal.foundIn": {
+  "tr": "{date}: {n} tahminde bulundu",
+  "en": "{date}: found in {n} guesses",
+  "de": "{date}: in {n} Versuchen gefunden",
+  "fr": "{date} : trouvé en {n} essais",
+  "es": "{date}: encontrado en {n} intentos",
+  "it": "{date}: trovato in {n} tentativi"
+ },
+ "cal.foundIn.one": {
+  "tr": "{date}: {n} tahminde bulundu",
+  "en": "{date}: found in {n} guess",
+  "de": "{date}: in {n} Versuch gefunden",
+  "fr": "{date} : trouvé en {n} essai",
+  "es": "{date}: encontrado en {n} intento",
+  "it": "{date}: trovato in {n} tentativo"
+ },
+ "cal.gaveUp": {
+  "tr": "{date}: pes edildi",
+  "en": "{date}: gave up",
+  "de": "{date}: aufgegeben",
+  "fr": "{date} : abandon",
+  "es": "{date}: rendido",
+  "it": "{date}: arreso"
+ },
+ "cal.games": {
+  "tr": "{date}: {n} oyun",
+  "en": "{date}: {n} games",
+  "de": "{date}: {n} Spiele",
+  "fr": "{date} : {n} parties",
+  "es": "{date}: {n} partidas",
+  "it": "{date}: {n} partite"
+ },
+ "cal.games.one": {
+  "tr": "{date}: {n} oyun",
+  "en": "{date}: {n} game",
+  "de": "{date}: {n} Spiel",
+  "fr": "{date} : {n} partie",
+  "es": "{date}: {n} partida",
+  "it": "{date}: {n} partita"
+ },
+ "cal.fewGuesses": {
+  "tr": "Az tahmin",
+  "en": "Few guesses",
+  "de": "Wenige Versuche",
+  "fr": "Peu d'essais",
+  "es": "Pocos intentos",
+  "it": "Pochi tentativi"
+ },
+ "cal.many": {
+  "tr": "Çok",
+  "en": "Many",
+  "de": "Viele",
+  "fr": "Beaucoup",
+  "es": "Muchos",
+  "it": "Molti"
+ },
+ "cal.gaveUpShort": {
+  "tr": "Pes",
+  "en": "Gave up",
+  "de": "Aufgegeben",
+  "fr": "Abandon",
+  "es": "Rendido",
+  "it": "Arreso"
+ },
+ "cal.few": {
+  "tr": "Az",
+  "en": "Few",
+  "de": "Wenige",
+  "fr": "Peu",
+  "es": "Pocas",
+  "it": "Poche"
+ },
+ "cal.manyGames": {
+  "tr": "Çok oyun",
+  "en": "Many games",
+  "de": "Viele Spiele",
+  "fr": "Beaucoup de parties",
+  "es": "Muchas partidas",
+  "it": "Molte partite"
+ },
+ "disc.title": {
+  "tr": "Keşfettiklerim",
+  "en": "My discoveries",
+  "de": "Meine Entdeckungen",
+  "fr": "Mes découvertes",
+  "es": "Mis descubrimientos",
+  "it": "Le mie scoperte"
+ },
+ "disc.found.province": {
+  "tr": "/ {total} il bulundu",
+  "en": "/ {total} provinces found",
+  "de": "/ {total} Provinzen gefunden",
+  "fr": "/ {total} provinces trouvées",
+  "es": "/ {total} provincias encontradas",
+  "it": "/ {total} province trovate"
+ },
+ "disc.found.country": {
+  "tr": "/ {total} ülke bulundu",
+  "en": "/ {total} countries found",
+  "de": "/ {total} Länder gefunden",
+  "fr": "/ {total} pays trouvés",
+  "es": "/ {total} países encontrados",
+  "it": "/ {total} paesi trovati"
+ },
+ "disc.hint.province": {
+  "tr": "Günlük ya da alıştırmada bulduğun her il yeşile boyanır.",
+  "en": "Every province you find in daily or practice games turns green.",
+  "de": "Jede Provinz, die du im Tagesrätsel oder in der Übung findest, wird grün.",
+  "fr": "Chaque province trouvée (jour ou entraînement) devient verte.",
+  "es": "Cada provincia que encuentres en el reto diario o en la práctica se pinta de verde.",
+  "it": "Ogni provincia trovata nella sfida del giorno o in allenamento diventa verde."
+ },
+ "disc.hint.country": {
+  "tr": "Günlük ya da alıştırmada bulduğun her ülke yeşile boyanır.",
+  "en": "Every country you find in daily or practice games turns green.",
+  "de": "Jedes Land, das du im Tagesrätsel oder in der Übung findest, wird grün.",
+  "fr": "Chaque pays trouvé (jour ou entraînement) devient vert.",
+  "es": "Cada país que encuentres en el reto diario o en la práctica se pinta de verde.",
+  "it": "Ogni paese trovato nella sfida del giorno o in allenamento diventa verde."
+ },
+ "disc.mapLabel": {
+  "tr": "Bulunan yerlerin haritası",
+  "en": "Map of found places",
+  "de": "Karte der gefundenen Orte",
+  "fr": "Carte des lieux trouvés",
+  "es": "Mapa de lugares encontrados",
+  "it": "Mappa dei luoghi trovati"
+ },
+ "prog.title": {
+  "tr": "Gelişim",
+  "en": "Progress",
+  "de": "Fortschritt",
+  "fr": "Progression",
+  "es": "Progreso",
+  "it": "Progressi"
+ },
+ "prog.empty": {
+  "tr": "Gelişim grafiği için birkaç oyun daha bitir. Her oyunun tahmin sayısı burada zamanla çizilecek.",
+  "en": "Finish a few more games to see your progress chart. Each game's guess count will be plotted here over time.",
+  "de": "Beende noch ein paar Spiele für das Fortschrittsdiagramm. Hier wird die Zahl der Versuche jedes Spiels im Zeitverlauf gezeigt.",
+  "fr": "Termine encore quelques parties pour voir ta progression. Le nombre d'essais de chaque partie sera tracé ici.",
+  "es": "Termina unas cuantas partidas más para ver tu progreso. Aquí se dibujarán los intentos de cada partida a lo largo del tiempo.",
+  "it": "Completa ancora qualche partita per vedere i tuoi progressi. Qui verranno tracciati i tentativi di ogni partita nel tempo."
+ },
+ "prog.last10": {
+  "tr": "Son 10 oyun · ort. tahmin",
+  "en": "Last 10 games · avg. guesses",
+  "de": "Letzte 10 Spiele · Ø Versuche",
+  "fr": "10 dernières parties · essais moy.",
+  "es": "Últimas 10 partidas · media de intentos",
+  "it": "Ultime 10 partite · media tentativi"
+ },
+ "prog.all": {
+  "tr": "Tüm oyunlar · ort. tahmin",
+  "en": "All games · avg. guesses",
+  "de": "Alle Spiele · Ø Versuche",
+  "fr": "Toutes les parties · essais moy.",
+  "es": "Todas las partidas · media de intentos",
+  "it": "Tutte le partite · media tentativi"
+ },
+ "prog.improving": {
+  "tr": "Gelişiyorsun",
+  "en": "Improving",
+  "de": "Du wirst besser",
+  "fr": "En progrès",
+  "es": "Mejorando",
+  "it": "Stai migliorando"
+ },
+ "prog.worsening": {
+  "tr": "Biraz geriledin",
+  "en": "Slightly worse",
+  "de": "Etwas schlechter",
+  "fr": "Léger recul",
+  "es": "Algo peor",
+  "it": "Leggermente peggio"
+ },
+ "prog.steady": {
+  "tr": "İstikrarlı",
+  "en": "Steady",
+  "de": "Stabil",
+  "fr": "Stable",
+  "es": "Estable",
+  "it": "Stabile"
+ },
+ "prog.axisGame": {
+  "tr": "Oyun",
+  "en": "Game",
+  "de": "Spiel",
+  "fr": "Partie",
+  "es": "Partida",
+  "it": "Partita"
+ },
+ "prog.axisGuesses": {
+  "tr": "Tahmin",
+  "en": "Guesses",
+  "de": "Versuche",
+  "fr": "Essais",
+  "es": "Intentos",
+  "it": "Tentativi"
+ },
+ "prog.average": {
+  "tr": "Ortalama",
+  "en": "Average",
+  "de": "Durchschnitt",
+  "fr": "Moyenne",
+  "es": "Media",
+  "it": "Media"
+ },
+ "prog.won": {
+  "tr": "Kazanılan",
+  "en": "Won",
+  "de": "Gewonnen",
+  "fr": "Gagnée",
+  "es": "Ganada",
+  "it": "Vinta"
+ },
+ "prog.gaveUp": {
+  "tr": "Pes edilen",
+  "en": "Gave up",
+  "de": "Aufgegeben",
+  "fr": "Abandonnée",
+  "es": "Rendida",
+  "it": "Arresa"
+ },
+ "prog.window": {
+  "tr": "{n} oyunluk ort.",
+  "en": "{n}-game avg.",
+  "de": "Ø aus {n} Spielen",
+  "fr": "moy. sur {n} parties",
+  "es": "media de {n} partidas",
+  "it": "media su {n} partite"
+ },
+ "prog.legend": {
+  "tr": "● kazanılan · ✕ pes edilen · çizgi: son 5 oyunun ortalaması (aşağı inmesi iyi)",
+  "en": "● won · ✕ gave up · line: average of the last 5 games (lower is better)",
+  "de": "● gewonnen · ✕ aufgegeben · Linie: Durchschnitt der letzten 5 Spiele (niedriger ist besser)",
+  "fr": "● gagnée · ✕ abandonnée · ligne : moyenne des 5 dernières parties (plus bas, c'est mieux)",
+  "es": "● ganada · ✕ rendida · línea: media de las últimas 5 partidas (más bajo es mejor)",
+  "it": "● vinta · ✕ arresa · linea: media delle ultime 5 partite (più bassa è meglio)"
+ },
+ "prog.recent": {
+  "tr": "Son oyunlar",
+  "en": "Recent games",
+  "de": "Letzte Spiele",
+  "fr": "Parties récentes",
+  "es": "Partidas recientes",
+  "it": "Partite recenti"
+ },
+ "prog.recentLost": {
+  "tr": "Pes ({guesses})",
+  "en": "Gave up ({guesses})",
+  "de": "Aufgegeben ({guesses})",
+  "fr": "Abandon ({guesses})",
+  "es": "Rendido ({guesses})",
+  "it": "Arreso ({guesses})"
+ },
+ "help.intro": {
+  "tr": "Bir kategori seç: Türkiye'nin illeri, bir kıtanın ülkeleri ya da tüm dünya. Her gün her kategoride bir gizli yer seçilir; amacın onu en az tahminde bulmak.",
+  "en": "Pick a category: the provinces of Türkiye, the countries of a continent, or the whole world. Every day each category gets a hidden place; your goal is to find it in as few guesses as possible.",
+  "de": "Wähle eine Kategorie: die Provinzen der Türkei, die Länder eines Kontinents oder die ganze Welt. Jeden Tag wird in jeder Kategorie ein geheimer Ort gewählt; finde ihn mit möglichst wenigen Versuchen.",
+  "fr": "Choisis une catégorie : les provinces de Turquie, les pays d'un continent ou le monde entier. Chaque jour, un lieu mystère est choisi dans chaque catégorie ; trouve-le en un minimum d'essais.",
+  "es": "Elige una categoría: las provincias de Turquía, los países de un continente o el mundo entero. Cada día se elige un lugar secreto en cada categoría; encuéntralo con los menos intentos posibles.",
+  "it": "Scegli una categoria: le province della Turchia, i paesi di un continente o il mondo intero. Ogni giorno in ogni categoria viene scelto un luogo segreto; trovalo con il minor numero di tentativi."
+ },
+ "help.b1": {
+  "tr": "Bir il ya da ülke adı yaz ve Enter'a bas. Türkiye'de plaka kodu da yazabilirsin (ör. 06).",
+  "en": "Type a province or country name and press Enter. For Türkiye you can also type the license plate code (e.g. 06).",
+  "de": "Gib den Namen einer Provinz oder eines Landes ein und drücke Enter. Bei der Türkei geht auch das Kfz-Kennzeichen (z. B. 06).",
+  "fr": "Saisis le nom d'une province ou d'un pays et appuie sur Entrée. Pour la Turquie, tu peux aussi taper le code d'immatriculation (ex. 06).",
+  "es": "Escribe el nombre de una provincia o país y pulsa Intro. En Turquía también puedes escribir el código de matrícula (p. ej., 06).",
+  "it": "Scrivi il nome di una provincia o di un paese e premi Invio. Per la Turchia puoi anche scrivere il codice della targa (es. 06)."
+ },
+ "help.b2": {
+  "tr": "Tahmin ettiğin yer haritada, gizli yere olan uzaklığına göre renklenir.",
+  "en": "Each guess is colored on the map by its distance to the hidden place.",
+  "de": "Jeder Tipp wird auf der Karte nach seiner Entfernung zum geheimen Ort eingefärbt.",
+  "fr": "Chaque essai est coloré sur la carte selon sa distance au lieu mystère.",
+  "es": "Cada intento se colorea en el mapa según su distancia al lugar secreto.",
+  "it": "Ogni tentativo viene colorato sulla mappa in base alla distanza dal luogo segreto."
+ },
+ "help.b3": {
+  "tr": "Uzaklık, iki yerin en yakın sınırları arasındaki mesafedir. Komşular 0 km sayılır.",
+  "en": "Distance is measured between the nearest borders of the two places. Neighbors count as 0 km.",
+  "de": "Die Entfernung wird zwischen den nächstgelegenen Grenzen gemessen. Nachbarn zählen als 0 km.",
+  "fr": "La distance est mesurée entre les frontières les plus proches. Les voisins comptent pour 0 km.",
+  "es": "La distancia se mide entre las fronteras más cercanas. Los vecinos cuentan como 0 km.",
+  "it": "La distanza è misurata tra i confini più vicini. I confinanti contano 0 km."
+ },
+ "help.b4": {
+  "tr": "Renk ne kadar koyu kırmızıysa gizli yere o kadar yakınsın.",
+  "en": "The darker the red, the closer you are.",
+  "de": "Je dunkler das Rot, desto näher bist du.",
+  "fr": "Plus le rouge est foncé, plus tu es proche.",
+  "es": "Cuanto más oscuro el rojo, más cerca estás.",
+  "it": "Più il rosso è scuro, più sei vicino."
+ },
+ "help.b5": {
+  "tr": "Günlük bulmaca herkes için aynıdır; sonucunu arkadaşlarınla paylaşabilirsin.",
+  "en": "The daily puzzle is the same for everyone; share your result with friends.",
+  "de": "Das Tagesrätsel ist für alle gleich; teile dein Ergebnis mit Freunden.",
+  "fr": "L'énigme du jour est la même pour tous ; partage ton résultat avec tes amis.",
+  "es": "El reto diario es el mismo para todos; comparte tu resultado con tus amigos.",
+  "it": "La sfida del giorno è uguale per tutti; condividi il risultato con gli amici."
+ },
+ "help.kmMac": {
+  "tr": "Kilometre bilgisini Ayarlar'dan (⌘,) kapatıp yalnızca renklerle oynayabilirsin.",
+  "en": "You can turn off kilometers in Settings (⌘,) and play with colors only.",
+  "de": "In den Einstellungen (⌘,) kannst du die Kilometer ausblenden und nur mit Farben spielen.",
+  "fr": "Tu peux masquer les kilomètres dans les Réglages (⌘,) et jouer uniquement avec les couleurs.",
+  "es": "Puedes ocultar los kilómetros en Ajustes (⌘,) y jugar solo con los colores.",
+  "it": "Puoi nascondere i chilometri nelle Impostazioni (⌘,) e giocare solo con i colori."
+ },
+ "help.kmPhone": {
+  "tr": "Kilometre bilgisini ••• menüsündeki Ayarlar'dan kapatıp yalnızca renklerle oynayabilirsin.",
+  "en": "You can turn off kilometers in Settings (••• menu) and play with colors only.",
+  "de": "Unter Einstellungen (Menü •••) kannst du die Kilometer ausblenden und nur mit Farben spielen.",
+  "fr": "Tu peux masquer les kilomètres dans les Réglages (menu •••) et jouer uniquement avec les couleurs.",
+  "es": "Puedes ocultar los kilómetros en Ajustes (menú •••) y jugar solo con los colores.",
+  "it": "Puoi nascondere i chilometri nelle Impostazioni (menu •••) e giocare solo con i colori."
+ },
+ "help.near": {
+  "tr": "Yakın / komşu",
+  "en": "Near / neighbor",
+  "de": "Nah / Nachbar",
+  "fr": "Proche / voisin",
+  "es": "Cerca / vecino",
+  "it": "Vicino / confinante"
+ },
+ "help.far": {
+  "tr": "Uzak",
+  "en": "Far",
+  "de": "Fern",
+  "fr": "Loin",
+  "es": "Lejos",
+  "it": "Lontano"
+ },
+ "help.practice": {
+  "tr": "**Alıştırma** modunda istediğin kadar rastgele oyun oynayabilirsin. Haritayı sürükleyerek kaydırabilir, iki parmakla ya da + / − ile yakınlaştırabilirsin.",
+  "en": "In **Practice** mode you can play as many random games as you like. Drag to move the map; pinch or use + / − to zoom.",
+  "de": "Im Modus **Übung** kannst du beliebig viele Zufallsspiele spielen. Ziehe die Karte zum Verschieben; zoome mit zwei Fingern oder + / −.",
+  "fr": "En mode **Libre**, joue autant de parties aléatoires que tu veux. Fais glisser la carte pour la déplacer ; zoome avec deux doigts ou + / −.",
+  "es": "En el modo **Práctica** puedes jugar tantas partidas aleatorias como quieras. Arrastra para mover el mapa; pellizca o usa + / − para hacer zoom.",
+  "it": "In modalità **Libera** puoi giocare quante partite casuali vuoi. Trascina per spostare la mappa; usa due dita o + / − per lo zoom."
+ },
+ "help.kmWeb": {
+  "tr": "Kilometre bilgisini Ayarlar'dan kapatabilirsin.",
+  "en": "You can turn off kilometers in Settings.",
+  "de": "Die Kilometer kannst du in den Einstellungen ausblenden.",
+  "fr": "Tu peux masquer les kilomètres dans les Réglages.",
+  "es": "Puedes ocultar los kilómetros en Ajustes.",
+  "it": "Puoi nascondere i chilometri nelle Impostazioni."
+ },
+ "help.start": {
+  "tr": "Başla",
+  "en": "Start",
+  "de": "Los geht's",
+  "fr": "C'est parti",
+  "es": "Empezar",
+  "it": "Inizia"
+ },
+ "set.game": {
+  "tr": "Oyun",
+  "en": "Game",
+  "de": "Spiel",
+  "fr": "Jeu",
+  "es": "Juego",
+  "it": "Gioco"
+ },
+ "set.distance": {
+  "tr": "Mesafeleri kilometre olarak göster",
+  "en": "Show distances in kilometers",
+  "de": "Entfernungen in Kilometern anzeigen",
+  "fr": "Afficher les distances en kilomètres",
+  "es": "Mostrar distancias en kilómetros",
+  "it": "Mostra le distanze in chilometri"
+ },
+ "set.distanceOn": {
+  "tr": "Her tahminin gizli yere en yakın sınır mesafesi (km) ve komşuluk bilgisi gösterilir.",
+  "en": "Each guess shows its nearest-border distance (km) to the hidden place and whether it's a neighbor.",
+  "de": "Für jeden Tipp werden die Entfernung zur nächsten Grenze (km) und Nachbarschaft angezeigt.",
+  "fr": "Chaque essai affiche sa distance (km) à la frontière la plus proche et s'il est voisin.",
+  "es": "Cada intento muestra su distancia (km) a la frontera más cercana y si es vecino.",
+  "it": "Ogni tentativo mostra la distanza (km) dal confine più vicino e se è confinante."
+ },
+ "set.distanceOff": {
+  "tr": "Kilometre gizlenir; komşular yine belirtilir, diğer yakınlığı renklerden tahmin edersin. Daha zor!",
+  "en": "Kilometers are hidden; neighbors are still marked, and you judge the rest from the colors. Harder!",
+  "de": "Kilometer werden ausgeblendet; Nachbarn werden weiter markiert, den Rest liest du an den Farben ab. Schwieriger!",
+  "fr": "Les kilomètres sont masqués ; les voisins restent indiqués, le reste se devine aux couleurs. Plus difficile !",
+  "es": "Se ocultan los kilómetros; los vecinos siguen marcados y el resto lo deduces por los colores. ¡Más difícil!",
+  "it": "I chilometri sono nascosti; i confinanti restano indicati e il resto lo capisci dai colori. Più difficile!"
+ },
+ "set.theme": {
+  "tr": "Tema",
+  "en": "Theme",
+  "de": "Design",
+  "fr": "Thème",
+  "es": "Tema",
+  "it": "Tema"
+ },
+ "set.system": {
+  "tr": "Sistem",
+  "en": "System",
+  "de": "System",
+  "fr": "Système",
+  "es": "Sistema",
+  "it": "Sistema"
+ },
+ "set.light": {
+  "tr": "Açık",
+  "en": "Light",
+  "de": "Hell",
+  "fr": "Clair",
+  "es": "Claro",
+  "it": "Chiaro"
+ },
+ "set.dark": {
+  "tr": "Koyu",
+  "en": "Dark",
+  "de": "Dunkel",
+  "fr": "Sombre",
+  "es": "Oscuro",
+  "it": "Scuro"
+ },
+ "set.version": {
+  "tr": "Sürüm {v}",
+  "en": "Version {v}",
+  "de": "Version {v}",
+  "fr": "Version {v}",
+  "es": "Versión {v}",
+  "it": "Versione {v}"
+ },
+ "set.languageAuto": {
+  "tr": "Otomatik (bölgene göre)",
+  "en": "Automatic (by region)",
+  "de": "Automatisch (nach Region)",
+  "fr": "Automatique (selon la région)",
+  "es": "Automático (según la región)",
+  "it": "Automatica (in base alla regione)"
+ },
+ "done": {
+  "tr": "Tamam",
+  "en": "Done",
+  "de": "Fertig",
+  "fr": "OK",
+  "es": "Listo",
+  "it": "Fine"
+ },
+ "hint.take": {
+  "tr": "İpucu al ({n} kaldı)",
+  "en": "Get a hint ({n} left)",
+  "de": "Hinweis holen (noch {n})",
+  "fr": "Un indice ({n} restants)",
+  "es": "Pedir pista (quedan {n})",
+  "it": "Chiedi un indizio (ne restano {n})"
+ },
+ "hint.take.one": {
+  "tr": "İpucu al ({n} kaldı)",
+  "en": "Get a hint ({n} left)",
+  "de": "Hinweis holen (noch {n})",
+  "fr": "Un indice ({n} restant)",
+  "es": "Pedir pista (queda {n})",
+  "it": "Chiedi un indizio (ne resta {n})"
+ },
+ "hints.header": {
+  "tr": "İpuçları",
+  "en": "Hints",
+  "de": "Hinweise",
+  "fr": "Indices",
+  "es": "Pistas",
+  "it": "Indizi"
+ },
+ "hints.about": {
+  "tr": "Bu yer hakkında",
+  "en": "About this place",
+  "de": "Über diesen Ort",
+  "fr": "À propos de ce lieu",
+  "es": "Sobre este lugar",
+  "it": "Su questo luogo"
+ },
+ "share.hints": {
+  "tr": "💡 {n} ipucu",
+  "en": "💡 {n} hints",
+  "de": "💡 {n} Hinweise",
+  "fr": "💡 {n} indices",
+  "es": "💡 {n} pistas",
+  "it": "💡 {n} indizi"
+ },
+ "share.hints.one": {
+  "tr": "💡 {n} ipucu",
+  "en": "💡 {n} hint",
+  "de": "💡 {n} Hinweis",
+  "fr": "💡 {n} indice",
+  "es": "💡 {n} pista",
+  "it": "💡 {n} indizio"
+ },
+ "help.hints": {
+  "tr": "Takılırsan ipucu düğmesiyle o yer hakkında 3 genel kültür ipucu açabilirsin; her biri bir öncekinden daha belirgindir.",
+  "en": "Stuck? The hint button reveals up to 3 trivia clues about the place, each more telling than the last.",
+  "de": "Kommst du nicht weiter? Über den Hinweis-Knopf erhältst du bis zu 3 Wissenshinweise zum Ort, jeder deutlicher als der vorige.",
+  "fr": "Bloqué ? Le bouton indice révèle jusqu'à 3 indices de culture générale sur le lieu, chacun plus parlant que le précédent.",
+  "es": "¿Atascado? El botón de pista revela hasta 3 pistas de cultura general sobre el lugar, cada una más reveladora que la anterior.",
+  "it": "Bloccato? Il pulsante indizio rivela fino a 3 indizi di cultura generale sul luogo, ognuno più chiaro del precedente."
+ },
+ "tv.didYouMean": {
+  "tr": "Bunu mu demek istedin?",
+  "en": "Did you mean?",
+  "de": "Meintest du?",
+  "fr": "Tu voulais dire ?",
+  "es": "¿Quisiste decir?",
+  "it": "Intendevi?"
+ },
+ "help.b1TV": {
+  "tr": "Kutuyu seçip bir il ya da ülke adı yaz ya da iPhone'daki Atlas'ta ••• → TV'ye söyle ile adı sesle söyle. Türkiye'de plaka kodu da olur (ör. 06).",
+  "en": "Select the box and type a province or country name, or say it with Atlas on iPhone (••• → Say it to TV). For Türkiye, the license plate code works too (e.g. 06).",
+  "de": "Wähle das Feld und tippe den Namen einer Provinz oder eines Landes ein oder sag ihn mit Atlas auf dem iPhone (••• → Dem TV sagen). Bei der Türkei geht auch das Kfz-Kennzeichen (z. B. 06).",
+  "fr": "Sélectionne la case et tape le nom d'une province ou d'un pays, ou dis-le avec Atlas sur l'iPhone (••• → Dire à la TV). Pour la Turquie, le code de plaque fonctionne aussi (ex. 06).",
+  "es": "Selecciona la casilla y escribe el nombre de una provincia o un país, o dilo con Atlas en el iPhone (••• → Decírselo a la TV). En Turquía también vale el código de matrícula (p. ej. 06).",
+  "it": "Seleziona la casella e scrivi il nome di una provincia o di un paese, oppure dillo con Atlas sull'iPhone (••• → Dillo alla TV). Per la Turchia vale anche il codice di targa (es. 06)."
+ },
+ "help.practiceTV": {
+  "tr": "**Alıştırma** modunda istediğin kadar rastgele oyun oynayabilirsin. Haritayı seçip yön tuşlarıyla kaydırabilir, ⏯ ile baştan gösterebilirsin.",
+  "en": "In **Practice** mode you can play as many random games as you like. Select the map to move it with the arrows; ⏯ resets it.",
+  "de": "Im Modus **Übung** kannst du beliebig viele Zufallsspiele spielen. Wähle die Karte, um sie mit den Pfeiltasten zu verschieben; ⏯ setzt sie zurück.",
+  "fr": "En mode **Libre**, tu peux jouer autant de parties aléatoires que tu veux. Sélectionne la carte pour la déplacer avec les flèches ; ⏯ la réinitialise.",
+  "es": "En el modo **Práctica** puedes jugar tantas partidas aleatorias como quieras. Selecciona el mapa para moverlo con las flechas; ⏯ lo restablece.",
+  "it": "In modalità **Libera** puoi giocare quante partite casuali vuoi. Seleziona la mappa per spostarla con le frecce; ⏯ la ripristina."
+ },
+ "level.up": {
+  "tr": "SEVİYE ATLADIN",
+  "en": "LEVEL UP",
+  "de": "LEVEL AUFGESTIEGEN",
+  "fr": "NIVEAU SUPÉRIEUR",
+  "es": "SUBISTE DE NIVEL",
+  "it": "LIVELLO SUPERIORE"
+ },
+ "level.n": {
+  "tr": "Seviye {n}",
+  "en": "Level {n}",
+  "de": "Level {n}",
+  "fr": "Niveau {n}",
+  "es": "Nivel {n}",
+  "it": "Livello {n}"
+ },
+ "xp.gained": {
+  "tr": "+{n} XP",
+  "en": "+{n} XP",
+  "de": "+{n} XP",
+  "fr": "+{n} XP",
+  "es": "+{n} XP",
+  "it": "+{n} XP"
+ },
+ "xp.none": {
+  "tr": "Bu oyundan puan gelmedi",
+  "en": "No points this game",
+  "de": "Keine Punkte in diesem Spiel",
+  "fr": "Pas de points cette partie",
+  "es": "Sin puntos esta partida",
+  "it": "Nessun punto in questa partita"
+ },
+ "help.xp": {
+  "tr": "Kazandığın her oyun puan (XP) getirir: ne kadar az tahminde bulursan o kadar çok. Günlük bulmaca 1,5 kat sayılır, ipuçları puanı azaltır; puan biriktikçe seviye atlarsın.",
+  "en": "Every win earns points (XP): the fewer guesses, the more points. The daily puzzle counts 1.5×, hints lower the points, and you level up as they add up.",
+  "de": "Jeder Sieg bringt Punkte (XP): je weniger Versuche, desto mehr. Das Tagesrätsel zählt 1,5-fach, Hinweise senken die Punkte, und mit genug Punkten steigst du ein Level auf.",
+  "fr": "Chaque victoire rapporte des points (XP) : moins tu fais d'essais, plus tu en gagnes. L'énigme du jour compte ×1,5, les indices réduisent les points, et tu montes de niveau en les accumulant.",
+  "es": "Cada victoria da puntos (XP): cuantos menos intentos, más puntos. El reto diario cuenta ×1,5, las pistas restan puntos y subes de nivel al acumularlos.",
+  "it": "Ogni vittoria dà punti (XP): meno tentativi fai, più punti ottieni. La sfida del giorno vale ×1,5, gli indizi riducono i punti e sali di livello accumulandoli."
+ },
+ "voice.title": {
+  "tr": "TV'ye söyle",
+  "en": "Say it to TV",
+  "de": "Dem TV sagen",
+  "fr": "Dire à la TV",
+  "es": "Decírselo a la TV",
+  "it": "Dillo alla TV"
+ },
+ "voice.searching": {
+  "tr": "Apple TV aranıyor…",
+  "en": "Looking for Apple TV…",
+  "de": "Apple TV wird gesucht …",
+  "fr": "Recherche de l'Apple TV…",
+  "es": "Buscando el Apple TV…",
+  "it": "Ricerca di Apple TV…"
+ },
+ "voice.connected": {
+  "tr": "Apple TV'ye bağlı",
+  "en": "Connected to Apple TV",
+  "de": "Mit Apple TV verbunden",
+  "fr": "Connecté à l'Apple TV",
+  "es": "Conectado al Apple TV",
+  "it": "Connesso ad Apple TV"
+ },
+ "voice.hold": {
+  "tr": "Basılı tut ve adı söyle",
+  "en": "Hold and say the name",
+  "de": "Gedrückt halten und Namen sagen",
+  "fr": "Maintiens et dis le nom",
+  "es": "Mantén pulsado y di el nombre",
+  "it": "Tieni premuto e di' il nome"
+ },
+ "voice.listening": {
+  "tr": "Dinliyorum…",
+  "en": "Listening…",
+  "de": "Ich höre zu …",
+  "fr": "J'écoute…",
+  "es": "Escuchando…",
+  "it": "Ti ascolto…"
+ },
+ "voice.denied": {
+  "tr": "Mikrofon ya da konuşma tanıma izni yok. Ayarlar → Atlas'tan açabilirsin.",
+  "en": "Microphone or speech recognition access is off. Turn it on in Settings → Atlas.",
+  "de": "Kein Zugriff auf Mikrofon oder Spracherkennung. Aktiviere ihn unter Einstellungen → Atlas.",
+  "fr": "L'accès au micro ou à la reconnaissance vocale est désactivé. Active-le dans Réglages → Atlas.",
+  "es": "No hay acceso al micrófono o al reconocimiento de voz. Actívalo en Ajustes → Atlas.",
+  "it": "L'accesso al microfono o al riconoscimento vocale è disattivato. Attivalo in Impostazioni → Atlas."
+ },
+ "voice.unavailable": {
+  "tr": "Konuşma tanıma şu an kullanılamıyor. İnternet bağlantını kontrol et.",
+  "en": "Speech recognition is unavailable right now. Check your internet connection.",
+  "de": "Spracherkennung ist gerade nicht verfügbar. Prüfe deine Internetverbindung.",
+  "fr": "La reconnaissance vocale est indisponible pour le moment. Vérifie ta connexion Internet.",
+  "es": "El reconocimiento de voz no está disponible ahora. Revisa tu conexión a internet.",
+  "it": "Il riconoscimento vocale non è disponibile al momento. Controlla la connessione a Internet."
+ },
+ "voice.footer": {
+  "tr": "Apple TV'de Atlas açık olmalı ve iPhone ile aynı Wi-Fi ağında olmalı. Söylediğin ad TV'de doğrudan tahmin olarak girilir.",
+  "en": "Atlas must be open on Apple TV, on the same Wi-Fi network as your iPhone. The name you say is entered as a guess on the TV.",
+  "de": "Atlas muss auf dem Apple TV geöffnet sein, im selben WLAN wie dein iPhone. Der gesagte Name wird auf dem TV direkt als Versuch eingegeben.",
+  "fr": "Atlas doit être ouvert sur l'Apple TV, sur le même réseau Wi-Fi que ton iPhone. Le nom que tu dis est saisi directement comme essai sur la TV.",
+  "es": "Atlas debe estar abierto en el Apple TV, en la misma red Wi-Fi que tu iPhone. El nombre que digas se introduce directamente como intento en la TV.",
+  "it": "Atlas deve essere aperto su Apple TV, sulla stessa rete Wi-Fi dell'iPhone. Il nome che dici viene inserito direttamente come tentativo sulla TV."
+ },
+ "voice.gameOver": {
+  "tr": "Bu oyun bitti. Sol üstteki “Yeni oyun” ile yenisini başlat.",
+  "en": "This game is over. Tap “New game” at the top left to start another.",
+  "de": "Dieses Spiel ist vorbei. Tippe oben links auf „Neues Spiel“.",
+  "fr": "Cette partie est terminée. Touche « Nouvelle partie » en haut à gauche.",
+  "es": "Esta partida ha terminado. Toca «Nueva partida» arriba a la izquierda.",
+  "it": "Questa partita è finita. Tocca «Nuova partita» in alto a sinistra."
+ },
+ "tv.phoneHint": {
+  "tr": "Sesle tahmin için: iPhone'daki Atlas'ta ••• → TV'ye söyle.",
+  "en": "To guess by voice: on iPhone, open Atlas → ••• → Say it to TV.",
+  "de": "Per Sprache raten: auf dem iPhone Atlas → ••• → Dem TV sagen.",
+  "fr": "Pour deviner à la voix : sur l'iPhone, Atlas → ••• → Dire à la TV.",
+  "es": "Para adivinar por voz: en el iPhone, Atlas → ••• → Decírselo a la TV.",
+  "it": "Per indovinare a voce: sull'iPhone, Atlas → ••• → Dillo alla TV."
+ },
+ "tv.phoneConnected": {
+  "tr": "iPhone bağlı: adı telefondan söyleyebilirsin.",
+  "en": "iPhone connected: say the name on your phone.",
+  "de": "iPhone verbunden: sag den Namen am Telefon.",
+  "fr": "iPhone connecté : dis le nom sur ton téléphone.",
+  "es": "iPhone conectado: di el nombre en el teléfono.",
+  "it": "iPhone connesso: di' il nome sul telefono."
+ },
+ "voice.noHints": {
+  "tr": "Bu oyunda ipucu kalmadı.",
+  "en": "No hints left in this game.",
+  "de": "Keine Hinweise mehr in diesem Spiel.",
+  "fr": "Plus d'indices pour cette partie.",
+  "es": "No quedan pistas en esta partida.",
+  "it": "Non restano indizi in questa partita."
+ },
+ "voice.giveUpConfirm": {
+  "tr": "Emin misin? Tekrar bas",
+  "en": "Sure? Tap again",
+  "de": "Sicher? Nochmal tippen",
+  "fr": "Sûr ? Touche encore",
+  "es": "¿Seguro? Toca otra vez",
+  "it": "Sicuro? Tocca ancora"
+ }
+}

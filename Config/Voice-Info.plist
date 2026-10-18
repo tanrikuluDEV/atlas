@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!-- iPhone ve Apple TV: "TV'ye söyle" (VoiceLink.swift) için yerel ağ, mikrofon ve konuşma tanıma izinleri.
+     Diğer anahtarlar derlemede üretilir (GENERATE_INFOPLIST_FILE). -->
+<plist version="1.0">
+<dict>
+	<key>NSBonjourServices</key>
+	<array>
+		<string>_atlas-voice._tcp</string>
+	</array>
+	<key>NSLocalNetworkUsageDescription</key>
+	<string>Atlas, iPhone'da söylediğin adları aynı ağdaki Apple TV'ye göndermek için yerel ağı kullanır.</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>Atlas, Apple TV'ye göndereceğin il ve ülke adlarını dinlemek için mikrofonu kullanır.</string>
+	<key>NSSpeechRecognitionUsageDescription</key>
+	<string>Atlas, söylediğin il ve ülke adlarını yazıya çevirip Apple TV'de tahmin olarak girmek için konuşma tanımayı kullanır.</string>
+</dict>
+</plist>

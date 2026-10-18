@@ -1,0 +1,70 @@
+name: Atlas
+options:
+  bundleIdPrefix: com.atlas
+  deploymentTarget:
+    macOS: "14.0"
+    iOS: "17.0"
+    tvOS: "17.0"
+  developmentLanguage: tr
+settings:
+  base:
+    SWIFT_VERSION: "5.0"
+    MARKETING_VERSION: "1.0"
+    CURRENT_PROJECT_VERSION: "1"
+targets:
+  Atlas:
+    type: application
+    platform: macOS
+    sources:
+      - Atlas
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.atlas.ilbulmaca
+        PRODUCT_NAME: Atlas
+        GENERATE_INFOPLIST_FILE: YES
+        INFOPLIST_KEY_CFBundleDisplayName: Atlas
+        INFOPLIST_KEY_LSApplicationCategoryType: public.app-category.puzzle-games
+        INFOPLIST_KEY_NSHumanReadableCopyright: ""
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+        ENABLE_HARDENED_RUNTIME: YES
+        CODE_SIGN_IDENTITY: "-"
+        CODE_SIGN_STYLE: Manual
+        DEVELOPMENT_TEAM: ""
+  AtlasiOS:
+    type: application
+    platform: iOS
+    sources:
+      - Atlas
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.atanrikulu.atlas
+        INFOPLIST_FILE: Config/Voice-Info.plist
+        PRODUCT_NAME: Atlas
+        GENERATE_INFOPLIST_FILE: YES
+        INFOPLIST_KEY_CFBundleDisplayName: Atlas
+        INFOPLIST_KEY_LSApplicationCategoryType: public.app-category.puzzle-games
+        INFOPLIST_KEY_UILaunchScreen_Generation: YES
+        INFOPLIST_KEY_UISupportedInterfaceOrientations: UIInterfaceOrientationPortrait
+        INFOPLIST_KEY_UIRequiresFullScreen: YES
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+        TARGETED_DEVICE_FAMILY: "1"
+        CODE_SIGN_STYLE: Automatic
+        DEVELOPMENT_TEAM: DR8AY52TR6
+  AtlasTV:
+    type: application
+    platform: tvOS
+    sources:
+      - Atlas
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.atanrikulu.atlas.tv
+        INFOPLIST_FILE: Config/Voice-Info.plist
+        PRODUCT_NAME: Atlas
+        GENERATE_INFOPLIST_FILE: YES
+        INFOPLIST_KEY_CFBundleDisplayName: Atlas
+        INFOPLIST_KEY_LSApplicationCategoryType: public.app-category.puzzle-games
+        INFOPLIST_KEY_UILaunchScreen_Generation: YES
+        ASSETCATALOG_COMPILER_APPICON_NAME: TVAppIcon
+        TARGETED_DEVICE_FAMILY: "3"
+        CODE_SIGN_STYLE: Automatic
+        DEVELOPMENT_TEAM: DR8AY52TR6

@@ -1,0 +1,14 @@
+# Derleme çıktısı
+build/
+DerivedData/
+xcuserdata/
+*.xcuserstate
+
+# Gizli bilgi (Vercel OIDC anahtarı) ve Vercel bağlantısı
+.env*
+.vercel/
+
+# Sistem
+.DS_Store
+node_modules/
+__pycache__/

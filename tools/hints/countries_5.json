@@ -1,0 +1,322 @@
+{
+"SRB": {
+ "tr": ["Balkanlar'da, denize kıyısı olmayan bir ülkedir.", "Nikola Tesla ve Novak Djokovic buralıdır; ćevapi ve rakija sevilir.", "Başkenti, Tuna ile Sava'nın birleştiği yerdeki Belgrad'dır."],
+ "en": ["A landlocked country in the Balkans.", "Nikola Tesla and Novak Djokovic come from here; ćevapi and rakija are beloved.", "Its capital is Belgrade, where the Danube and Sava meet."],
+ "de": ["Ein Binnenland auf dem Balkan.", "Nikola Tesla und Novak Đoković stammen von hier; Ćevapi und Rakija sind beliebt.", "Seine Hauptstadt ist Belgrad, wo Donau und Save zusammenfließen."],
+ "fr": ["Un pays enclavé des Balkans.", "Nikola Tesla et Novak Djokovic en sont originaires ; on adore les ćevapi et la rakija.", "Sa capitale est Belgrade, au confluent du Danube et de la Save."],
+ "es": ["Un país sin salida al mar de los Balcanes.", "Nikola Tesla y Novak Djokovic son de aquí; los ćevapi y la rakija son muy apreciados.", "Su capital es Belgrado, donde se unen el Danubio y el Sava."],
+ "it": ["Un paese senza sbocco sul mare nei Balcani.", "Nikola Tesla e Novak Djokovic vengono da qui; molto amati i ćevapi e la rakija.", "La sua capitale è Belgrado, alla confluenza di Danubio e Sava."]
+},
+"TJK": {
+ "tr": ["Orta Asya'da, topraklarının %90'ından fazlası dağ olan bir ülkedir.", "Dünyanın çatısı denen Pamir Dağları buradadır; Farsçaya yakın bir dil konuşulan tek Orta Asya ülkesidir.", "Başkenti, adı pazartesi anlamına gelen Duşanbe'dir."],
+ "en": ["A Central Asian country where over 90% of the land is mountains.", "The Pamirs, 'the roof of the world', are here; it is the only Central Asian country speaking a Persian language.", "Its capital is Dushanbe, whose name means 'Monday'."],
+ "de": ["Ein zentralasiatisches Land, dessen Fläche zu über 90 % aus Gebirge besteht.", "Hier liegt der Pamir, das „Dach der Welt“; es ist das einzige zentralasiatische Land mit einer persischen Sprache.", "Seine Hauptstadt ist Duschanbe, was „Montag“ bedeutet."],
+ "fr": ["Un pays d'Asie centrale dont plus de 90 % du territoire est montagneux.", "Le Pamir, « toit du monde », est ici ; c'est le seul pays d'Asie centrale de langue persane.", "Sa capitale est Douchanbé, dont le nom signifie « lundi »."],
+ "es": ["Un país de Asia central cuyo territorio es en más de un 90 % montaña.", "Aquí está el Pamir, «el techo del mundo»; es el único país de Asia central de lengua persa.", "Su capital es Dusambé, cuyo nombre significa «lunes»."],
+ "it": ["Un paese dell'Asia centrale il cui territorio è per oltre il 90% montuoso.", "Qui c'è il Pamir, «il tetto del mondo»; è l'unico paese dell'Asia centrale di lingua persiana.", "La sua capitale è Dušanbe, il cui nome significa «lunedì»."]
+},
+"TZA": {
+ "tr": ["Doğu Afrika'da, Hint Okyanusu kıyısında bir ülkedir.", "Afrika'nın en yüksek dağı Kilimanjaro ve Serengeti buradadır.", "Başkenti Dodoma, en büyük şehri Darüsselam'dır; Zanzibar adası bu ülkeye bağlıdır."],
+ "en": ["An East African country on the Indian Ocean.", "Kilimanjaro, Africa's highest mountain, and the Serengeti are here.", "Its capital is Dodoma and its largest city Dar es Salaam; Zanzibar belongs to it."],
+ "de": ["Ein ostafrikanisches Land am Indischen Ozean.", "Der Kilimandscharo, Afrikas höchster Berg, und die Serengeti liegen hier.", "Hauptstadt ist Dodoma, größte Stadt Daressalam; Sansibar gehört dazu."],
+ "fr": ["Un pays d'Afrique de l'Est sur l'océan Indien.", "Le Kilimandjaro, plus haut sommet d'Afrique, et le Serengeti sont ici.", "Sa capitale est Dodoma et sa plus grande ville Dar es Salaam ; Zanzibar en fait partie."],
+ "es": ["Un país de África oriental en el océano Índico.", "El Kilimanjaro, la montaña más alta de África, y el Serengueti están aquí.", "Su capital es Dodoma y su mayor ciudad Dar es-Salam; Zanzíbar le pertenece."],
+ "it": ["Un paese dell'Africa orientale sull'Oceano Indiano.", "Il Kilimangiaro, la montagna più alta dell'Africa, e il Serengeti sono qui.", "La capitale è Dodoma e la città più grande Dar es Salaam; Zanzibar ne fa parte."]
+},
+"THA": {
+ "tr": ["Güneydoğu Asya'da, hiç sömürge olmamış bir ülkedir.", "Pad thai, Muay Thai ve Phuket plajlarıyla ünlüdür.", "Başkenti Bangkok'tur; eski adı Siyam'dır."],
+ "en": ["A Southeast Asian country that was never colonised.", "Famous for pad thai, Muay Thai and the beaches of Phuket.", "Its capital is Bangkok; it used to be called Siam."],
+ "de": ["Ein südostasiatisches Land, das nie kolonisiert wurde.", "Berühmt für Pad Thai, Muay Thai und die Strände von Phuket.", "Seine Hauptstadt ist Bangkok; früher hieß es Siam."],
+ "fr": ["Un pays d'Asie du Sud-Est qui n'a jamais été colonisé.", "Célèbre pour le pad thaï, la boxe muay-thaï et les plages de Phuket.", "Sa capitale est Bangkok ; il s'appelait autrefois le Siam."],
+ "es": ["Un país del sudeste asiático que nunca fue colonizado.", "Famoso por el pad thai, el muay thai y las playas de Phuket.", "Su capital es Bangkok; antes se llamaba Siam."],
+ "it": ["Un paese del Sud-est asiatico mai colonizzato.", "Famoso per il pad thai, la muay thai e le spiagge di Phuket.", "La sua capitale è Bangkok; un tempo si chiamava Siam."]
+},
+"TWN": {
+ "tr": ["Doğu Asya'da, Çin anakarasının doğusunda bir adadır.", "Dünyanın en gelişmiş çiplerinin çoğu burada üretilir; bubble tea buradan çıktı.", "Başkenti Taipei'dir; Taipei 101 gökdeleni ünlüdür."],
+ "en": ["An island in East Asia, east of mainland China.", "Most of the world's most advanced chips are made here; bubble tea was invented here.", "Its capital is Taipei; the Taipei 101 skyscraper is famous."],
+ "de": ["Eine Insel in Ostasien, östlich des chinesischen Festlands.", "Die meisten der fortschrittlichsten Chips der Welt werden hier hergestellt; Bubble Tea wurde hier erfunden.", "Seine Hauptstadt ist Taipeh; berühmt ist der Wolkenkratzer Taipei 101."],
+ "fr": ["Une île d'Asie de l'Est, à l'est de la Chine continentale.", "La plupart des puces les plus avancées du monde y sont fabriquées ; le bubble tea y a été inventé.", "Sa capitale est Taipei ; le gratte-ciel Taipei 101 est célèbre."],
+ "es": ["Una isla de Asia oriental, al este de China continental.", "Aquí se fabrican la mayoría de los chips más avanzados del mundo; el bubble tea se inventó aquí.", "Su capital es Taipéi; el rascacielos Taipei 101 es famoso."],
+ "it": ["Un'isola dell'Asia orientale, a est della Cina continentale.", "Qui si producono gran parte dei chip più avanzati del mondo; il bubble tea è nato qui.", "La sua capitale è Taipei; famoso il grattacielo Taipei 101."]
+},
+"TGO": {
+ "tr": ["Batı Afrika'da, Gine Körfezi kıyısında çok dar ve uzun bir ülkedir.", "Önce Alman, sonra Fransız sömürgesi oldu; Koutammakou'nun kule biçimli kerpiç evleri UNESCO listesindedir.", "Başkenti Lomé'dir."],
+ "en": ["A very narrow, elongated West African country on the Gulf of Guinea.", "First a German, then a French colony; the tower-shaped mud houses of Koutammakou are a UNESCO site.", "Its capital is Lomé."],
+ "de": ["Ein sehr schmales, langgestrecktes westafrikanisches Land am Golf von Guinea.", "Erst deutsche, dann französische Kolonie; die turmartigen Lehmhäuser von Koutammakou sind UNESCO-Welterbe.", "Seine Hauptstadt ist Lomé."],
+ "fr": ["Un pays d'Afrique de l'Ouest très étroit et allongé, sur le golfe de Guinée.", "Colonie allemande puis française ; les maisons-tours en terre du Koutammakou sont classées à l'UNESCO.", "Sa capitale est Lomé."],
+ "es": ["Un país de África occidental muy estrecho y alargado, en el golfo de Guinea.", "Primero colonia alemana y luego francesa; las casas-torre de barro de Koutammakou son Patrimonio de la UNESCO.", "Su capital es Lomé."],
+ "it": ["Un paese dell'Africa occidentale molto stretto e allungato, sul Golfo di Guinea.", "Prima colonia tedesca, poi francese; le case-torre di fango di Koutammakou sono patrimonio UNESCO.", "La sua capitale è Lomé."]
+},
+"TON": {
+ "tr": ["Güney Pasifik'te yaklaşık 170 adadan oluşan bir Polinezya krallığıdır.", "Hiç sömürge olmamış tek Pasifik ülkesidir; Kaptan Cook ona Dostluk Adaları adını verdi.", "Başkenti Nuku'alofa'dır."],
+ "en": ["A Polynesian kingdom of about 170 islands in the South Pacific.", "The only Pacific nation never colonised; Captain Cook called it the 'Friendly Islands'.", "Its capital is Nuku'alofa."],
+ "de": ["Ein polynesisches Königreich aus etwa 170 Inseln im Südpazifik.", "Der einzige Pazifikstaat, der nie kolonisiert wurde; Kapitän Cook nannte ihn „Freundschaftsinseln“.", "Seine Hauptstadt ist Nukuʻalofa."],
+ "fr": ["Un royaume polynésien d'environ 170 îles dans le Pacifique Sud.", "Le seul pays du Pacifique jamais colonisé ; le capitaine Cook l'appela les « îles des Amis ».", "Sa capitale est Nukuʻalofa."],
+ "es": ["Un reino polinesio de unas 170 islas en el Pacífico Sur.", "El único país del Pacífico nunca colonizado; el capitán Cook lo llamó las «islas de los Amigos».", "Su capital es Nukualofa."],
+ "it": ["Un regno polinesiano di circa 170 isole nel Pacifico meridionale.", "L'unico paese del Pacifico mai colonizzato; il capitano Cook lo chiamò «isole degli Amici».", "La sua capitale è Nukuʻalofa."]
+},
+"TTO": {
+ "tr": ["Karayipler'in güneyinde, Venezuela kıyısının hemen açığında iki adadan oluşan bir ülkedir.", "Çelik davul (steelpan), kalipso ve limbo dansı buradan çıktı; dev bir karnavalı vardır.", "Başkenti Port of Spain'dir; petrol ve doğalgaz zenginidir."],
+ "en": ["A two-island nation in the southern Caribbean, just off the coast of Venezuela.", "The steelpan, calypso and the limbo dance come from here; it holds a huge carnival.", "Its capital is Port of Spain; it is rich in oil and gas."],
+ "de": ["Ein Staat aus zwei Inseln in der südlichen Karibik, direkt vor Venezuela.", "Steelpan, Calypso und Limbo stammen von hier; es feiert einen riesigen Karneval.", "Seine Hauptstadt ist Port of Spain; reich an Öl und Gas."],
+ "fr": ["Un pays de deux îles au sud des Caraïbes, au large du Venezuela.", "Le steelpan, le calypso et la danse limbo viennent d'ici ; son carnaval est immense.", "Sa capitale est Port-d'Espagne ; il est riche en pétrole et en gaz."],
+ "es": ["Un país de dos islas en el sur del Caribe, frente a la costa de Venezuela.", "El steelpan, el calipso y el baile del limbo vienen de aquí; celebra un gran carnaval.", "Su capital es Puerto España; es rico en petróleo y gas."],
+ "it": ["Un paese di due isole nei Caraibi meridionali, al largo del Venezuela.", "Lo steelpan, il calypso e il limbo vengono da qui; celebra un enorme carnevale.", "La sua capitale è Port of Spain; è ricco di petrolio e gas."]
+},
+"TUN": {
+ "tr": ["Afrika'nın en kuzey ucunda, Akdeniz kıyısında bir ülkedir.", "Antik Kartaca buradadır; Arap Baharı 2010'da burada başladı. Yıldız Savaşları'ndaki Tatooine sahneleri burada çekildi.", "Başkenti ülkeyle aynı adı taşır; Sidi Bou Said'in mavi-beyaz evleri ünlüdür."],
+ "en": ["A country at the northern tip of Africa, on the Mediterranean.", "Ancient Carthage is here; the Arab Spring began here in 2010. Star Wars' Tatooine scenes were filmed here.", "Its capital shares the country's name; the blue-and-white houses of Sidi Bou Said are famous."],
+ "de": ["Ein Land an der Nordspitze Afrikas, am Mittelmeer.", "Das antike Karthago liegt hier; 2010 begann hier der Arabische Frühling. Die Tatooine-Szenen von Star Wars wurden hier gedreht.", "Die Hauptstadt trägt den Landesnamen; berühmt sind die blau-weißen Häuser von Sidi Bou Said."],
+ "fr": ["Un pays à la pointe nord de l'Afrique, au bord de la Méditerranée.", "L'antique Carthage est ici ; le Printemps arabe y a commencé en 2010. Les scènes de Tatooine de Star Wars y ont été tournées.", "Sa capitale porte le nom du pays ; les maisons bleu et blanc de Sidi Bou Saïd sont célèbres."],
+ "es": ["Un país en el extremo norte de África, a orillas del Mediterráneo.", "La antigua Cartago está aquí; la Primavera Árabe empezó aquí en 2010. Las escenas de Tatooine de Star Wars se rodaron aquí.", "Su capital lleva el nombre del país; las casas blancas y azules de Sidi Bou Said son famosas."],
+ "it": ["Un paese all'estremità settentrionale dell'Africa, sul Mediterraneo.", "L'antica Cartagine è qui; la Primavera araba è iniziata qui nel 2010. Le scene di Tatooine di Star Wars sono state girate qui.", "La capitale porta il nome del paese; famose le case bianche e blu di Sidi Bou Said."]
+},
+"TUV": {
+ "tr": ["Pasifik'te, dokuz adadan oluşan dünyanın en küçük ülkelerinden biridir.", "İnternet alan adı .tv'yi kiralayarak önemli gelir elde eder; yükselen deniz seviyesiyle tehdit altındadır.", "Başkenti Funafuti'dir."],
+ "en": ["One of the world's smallest countries, made up of nine islands in the Pacific.", "It earns significant income by leasing its '.tv' internet domain; it is threatened by rising seas.", "Its capital is Funafuti."],
+ "de": ["Eines der kleinsten Länder der Welt, aus neun Inseln im Pazifik.", "Es verdient viel Geld mit der Vermietung seiner Internetendung „.tv“; der steigende Meeresspiegel bedroht es.", "Seine Hauptstadt ist Funafuti."],
+ "fr": ["L'un des plus petits pays du monde, formé de neuf îles du Pacifique.", "Il tire d'importants revenus de la location de son domaine Internet « .tv » ; la montée des eaux le menace.", "Sa capitale est Funafuti."],
+ "es": ["Uno de los países más pequeños del mundo, formado por nueve islas del Pacífico.", "Obtiene grandes ingresos alquilando su dominio de internet «.tv»; la subida del mar lo amenaza.", "Su capital es Funafuti."],
+ "it": ["Uno dei paesi più piccoli del mondo, formato da nove isole del Pacifico.", "Guadagna molto affittando il suo dominio internet «.tv»; è minacciato dall'innalzamento del mare.", "La sua capitale è Funafuti."]
+},
+"TUR": {
+ "tr": ["Toprakları hem Avrupa'da hem Asya'da olan, iki boğazı bulunan bir ülkedir.", "Kapadokya, Pamukkale ve Efes buradadır; çay ve baklava çok sevilir.", "Başkenti Ankara, en büyük şehri İstanbul'dur."],
+ "en": ["A country with land in both Europe and Asia, divided by two straits.", "Cappadocia, Pamukkale and Ephesus are here; tea and baklava are beloved.", "Its capital is Ankara; its largest city is Istanbul."],
+ "de": ["Ein Land mit Gebiet in Europa und Asien, getrennt durch zwei Meerengen.", "Kappadokien, Pamukkale und Ephesos liegen hier; Tee und Baklava sind beliebt.", "Hauptstadt ist Ankara, größte Stadt Istanbul."],
+ "fr": ["Un pays à cheval sur l'Europe et l'Asie, séparées par deux détroits.", "La Cappadoce, Pamukkale et Éphèse sont ici ; on adore le thé et le baklava.", "Sa capitale est Ankara ; sa plus grande ville est Istanbul."],
+ "es": ["Un país con territorio en Europa y Asia, separadas por dos estrechos.", "Capadocia, Pamukkale y Éfeso están aquí; el té y el baklava son muy apreciados.", "Su capital es Ankara; su mayor ciudad es Estambul."],
+ "it": ["Un paese con territorio in Europa e in Asia, separate da due stretti.", "La Cappadocia, Pamukkale ed Efeso sono qui; molto amati il tè e il baklava.", "La capitale è Ankara; la città più grande è Istanbul."]
+},
+"TKM": {
+ "tr": ["Orta Asya'da, Hazar Denizi kıyısındadır; topraklarının büyük kısmı Karakum Çölü'dür.", "Yıllardır yanan Derweze gaz krateri (Cehennemin Kapısı) ve Ahal-Teke atlarıyla ünlüdür.", "Başkenti, beyaz mermer binalarıyla Aşkabat'tır."],
+ "en": ["A Central Asian country on the Caspian Sea, mostly covered by the Karakum Desert.", "Famous for the Darvaza gas crater ('Gates of Hell'), burning for decades, and Akhal-Teke horses.", "Its capital is Ashgabat, known for its white marble buildings."],
+ "de": ["Ein zentralasiatisches Land am Kaspischen Meer, größtenteils Karakum-Wüste.", "Berühmt für den seit Jahrzehnten brennenden Gaskrater von Derweze („Tor zur Hölle“) und Achal-Tekkiner-Pferde.", "Seine Hauptstadt ist Aşgabat, bekannt für weiße Marmorbauten."],
+ "fr": ["Un pays d'Asie centrale sur la Caspienne, en grande partie couvert par le désert du Karakoum.", "Célèbre pour le cratère de gaz de Darvaza (« porte de l'enfer »), en feu depuis des décennies, et les chevaux akhal-teke.", "Sa capitale est Achgabat, connue pour ses bâtiments en marbre blanc."],
+ "es": ["Un país de Asia central en el mar Caspio, cubierto en su mayoría por el desierto de Karakum.", "Famoso por el cráter de gas de Darvaza («Puerta del Infierno»), que arde desde hace décadas, y los caballos akhal-teke.", "Su capital es Asjabad, conocida por sus edificios de mármol blanco."],
+ "it": ["Un paese dell'Asia centrale sul Mar Caspio, in gran parte coperto dal deserto del Karakum.", "Famoso per il cratere di gas di Darvaza («Porta dell'Inferno»), in fiamme da decenni, e per i cavalli akhal-teke.", "La sua capitale è Aşgabat, nota per gli edifici di marmo bianco."]
+},
+"UGA": {
+ "tr": ["Doğu Afrika'da, ekvator üzerinde, denize kıyısı olmayan bir ülkedir.", "Nil'in kaynağı Victoria Gölü'nün kıyısındadır; Bwindi ormanında dağ gorilleri yaşar.", "Başkenti Kampala'dır; Churchill ona Afrika'nın incisi demişti."],
+ "en": ["A landlocked East African country on the equator.", "It lies on Lake Victoria, source of the Nile; mountain gorillas live in its Bwindi forest.", "Its capital is Kampala; Churchill called it 'the pearl of Africa'."],
+ "de": ["Ein ostafrikanisches Binnenland am Äquator.", "Es liegt am Victoriasee, der Quelle des Nils; im Bwindi-Wald leben Berggorillas.", "Seine Hauptstadt ist Kampala; Churchill nannte es „die Perle Afrikas“."],
+ "fr": ["Un pays enclavé d'Afrique de l'Est, sur l'équateur.", "Il borde le lac Victoria, source du Nil ; des gorilles des montagnes vivent dans sa forêt de Bwindi.", "Sa capitale est Kampala ; Churchill l'appelait « la perle de l'Afrique »."],
+ "es": ["Un país sin salida al mar de África oriental, sobre el ecuador.", "Está a orillas del lago Victoria, fuente del Nilo; en su bosque de Bwindi viven gorilas de montaña.", "Su capital es Kampala; Churchill la llamó «la perla de África»."],
+ "it": ["Un paese senza sbocco sul mare dell'Africa orientale, sull'equatore.", "Si affaccia sul lago Vittoria, sorgente del Nilo; nella foresta di Bwindi vivono i gorilla di montagna.", "La sua capitale è Kampala; Churchill lo chiamò «la perla dell'Africa»."]
+},
+"UKR": {
+ "tr": ["Rusya'dan sonra Avrupa'nın yüzölçümü en büyük ülkesidir.", "Ayçiçeği ve buğday tarlalarıyla Avrupa'nın tahıl ambarı denir; borş çorbası ünlüdür.", "Başkenti Kiev'dir; 1986 Çernobil nükleer kazası burada yaşandı."],
+ "en": ["The largest country entirely in Europe after Russia.", "Its sunflower and wheat fields earned it the name 'breadbasket of Europe'; borscht is famous.", "Its capital is Kyiv; the 1986 Chernobyl nuclear disaster happened here."],
+ "de": ["Nach Russland das flächenmäßig größte Land Europas.", "Sonnenblumen- und Weizenfelder machten es zur „Kornkammer Europas“; berühmt ist Borschtsch.", "Seine Hauptstadt ist Kyjiw; 1986 ereignete sich hier die Atomkatastrophe von Tschernobyl."],
+ "fr": ["Le plus grand pays d'Europe après la Russie.", "Ses champs de tournesols et de blé lui valent le surnom de « grenier de l'Europe » ; le bortsch est célèbre.", "Sa capitale est Kiev ; la catastrophe nucléaire de Tchernobyl s'y est produite en 1986."],
+ "es": ["El país más extenso de Europa después de Rusia.", "Sus campos de girasol y trigo le valieron el apodo de «granero de Europa»; el borsch es famoso.", "Su capital es Kiev; aquí ocurrió el desastre nuclear de Chernóbil en 1986."],
+ "it": ["Il paese più esteso d'Europa dopo la Russia.", "I campi di girasole e grano gli valgono il soprannome di «granaio d'Europa»; famoso il boršč.", "La sua capitale è Kiev; qui avvenne il disastro nucleare di Černobyl' nel 1986."]
+},
+"OMN": {
+ "tr": ["Arap Yarımadası'nın güneydoğu ucundadır.", "Tarih boyunca günlük (tütsü) ticaretiyle zenginleşti; kuzeydeki Musandam'da fiyortları vardır.", "Başkenti Maskat'tır; Hürmüz Boğazı'na bakar."],
+ "en": ["A country at the southeastern tip of the Arabian Peninsula.", "Historically rich from the frankincense trade; its northern Musandam exclave has fjords.", "Its capital is Muscat; it overlooks the Strait of Hormuz."],
+ "de": ["Ein Land an der Südostspitze der Arabischen Halbinsel.", "Historisch reich durch den Weihrauchhandel; die nördliche Exklave Musandam hat Fjorde.", "Seine Hauptstadt ist Maskat; es blickt auf die Straße von Hormus."],
+ "fr": ["Un pays à la pointe sud-est de la péninsule Arabique.", "Historiquement enrichi par le commerce de l'encens ; son exclave du Musandam, au nord, a des fjords.", "Sa capitale est Mascate ; il domine le détroit d'Ormuz."],
+ "es": ["Un país en el extremo sureste de la península arábiga.", "Históricamente se enriqueció con el comercio del incienso; su exclave de Musandam, al norte, tiene fiordos.", "Su capital es Mascate; domina el estrecho de Ormuz."],
+ "it": ["Un paese all'estremità sud-orientale della penisola arabica.", "Storicamente arricchito dal commercio dell'incenso; la sua exclave settentrionale di Musandam ha dei fiordi.", "La sua capitale è Mascate; si affaccia sullo stretto di Hormuz."]
+},
+"URY": {
+ "tr": ["Güney Amerika'da, Arjantin ile Brezilya arasındaki küçük bir ülkedir.", "İlk Dünya Kupası'nı 1930'da düzenledi ve kazandı; mate çayı çok sevilir.", "Başkenti Montevideo'dur."],
+ "en": ["A small South American country between Argentina and Brazil.", "It hosted and won the first World Cup in 1930; mate tea is beloved.", "Its capital is Montevideo."],
+ "de": ["Ein kleines südamerikanisches Land zwischen Argentinien und Brasilien.", "Es richtete 1930 die erste Fußball-WM aus und gewann sie; Mate-Tee ist sehr beliebt.", "Seine Hauptstadt ist Montevideo."],
+ "fr": ["Un petit pays d'Amérique du Sud entre l'Argentine et le Brésil.", "Il a organisé et remporté la première Coupe du monde en 1930 ; le maté y est très apprécié.", "Sa capitale est Montevideo."],
+ "es": ["Un pequeño país sudamericano entre Argentina y Brasil.", "Organizó y ganó el primer Mundial en 1930; el mate es muy querido.", "Su capital es Montevideo."],
+ "it": ["Un piccolo paese sudamericano tra Argentina e Brasile.", "Ha organizzato e vinto il primo Mondiale nel 1930; il mate è amatissimo.", "La sua capitale è Montevideo."]
+},
+"VUT": {
+ "tr": ["Güneybatı Pasifik'te 80'den fazla adadan oluşan bir Melanezya ülkesidir.", "Pentecost adasındaki kara dalışı bungee jumping'in atası sayılır; Yasur yanardağı sürekli faaldir.", "Başkenti Port Vila'dır."],
+ "en": ["A Melanesian nation of more than 80 islands in the southwest Pacific.", "Land diving on Pentecost Island is considered the ancestor of bungee jumping; Mount Yasur volcano is constantly active.", "Its capital is Port Vila."],
+ "de": ["Ein melanesischer Staat aus über 80 Inseln im Südwestpazifik.", "Das Turmspringen auf Pentecost gilt als Vorläufer des Bungee-Springens; der Vulkan Yasur ist ständig aktiv.", "Seine Hauptstadt ist Port Vila."],
+ "fr": ["Un pays mélanésien de plus de 80 îles dans le Pacifique sud-ouest.", "Le saut du Gol de l'île de Pentecôte est considéré comme l'ancêtre du saut à l'élastique ; le volcan Yasur est en activité permanente.", "Sa capitale est Port-Vila."],
+ "es": ["Un país melanesio de más de 80 islas en el Pacífico suroccidental.", "El salto desde torres de la isla de Pentecostés se considera el antepasado del puenting; el volcán Yasur está siempre activo.", "Su capital es Port Vila."],
+ "it": ["Un paese melanesiano di oltre 80 isole nel Pacifico sud-occidentale.", "I salti dalle torri dell'isola di Pentecoste sono considerati gli antenati del bungee jumping; il vulcano Yasur è sempre attivo.", "La sua capitale è Port Vila."]
+},
+"VAT": {
+ "tr": ["Dünyanın en küçük ülkesidir; tamamen bir şehrin içindedir.", "Katolik Kilisesi'nin merkezidir; İsviçreli Muhafızlar tarafından korunur.", "Aziz Petrus Bazilikası ve Sistina Şapeli buradadır."],
+ "en": ["The smallest country in the world, entirely within a city.", "It is the centre of the Catholic Church, guarded by the Swiss Guard.", "St Peter's Basilica and the Sistine Chapel are here."],
+ "de": ["Das kleinste Land der Welt, vollständig innerhalb einer Stadt.", "Es ist das Zentrum der katholischen Kirche, bewacht von der Schweizergarde.", "Der Petersdom und die Sixtinische Kapelle sind hier."],
+ "fr": ["Le plus petit pays du monde, entièrement situé dans une ville.", "C'est le centre de l'Église catholique, gardé par la Garde suisse.", "La basilique Saint-Pierre et la chapelle Sixtine sont ici."],
+ "es": ["El país más pequeño del mundo, situado por completo dentro de una ciudad.", "Es el centro de la Iglesia católica, custodiado por la Guardia Suiza.", "La basílica de San Pedro y la Capilla Sixtina están aquí."],
+ "it": ["Il paese più piccolo del mondo, interamente all'interno di una città.", "È il centro della Chiesa cattolica, sorvegliato dalla Guardia Svizzera.", "La basilica di San Pietro e la Cappella Sistina sono qui."]
+},
+"VEN": {
+ "tr": ["Güney Amerika'nın kuzeyinde, Karayip kıyısında bir ülkedir.", "Dünyanın en yüksek şelalesi Angel Şelalesi buradadır; kanıtlanmış petrol rezervleri dünyanın en büyüğüdür.", "Başkenti Caracas'tır; Simón Bolívar burada doğdu."],
+ "en": ["A country in northern South America on the Caribbean coast.", "Angel Falls, the world's highest waterfall, is here; it has the world's largest proven oil reserves.", "Its capital is Caracas; Simón Bolívar was born here."],
+ "de": ["Ein Land im Norden Südamerikas an der Karibikküste.", "Hier liegt der Salto Ángel, der höchste Wasserfall der Welt; es hat die größten nachgewiesenen Ölreserven der Welt.", "Seine Hauptstadt ist Caracas; Simón Bolívar wurde hier geboren."],
+ "fr": ["Un pays du nord de l'Amérique du Sud, sur la mer des Caraïbes.", "Le Salto Ángel, plus haute chute d'eau du monde, est ici ; il a les plus grandes réserves prouvées de pétrole.", "Sa capitale est Caracas ; Simón Bolívar y est né."],
+ "es": ["Un país del norte de Sudamérica, en la costa caribeña.", "El Salto Ángel, la cascada más alta del mundo, está aquí; tiene las mayores reservas probadas de petróleo del mundo.", "Su capital es Caracas; Simón Bolívar nació aquí."],
+ "it": ["Un paese del nord del Sud America, sulla costa caraibica.", "Il Salto Angel, la cascata più alta del mondo, è qui; ha le maggiori riserve accertate di petrolio al mondo.", "La sua capitale è Caracas; Simón Bolívar nacque qui."]
+},
+"VNM": {
+ "tr": ["Güneydoğu Asya'da, uzun ve S harfi biçimli bir ülkedir.", "Pho çorbası ve Ha Long Körfezi ile ünlüdür; kahve üretiminde dünyada ikincidir.", "Başkenti Hanoi, en büyük şehri Ho Chi Minh'tir."],
+ "en": ["A long, S-shaped country in Southeast Asia.", "Famous for pho and Ha Long Bay; it is the world's second-largest coffee producer.", "Its capital is Hanoi; its largest city is Ho Chi Minh City."],
+ "de": ["Ein langes, S-förmiges Land in Südostasien.", "Berühmt für Pho und die Halong-Bucht; es ist der zweitgrößte Kaffeeproduzent der Welt.", "Hauptstadt ist Hanoi, größte Stadt Ho-Chi-Minh-Stadt."],
+ "fr": ["Un pays long, en forme de S, en Asie du Sud-Est.", "Célèbre pour le phở et la baie d'Along ; c'est le deuxième producteur mondial de café.", "Sa capitale est Hanoï ; sa plus grande ville est Hô Chi Minh-Ville."],
+ "es": ["Un país largo y en forma de S del sudeste asiático.", "Famoso por el pho y la bahía de Ha Long; es el segundo productor de café del mundo.", "Su capital es Hanói; su mayor ciudad es Ciudad Ho Chi Minh."],
+ "it": ["Un paese lungo e a forma di S del Sud-est asiatico.", "Famoso per il pho e la baia di Ha Long; è il secondo produttore mondiale di caffè.", "La capitale è Hanoi; la città più grande è Ho Chi Minh."]
+},
+"YEM": {
+ "tr": ["Arap Yarımadası'nın güneybatı ucundadır.", "Mocha kahvesi adını buradaki limandan alır; Sokotra adasının ejder kanı ağaçları ünlüdür.", "Başkenti, kerpiç gökdelenleriyle Sana'dır; Aden limanı buradadır."],
+ "en": ["A country at the southwestern tip of the Arabian Peninsula.", "Mocha coffee is named after one of its ports; the dragon's blood trees of Socotra island are famous.", "Its capital is Sanaa, known for its mud-brick tower houses; the port of Aden is here."],
+ "de": ["Ein Land an der Südwestspitze der Arabischen Halbinsel.", "Der Mokka ist nach einem seiner Häfen benannt; berühmt sind die Drachenblutbäume der Insel Sokotra.", "Seine Hauptstadt ist Sanaa mit ihren Lehmturmhäusern; der Hafen Aden liegt hier."],
+ "fr": ["Un pays à la pointe sud-ouest de la péninsule Arabique.", "Le café moka doit son nom à l'un de ses ports ; les dragonniers de l'île de Socotra sont célèbres.", "Sa capitale est Sanaa, connue pour ses maisons-tours en terre ; le port d'Aden est ici."],
+ "es": ["Un país en el extremo suroeste de la península arábiga.", "El café moca debe su nombre a uno de sus puertos; los dragos de la isla de Socotra son famosos.", "Su capital es Saná, conocida por sus casas torre de adobe; el puerto de Adén está aquí."],
+ "it": ["Un paese all'estremità sud-occidentale della penisola arabica.", "Il caffè moka prende il nome da uno dei suoi porti; famosi gli alberi del sangue di drago dell'isola di Socotra.", "La sua capitale è Sana'a, nota per le case-torre di fango; il porto di Aden è qui."]
+},
+"NZL": {
+ "tr": ["Güneybatı Pasifik'te, iki ana adadan oluşan bir ülkedir.", "Maori kültürü, haka dansı ve kivi kuşuyla bilinir.", "Başkenti Wellington'dır; Yüzüklerin Efendisi filmleri burada çekildi."],
+ "en": ["A southwest Pacific country made up of two main islands.", "Known for Māori culture, the haka and the kiwi bird.", "Its capital is Wellington; The Lord of the Rings was filmed here."],
+ "de": ["Ein Land im Südwestpazifik aus zwei Hauptinseln.", "Bekannt für die Kultur der Māori, den Haka und den Kiwi-Vogel.", "Seine Hauptstadt ist Wellington; „Der Herr der Ringe“ wurde hier gedreht."],
+ "fr": ["Un pays du Pacifique sud-ouest formé de deux îles principales.", "Connu pour la culture maorie, le haka et l'oiseau kiwi.", "Sa capitale est Wellington ; Le Seigneur des anneaux y a été tourné."],
+ "es": ["Un país del Pacífico suroccidental formado por dos islas principales.", "Conocido por la cultura maorí, el haka y el ave kiwi.", "Su capital es Wellington; El Señor de los Anillos se rodó aquí."],
+ "it": ["Un paese del Pacifico sud-occidentale formato da due isole principali.", "Noto per la cultura maori, la haka e l'uccello kiwi.", "La sua capitale è Wellington; Il Signore degli Anelli è stato girato qui."]
+},
+"CPV": {
+ "tr": ["Atlantik'te, Batı Afrika açıklarında 10 volkanik adadan oluşan bir ülkedir.", "Eski bir Portekiz sömürgesidir; morna müziğinin kraliçesi Cesária Évora buralıdır.", "Başkenti Praia'dır."],
+ "en": ["A nation of 10 volcanic islands in the Atlantic, off West Africa.", "A former Portuguese colony; Cesária Évora, queen of morna music, came from here.", "Its capital is Praia."],
+ "de": ["Ein Staat aus 10 Vulkaninseln im Atlantik vor Westafrika.", "Eine ehemalige portugiesische Kolonie; Cesária Évora, Königin der Morna, stammte von hier.", "Seine Hauptstadt ist Praia."],
+ "fr": ["Un pays de 10 îles volcaniques dans l'Atlantique, au large de l'Afrique de l'Ouest.", "Une ancienne colonie portugaise ; Cesária Évora, reine de la morna, en était originaire.", "Sa capitale est Praia."],
+ "es": ["Un país de 10 islas volcánicas en el Atlántico, frente a África occidental.", "Una antigua colonia portuguesa; Cesária Évora, reina de la morna, era de aquí.", "Su capital es Praia."],
+ "it": ["Un paese di 10 isole vulcaniche nell'Atlantico, al largo dell'Africa occidentale.", "Un'ex colonia portoghese; Cesária Évora, regina della morna, veniva da qui.", "La sua capitale è Praia."]
+},
+"GRC": {
+ "tr": ["Balkanlar'ın güneyinde, binlerce adası olan bir ülkedir.", "Demokrasinin, felsefenin ve Olimpiyat Oyunları'nın doğduğu yerdir.", "Başkenti Atina'dır; Akropolis buradadır."],
+ "en": ["A country at the southern end of the Balkans with thousands of islands.", "The birthplace of democracy, philosophy and the Olympic Games.", "Its capital is Athens, home of the Acropolis."],
+ "de": ["Ein Land im Süden des Balkans mit Tausenden Inseln.", "Die Wiege der Demokratie, der Philosophie und der Olympischen Spiele.", "Seine Hauptstadt ist Athen mit der Akropolis."],
+ "fr": ["Un pays au sud des Balkans comptant des milliers d'îles.", "Le berceau de la démocratie, de la philosophie et des Jeux olympiques.", "Sa capitale est Athènes, où se dresse l'Acropole."],
+ "es": ["Un país en el extremo sur de los Balcanes con miles de islas.", "La cuna de la democracia, la filosofía y los Juegos Olímpicos.", "Su capital es Atenas, donde está la Acrópolis."],
+ "it": ["Un paese all'estremità meridionale dei Balcani con migliaia di isole.", "La culla della democrazia, della filosofia e dei Giochi olimpici.", "La sua capitale è Atene, dove sorge l'Acropoli."]
+},
+"ZMB": {
+ "tr": ["Güney Afrika'da, denize kıyısı olmayan bir ülkedir.", "Bakır üretimiyle bilinir; Victoria Şelalesi'ni komşusuyla paylaşır.", "Başkenti Lusaka'dır; eski adı Kuzey Rodezya'dır."],
+ "en": ["A landlocked country in southern Africa.", "Known for copper mining; it shares Victoria Falls with its neighbour.", "Its capital is Lusaka; it was formerly Northern Rhodesia."],
+ "de": ["Ein Binnenland im südlichen Afrika.", "Bekannt für Kupferbergbau; die Victoriafälle teilt es mit seinem Nachbarn.", "Seine Hauptstadt ist Lusaka; früher hieß es Nordrhodesien."],
+ "fr": ["Un pays enclavé d'Afrique australe.", "Connu pour ses mines de cuivre ; il partage les chutes Victoria avec son voisin.", "Sa capitale est Lusaka ; il s'appelait autrefois la Rhodésie du Nord."],
+ "es": ["Un país sin salida al mar del sur de África.", "Conocido por la minería del cobre; comparte las cataratas Victoria con su vecino.", "Su capital es Lusaka; antes se llamaba Rodesia del Norte."],
+ "it": ["Un paese senza sbocco sul mare dell'Africa australe.", "Noto per le miniere di rame; condivide le cascate Vittoria con il vicino.", "La sua capitale è Lusaka; un tempo si chiamava Rhodesia del Nord."]
+},
+"ZWE": {
+ "tr": ["Güney Afrika'da, denize kıyısı olmayan bir ülkedir.", "Ortaçağdan kalma dev taş kent kalıntıları ülkeye adını verdi; 2008'de tarihin en yüksek enflasyonlarından birini yaşadı.", "Başkenti Harare'dir; eski adı Güney Rodezya'dır."],
+ "en": ["A landlocked country in southern Africa.", "Medieval stone city ruins gave the country its name; in 2008 it suffered one of history's worst hyperinflations.", "Its capital is Harare; it was formerly Southern Rhodesia."],
+ "de": ["Ein Binnenland im südlichen Afrika.", "Mittelalterliche Ruinen einer Steinstadt gaben dem Land seinen Namen; 2008 erlebte es eine der schlimmsten Hyperinflationen der Geschichte.", "Seine Hauptstadt ist Harare; früher hieß es Südrhodesien."],
+ "fr": ["Un pays enclavé d'Afrique australe.", "Les ruines d'une cité de pierre médiévale ont donné son nom au pays ; en 2008, il a connu l'une des pires hyperinflations de l'histoire.", "Sa capitale est Harare ; il s'appelait autrefois la Rhodésie du Sud."],
+ "es": ["Un país sin salida al mar del sur de África.", "Las ruinas de una ciudad de piedra medieval dieron nombre al país; en 2008 sufrió una de las peores hiperinflaciones de la historia.", "Su capital es Harare; antes se llamaba Rodesia del Sur."],
+ "it": ["Un paese senza sbocco sul mare dell'Africa australe.", "Le rovine di una città di pietra medievale hanno dato il nome al paese; nel 2008 subì una delle peggiori iperinflazioni della storia.", "La sua capitale è Harare; un tempo si chiamava Rhodesia del Sud."]
+},
+"TCD": {
+ "tr": ["Orta Afrika'da, denize kıyısı olmayan büyük bir ülkedir.", "Adını taşıyan göl son 60 yılda yaklaşık %90 küçüldü; Tibesti Dağları buradadır.", "Başkenti N'Djamena'dır."],
+ "en": ["A large landlocked country in Central Africa.", "The lake sharing its name has shrunk by about 90% in 60 years; the Tibesti Mountains are here.", "Its capital is N'Djamena."],
+ "de": ["Ein großes Binnenland in Zentralafrika.", "Der gleichnamige See ist in 60 Jahren um etwa 90 % geschrumpft; das Tibesti-Gebirge liegt hier.", "Seine Hauptstadt ist N'Djamena."],
+ "fr": ["Un grand pays enclavé d'Afrique centrale.", "Le lac qui porte son nom a perdu environ 90 % de sa surface en 60 ans ; le massif du Tibesti est ici.", "Sa capitale est N'Djamena."],
+ "es": ["Un gran país sin salida al mar de África central.", "El lago que lleva su nombre se ha reducido cerca de un 90 % en 60 años; los montes Tibesti están aquí.", "Su capital es Yamena."],
+ "it": ["Un grande paese senza sbocco sul mare dell'Africa centrale.", "Il lago che porta il suo nome si è ridotto di circa il 90% in 60 anni; qui ci sono i monti Tibesti.", "La sua capitale è N'Djamena."]
+},
+"CZE": {
+ "tr": ["Orta Avrupa'da, denize kıyısı olmayan bir ülkedir; Bohemya ve Moravya'dan oluşur.", "Kişi başına en çok bira içilen ülkedir; Pilsner birası ve Franz Kafka buradan.", "Başkenti Prag'dır; Karl Köprüsü ünlüdür."],
+ "en": ["A landlocked Central European country made up of Bohemia and Moravia.", "It drinks the most beer per person in the world; Pilsner and Franz Kafka come from here.", "Its capital is Prague; the Charles Bridge is famous."],
+ "de": ["Ein mitteleuropäisches Binnenland aus Böhmen und Mähren.", "Hier wird pro Kopf das meiste Bier der Welt getrunken; Pilsner und Franz Kafka stammen von hier.", "Seine Hauptstadt ist Prag; berühmt ist die Karlsbrücke."],
+ "fr": ["Un pays enclavé d'Europe centrale formé de la Bohême et de la Moravie.", "On y boit le plus de bière par habitant au monde ; la pils et Franz Kafka en sont originaires.", "Sa capitale est Prague ; le pont Charles est célèbre."],
+ "es": ["Un país sin salida al mar de Europa central formado por Bohemia y Moravia.", "Es el país donde más cerveza se bebe por persona; la pilsner y Franz Kafka son de aquí.", "Su capital es Praga; el puente de Carlos es famoso."],
+ "it": ["Un paese senza sbocco sul mare dell'Europa centrale formato da Boemia e Moravia.", "È il paese dove si beve più birra pro capite; la pilsner e Franz Kafka vengono da qui.", "La sua capitale è Praga; famoso il ponte Carlo."]
+},
+"CHN": {
+ "tr": ["Doğu Asya'da, dünyanın en kalabalık ikinci ülkesidir.", "Kâğıt, barut, matbaa ve pusula burada icat edildi; dev pandalar buradadır.", "Başkenti Pekin'dir; Yasak Şehir ve dünyanın en uzun savunma duvarı buradadır."],
+ "en": ["The world's second most populous country, in East Asia.", "Paper, gunpowder, printing and the compass were invented here; giant pandas live here.", "Its capital is Beijing; the Forbidden City and the world's longest defensive wall are here."],
+ "de": ["Das zweitbevölkerungsreichste Land der Welt, in Ostasien.", "Papier, Schießpulver, Buchdruck und Kompass wurden hier erfunden; Große Pandas leben hier.", "Seine Hauptstadt ist Peking; die Verbotene Stadt und die längste Verteidigungsmauer der Welt sind hier."],
+ "fr": ["Le deuxième pays le plus peuplé du monde, en Asie de l'Est.", "Le papier, la poudre, l'imprimerie et la boussole y ont été inventés ; les pandas géants y vivent.", "Sa capitale est Pékin ; la Cité interdite et le plus long mur défensif du monde sont ici."],
+ "es": ["El segundo país más poblado del mundo, en Asia oriental.", "El papel, la pólvora, la imprenta y la brújula se inventaron aquí; aquí viven los pandas gigantes.", "Su capital es Pekín; la Ciudad Prohibida y la muralla defensiva más larga del mundo están aquí."],
+ "it": ["Il secondo paese più popoloso del mondo, in Asia orientale.", "La carta, la polvere da sparo, la stampa e la bussola sono state inventate qui; qui vivono i panda giganti.", "La sua capitale è Pechino; la Città Proibita e il muro difensivo più lungo del mondo sono qui."]
+},
+"UZB": {
+ "tr": ["Orta Asya'da, yalnızca denize kıyısı olmayan ülkelerle çevrili iki ülkeden biridir.", "İpek Yolu şehirleri Semerkant, Buhara ve Hiva buradadır; pilavı ünlüdür.", "Başkenti Taşkent'tir; şair Ali Şir Nevai ile anılır."],
+ "en": ["A Central Asian country, one of only two doubly landlocked countries.", "The Silk Road cities of Samarkand, Bukhara and Khiva are here; its pilaf (plov) is famous.", "Its capital is Tashkent; it honours the poet Alisher Navoi."],
+ "de": ["Ein zentralasiatisches Land und eines von nur zwei doppelten Binnenländern.", "Die Seidenstraßenstädte Samarkand, Buchara und Chiwa liegen hier; berühmt ist sein Pilaw.", "Seine Hauptstadt ist Taschkent; es verehrt den Dichter Ali Schir Nawoi."],
+ "fr": ["Un pays d'Asie centrale, l'un des deux seuls pays doublement enclavés.", "Les villes de la route de la soie, Samarcande, Boukhara et Khiva, sont ici ; son plov est célèbre.", "Sa capitale est Tachkent ; il honore le poète Alisher Navoï."],
+ "es": ["Un país de Asia central, uno de los dos únicos doblemente sin salida al mar.", "Las ciudades de la Ruta de la Seda, Samarcanda, Bujará y Jiva, están aquí; su plov es famoso.", "Su capital es Taskent; honra al poeta Alisher Navoi."],
+ "it": ["Un paese dell'Asia centrale, uno dei soli due doppiamente senza sbocco sul mare.", "Le città della Via della Seta, Samarcanda, Bukhara e Khiva, sono qui; famoso il suo plov.", "La sua capitale è Tashkent; onora il poeta Alisher Navoi."]
+},
+"JOR": {
+ "tr": ["Orta Doğu'da, Kızıldeniz'e kısa bir kıyısı olan bir ülkedir.", "Kayalara oyulmuş antik Petra kenti ve Wadi Rum çölü buradadır.", "Başkenti Amman'dır; Lut Gölü'ne kıyısı vardır."],
+ "en": ["A Middle Eastern country with a short Red Sea coastline.", "The rock-carved ancient city of Petra and the Wadi Rum desert are here.", "Its capital is Amman; it borders the Dead Sea."],
+ "de": ["Ein Land im Nahen Osten mit einer kurzen Küste am Roten Meer.", "Die in Fels gehauene antike Stadt Petra und die Wüste Wadi Rum liegen hier.", "Seine Hauptstadt ist Amman; es grenzt ans Tote Meer."],
+ "fr": ["Un pays du Moyen-Orient avec une courte côte sur la mer Rouge.", "La cité antique de Pétra, taillée dans la roche, et le désert du Wadi Rum sont ici.", "Sa capitale est Amman ; il borde la mer Morte."],
+ "es": ["Un país de Oriente Medio con una corta costa en el mar Rojo.", "La antigua ciudad de Petra, tallada en la roca, y el desierto de Wadi Rum están aquí.", "Su capital es Amán; tiene orilla en el mar Muerto."],
+ "it": ["Un paese del Medio Oriente con un breve tratto di costa sul Mar Rosso.", "L'antica città di Petra, scolpita nella roccia, e il deserto del Wadi Rum sono qui.", "La sua capitale è Amman; si affaccia sul Mar Morto."]
+},
+"IRN": {
+ "tr": ["Orta Doğu'da, Hazar Denizi ile Basra Körfezi arasında bir ülkedir.", "Antik Persepolis buradadır; halısı, safranı ve Hafız ile Ömer Hayyam gibi şairleriyle ünlüdür.", "Başkenti Tahran'dır; İsfahan'ın meydanı ve camileri ünlüdür."],
+ "en": ["A Middle Eastern country between the Caspian Sea and the Persian Gulf.", "Ancient Persepolis is here; it is famous for carpets, saffron and poets like Hafez and Omar Khayyam.", "Its capital is Tehran; the square and mosques of Isfahan are famous."],
+ "de": ["Ein Land im Nahen Osten zwischen Kaspischem Meer und Persischem Golf.", "Das antike Persepolis liegt hier; berühmt für Teppiche, Safran und Dichter wie Hafis und Omar Chayyam.", "Seine Hauptstadt ist Teheran; berühmt sind Platz und Moscheen von Isfahan."],
+ "fr": ["Un pays du Moyen-Orient entre la mer Caspienne et le golfe Persique.", "L'antique Persépolis est ici ; il est célèbre pour ses tapis, son safran et des poètes comme Hafez et Omar Khayyam.", "Sa capitale est Téhéran ; la place et les mosquées d'Ispahan sont célèbres."],
+ "es": ["Un país de Oriente Medio entre el mar Caspio y el golfo Pérsico.", "La antigua Persépolis está aquí; es famoso por sus alfombras, el azafrán y poetas como Hafez y Omar Jayam.", "Su capital es Teherán; la plaza y las mezquitas de Isfahán son famosas."],
+ "it": ["Un paese del Medio Oriente tra il Mar Caspio e il Golfo Persico.", "L'antica Persepoli è qui; è famoso per i tappeti, lo zafferano e poeti come Hafez e Omar Khayyam.", "La sua capitale è Teheran; famosi la piazza e le moschee di Isfahan."]
+},
+"IRL": {
+ "tr": ["Atlantik'te, Büyük Britanya'nın batısındaki bir adanın büyük kısmını kaplar.", "Zümrüt Ada diye anılır; Guinness birası, Aziz Patrick Günü ve yoncasıyla ünlüdür.", "Başkenti Dublin'dir; James Joyce buralıdır."],
+ "en": ["It covers most of an island in the Atlantic, west of Great Britain.", "Nicknamed the 'Emerald Isle'; famous for Guinness, St Patrick's Day and the shamrock.", "Its capital is Dublin; James Joyce came from here."],
+ "de": ["Es nimmt den Großteil einer Insel im Atlantik westlich von Großbritannien ein.", "Die „Grüne Insel“ ist berühmt für Guinness, den St. Patrick's Day und das Kleeblatt.", "Seine Hauptstadt ist Dublin; James Joyce stammte von hier."],
+ "fr": ["Il occupe la majeure partie d'une île de l'Atlantique, à l'ouest de la Grande-Bretagne.", "Surnommée « l'île d'Émeraude », célèbre pour la Guinness, la Saint-Patrick et le trèfle.", "Sa capitale est Dublin ; James Joyce en était originaire."],
+ "es": ["Ocupa la mayor parte de una isla del Atlántico, al oeste de Gran Bretaña.", "Apodada la «Isla Esmeralda», famosa por la Guinness, el día de San Patricio y el trébol.", "Su capital es Dublín; James Joyce era de aquí."],
+ "it": ["Occupa gran parte di un'isola dell'Atlantico, a ovest della Gran Bretagna.", "Soprannominata «l'isola di smeraldo», famosa per la Guinness, il giorno di San Patrizio e il trifoglio.", "La sua capitale è Dublino; James Joyce veniva da qui."]
+},
+"ESP": {
+ "tr": ["İber Yarımadası'nın büyük kısmını kaplar.", "Flamenko, paella ve Gaudí'nin Sagrada Família'sıyla ünlüdür.", "Başkenti Madrid'dir; Granada'daki Elhamra Sarayı buradadır."],
+ "en": ["It covers most of the Iberian Peninsula.", "Famous for flamenco, paella and Gaudí's Sagrada Família.", "Its capital is Madrid; the Alhambra of Granada is here."],
+ "de": ["Es umfasst den Großteil der Iberischen Halbinsel.", "Berühmt für Flamenco, Paella und Gaudís Sagrada Família.", "Seine Hauptstadt ist Madrid; die Alhambra von Granada liegt hier."],
+ "fr": ["Il occupe la majeure partie de la péninsule Ibérique.", "Célèbre pour le flamenco, la paella et la Sagrada Família de Gaudí.", "Sa capitale est Madrid ; l'Alhambra de Grenade est ici."],
+ "es": ["Ocupa la mayor parte de la península ibérica.", "Famoso por el flamenco, la paella y la Sagrada Familia de Gaudí.", "Su capital es Madrid; la Alhambra de Granada está aquí."],
+ "it": ["Occupa gran parte della penisola iberica.", "Famoso per il flamenco, la paella e la Sagrada Família di Gaudí.", "La sua capitale è Madrid; l'Alhambra di Granada è qui."]
+},
+"ISR": {
+ "tr": ["Doğu Akdeniz kıyısında küçük bir ülkedir.", "Resmî dili İbranicedir; Lut Gölü'ne ve Kızıldeniz'deki Eilat'a kıyısı vardır.", "Kudüs'ü başkent ilan eder; en büyük ekonomik merkezi Tel Aviv'dir."],
+ "en": ["A small country on the eastern Mediterranean coast.", "Its official language is Hebrew; it borders the Dead Sea and reaches the Red Sea at Eilat.", "It proclaims Jerusalem as its capital; Tel Aviv is its main economic hub."],
+ "de": ["Ein kleines Land an der östlichen Mittelmeerküste.", "Amtssprache ist Hebräisch; es grenzt ans Tote Meer und erreicht bei Eilat das Rote Meer.", "Es erklärt Jerusalem zur Hauptstadt; wichtigstes Wirtschaftszentrum ist Tel Aviv."],
+ "fr": ["Un petit pays sur la côte orientale de la Méditerranée.", "Sa langue officielle est l'hébreu ; il borde la mer Morte et atteint la mer Rouge à Eilat.", "Il proclame Jérusalem comme capitale ; Tel-Aviv est son principal centre économique."],
+ "es": ["Un pequeño país en la costa oriental del Mediterráneo.", "Su idioma oficial es el hebreo; tiene orilla en el mar Muerto y llega al mar Rojo en Eilat.", "Proclama Jerusalén como su capital; Tel Aviv es su principal centro económico."],
+ "it": ["Un piccolo paese sulla costa orientale del Mediterraneo.", "La lingua ufficiale è l'ebraico; si affaccia sul Mar Morto e raggiunge il Mar Rosso a Eilat.", "Proclama Gerusalemme come capitale; Tel Aviv è il principale centro economico."]
+},
+"SWE": {
+ "tr": ["İskandinavya'nın en büyük ülkesidir.", "IKEA, ABBA ve Volvo buradan çıktı; Nobel ödüllerinin çoğu burada verilir.", "Başkenti, adalar üzerine kurulu Stockholm'dür."],
+ "en": ["The largest country in Scandinavia.", "IKEA, ABBA and Volvo come from here; most Nobel Prizes are awarded here.", "Its capital is Stockholm, built on islands."],
+ "de": ["Das größte Land Skandinaviens.", "IKEA, ABBA und Volvo stammen von hier; die meisten Nobelpreise werden hier verliehen.", "Seine Hauptstadt ist Stockholm, auf Inseln erbaut."],
+ "fr": ["Le plus grand pays de Scandinavie.", "IKEA, ABBA et Volvo viennent d'ici ; la plupart des prix Nobel y sont remis.", "Sa capitale est Stockholm, bâtie sur des îles."],
+ "es": ["El país más grande de Escandinavia.", "IKEA, ABBA y Volvo vienen de aquí; la mayoría de los premios Nobel se entregan aquí.", "Su capital es Estocolmo, construida sobre islas."],
+ "it": ["Il paese più grande della Scandinavia.", "IKEA, ABBA e Volvo vengono da qui; la maggior parte dei premi Nobel viene assegnata qui.", "La sua capitale è Stoccolma, costruita su isole."]
+},
+"CHE": {
+ "tr": ["Alpler'de, denize kıyısı olmayan ve dört resmî dili olan bir ülkedir.", "Çikolatası, saatleri, peynirleri, tarafsızlığı ve Matterhorn Dağı ile ünlüdür.", "Başkenti Bern'dir; Cenevre'de BM ofisleri ve Kızılhaç bulunur."],
+ "en": ["A landlocked Alpine country with four official languages.", "Famous for chocolate, watches, cheese, neutrality and the Matterhorn.", "Its capital is Bern; Geneva hosts UN offices and the Red Cross."],
+ "de": ["Ein Binnenland in den Alpen mit vier Landessprachen.", "Berühmt für Schokolade, Uhren, Käse, Neutralität und das Matterhorn.", "Seine Hauptstadt ist Bern; in Genf sitzen UNO-Büros und das Rote Kreuz."],
+ "fr": ["Un pays alpin enclavé avec quatre langues officielles.", "Célèbre pour son chocolat, ses montres, ses fromages, sa neutralité et le Cervin.", "Sa capitale est Berne ; Genève accueille des bureaux de l'ONU et la Croix-Rouge."],
+ "es": ["Un país alpino sin salida al mar con cuatro idiomas oficiales.", "Famoso por su chocolate, sus relojes, sus quesos, su neutralidad y el Cervino.", "Su capital es Berna; Ginebra acoge oficinas de la ONU y la Cruz Roja."],
+ "it": ["Un paese alpino senza sbocco sul mare con quattro lingue ufficiali.", "Famoso per cioccolato, orologi, formaggi, neutralità e il Cervino.", "La sua capitale è Berna; Ginevra ospita uffici dell'ONU e la Croce Rossa."]
+},
+"ITA": {
+ "tr": ["Akdeniz'e uzanan çizme biçimli bir yarımadadadır.", "Pizza, makarna, Rönesans ve Leonardo da Vinci ile ünlüdür.", "Başkenti Roma'dır; Kolezyum ve Venedik'in kanalları buradadır."],
+ "en": ["A boot-shaped peninsula stretching into the Mediterranean.", "Famous for pizza, pasta, the Renaissance and Leonardo da Vinci.", "Its capital is Rome; the Colosseum and the canals of Venice are here."],
+ "de": ["Eine stiefelförmige Halbinsel, die ins Mittelmeer ragt.", "Berühmt für Pizza, Pasta, die Renaissance und Leonardo da Vinci.", "Seine Hauptstadt ist Rom; das Kolosseum und die Kanäle Venedigs sind hier."],
+ "fr": ["Une péninsule en forme de botte qui s'avance dans la Méditerranée.", "Célèbre pour la pizza, les pâtes, la Renaissance et Léonard de Vinci.", "Sa capitale est Rome ; le Colisée et les canaux de Venise sont ici."],
+ "es": ["Una península con forma de bota que se adentra en el Mediterráneo.", "Famoso por la pizza, la pasta, el Renacimiento y Leonardo da Vinci.", "Su capital es Roma; el Coliseo y los canales de Venecia están aquí."],
+ "it": ["Una penisola a forma di stivale che si allunga nel Mediterraneo.", "Famoso per la pizza, la pasta, il Rinascimento e Leonardo da Vinci.", "La sua capitale è Roma; il Colosseo e i canali di Venezia sono qui."]
+},
+"ISL": {
+ "tr": ["Kuzey Atlantik'te, buzullar ve yanardağlarla dolu volkanik bir adadır.", "Gayzerleri ve kuzey ışıklarıyla ünlüdür; parlamentosu Althing dünyanın en eskilerindendir.", "Başkenti, dünyanın en kuzeydeki başkenti Reykjavik'tir."],
+ "en": ["A volcanic island in the North Atlantic, full of glaciers and volcanoes.", "Famous for geysers and the northern lights; its parliament, the Althing, is among the oldest in the world.", "Its capital is Reykjavík, the world's northernmost capital."],
+ "de": ["Eine Vulkaninsel im Nordatlantik voller Gletscher und Vulkane.", "Berühmt für Geysire und Nordlichter; sein Parlament, das Althing, gehört zu den ältesten der Welt.", "Seine Hauptstadt ist Reykjavík, die nördlichste Hauptstadt der Welt."],
+ "fr": ["Une île volcanique de l'Atlantique Nord, couverte de glaciers et de volcans.", "Célèbre pour ses geysers et ses aurores boréales ; son parlement, l'Althing, est l'un des plus anciens du monde.", "Sa capitale est Reykjavik, la capitale la plus septentrionale du monde."],
+ "es": ["Una isla volcánica del Atlántico Norte, llena de glaciares y volcanes.", "Famosa por sus géiseres y auroras boreales; su parlamento, el Althing, es uno de los más antiguos del mundo.", "Su capital es Reikiavik, la capital más septentrional del mundo."],
+ "it": ["Un'isola vulcanica dell'Atlantico settentrionale, piena di ghiacciai e vulcani.", "Famosa per i geyser e le aurore boreali; il suo parlamento, l'Althing, è tra i più antichi del mondo.", "La sua capitale è Reykjavík, la capitale più settentrionale del mondo."]
+},
+"CHL": {
+ "tr": ["Güney Amerika'nın batısında, dünyanın en uzun ve en ince ülkesidir.", "Dünyanın en kurak çölü Atacama ve Paskalya Adası'nın dev heykelleri buradadır.", "Başkenti Santiago'dur; bakır üretiminde dünya lideridir."],
+ "en": ["A country on the west of South America, the longest and narrowest in the world.", "The Atacama, the driest desert on Earth, and the giant statues of Easter Island are here.", "Its capital is Santiago; it is the world's top copper producer."],
+ "de": ["Ein Land im Westen Südamerikas, das längste und schmalste der Welt.", "Die Atacama, die trockenste Wüste der Erde, und die riesigen Statuen der Osterinsel gehören dazu.", "Seine Hauptstadt ist Santiago; es ist der größte Kupferproduzent der Welt."],
+ "fr": ["Un pays de l'ouest de l'Amérique du Sud, le plus long et le plus étroit du monde.", "L'Atacama, désert le plus aride de la planète, et les statues géantes de l'île de Pâques sont ici.", "Sa capitale est Santiago ; c'est le premier producteur mondial de cuivre."],
+ "es": ["Un país del oeste de Sudamérica, el más largo y estrecho del mundo.", "El Atacama, el desierto más seco de la Tierra, y las estatuas gigantes de la isla de Pascua están aquí.", "Su capital es Santiago; es el mayor productor de cobre del mundo."],
+ "it": ["Un paese dell'ovest del Sud America, il più lungo e stretto del mondo.", "L'Atacama, il deserto più arido della Terra, e le statue giganti dell'Isola di Pasqua sono qui.", "La sua capitale è Santiago; è il primo produttore mondiale di rame."]
+}
+}
