@@ -74,6 +74,7 @@ node tools/cdp.mjs http://127.0.0.1:8765/ 1280 800 1 adimlar.json <klasör>
 
 ## Uyulması gereken kurallar
 
+- **Her güncelleme GitHub'a da gider.** Depo: https://github.com/tanrikuluDEV/atlas (gizli/private, dal `main`). Bir iş bitince değişiklikler Türkçe bir mesajla commit edilip `git push` yapılır (kullanıcı bunu kalıcı olarak istedi). `gh`'de etkin hesap `azerozgurr` adıyla kayıtlı ama GitHub adı `tanrikuluDEV`; `halisahamobile` (azertanrikulu) hesabına geçme. `.gitignore` `build/`, `.env*` ve `.vercel/`'ı dışarıda tutar; `web/.env.local` asla commit edilmez.
 - **Günlük bulmaca üç sürümde aynı olmalı.** `web/js/daily.js` Swift'teki `DailyPuzzle` ile birebir aynı sonucu verir (64 test durumuyla doğrulandı). Kategori sırası (`GameCategory.allCases` ↔ `CATEGORIES`), tohum, epoch (1 Ocak 2026) ya da yer sırası değişirse herkesin günlük bulmacası bozulur. Oyun mantığındaki değişiklikler genelde hem Swift'e hem `web/`'e uygulanmalı.
 - **Türkiye için eski anahtarlar korunur:** istatistik anahtarı `stats` / `stats.practice`, günlük kayıt anahtarı `daily.<gün>` (kullanıcının mevcut istatistikleri bunlarda).
 - **Web her yayında:** `web/js/version.js` içindeki `VERSION` ve `web/sw.js` içindeki `CACHE` (`atlas-vN`) birlikte artırılır. Veri dosyaları `?v=VERSION` ile istenir (eskiden `data/` 24 saat önbellekleniyordu ve dönen kullanıcılar eski `world.json` yüzünden ülke adlarını Türkçe görüyordu). Sayfa, yeni service worker devreye girince kendini yeniler; Ayarlar'da sürüm görünür. Şu an: Sürüm 11. `npx vercel deploy` ilk denemede ara sıra `"status": "error"` veriyor; tekrar denemek yetiyor (canlı `VERSION`'ı curl ile doğrula).
@@ -154,7 +155,6 @@ node tools/cdp.mjs http://127.0.0.1:8765/ 1280 800 1 adimlar.json <klasör>
 - [ ] **İstatistik senkronizasyonu:** Mac, iPhone ve web istatistikleri ayrı (web'de tarayıcı başına). iCloud ile senkronizasyon teklif edildi, yapılmadı.
 - [ ] **Özel alan adı:** Örn. atlasbulmaca.com bağlamak teklif edildi, yapılmadı.
 - [ ] **TestFlight / imzalı Mac DMG:** Seçenek olarak sunuldu; web seçildiği için yapılmadı.
-- [ ] **Git deposu yok.** Proje sürüm kontrolünde değil; `git init` yapılması iyi olur (`build/`, `web/.env.local`, `web/.vercel` hariç tutulmalı).
 - [ ] **Geliştirici imzası:** iPhone kurulumu geliştirici imzalı; yaklaşık 1 yılda süresi dolar.
 - [ ] **Küçük bilinen kusur:** Dünya haritasında Kiribati'nin işareti, 180° boylamına yayıldığı için haritanın sol kenarında görünüyor.
 - [ ] **"TV'ye söyle" gerçek cihazda:** Kullanıcı denedi, çalışıyor; ama bazı adları hâlâ doğru algılamadığını söyledi. İki aşamada iyileştirildi (ses oturumu/titreşim, sonra çift tanıyıcı + özel dil modeli + güçlü eşleştirme). Cihazda özel modelin Türkçe için çalışıp çalışmadığı (cihazda tanıma desteği) denenemedi; geri bildirim bekleniyor.
