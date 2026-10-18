@@ -9,7 +9,7 @@
 
 ---
 
-**Atlas**, [Globle](https://globle-game.com) oyununun Türkçe sürümü. Her gün bir il ya da ülke gizlenir. Bir yer adı yazarsın; o yer haritada, gizli yere ne kadar yakınsa o kadar **sıcak** (koyu kırmızı), ne kadar uzaksa o kadar **soğuk** (soluk krem) renge boyanır. Renklere bakarak yaklaşır, en az tahminle gizli yeri bulmaya çalışırsın.
+**Atlas**, haritada gizli yeri bulmaya dayanan bir coğrafya bulmacası. Her gün bir il ya da ülke gizlenir. Bir yer adı yazarsın; o yer haritada, gizli yere ne kadar yakınsa o kadar **sıcak** (koyu kırmızı), ne kadar uzaksa o kadar **soğuk** (soluk krem) renge boyanır. Renklere bakarak yaklaşır, en az tahminle gizli yeri bulmaya çalışırsın.
 
 ## Nasıl oynanır?
 

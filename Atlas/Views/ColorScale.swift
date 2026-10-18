@@ -1,6 +1,6 @@
 import SwiftUI
 
-/// Globle tarzı sıcaklık skalası: yakın = koyu kırmızı, uzak = soluk krem.
+/// Sıcaklık skalası: yakın = koyu kırmızı, uzak = soluk krem.
 enum ColorScale {
     static let found = Color(red: 0.18, green: 0.62, blue: 0.31)
     static let answerReveal = Color(red: 0.16, green: 0.45, blue: 0.85)

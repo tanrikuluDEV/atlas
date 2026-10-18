@@ -1,6 +1,6 @@
-# Atlas — Türkçe Globle
+# Atlas — coğrafya bulmacası
 
-[globle-game.com](https://globle-game.com) oyununun Türkçe sürümü. Gizli bir il ya da ülke seçilir; her tahmin, gizli yere olan en yakın sınır mesafesine göre haritada sıcak–soğuk renklerle boyanır. Dört sürüm var ve hepsi aynı oyunu oynatır:
+Bağımsız bir coğrafya bulmacası (kendi özellikleri olan ayrı bir uygulama; hiçbir yerde başka bir oyunun "Türkçe sürümü" diye tanıtılmaz, kullanıcı istedi). Gizli bir il ya da ülke seçilir; her tahmin, gizli yere olan en yakın sınır mesafesine göre haritada sıcak–soğuk renklerle boyanır. Dört sürüm var ve hepsi aynı oyunu oynatır:
 
 | Sürüm | Konum | Durum |
 |---|---|---|
@@ -106,7 +106,7 @@ node tools/cdp.mjs http://127.0.0.1:8765/ 1280 800 1 adimlar.json <klasör>
 - Oyunda olanlar: BM üyeleri, Vatikan, Filistin, Kosova, Tayvan, Batı Sahra, Grönland, KKTC (ayrı ülke). Güney Kıbrıs "Güney Kıbrıs" adıyla.
 - Somaliland, Somali'ye birleştirildi. Bağımlı bölgeler (Porto Riko, Jersey…) yalnızca arka planda çiziliyor.
 - Türkiye, Rusya, Kıbrıs ve KKTC hem Avrupa hem Asya kategorisinde.
-- Fransa, Fransız Guyanası üzerinden Brezilya ve Surinam ile komşu sayılır (orijinal Globle gibi).
+- Fransa, Fransız Guyanası üzerinden Brezilya ve Surinam ile komşu sayılır.
 
 **Diller**
 - Arayüz 6 dilde: Türkçe, İngilizce, Almanca, Fransızca, İspanyolca, İtalyanca. Elle seçilmemişse dil bölgeye göre seçilir: web'de bağlanılan ülke (IP, `/api/geo`), Mac/iPhone'da cihazın bölge ayarı; eşleşmezse cihaz/tarayıcı dili, o da yoksa İngilizce.

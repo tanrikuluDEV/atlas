@@ -1,4 +1,4 @@
-// Renkler: Globle tarzı sıcaklık skalası (yakın = koyu kırmızı, uzak = soluk krem) ve tema renkleri.
+// Renkler: sıcaklık skalası (yakın = koyu kırmızı, uzak = soluk krem) ve tema renkleri.
 
 const STOPS = [
   [0.45, 0.00, 0.06], // komşu
