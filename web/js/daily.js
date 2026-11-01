@@ -58,9 +58,9 @@ export function dayIndex(date = new Date()) {
   return Math.max(0, Math.round((today - start) / 86_400_000));
 }
 
-/** Sıralı (id'ye göre) listede gizli yerin konumu. categoryIndex: GameCategory.allCases sırası. */
-export function answerIndex(day, categoryIndex, count) {
-  const salt = BigInt.asUintN(64, BigInt(categoryIndex) * 104_729n);
+/** Sıralı (id'ye göre) listede gizli yerin konumu. seed: kategorinin sabit tohumu (Swift `GameCategory.seedIndex`). */
+export function answerIndex(day, categorySeed, count) {
+  const salt = BigInt.asUintN(64, BigInt(categorySeed) * 104_729n);
   const cycle = Math.floor(day / count);
   const seed = BigInt.asUintN(64, 0xA71A5n + BigInt(cycle) * 7919n + salt);
   const rng = new SeededGenerator(seed);

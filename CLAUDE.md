@@ -75,7 +75,7 @@ node tools/cdp.mjs http://127.0.0.1:8765/ 1280 800 1 adimlar.json <klasör>
 ## Uyulması gereken kurallar
 
 - **Her güncelleme GitHub'a da gider.** Depo: https://github.com/tanrikuluDEV/atlas (gizli/private, dal `main`). Bir iş bitince değişiklikler Türkçe bir mesajla commit edilip `git push` yapılır (kullanıcı bunu kalıcı olarak istedi). `gh`'de etkin hesap `azerozgurr` adıyla kayıtlı ama GitHub adı `tanrikuluDEV`; `halisahamobile` (azertanrikulu) hesabına geçme. `.gitignore` `build/`, `.env*` ve `.vercel/`'ı dışarıda tutar; `web/.env.local` asla commit edilmez. Commit mesajlarına `Co-Authored-By: Claude …` satırı **eklenmez** (GitHub'da Claude katkıda bulunan olarak görünüyordu; kullanıcı istemedi).
-- **Günlük bulmaca üç sürümde aynı olmalı.** `web/js/daily.js` Swift'teki `DailyPuzzle` ile birebir aynı sonucu verir (64 test durumuyla doğrulandı). Kategori sırası (`GameCategory.allCases` ↔ `CATEGORIES`), tohum, epoch (1 Ocak 2026) ya da yer sırası değişirse herkesin günlük bulmacası bozulur. Oyun mantığındaki değişiklikler genelde hem Swift'e hem `web/`'e uygulanmalı.
+- **Günlük bulmaca üç sürümde aynı olmalı.** `web/js/daily.js` Swift'teki `DailyPuzzle` ile birebir aynı sonucu verir (64 test durumuyla doğrulandı). Kategori tohumu (`GameCategory.seedIndex` ↔ `Category.seed`; Türkiye 0, Avrupa 1, Asya 2, Afrika 3, K. Amerika 4, G. Amerika 5, Okyanusya 6, Dünya 7), tohum, epoch (1 Ocak 2026) ya da yer sırası değişirse herkesin günlük bulmacası bozulur. Oyun mantığındaki değişiklikler genelde hem Swift'e hem `web/`'e uygulanmalı.
 - **Türkiye için eski anahtarlar korunur:** istatistik anahtarı `stats` / `stats.practice`, günlük kayıt anahtarı `daily.<gün>` (kullanıcının mevcut istatistikleri bunlarda).
 - **Web her yayında:** `web/js/version.js` içindeki `VERSION` ve `web/sw.js` içindeki `CACHE` (`atlas-vN`) birlikte artırılır. Veri dosyaları `?v=VERSION` ile istenir (eskiden `data/` 24 saat önbellekleniyordu ve dönen kullanıcılar eski `world.json` yüzünden ülke adlarını Türkçe görüyordu). Sayfa, yeni service worker devreye girince kendini yeniler; Ayarlar'da sürüm görünür. Şu an: Sürüm 11. `npx vercel deploy` ilk denemede ara sıra `"status": "error"` veriyor; tekrar denemek yetiyor (canlı `VERSION`'ı curl ile doğrula).
 - **Gizli bilgi:** Vercel CLI `web/.env.local` dosyasına bir OIDC anahtarı yazar. `web/.vercelignore` bunu (`.env*`) hariç tutar; silinmemeli.
@@ -85,6 +85,7 @@ node tools/cdp.mjs http://127.0.0.1:8765/ 1280 800 1 adimlar.json <klasör>
 ## Verilen kararlar
 
 **Oyun**
+- Gösterim sırası (menü, ⌘1…⌘8, web seçici): Türkiye, Avrupa, Dünya, Asya, Afrika, K. Amerika, G. Amerika, Okyanusya. Kullanıcı Dünya'yı 3. sıraya istedi; bu sıra günlük bulmacayı etkilemez (tohum ayrı).
 - Kategoriler: Türkiye (81 il), Avrupa (48), Asya (51), Afrika (55), Kuzey Amerika (24, Orta Amerika ve Karayipler dahil), Güney Amerika (12), Okyanusya (14), Dünya (200).
 - Mesafe = iki yerin en yakın sınırları arası (köşe–kenar). Komşular 0 km (iller için < 2 km, ülkeler için < 5 km).
 - Her kategorinin kendi günlük bulmacası ve istatistikleri var; istatistikler Günlük ve Alıştırma olarak ayrı tutulur. Alıştırmada bitirilen her oyun sayılır; bitirilmeden bırakılan oyun sayılmaz.

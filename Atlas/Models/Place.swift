@@ -36,10 +36,26 @@ struct Place: Identifiable, Hashable {
     func hash(into hasher: inout Hasher) { hasher.combine(id) }
 }
 
+/// Sıra menülerde, kısayollarda (⌘1…⌘8) ve kategori seçicide görünen sıradır.
 enum GameCategory: String, CaseIterable, Identifiable {
-    case turkey, europe, asia, africa, northAmerica, southAmerica, oceania, world
+    case turkey, europe, world, asia, africa, northAmerica, southAmerica, oceania
 
     var id: String { rawValue }
+
+    /// Günlük bulmacanın tohumu. Kategorilerin ilk sırasıdır ve gösterim sırası değişse de sabit kalır;
+    /// değişirse herkesin günlük bulmacası bozulur (web: `Category.seed`).
+    var seedIndex: Int {
+        switch self {
+        case .turkey: 0
+        case .europe: 1
+        case .asia: 2
+        case .africa: 3
+        case .northAmerica: 4
+        case .southAmerica: 5
+        case .oceania: 6
+        case .world: 7
+        }
+    }
 
     var title: String { L("cat.\(rawValue)") }
 

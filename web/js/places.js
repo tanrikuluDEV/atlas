@@ -15,24 +15,27 @@ export function normalize(text) {
 export { formatKm };
 
 class Category {
-  constructor(id, icon) {
+  constructor(id, icon, seed) {
     this.id = id;
     this.icon = icon;
+    /** Günlük bulmacanın tohumu (Swift `seedIndex`); gösterim sırası değişse de sabit kalır. */
+    this.seed = seed;
     /** Metin anahtarlarında kullanılır: "province" (il) ya da "country" (ülke). */
     this.kind = id === 'turkey' ? 'province' : 'country';
   }
   get title() { return t(`cat.${this.id}`); }
 }
 
+// Gösterim sırası (Swift `GameCategory.allCases` ile aynı).
 export const CATEGORIES = [
-  new Category('turkey', '🇹🇷'),
-  new Category('europe', '🌍'),
-  new Category('asia', '🌏'),
-  new Category('africa', '🌍'),
-  new Category('northAmerica', '🌎'),
-  new Category('southAmerica', '🌎'),
-  new Category('oceania', '🌏'),
-  new Category('world', '🌐'),
+  new Category('turkey', '🇹🇷', 0),
+  new Category('europe', '🌍', 1),
+  new Category('world', '🌐', 7),
+  new Category('asia', '🌏', 2),
+  new Category('africa', '🌍', 3),
+  new Category('northAmerica', '🌎', 4),
+  new Category('southAmerica', '🌎', 5),
+  new Category('oceania', '🌏', 6),
 ];
 
 export const categoryIndex = (id) => CATEGORIES.findIndex((c) => c.id === id);

@@ -1,6 +1,6 @@
 // Oyun durumu ve istatistikler. Mac/iPhone uygulamasındaki GameModel.swift ve Stats.swift'in karşılığı.
 import { answerIndex, dayIndex } from './daily.js';
-import { categoryIndex, hintsFor, placeSet } from './places.js';
+import { categoryById, categoryIndex, hintsFor, placeSet } from './places.js';
 import { t } from './i18n.js';
 import { store } from './store.js';
 import { progress, totalXP } from './progression.js';
@@ -211,7 +211,7 @@ export class Game {
   startDaily() {
     this.day = dayIndex();
     const byId = this.places.placesById;
-    this.answer = byId[answerIndex(this.day, categoryIndex(this.category), byId.length)];
+    this.answer = byId[answerIndex(this.day, categoryById(this.category).seed, byId.length)];
     this.restoreDaily();
   }
 

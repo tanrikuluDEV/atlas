@@ -276,7 +276,7 @@ enum DailyPuzzle {
     /// Her döngüde kategorideki tüm yerler birer kez çıkar; döngü sırası sabit tohumla karıştırılır.
     static func answer(for day: Int, category: GameCategory) -> Place {
         // Türkiye'nin tohumu eski sürümle aynı kalır; böylece bugünün gizli ili değişmez.
-        let salt = UInt64(GameCategory.allCases.firstIndex(of: category)!) &* 104_729
+        let salt = UInt64(category.seedIndex) &* 104_729
         let places = PlaceSet.forCategory(category).places.sorted { $0.id < $1.id }
         let cycle = day / places.count
         var rng = SeededGenerator(seed: UInt64(0xA71A5 &+ cycle &* 7919) &+ salt)
