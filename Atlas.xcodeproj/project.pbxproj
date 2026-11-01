@@ -11,6 +11,7 @@
 		086C260022A7779A6697E782 /* Platform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8966DBC817BE95BE90215875 /* Platform.swift */; };
 		0D158FA61CE680B78634FED9 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 274F0CF7EF58B24307CCED4E /* SettingsView.swift */; };
 		0E2C954889AE78439B391A96 /* Progression.swift in Sources */ = {isa = PBXBuildFile; fileRef = C55E6A3830AF4CC7BC91B879 /* Progression.swift */; };
+		12DE3C652D6808548F5E2355 /* CategoryPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBD42E6296FC6E89B2627B12 /* CategoryPicker.swift */; };
 		13093D1922628596FC94E1A5 /* TurkishText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 014482CAB6307BA9B93C46B9 /* TurkishText.swift */; };
 		1510FE831157913B7E8C2414 /* Brand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B0329F2374D6A94596CD083 /* Brand.swift */; };
 		160A261EDA47F94B7A1E8854 /* GameModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B15A1DFC23AFA60D626F836E /* GameModel.swift */; };
@@ -22,6 +23,7 @@
 		21317B473DC86BB83DA39A12 /* Sheets.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0D6074433BEC2769D35BEC6 /* Sheets.swift */; };
 		228091EC9E31E765C035611B /* provinces.json in Resources */ = {isa = PBXBuildFile; fileRef = AD19E18DF83948FAC8D87A4B /* provinces.json */; };
 		22E5267F721D6AB6AE976E17 /* DebugSnapshots.swift in Sources */ = {isa = PBXBuildFile; fileRef = F30335D55EA0CC3488A6727A /* DebugSnapshots.swift */; };
+		23170EEDBDF699705E2F7A2B /* CategoryPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBD42E6296FC6E89B2627B12 /* CategoryPicker.swift */; };
 		281ABB335BD23E0D75F3AEB6 /* VoiceRemoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D8B429A21D1DE3357DAB066 /* VoiceRemoteView.swift */; };
 		28FF4376C4E3B315A6B81465 /* TVViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C452AC98790E815E93B523 /* TVViews.swift */; };
 		2E1565BD03D665DFD101B7DD /* Brand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B0329F2374D6A94596CD083 /* Brand.swift */; };
@@ -47,6 +49,8 @@
 		729A9C72E9997F815736A635 /* BricolageGrotesque-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 12B972CBC916EE61EDF6790C /* BricolageGrotesque-ExtraBold.ttf */; };
 		73FBE2118A78488E818997BB /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AEBDC7BEE7D554C7FA18D29 /* ContentView.swift */; };
 		77A7CCAEA4F6C21875D87DCD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AA986E23356244005C7DA505 /* Assets.xcassets */; };
+		7AF394AF2F2723CDE9BB3F70 /* CategoryPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBD42E6296FC6E89B2627B12 /* CategoryPicker.swift */; };
+		7DB02561C4B3C4290B86D5F5 /* BricolageGrotesque-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 444C1C6DF9A16811F6E9A4C8 /* BricolageGrotesque-Bold.ttf */; };
 		804E4F473D2725520708B399 /* ColorScale.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8356D25827C690014A991AE8 /* ColorScale.swift */; };
 		82893E684D2475DE99F105E5 /* VoiceLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B8E0FCE8B21CCBBE19E3D7 /* VoiceLink.swift */; };
 		83BA462B140CAFE54B9BD6B3 /* Progression.swift in Sources */ = {isa = PBXBuildFile; fileRef = C55E6A3830AF4CC7BC91B879 /* Progression.swift */; };
@@ -54,6 +58,7 @@
 		8C765C596682AE3FFE304DE8 /* Hints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A9553E85063A5FB584EAB42 /* Hints.swift */; };
 		8D28FE030C7EE76B688E65BB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AA986E23356244005C7DA505 /* Assets.xcassets */; };
 		8E6D03DECB33D33E28845AA6 /* Platform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8966DBC817BE95BE90215875 /* Platform.swift */; };
+		8ECBD7C1FB6B643085DD8837 /* BricolageGrotesque-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 444C1C6DF9A16811F6E9A4C8 /* BricolageGrotesque-Bold.ttf */; };
 		915C0C9C4936D26DBA708C44 /* MapGeometry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E2B96D3406A1130DE2C723A /* MapGeometry.swift */; };
 		91F6B06BC7B81A4144751808 /* ProgressSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E8DB256F31E768D1AD48E46 /* ProgressSection.swift */; };
 		923C03A157077833EAB89E82 /* Platform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8966DBC817BE95BE90215875 /* Platform.swift */; };
@@ -76,6 +81,7 @@
 		CE24624743C5A1BDB1ADE257 /* GameModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B15A1DFC23AFA60D626F836E /* GameModel.swift */; };
 		D63B904B098C41F41A09E9A5 /* MapGeometry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E2B96D3406A1130DE2C723A /* MapGeometry.swift */; };
 		D7948AF7A9ED61B600FABA95 /* world.json in Resources */ = {isa = PBXBuildFile; fileRef = 9BB43DB9C755082BFFA2AA5E /* world.json */; };
+		D9C79E9AEE6454A58329F4E6 /* BricolageGrotesque-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 444C1C6DF9A16811F6E9A4C8 /* BricolageGrotesque-Bold.ttf */; };
 		DC4D6D8DA5663ECCB81656A4 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AEBDC7BEE7D554C7FA18D29 /* ContentView.swift */; };
 		DEC81627DDBCB0E427C4A9F4 /* strings.json in Resources */ = {isa = PBXBuildFile; fileRef = A38F86C82521E6D9DE6E1419 /* strings.json */; };
 		E271EB8E5C52C711E2041654 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54BB62A20AA41137A8520563 /* MapView.swift */; };
@@ -109,6 +115,7 @@
 		274F0CF7EF58B24307CCED4E /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		2B0AEE80F05E5E3789F2D638 /* ConfettiView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfettiView.swift; sourceTree = "<group>"; };
 		413A56C9FFE04C7BBD65B964 /* Atlas.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Atlas.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		444C1C6DF9A16811F6E9A4C8 /* BricolageGrotesque-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "BricolageGrotesque-Bold.ttf"; sourceTree = "<group>"; };
 		54BB62A20AA41137A8520563 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		5A9553E85063A5FB584EAB42 /* Hints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hints.swift; sourceTree = "<group>"; };
 		6AEBDC7BEE7D554C7FA18D29 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -129,6 +136,7 @@
 		E0D6074433BEC2769D35BEC6 /* Sheets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sheets.swift; sourceTree = "<group>"; };
 		E0E994E13C63287E0B942955 /* Stats.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stats.swift; sourceTree = "<group>"; };
 		F30335D55EA0CC3488A6727A /* DebugSnapshots.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugSnapshots.swift; sourceTree = "<group>"; };
+		FBD42E6296FC6E89B2627B12 /* CategoryPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryPicker.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
@@ -177,6 +185,7 @@
 		D31C3F19C9E477535FFFB67D /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				444C1C6DF9A16811F6E9A4C8 /* BricolageGrotesque-Bold.ttf */,
 				12B972CBC916EE61EDF6790C /* BricolageGrotesque-ExtraBold.ttf */,
 				E0A9FEAB54207168722BE498 /* hints.json */,
 				AD19E18DF83948FAC8D87A4B /* provinces.json */,
@@ -201,6 +210,7 @@
 			isa = PBXGroup;
 			children = (
 				6B0329F2374D6A94596CD083 /* Brand.swift */,
+				FBD42E6296FC6E89B2627B12 /* CategoryPicker.swift */,
 				8356D25827C690014A991AE8 /* ColorScale.swift */,
 				2B0AEE80F05E5E3789F2D638 /* ConfettiView.swift */,
 				6AEBDC7BEE7D554C7FA18D29 /* ContentView.swift */,
@@ -333,6 +343,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				663323FC22C01E47BE80BB70 /* Assets.xcassets in Resources */,
+				8ECBD7C1FB6B643085DD8837 /* BricolageGrotesque-Bold.ttf in Resources */,
 				729A9C72E9997F815736A635 /* BricolageGrotesque-ExtraBold.ttf in Resources */,
 				57469922407804A950347D8F /* hints.json in Resources */,
 				228091EC9E31E765C035611B /* provinces.json in Resources */,
@@ -346,6 +357,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8D28FE030C7EE76B688E65BB /* Assets.xcassets in Resources */,
+				D9C79E9AEE6454A58329F4E6 /* BricolageGrotesque-Bold.ttf in Resources */,
 				1D883C8A83495FE5C6B84C3C /* BricolageGrotesque-ExtraBold.ttf in Resources */,
 				F65FCD1227CF717453BC55A7 /* hints.json in Resources */,
 				5812964D02223C6272680A7B /* provinces.json in Resources */,
@@ -359,6 +371,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				77A7CCAEA4F6C21875D87DCD /* Assets.xcassets in Resources */,
+				7DB02561C4B3C4290B86D5F5 /* BricolageGrotesque-Bold.ttf in Resources */,
 				F20115CCFFB06A8F0C029570 /* BricolageGrotesque-ExtraBold.ttf in Resources */,
 				F24BB8B3912FD2B74A9AB086 /* hints.json in Resources */,
 				57541F5560DD69991E0B2FB0 /* provinces.json in Resources */,
@@ -376,6 +389,7 @@
 			files = (
 				35ACA5CC77B371822C812FC1 /* AtlasApp.swift in Sources */,
 				1510FE831157913B7E8C2414 /* Brand.swift in Sources */,
+				23170EEDBDF699705E2F7A2B /* CategoryPicker.swift in Sources */,
 				AB6E170245C08D19CE081947 /* ColorScale.swift in Sources */,
 				F2621F89323ABFA03E84847F /* ConfettiView.swift in Sources */,
 				73FBE2118A78488E818997BB /* ContentView.swift in Sources */,
@@ -406,6 +420,7 @@
 			files = (
 				00113AA244B9C57F1702BB9B /* AtlasApp.swift in Sources */,
 				AA81D0A8A7DE4CBFFB410C92 /* Brand.swift in Sources */,
+				12DE3C652D6808548F5E2355 /* CategoryPicker.swift in Sources */,
 				A74AB6B12C5356D3D8470196 /* ColorScale.swift in Sources */,
 				BFF944916531F1AB5106B3D2 /* ConfettiView.swift in Sources */,
 				DC4D6D8DA5663ECCB81656A4 /* ContentView.swift in Sources */,
@@ -436,6 +451,7 @@
 			files = (
 				97F64F47C99747F2D425C52B /* AtlasApp.swift in Sources */,
 				2E1565BD03D665DFD101B7DD /* Brand.swift in Sources */,
+				7AF394AF2F2723CDE9BB3F70 /* CategoryPicker.swift in Sources */,
 				804E4F473D2725520708B399 /* ColorScale.swift in Sources */,
 				E42E83E311A854D9BAE9CB9C /* ConfettiView.swift in Sources */,
 				A97C500F2B501AE325483EA8 /* ContentView.swift in Sources */,

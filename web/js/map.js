@@ -104,6 +104,10 @@ export class FlatGeometry {
     const view = set.view;
     const midLat = view ? view.bounds[1] + view.bounds[3] / 2 : 39;
     const k = Math.cos(Math.min(Math.abs(midLat), 60) * DEG);
+    /** Boylamın x'e çevrilme katsayısı (enlem-boylam ağı için). */
+    this.k = k;
+    /** Ağ aralığı (derece): Türkiye'de sık, kıtalarda seyrek. */
+    this.gridStep = set.category.id === 'turkey' ? 2 : 10;
     const shift = view ? view.shift : (x) => x;
 
     const project = (ring) => {
@@ -405,10 +409,12 @@ export class MapView {
 
     ctx.fillStyle = colors.sea;
     ctx.fillRect(0, 0, this.size.w, this.size.h);
+    drawSeaVignette(ctx, this.size.w, this.size.h, colors);
 
     const tx = this.size.w / 2 - this.cam.a * s;
     const ty = this.size.h / 2 - this.cam.b * s;
     ctx.setTransform(dpr * s, 0, 0, dpr * s, dpr * tx, dpr * ty);
+    drawFlatGraticule(ctx, geo, { x: -tx / s, y: -ty / s, w: this.size.w / s, h: this.size.h / s }, s, colors);
 
     ctx.fillStyle = colors.backgroundLand;
     ctx.strokeStyle = colors.backgroundBorder;
@@ -1019,6 +1025,57 @@ export class MapView {
       this.render();
     }, { passive: false });
   }
+}
+
+// MARK: - Deniz dokusu
+
+/** Denizde kenarlara doğru hafif koyulaşma: haritaya derinlik verir (ekran koordinatında). */
+function drawSeaVignette(ctx, w, h, colors) {
+  const g = ctx.createRadialGradient(w / 2, h / 2, Math.min(w, h) * 0.35, w / 2, h / 2, Math.hypot(w, h) / 2);
+  g.addColorStop(0, 'rgba(0,0,0,0)');
+  g.addColorStop(1, colors.vignette);
+  ctx.fillStyle = g;
+  ctx.fillRect(0, 0, w, h);
+}
+
+/** Düz haritada ince enlem-boylam ağı (harita koordinatında; kara bunun üstüne çizilir). */
+function drawFlatGraticule(ctx, geo, view, s, colors) {
+  const step = geo.gridStep, k = geo.k;
+  ctx.beginPath();
+  const lon0 = Math.floor(view.x / k / step) * step, lon1 = (view.x + view.w) / k;
+  for (let lon = lon0; lon <= lon1; lon += step) { ctx.moveTo(lon * k, view.y); ctx.lineTo(lon * k, view.y + view.h); }
+  const lat0 = Math.floor(-(view.y + view.h) / step) * step, lat1 = -view.y;
+  for (let lat = lat0; lat <= lat1; lat += step) { ctx.moveTo(view.x, -lat); ctx.lineTo(view.x + view.w, -lat); }
+  ctx.strokeStyle = colors.graticule;
+  ctx.lineWidth = 1 / s;
+  ctx.stroke();
+}
+
+// MARK: - Kategori kartı küçük resmi
+
+/** Kategori seçicideki kart: kategorinin yerleri turuncu, çevresi soluk. */
+export function drawCategoryThumb(canvas, set) {
+  const geo = flatGeometryFor(set);
+  const colors = COLORS();
+  const dpr = window.devicePixelRatio || 1;
+  const w = canvas.clientWidth, h = canvas.clientHeight;
+  canvas.width = Math.round(w * dpr);
+  canvas.height = Math.round(h * dpr);
+  const ctx = canvas.getContext('2d');
+  const b = geo.bounds;
+  const s = Math.min((w - 12) / b.w, (h - 12) / b.h);
+  const tx = w / 2 - (b.x + b.w / 2) * s, ty = h / 2 - (b.y + b.h / 2) * s;
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  ctx.fillStyle = colors.thumbSea;
+  ctx.fillRect(0, 0, w, h);
+  ctx.setTransform(dpr * s, 0, 0, dpr * s, dpr * tx, dpr * ty);
+  ctx.lineJoin = 'round';
+  ctx.fillStyle = colors.thumbLand;
+  for (const g of geo.background) ctx.fill(g.path);
+  ctx.fillStyle = colors.thumbPlace;
+  ctx.strokeStyle = colors.thumbSea;
+  ctx.lineWidth = 0.6 / s;
+  for (const g of geo.places) { ctx.fill(g.path); ctx.stroke(g.path); }
 }
 
 // MARK: - Keşif haritası (istatistikler)

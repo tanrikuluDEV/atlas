@@ -1454,5 +1454,61 @@
   "fr": "Sûr ? Touche encore",
   "es": "¿Seguro? Toca otra vez",
   "it": "Sicuro? Tocca ancora"
+ },
+ "count.province": {
+  "tr": "{n} il",
+  "en": "{n} provinces",
+  "de": "{n} Provinzen",
+  "fr": "{n} provinces",
+  "es": "{n} provincias",
+  "it": "{n} province"
+ },
+ "count.country": {
+  "tr": "{n} ülke",
+  "en": "{n} countries",
+  "de": "{n} Länder",
+  "fr": "{n} pays",
+  "es": "{n} países",
+  "it": "{n} paesi"
+ },
+ "picker.subtitle": {
+  "tr": "Her kategorinin kendi günlük bulmacası var.",
+  "en": "Each category has its own daily puzzle.",
+  "de": "Jede Kategorie hat ihr eigenes Tagesrätsel.",
+  "fr": "Chaque catégorie a sa propre énigme du jour.",
+  "es": "Cada categoría tiene su propio reto diario.",
+  "it": "Ogni categoria ha il suo enigma del giorno."
+ },
+ "picker.won": {
+  "tr": "{n} tahminde bulundu",
+  "en": "Solved in {n}",
+  "de": "In {n} gelöst",
+  "fr": "Trouvé en {n}",
+  "es": "Resuelto en {n}",
+  "it": "Risolto in {n}"
+ },
+ "picker.lost": {
+  "tr": "Pes edildi",
+  "en": "Gave up",
+  "de": "Aufgegeben",
+  "fr": "Abandonné",
+  "es": "Abandonado",
+  "it": "Abbandonato"
+ },
+ "picker.playing": {
+  "tr": "Devam ediyor",
+  "en": "In progress",
+  "de": "Läuft",
+  "fr": "En cours",
+  "es": "En curso",
+  "it": "In corso"
+ },
+ "picker.new": {
+  "tr": "Yeni bulmaca",
+  "en": "New puzzle",
+  "de": "Neues Rätsel",
+  "fr": "Nouvelle énigme",
+  "es": "Reto nuevo",
+  "it": "Nuovo enigma"
  }
 }

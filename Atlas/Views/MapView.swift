@@ -472,6 +472,7 @@ struct MapLayer: View, Animatable {
         let visible = CGRect(origin: .zero, size: size).insetBy(dx: -20, dy: -20)
 
         ctx.fill(Path(CGRect(origin: .zero, size: size)), with: .color(palette.sea))
+        drawSeaTexture(&ctx, geometry: geometry, transform: transform, size: size)
         for path in geometry.backgroundPaths where path.boundingRect.applying(transform).intersects(visible) {
             let shape = path.applying(transform)
             ctx.fill(shape, with: .color(palette.backgroundLand))
@@ -560,6 +561,32 @@ struct MapLayer: View, Animatable {
         ctx.fill(disk, with: .radialGradient(Gradient(colors: [.clear, palette.globeShade]),
                                              center: c, startRadius: r * 0.75, endRadius: r))
         return labels
+    }
+
+    /// Düz haritada deniz dokusu: kenarlara doğru hafif koyulaşma ve ince enlem-boylam ağı (web: drawSeaVignette, drawFlatGraticule).
+    private func drawSeaTexture(_ ctx: inout GraphicsContext, geometry: MapGeometry, transform: CGAffineTransform, size: CGSize) {
+        let center = CGPoint(x: size.width / 2, y: size.height / 2)
+        ctx.fill(Path(CGRect(origin: .zero, size: size)),
+                 with: .radialGradient(Gradient(colors: [.clear, palette.vignette]), center: center,
+                                       startRadius: min(size.width, size.height) * 0.35,
+                                       endRadius: hypot(size.width, size.height) / 2))
+        let inverse = transform.inverted()
+        let view = CGRect(origin: .zero, size: size).applying(inverse)
+        let step = geometry.gridStep, k = geometry.k
+        var grid = Path()
+        var lon = (view.minX / k / step).rounded(.down) * step
+        while lon * k <= view.maxX {
+            grid.move(to: CGPoint(x: lon * k, y: view.minY))
+            grid.addLine(to: CGPoint(x: lon * k, y: view.maxY))
+            lon += step
+        }
+        var lat = (-view.maxY / step).rounded(.down) * step
+        while -lat >= view.minY {
+            grid.move(to: CGPoint(x: view.minX, y: -lat))
+            grid.addLine(to: CGPoint(x: view.maxX, y: -lat))
+            lat += step
+        }
+        ctx.stroke(grid.applying(transform), with: .color(palette.graticule), lineWidth: 1)
     }
 
     private func drawGraticule(_ ctx: inout GraphicsContext, _ proj: GlobeProjection) {
@@ -651,23 +678,27 @@ struct MapLayer: View, Animatable {
 
     private struct Palette {
         let sea, backgroundLand, border, markerStroke, unguessed: Color
-        let space, seaLight, atmosphere, globeShade, graticule, labelText, labelHalo: Color
+        let space, seaLight, atmosphere, globeShade, graticule, vignette, labelText, labelHalo: Color
     }
 
+    /// Kara sıcak gri/krem, deniz soğuk gri-mavi; koyu temada lacivert tonları (web: colors.js LIGHT/DARK).
     private var palette: Palette {
-        colorScheme == .dark
-            ? Palette(sea: Color(red: 0.07, green: 0.09, blue: 0.13), backgroundLand: Color(white: 0.17),
-                      border: Color.black.opacity(0.6), markerStroke: Color.white.opacity(0.5), unguessed: Color(white: 0.30),
-                      space: Color(red: 0.03, green: 0.035, blue: 0.05), seaLight: Color(red: 0.11, green: 0.15, blue: 0.2),
-                      atmosphere: Color(red: 0.35, green: 0.59, blue: 1).opacity(0.28), globeShade: Color.black.opacity(0.45),
-                      graticule: Color(red: 0.55, green: 0.67, blue: 0.86).opacity(0.10),
-                      labelText: Color(white: 0.96), labelHalo: Color.black.opacity(0.75))
-            : Palette(sea: Color(red: 0.89, green: 0.93, blue: 0.97), backgroundLand: Color(white: 0.95),
-                      border: Color.white, markerStroke: Color.black.opacity(0.35), unguessed: Color(white: 0.82),
-                      space: Color(red: 0.96, green: 0.965, blue: 0.98), seaLight: Color(red: 0.95, green: 0.97, blue: 0.99),
-                      atmosphere: Color(red: 0.47, green: 0.67, blue: 0.9).opacity(0.35), globeShade: Color(red: 0.16, green: 0.24, blue: 0.4).opacity(0.18),
-                      graticule: Color(red: 0.24, green: 0.4, blue: 0.63).opacity(0.12),
-                      labelText: Color(white: 0.11), labelHalo: Color.white.opacity(0.85))
+        func hex(_ v: UInt32, _ a: Double = 1) -> Color {
+            Color(red: Double(v >> 16 & 0xff) / 255, green: Double(v >> 8 & 0xff) / 255, blue: Double(v & 0xff) / 255).opacity(a)
+        }
+        return colorScheme == .dark
+            ? Palette(sea: hex(0x0c141e), backgroundLand: hex(0x1b2633),
+                      border: hex(0x060b12, 0.75), markerStroke: hex(0xf9f6f1, 0.5), unguessed: hex(0x2f3c4c),
+                      space: hex(0x060b12), seaLight: hex(0x17263a),
+                      atmosphere: Color(red: 0.35, green: 0.59, blue: 1).opacity(0.26), globeShade: Color.black.opacity(0.45),
+                      graticule: hex(0x96b4dc, 0.08), vignette: Color.black.opacity(0.35),
+                      labelText: hex(0xf9f6f1), labelHalo: hex(0x080e16, 0.8))
+            : Palette(sea: hex(0xdbe5ec), backgroundLand: hex(0xefece6),
+                      border: hex(0xfbf9f5), markerStroke: hex(0x142030, 0.35), unguessed: hex(0xdcd6cc),
+                      space: hex(0xf3f1ec), seaLight: hex(0xeef4f8),
+                      atmosphere: Color(red: 0.47, green: 0.67, blue: 0.9).opacity(0.35), globeShade: hex(0x142030, 0.18),
+                      graticule: hex(0x143c6e, 0.10), vignette: hex(0x142846, 0.10),
+                      labelText: hex(0x142030), labelHalo: hex(0xfbf9f5, 0.88))
     }
 
     private func fill(for place: Place) -> Color {

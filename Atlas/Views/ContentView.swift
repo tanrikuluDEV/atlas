@@ -7,8 +7,10 @@ struct ContentView: View {
     @AppStorage("helpSeen") private var helpSeen = false
     @State private var showSettings = false
     @State private var showVoiceRemote = false
+    @State private var showCategories = false
     @State private var confettiStart: Date?
-    @State private var showSplash = true
+    /// Açılış animasyonu; `-renderSnapshots` ile ekran dışı çizimde atlanır.
+    @State private var showSplash = !ProcessInfo.processInfo.arguments.contains("-renderSnapshots")
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @State private var l10n = L10n.shared
 
@@ -27,6 +29,8 @@ struct ContentView: View {
         }
         // Büyük harfe çevirme, tarih ve sayı biçimleri seçili dile uysun (Türkçede "i" → "İ").
         .environment(\.locale, l10n.language.locale)
+        // Bağlantılar, düğmeler ve seçimler sistem vurgusu yerine marka turuncusuyla.
+        .tint(Brand.accent)
     }
 
     @ViewBuilder
@@ -72,15 +76,20 @@ struct ContentView: View {
         #if !os(tvOS)
         .toolbar {
             ToolbarItem(placement: .navigation) {
-                Picker(selection: Binding(get: { game.category }, set: { game.switchCategory($0) })) {
-                    ForEach(GameCategory.allCases) { c in
-                        Label(c.title, systemImage: c.symbol).tag(c)
-                    }
-                } label: {
-                    Label(L("category"), systemImage: game.category.symbol)
+                // Kartlı kategori seçici: Mac'te balon, iPhone'da sayfa.
+                Button { showCategories = true } label: {
+                    Label(game.category.title, systemImage: game.category.symbol)
+                        #if os(macOS)
+                        .labelStyle(.titleAndIcon)
+                        #endif
                 }
-                .pickerStyle(.menu)
                 .help(L("category"))
+                .accessibilityLabel("\(L("category")): \(game.category.title)")
+                #if os(macOS)
+                .popover(isPresented: $showCategories, arrowEdge: .bottom) {
+                    CategoryPicker(game: game, isPresented: $showCategories)
+                }
+                #endif
             }
             ToolbarItem(placement: .principal) {
                 Picker(L("mode"), selection: Binding(get: { game.mode }, set: { game.switchMode($0) })) {
@@ -129,6 +138,7 @@ struct ContentView: View {
         .sheet(isPresented: $showHelp) { HelpView() }
         #if os(iOS)
         .sheet(isPresented: $showVoiceRemote) { VoiceRemoteView() }
+        .sheet(isPresented: $showCategories) { CategoryPicker(game: game, isPresented: $showCategories) }
         #endif
         #if os(iOS) || os(tvOS)
         .sheet(isPresented: $showSettings) { SettingsView() }
@@ -137,6 +147,10 @@ struct ContentView: View {
         #if DEBUG && os(iOS)
         .onAppear {
             if ProcessInfo.processInfo.environment["ATLAS_VOICE_SEND"] != nil { showVoiceRemote = true }
+            // Geliştirme: kategori seçiciyi açılışta açar (simülatörde ekran görüntüsü için).
+            if ProcessInfo.processInfo.environment["ATLAS_SHOW"] == "categories" {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2) { showCategories = true }
+            }
         }
         #endif
         // Bulunca konfeti (yalnızca tahminle kazanıldığında; kayıtlı oyun açılınca değil).
@@ -202,7 +216,7 @@ private struct Sidebar: View {
                         .font(.headline)
                         .foregroundStyle(.secondary)
                     Text(game.mode == .daily ? L("panel.daily.\(game.category.kind)") : L("mode.practice"))
-                        .font(.title2.bold())
+                        .font(Brand.heading(.title2))
                     Text(game.category.subtitle)
                         .font(.callout)
                         .foregroundStyle(.secondary)
@@ -270,6 +284,9 @@ private struct Sidebar: View {
             .font(.callout)
         }
         .padding(Platform.isMac ? 18 : 14)
+        #if !os(tvOS)
+        .background(Brand.panel)
+        #endif
         .animation(.default, value: game.message)
     }
 
@@ -335,7 +352,7 @@ private struct GameOverBanner: View {
             Label(game.status == .won ? L("over.won") : L("over.hidden.\(game.category.kind)"), systemImage: game.status == .won ? "checkmark.seal.fill" : "flag.fill")
                 .font(.headline)
                 .foregroundStyle(game.status == .won ? ColorScale.found : ColorScale.answerReveal)
-            Text(game.answer.name).font(.title.bold())
+            Text(game.answer.name).font(Brand.heading(.title))
             HStack {
                 Button(L("result")) { game.showResult = true }
                 Button(L("newGame")) { game.newPractice() }
@@ -418,7 +435,7 @@ private struct GuessInput: View {
                             .padding(.horizontal, 10)
                             .padding(.vertical, Platform.isMac ? 6 : 10)
                             .contentShape(Rectangle())
-                            .background(i == highlighted ? Color.accentColor.opacity(0.18) : .clear)
+                            .background(i == highlighted ? Brand.accent.opacity(0.16) : .clear)
                         }
                         .buttonStyle(.plain)
                         .onHover { if $0 { highlighted = i } }

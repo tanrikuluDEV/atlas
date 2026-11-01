@@ -8,13 +8,31 @@ enum Brand {
     static let orange = Color(red: 0.949, green: 0.400, blue: 0.265)
     static let navy = Color(red: 0.077, green: 0.125, blue: 0.187)
     static let cream = Color(red: 0.977, green: 0.966, blue: 0.944)
+    /// Koyu temada lacivert zemin üstündeki kartlar (#17263a).
+    static let navyRaised = Color(red: 0.090, green: 0.149, blue: 0.227)
+
+    /// Vurgu rengi: açıkta beyaz yazının okunacağı turuncu, koyuda marka turuncusu (Assets.xcassets/AccentColor).
+    /// Mac'te sistem vurgu rengi uygulamanınkini ezdiği için marka rengi gereken yerde açıkça kullanılır.
+    static let accent = Color("AccentColor")
+
+    /// Panel zemini: açıkta sıcak beyaz, koyuda lacivert (Assets.xcassets/Panel; web: `--panel`).
+    static let panel = Color("Panel")
 
     /// Logo yazı tipi (Bricolage Grotesque ExtraBold; yalnızca "Atlas" harfleri ve rakamlar gömülü).
     static func wordmark(_ size: CGFloat) -> Font { .custom("BricolageGrotesque96pt-ExtraBold", size: size) }
 
+    /// Başlık yazı tipi (Bricolage Grotesque Bold, 24 pt optik boyut; Latin, Türkçe ve Batı Avrupa harfleri).
+    /// Boyut, platformun o metin stiline verdiği boyuttur; böylece Apple TV'de de büyür ve Dinamik Yazı'ya uyar.
+    /// Dosya `tools/heading_font.py` ile üretilir (web: `bricolage-700.woff2`).
+    static func heading(_ style: Font.TextStyle) -> Font {
+        .custom("BricolageGrotesqueHeading-Bold", size: Platform.textSize(style) * 1.06, relativeTo: style)
+    }
+
     static func registerFonts() {
-        guard let url = Bundle.main.url(forResource: "BricolageGrotesque-ExtraBold", withExtension: "ttf") else { return }
-        CTFontManagerRegisterFontsForURL(url as CFURL, .process, nil)
+        for name in ["BricolageGrotesque-ExtraBold", "BricolageGrotesque-Bold"] {
+            guard let url = Bundle.main.url(forResource: name, withExtension: "ttf") else { continue }
+            CTFontManagerRegisterFontsForURL(url as CFURL, .process, nil)
+        }
     }
 }
 
@@ -145,6 +163,7 @@ struct LevelCard: View {
     let progress: LevelProgress
     var reward: Reward?
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
+    @Environment(\.colorScheme) private var colorScheme
     @State private var shownLevel: Int
     @State private var bar: Double
     @State private var popped = false
@@ -178,7 +197,7 @@ struct LevelCard: View {
                     .scaleEffect(popped ? 1.25 : 1)
                 VStack(alignment: .leading, spacing: 4) {
                     Text(L("level.n", ["n": shownLevel]))
-                        .font(.system(size: 22 * k, weight: .heavy))
+                        .font(.custom("BricolageGrotesqueHeading-Bold", size: 24 * k))
                     if let reward {
                         Text(reward.gained > 0 ? L("xp.gained", ["n": reward.gained]) : L("xp.none"))
                             .font(mono)
@@ -209,7 +228,9 @@ struct LevelCard: View {
         .padding(20 * k)
         .frame(maxWidth: .infinity)
         .foregroundStyle(Brand.cream)
-        .background(Brand.navy, in: RoundedRectangle(cornerRadius: 20 * k))
+        // Koyu temada lacivert pencerenin üstünde kaybolmasın diye biraz açık ton ve ince kenar.
+        .background(colorScheme == .dark ? Brand.navyRaised : Brand.navy, in: RoundedRectangle(cornerRadius: 20 * k))
+        .overlay(RoundedRectangle(cornerRadius: 20 * k).strokeBorder(Brand.cream.opacity(colorScheme == .dark ? 0.09 : 0)))
         .task { await play() }
     }
 

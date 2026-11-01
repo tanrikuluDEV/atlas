@@ -78,7 +78,7 @@ struct CalendarSection: View {
         let played = cols.joined().filter { $0.level > 0 || $0.lost }.count
         VStack(alignment: .leading, spacing: 6) {
             HStack(alignment: .firstTextBaseline, spacing: 6) {
-                Text(L("cal.title")).font(.headline)
+                Text(L("cal.title")).font(Brand.heading(.headline))
                 Text(L("cal.summary", ["w": Self.weeks, "n": played])).font(.callout).foregroundStyle(.secondary)
             }
             HStack(alignment: .top, spacing: Self.gap) {
@@ -170,9 +170,9 @@ struct DiscoverySection: View {
         let total = places.places.count
         let pct = total == 0 ? 0 : Int((Double(found.count) / Double(total) * 100).rounded())
         VStack(alignment: .leading, spacing: 8) {
-            Text(L("disc.title")).font(.headline)
+            Text(L("disc.title")).font(Brand.heading(.headline))
             HStack(alignment: .firstTextBaseline, spacing: 4) {
-                Text("\(found.count)").font(.title3.bold())
+                Text("\(found.count)").font(Brand.heading(.title3))
                 Text(L("disc.found.\(category.kind)", ["total": total]))
                 Text("(\((Double(pct) / 100).formatted(.percent.locale(L10n.shared.language.locale))))").foregroundStyle(.secondary)
             }

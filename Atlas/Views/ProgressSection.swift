@@ -28,7 +28,7 @@ struct ProgressSection: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
-            Text(L("prog.title")).font(.headline)
+            Text(L("prog.title")).font(Brand.heading(.headline))
 
             if stats.history.count < 2 {
                 Text(L("prog.empty"))
@@ -93,7 +93,7 @@ struct ProgressSection: View {
             }
             ForEach(data.filter { $0.average != nil }) { p in
                 LineMark(x: .value(L("prog.axisGame"), p.number), y: .value(L("prog.average"), p.average!))
-                    .foregroundStyle(Color.accentColor)
+                    .foregroundStyle(Brand.accent)
                     .interpolationMethod(.monotone)
                     .lineStyle(StrokeStyle(lineWidth: 2))
             }
@@ -110,7 +110,7 @@ struct ProgressSection: View {
         HStack(spacing: 12) {
             legendItem(Circle().fill(ColorScale.found).frame(width: 7, height: 7), L("prog.won"))
             legendItem(Image(systemName: "xmark").font(.system(size: 7, weight: .bold)).foregroundStyle(.gray), L("prog.gaveUp"))
-            legendItem(Capsule().fill(Color.accentColor).frame(width: 14, height: 3), L("prog.window", ["n": Self.window]))
+            legendItem(Capsule().fill(Brand.accent).frame(width: 14, height: 3), L("prog.window", ["n": Self.window]))
         }
         .font(.caption2)
         .foregroundStyle(.secondary)

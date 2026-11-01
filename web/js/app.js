@@ -2,7 +2,8 @@
 import { CATEGORIES, categoryById, loadData, placeSet } from './places.js';
 import { LANGUAGES, detectLanguage, languageInfo, nativeName, formatKm, formatNumber, language, loadStrings, locale, onLanguageChange, setLanguage, t } from './i18n.js';
 import { Game, Stats, store } from './game.js';
-import { MapView, drawDiscoveryMap } from './map.js';
+import { MapView, drawCategoryThumb, drawDiscoveryMap } from './map.js';
+import { dayIndex } from './daily.js';
 import { confetti } from './confetti.js';
 import { VERSION } from './version.js';
 import { levelCardHTML, playLevelCard, splashStarted } from './brand.js';
@@ -59,8 +60,7 @@ async function start() {
 // MARK: - Araç çubuğu
 
 function setupToolbar() {
-  const select = $('categorySelect');
-  select.addEventListener('change', () => game.switchCategory(select.value));
+  $('categoryButton').addEventListener('click', () => openCategoryPicker());
   const langSelect = $('languageSelect');
   langSelect.innerHTML = LANGUAGES.map((l) => `<option value="${l.id}">${l.flag} ${esc(nativeName(l.id))}</option>`).join('');
   langSelect.addEventListener('change', () => setLanguage(langSelect.value));
@@ -102,8 +102,7 @@ function applyStaticTexts() {
     const el = $(id);
     for (const a of attrs) if (a === 'text') el.textContent = text; else el.setAttribute(a, text);
   };
-  set('categoryLabel', t('category'), ['title']);
-  set('categorySelect', t('category'), ['aria-label']);
+  set('categoryButton', t('category'));
   set('languageLabel', t('language'), ['title']);
   set('languageSelect', t('language'), ['aria-label']);
   set('modeSegmented', t('mode'), ['aria-label']);
@@ -123,8 +122,6 @@ function applyStaticTexts() {
   reset.title = t('map.reset');
   set('guessButton', t('guess'), ['text']);
   set('giveUpButton', t('giveUp'), ['text']);
-  $('categorySelect').innerHTML = CATEGORIES.map((c) => `<option value="${c.id}">${esc(c.title)}</option>`).join('');
-  if (game) $('categorySelect').value = game.category;
   $('languageSelect').value = language();
   $('languageFlag').textContent = languageInfo().flag;
   document.querySelector('meta[name="description"]')?.setAttribute('content', `Atlas · ${t('app.tagline')}`);
@@ -249,7 +246,7 @@ function render() {
   last = { roundID: game.roundID, lastGuess: game.lastGuess, highlighted: game.highlighted, category: game.category, showResult: game.showResult, status: game.status };
 
   // Araç çubuğu
-  $('categorySelect').value = game.category;
+  $('categoryName').textContent = c.title;
   $('categoryIcon').textContent = c.icon;
   document.querySelectorAll('#modeSegmented button').forEach((b) => b.setAttribute('aria-selected', b.dataset.mode === game.mode));
   $('newGameButton').hidden = game.mode !== 'practice';
@@ -351,6 +348,50 @@ function renderGuesses() {
       game.setHighlighted(game.highlighted?.id === p.id ? null : p);
     };
   });
+}
+
+// MARK: - Kategori seçici
+
+/** Bir kategorinin bugünkü günlük bulmacasının durumu (kartta rozet olarak). */
+function dailyStatus(categoryId, day) {
+  const saved = store.get(`atlas.daily.${categoryId}.${day}`);
+  const n = saved?.guessIDs?.length ?? 0;
+  if (saved?.status === 'won') return { cls: 'won', text: `✓ ${t('picker.won', { n })}` };
+  if (saved?.status === 'lost') return { cls: 'lost', text: t('picker.lost') };
+  if (n) return { cls: 'playing', text: `${t('picker.playing')} · ${n}` };
+  return { cls: 'new', text: t('picker.new') };
+}
+
+/** Kategoriler kart olarak: küçük harita, yer sayısı ve bugünkü bulmacanın durumu. */
+function openCategoryPicker() {
+  const day = dayIndex();
+  const cards = CATEGORIES.map((c, i) => {
+    const st = dailyStatus(c.id, day);
+    return `<button class="cat-card${c.id === game.category ? ' selected' : ''}" data-id="${c.id}" title="⌘${i + 1}">
+        <canvas class="cat-thumb" aria-hidden="true"></canvas>
+        <span class="cat-info">
+          <span class="cat-title">${c.icon} ${esc(c.title)}</span>
+          <span class="cat-count">${esc(t(`count.${c.kind}`, { n: placeSet(c.id).places.length }))}</span>
+          <span class="cat-status ${st.cls}">${esc(st.text)}</span>
+        </span>
+      </button>`;
+  }).join('');
+  showDialog('categoryDialog', `
+    <div class="picker-head">
+      <div><h2>${esc(t('category'))}</h2><p>${esc(t('picker.subtitle'))}</p></div>
+      <button class="icon-button" data-close aria-label="${esc(t('close'))}" title="${esc(t('close'))}">
+        <svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+    </div>
+    <div class="picker-grid">${cards}</div>`, (d) => {
+    d.querySelectorAll('.cat-card').forEach((b) => {
+      b.onclick = () => { d.close(); game.switchCategory(b.dataset.id); };
+    });
+  });
+  // Küçük haritalar pencere açılıp boyut kazanınca çizilir.
+  const d = $('categoryDialog');
+  d.querySelectorAll('.cat-card').forEach((b) => drawCategoryThumb(b.querySelector('canvas'), placeSet(b.dataset.id)));
+  d.querySelector('.cat-card.selected')?.focus();
 }
 
 // MARK: - Pencereler

@@ -21,21 +21,26 @@ export function heatColor(km, maxKm) {
   return `rgb(${c(0)}, ${c(1)}, ${c(2)})`;
 }
 
+// Kara sıcak gri/krem, deniz soğuk gri-mavi; koyu temada her şey lacivert tonunda (Swift: MapLayer.palette).
 const LIGHT = {
-  sea: '#e3edf7', backgroundLand: '#f2f2f2', backgroundBorder: 'rgba(255,255,255,0.7)',
-  border: '#ffffff', unguessed: '#d1d1d1', markerStroke: 'rgba(0,0,0,0.35)', text: '#1d1d1f',
+  sea: '#dbe5ec', backgroundLand: '#efece6', backgroundBorder: 'rgba(255,255,255,0.75)',
+  border: '#fbf9f5', unguessed: '#dcd6cc', markerStroke: 'rgba(20,32,48,0.35)', text: '#142030',
   // Küre
-  space: '#f4f6fa', seaLight: '#f3f8fd', atmosphere: 'rgba(120, 170, 230, 0.35)',
-  globeShade: 'rgba(40, 60, 100, 0.18)', graticule: 'rgba(60, 100, 160, 0.12)',
+  space: '#f3f1ec', seaLight: '#eef4f8', atmosphere: 'rgba(120, 170, 230, 0.35)',
+  globeShade: 'rgba(20, 32, 48, 0.18)', graticule: 'rgba(20, 60, 110, 0.10)',
+  vignette: 'rgba(20, 40, 70, 0.10)',
   // Adlar ve animasyon
-  labelText: '#1d1d1f', labelHalo: 'rgba(255,255,255,0.85)', pulse: 'rgba(255,255,255,ALPHA)',
+  labelText: '#142030', labelHalo: 'rgba(251,249,245,0.88)', pulse: 'rgba(255,255,255,ALPHA)',
+  thumbPlace: '#f26644', thumbLand: '#e6e1d8', thumbSea: '#eef2f4',
 };
 const DARK = {
-  sea: '#12171f', backgroundLand: '#2b2b2b', backgroundBorder: 'rgba(0,0,0,0.4)',
-  border: 'rgba(0,0,0,0.6)', unguessed: '#4d4d4d', markerStroke: 'rgba(255,255,255,0.5)', text: '#f5f5f7',
-  space: '#07090d', seaLight: '#1c2533', atmosphere: 'rgba(90, 150, 255, 0.28)',
-  globeShade: 'rgba(0, 0, 0, 0.45)', graticule: 'rgba(140, 170, 220, 0.10)',
-  labelText: '#f5f5f7', labelHalo: 'rgba(0,0,0,0.75)', pulse: 'rgba(255,255,255,ALPHA)',
+  sea: '#0c141e', backgroundLand: '#1b2633', backgroundBorder: 'rgba(0,0,0,0.4)',
+  border: 'rgba(6,11,18,0.75)', unguessed: '#2f3c4c', markerStroke: 'rgba(249,246,241,0.5)', text: '#f9f6f1',
+  space: '#060b12', seaLight: '#17263a', atmosphere: 'rgba(90, 150, 255, 0.26)',
+  globeShade: 'rgba(0, 0, 0, 0.45)', graticule: 'rgba(150, 180, 220, 0.08)',
+  vignette: 'rgba(0, 0, 0, 0.35)',
+  labelText: '#f9f6f1', labelHalo: 'rgba(8,14,22,0.8)', pulse: 'rgba(255,255,255,ALPHA)',
+  thumbPlace: '#f26644', thumbLand: '#253244', thumbSea: '#131e2c',
 };
 const SHARED = {
   found: 'rgb(46, 158, 79)', answerReveal: 'rgb(41, 115, 217)',
@@ -66,7 +71,7 @@ export function applyTheme() {
   const pref = themePreference();
   const root = document.documentElement;
   if (pref === 'system') delete root.dataset.theme; else root.dataset.theme = pref;
-  document.querySelector('meta[name="theme-color"]')?.setAttribute('content', isDark() ? '#1c1c1e' : '#ffffff');
+  document.querySelector('meta[name="theme-color"]')?.setAttribute('content', isDark() ? '#121c29' : '#fbf9f5');
   listeners.forEach((fn) => fn());
 }
 

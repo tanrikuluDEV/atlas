@@ -15,6 +15,25 @@ enum Platform {
     static let isTV = false
     static let drawScale: CGFloat = 1
     #endif
+
+    /// Platformun bir metin stili için varsayılan boyutu (özel yazı tipleri bu boyutla kullanılır).
+    static func textSize(_ style: Font.TextStyle) -> CGFloat {
+        #if os(macOS)
+        let map: [Font.TextStyle: NSFont.TextStyle] = [.largeTitle: .largeTitle, .title: .title1, .title2: .title2,
+                                                        .title3: .title3, .headline: .headline, .body: .body]
+        return NSFont.preferredFont(forTextStyle: map[style] ?? .body).pointSize
+        #else
+        var map: [Font.TextStyle: UIFont.TextStyle] = [.title: .title1, .title2: .title2, .title3: .title3,
+                                                       .headline: .headline, .body: .body]
+        #if os(iOS)
+        map[.largeTitle] = .largeTitle
+        #endif
+        // tvOS'ta largeTitle yok; başlık stiliyle aynı boyutta kullanılır.
+        let ui = map[style] ?? (style == .largeTitle ? .title1 : .body)
+        // Dinamik Yazı ölçeklemesini `relativeTo:` yapar; burada varsayılan boyut alınır.
+        return UIFont.preferredFont(forTextStyle: ui, compatibleWith: UITraitCollection(preferredContentSizeCategory: .large)).pointSize
+        #endif
+    }
 }
 
 extension View {

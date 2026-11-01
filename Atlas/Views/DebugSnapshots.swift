@@ -105,6 +105,37 @@ enum DebugSnapshots {
             try? png.write(to: dir.appendingPathComponent("brand.png"))
         }
 
+        // Kategori seçici ve koyu temada pencere (açık / koyu).
+        let pickerGame = GameModel()
+        for scheme in [ColorScheme.light, .dark] {
+            let suffix = scheme == .dark ? "dark" : "light"
+            let picker = CategoryPicker(game: pickerGame, isPresented: .constant(true)).environment(\.colorScheme, scheme)
+            let r = ImageRenderer(content: picker)
+            r.scale = 1
+            if let image = r.nsImage, let tiff = image.tiffRepresentation,
+               let png = NSBitmapImageRep(data: tiff)?.representation(using: .png, properties: [:]) {
+                try? png.write(to: dir.appendingPathComponent("picker-\(suffix).png"))
+            }
+        }
+        for category in [GameCategory.turkey, .europe, .world] {
+            let game = GameModel()
+            game.switchCategory(category)
+            if game.mode == .daily { game.switchMode(.practice) }
+            let others = game.places.places.filter { $0 != game.answer }
+                .sorted { game.places.distance($0, game.answer) < game.places.distance($1, game.answer) }
+            for idx in [0, others.count / 8, others.count / 3] { game.submit(others[idx]) }
+            let full = ContentView(game: game, showStats: .constant(false), showHelp: .constant(false))
+                .frame(width: 1180, height: 720)
+                .environment(\.colorScheme, .dark)
+                .background(Color.black)
+            let r = ImageRenderer(content: full)
+            r.scale = 1
+            if let image = r.nsImage, let tiff = image.tiffRepresentation,
+               let png = NSBitmapImageRep(data: tiff)?.representation(using: .png, properties: [:]) {
+                try? png.write(to: dir.appendingPathComponent("window-dark-\(category.rawValue).png"))
+            }
+        }
+
         if let savedCategory { UserDefaults.standard.set(savedCategory, forKey: "category") }
         else { UserDefaults.standard.removeObject(forKey: "category") }
         exit(0)

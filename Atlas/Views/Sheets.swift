@@ -15,11 +15,11 @@ struct ResultView: View {
                 .foregroundStyle(game.status == .won ? ColorScale.found : ColorScale.answerReveal)
 
             if game.status == .won {
-                Text(L("congrats")).font(.largeTitle.bold())
+                Text(L("congrats")).font(Brand.heading(.largeTitle))
                 Text(LocalizedStringKey(L("result.won.\(game.category.kind)", ["name": "**\(game.answer.name)**"])
                                         + "\n" + L("result.foundIn", ["n": game.guesses.count])))
             } else {
-                Text(L("nextTime")).font(.largeTitle.bold())
+                Text(L("nextTime")).font(Brand.heading(.largeTitle))
                 Text(LocalizedStringKey(L("result.lost.\(game.category.kind)", ["name": "**\(game.answer.name)**"])))
             }
 
@@ -95,7 +95,7 @@ struct StatsView: View {
 
     var body: some View {
         VStack(spacing: 16) {
-            Text(L("stats")).font(.title.bold())
+            Text(L("stats")).font(Brand.heading(.title))
             HStack(spacing: 12) {
                 Picker(L("category"), selection: $category) {
                     ForEach(GameCategory.allCases) { c in
@@ -131,7 +131,7 @@ struct StatsView: View {
             StatsSummary(stats: stats, streakLabel: L(tab == .daily ? "stats.streakDays" : "stats.streak"))
 
             VStack(alignment: .leading, spacing: 6) {
-                Text(L("stats.distribution")).font(.headline)
+                Text(L("stats.distribution")).font(Brand.heading(.headline))
                 let dist = stats.distribution
                 let maxCount = max(dist.map(\.count).max() ?? 0, 1)
                 ForEach(dist, id: \.label) { row in
@@ -139,7 +139,7 @@ struct StatsView: View {
                         Text(row.label).frame(width: 48, alignment: .leading).monospacedDigit()
                         GeometryReader { geo in
                             RoundedRectangle(cornerRadius: 3)
-                                .fill(Color.accentColor.opacity(row.count == 0 ? 0.2 : 0.8))
+                                .fill(Brand.accent.opacity(row.count == 0 ? 0.2 : 0.8))
                                 .frame(width: max(8, geo.size.width * CGFloat(row.count) / CGFloat(maxCount)))
                         }
                         .frame(height: 16)
@@ -181,7 +181,7 @@ private struct StatsSummary: View {
 
     private func item(_ value: String, _ label: String) -> some View {
         VStack(spacing: 2) {
-            Text(value).font(.title2.bold()).monospacedDigit()
+            Text(value).font(Brand.heading(.title2)).monospacedDigit()
             Text(label).font(.caption).foregroundStyle(.secondary)
         }
         .frame(minWidth: 64)
@@ -193,7 +193,7 @@ struct HelpView: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 14) {
-            Text(L("help")).font(.title.bold())
+            Text(L("help")).font(Brand.heading(.title))
 
             Text(L("help.intro"))
 

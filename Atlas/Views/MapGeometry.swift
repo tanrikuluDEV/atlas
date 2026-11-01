@@ -13,11 +13,16 @@ final class MapGeometry {
     let labelPoints: [CGPoint]
     /// Haritada gösterilecek alan (projeksiyon koordinatlarında).
     let bounds: CGRect
+    /// Boylamın x'e çevrilme katsayısı ve enlem-boylam ağının aralığı (derece; web: FlatGeometry).
+    let k: Double
+    let gridStep: Double
 
     init(set: PlaceSet) {
         // Görünüm alanının orta enlemine göre eşdikdörtgen projeksiyon: x = boylam·cos(φ₀), y = -enlem
         let midLat = set.viewBounds.map { $0.midY } ?? 39
         let k = cos(min(abs(midLat), 60) * .pi / 180)
+        self.k = k
+        gridStep = set.category == .turkey ? 2 : 10
         let shift = set.shiftLongitude
 
         func project(_ ring: [[Double]]) -> [CGPoint] {

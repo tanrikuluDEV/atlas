@@ -208,8 +208,17 @@ final class GameModel {
     }
 
     /// Türkiye için eski sürümle uyumlu anahtar korunur.
-    private var dailyKey: String {
-        category == .turkey ? "daily.\(dayIndex)" : "daily.\(category.rawValue).\(dayIndex)"
+    private var dailyKey: String { Self.dailyKey(category: category, day: dayIndex) }
+
+    private static func dailyKey(category: GameCategory, day: Int) -> String {
+        category == .turkey ? "daily.\(day)" : "daily.\(category.rawValue).\(day)"
+    }
+
+    /// Bir kategorinin o günkü günlük bulmacası: durum ve tahmin sayısı (kategori seçicideki rozet için).
+    static func savedDaily(category: GameCategory, day: Int) -> (status: GameStatus, guesses: Int)? {
+        guard let data = UserDefaults.standard.data(forKey: dailyKey(category: category, day: day)),
+              let saved = try? JSONDecoder().decode(SavedDaily.self, from: data) else { return nil }
+        return (saved.status, saved.guessIDs.count)
     }
 
     private func persistDaily() {

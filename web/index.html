@@ -6,6 +6,7 @@
   <title>Atlas</title>
   <meta name="description" content="Gizli ili ya da ülkeyi bul! Her tahmin, gizli yere ne kadar yakın olduğunu haritada renklerle gösterir. Türkiye, kıtalar ve tüm dünya.">
   <meta name="theme-color" content="#142030">
+  <link rel="preload" href="fonts/bricolage-700.woff2" as="font" type="font/woff2" crossorigin>
   <meta property="og:title" content="Atlas · İl ve Ülke Bulmaca">
   <meta property="og:description" content="Gizli ili ya da ülkeyi bul! Her tahmin haritada sıcak–soğuk renklerle gösterilir.">
   <meta property="og:type" content="website">
@@ -42,10 +43,10 @@
     <header class="toolbar">
       <div class="toolbar-left">
         <span class="brand"><svg class="mark brand-mark" viewBox="0 0 100 100" aria-hidden="true"><path d="M50 94 C50 94 16 60 16 38 A34 34 0 1 1 84 38 C84 60 50 94 50 94Z" fill="var(--brand-pin)"/><circle cx="50" cy="38" r="20" fill="none" stroke="var(--brand-pin-lines)" stroke-width="4"/><line x1="30" y1="38" x2="70" y2="38" stroke="var(--brand-orange)" stroke-width="4"/><ellipse class="meridian" cx="50" cy="38" rx="8" ry="20" fill="none" stroke="var(--brand-pin-lines)" stroke-width="4"/></svg>Atlas</span>
-        <label class="category-select" id="categoryLabel" title="Kategori">
+        <button class="category-button" id="categoryButton" title="Kategori" aria-haspopup="dialog">
           <span class="category-icon" id="categoryIcon">🇹🇷</span>
-          <select id="categorySelect" aria-label="Kategori"></select>
-        </label>
+          <span class="category-name" id="categoryName">Türkiye</span>
+        </button>
       </div>
       <div class="segmented" id="modeSegmented" role="tablist" aria-label="Mod">
         <button data-mode="daily" role="tab">Günlük</button>
@@ -124,6 +125,7 @@
   <dialog id="statsDialog" class="sheet wide"></dialog>
   <dialog id="helpDialog" class="sheet"></dialog>
   <dialog id="settingsDialog" class="sheet"></dialog>
+  <dialog id="categoryDialog" class="sheet picker"></dialog>
 
   <script type="module" src="js/app.js"></script>
 </body>

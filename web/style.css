@@ -1,50 +1,72 @@
+/* Renkler marka paletinden (turuncu #f26644, lacivert #142030, krem #f9f6f1) türetilir.
+   Mac/iPhone karşılığı: Brand.swift + Assets.xcassets (AccentColor, Panel). */
 :root {
-  --bg: #ffffff;
-  --panel: #ffffff;
-  --text: #1d1d1f;
-  --muted: #6e6e73;
-  --line: rgba(0, 0, 0, 0.1);
-  --fill: rgba(0, 0, 0, 0.045);
-  --fill-strong: rgba(0, 0, 0, 0.08);
-  --accent: #e3382e;
-  --primary: #0a84ff;
+  --bg: #ffffff;           /* giriş kutuları */
+  --panel: #fbf9f5;        /* araç çubuğu, panel, pencereler: sıcak beyaz */
+  --card: #ffffff;
+  --text: #142030;
+  --muted: #5d6878;
+  --line: rgba(20, 32, 48, 0.11);
+  --fill: rgba(20, 32, 48, 0.05);
+  --fill-strong: rgba(20, 32, 48, 0.09);
+  --segment-on: #ffffff;
+  --accent: #f26644;
+  --primary: #e8572f;      /* düğme zemini (beyaz yazıyla okunur) */
+  --primary-text: #c4421c; /* bağlantı rengi (krem zeminde okunur) */
   --highlight: rgb(148, 61, 245);
   --found: rgb(46, 158, 79);
   --reveal: rgb(41, 115, 217);
-  --danger: #d70015;
-  --shadow: 0 10px 30px rgba(0, 0, 0, 0.18);
+  --danger: #c8102e;
+  --shadow: 0 12px 32px rgba(20, 32, 48, 0.18);
   --radius: 10px;
+  --heading: "Bricolage Heading", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   color-scheme: light dark;
 }
 
-/* Koyu tema: kullanıcı seçtiyse ya da seçim yoksa ve sistem koyuysa. */
+/* Koyu tema: kullanıcı seçtiyse ya da seçim yoksa ve sistem koyuysa. Zemin lacivert. */
 :root[data-theme="dark"] {
   color-scheme: dark;
-    --bg: #000000;
-    --panel: #1c1c1e;
-    --text: #f5f5f7;
-    --muted: #98989d;
-    --line: rgba(255, 255, 255, 0.12);
-    --fill: rgba(255, 255, 255, 0.06);
-    --fill-strong: rgba(255, 255, 255, 0.12);
-    --danger: #ff453a;
-    --shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+  --bg: #0b121b;
+  --panel: #121c29;
+  --card: #182434;
+  --text: #f9f6f1;
+  --muted: #94a0b0;
+  --line: rgba(249, 246, 241, 0.10);
+  --fill: rgba(249, 246, 241, 0.055);
+  --fill-strong: rgba(249, 246, 241, 0.10);
+  --segment-on: rgba(249, 246, 241, 0.16);
+  --primary: #f26644;
+  --primary-text: #ff8a68;
+  --danger: #ff6b5e;
+  --shadow: 0 12px 32px rgba(0, 0, 0, 0.55);
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
     color-scheme: dark;
-    --bg: #000000;
-    --panel: #1c1c1e;
-    --text: #f5f5f7;
-    --muted: #98989d;
-    --line: rgba(255, 255, 255, 0.12);
-    --fill: rgba(255, 255, 255, 0.06);
-    --fill-strong: rgba(255, 255, 255, 0.12);
-    --danger: #ff453a;
-    --shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+    --bg: #0b121b;
+    --panel: #121c29;
+    --card: #182434;
+    --text: #f9f6f1;
+    --muted: #94a0b0;
+    --line: rgba(249, 246, 241, 0.10);
+    --fill: rgba(249, 246, 241, 0.055);
+    --fill-strong: rgba(249, 246, 241, 0.10);
+    --segment-on: rgba(249, 246, 241, 0.16);
+    --primary: #f26644;
+    --primary-text: #ff8a68;
+    --danger: #ff6b5e;
+    --shadow: 0 12px 32px rgba(0, 0, 0, 0.55);
   }
 }
 :root[data-theme="light"] { color-scheme: light; }
+
+/* Başlık yazı tipi: Bricolage Grotesque Bold (24 pt optik boyut), Latin + Türkçe + Batı Avrupa harfleri. */
+@font-face {
+  font-family: "Bricolage Heading";
+  font-weight: 700;
+  font-display: swap;
+  src: url("fonts/bricolage-700.woff2") format("woff2");
+}
 
 * { box-sizing: border-box; }
 
@@ -111,6 +133,21 @@ button { cursor: pointer; }
   transform: translateY(-70%) rotate(45deg);
   pointer-events: none;
 }
+.category-button {
+  position: relative;
+  display: inline-flex; align-items: center; gap: 7px;
+  padding: 5px 28px 5px 10px;
+  border: 0; border-radius: 999px;
+  background: var(--fill);
+  font-weight: 600;
+}
+.category-button:hover { background: var(--fill-strong); }
+.category-button::after {
+  content: ""; position: absolute; right: 11px; top: 50%;
+  width: 6px; height: 6px;
+  border-right: 1.6px solid var(--muted); border-bottom: 1.6px solid var(--muted);
+  transform: translateY(-70%) rotate(45deg);
+}
 .category-select select {
   appearance: none;
   border: 0;
@@ -134,8 +171,9 @@ button { cursor: pointer; }
   font-weight: 500;
 }
 .segmented button[aria-selected="true"] {
-  background: var(--panel);
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+  background: var(--segment-on);
+  font-weight: 600;
+  box-shadow: 0 1px 3px rgba(20, 32, 48, 0.15);
 }
 
 .icon-button {
@@ -229,7 +267,7 @@ button { cursor: pointer; }
   min-height: 0;
 }
 .panel-category { color: var(--muted); font-weight: 600; font-size: 14px; }
-.panel h1 { margin: 2px 0 0; font-size: 22px; letter-spacing: -0.01em; }
+.panel h1 { margin: 2px 0 0; font: 700 23px/1.15 var(--heading); letter-spacing: -0.015em; }
 .panel-header p { margin: 2px 0 0; }
 .muted { color: var(--muted); }
 
@@ -244,7 +282,7 @@ button { cursor: pointer; }
   font-size: 16px; /* iOS'ta odaklanınca yakınlaşmayı önler */
   outline: none;
 }
-.guess-row input:focus { border-color: var(--primary); box-shadow: 0 0 0 3px color-mix(in srgb, var(--primary) 25%, transparent); }
+.guess-row input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 25%, transparent); }
 button.primary {
   border: 0;
   padding: 0 14px;
@@ -272,7 +310,7 @@ button.primary:disabled { opacity: 0.4; cursor: default; }
   padding: 8px 11px;
   cursor: pointer;
 }
-.suggestions li.active { background: color-mix(in srgb, var(--primary) 18%, transparent); }
+.suggestions li.active { background: color-mix(in srgb, var(--accent) 16%, transparent); }
 .suggestions li .code { color: var(--muted); font-variant-numeric: tabular-nums; }
 
 .feedback { margin: 0; min-height: 1.4em; font-size: 14px; }
@@ -290,7 +328,7 @@ button.primary:disabled { opacity: 0.4; cursor: default; }
 .hints h2 { margin: 0; font-size: 12px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; color: var(--muted); }
 .hints ol { margin: 0; padding-left: 1.4em; display: flex; flex-direction: column; gap: 4px; line-height: 1.35; }
 .hints li::marker { color: var(--muted); }
-button.hint-button { align-self: flex-start; color: var(--primary); font-size: 14px; }
+button.hint-button { align-self: flex-start; color: var(--primary-text); font-size: 14px; font-weight: 600; }
 
 .guesses { flex: 1; min-height: 0; overflow-y: auto; display: flex; flex-direction: column; gap: 4px; }
 .guesses h2 { margin: 0 0 2px; font-size: 12px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; color: var(--muted); }
@@ -321,12 +359,12 @@ button.link.danger { color: var(--danger); }
 .game-over .status { font-weight: 600; }
 .game-over .status.won { color: var(--found); }
 .game-over .status.lost { color: var(--reveal); }
-.game-over .answer { font-size: 24px; font-weight: 700; margin: 2px 0 8px; }
+.game-over .answer { font: 700 27px/1.15 var(--heading); letter-spacing: -0.015em; margin: 4px 0 10px; }
 .game-over .actions { display: flex; gap: 8px; }
 
 .button {
   border: 1px solid var(--line);
-  background: var(--panel);
+  background: var(--card);
   padding: 6px 12px;
   border-radius: 8px;
   font-weight: 500;
@@ -346,15 +384,15 @@ dialog.sheet {
   overflow-y: auto;
 }
 dialog.sheet.wide { width: min(560px, calc(100vw - 24px)); }
-dialog::backdrop { background: rgba(0, 0, 0, 0.35); }
-dialog h2 { margin: 0 0 12px; font-size: 24px; }
+dialog::backdrop { background: rgba(11, 18, 27, 0.45); }
+dialog h2 { margin: 0 0 12px; font: 700 26px/1.15 var(--heading); letter-spacing: -0.015em; }
 dialog .center { text-align: center; }
 dialog .actions { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-top: 16px; }
 dialog .actions.end { justify-content: flex-end; }
 
 .summary { display: flex; justify-content: center; gap: 18px; margin: 12px 0; }
 .summary div { text-align: center; min-width: 64px; }
-.summary b { display: block; font-size: 22px; font-variant-numeric: tabular-nums; }
+.summary b { display: block; font: 700 24px/1.2 var(--heading); font-variant-numeric: tabular-nums; }
 .summary span { font-size: 12px; color: var(--muted); }
 
 .dist-row { display: flex; align-items: center; gap: 8px; margin: 4px 0; font-variant-numeric: tabular-nums; }
@@ -365,10 +403,10 @@ dialog .actions.end { justify-content: flex-end; }
 .dist-row .count { width: 28px; text-align: right; }
 
 .stats-controls { display: flex; gap: 10px; justify-content: center; align-items: center; flex-wrap: wrap; margin-bottom: 8px; }
-.stats-controls select { padding: 5px 8px; border-radius: 8px; border: 1px solid var(--line); background: var(--panel); }
+.stats-controls select { padding: 5px 8px; border-radius: 8px; border: 1px solid var(--line); background: var(--card); }
 
 .trend { display: flex; gap: 22px; align-items: center; margin: 8px 0; flex-wrap: wrap; }
-.trend b { font-size: 19px; display: block; font-variant-numeric: tabular-nums; }
+.trend b { font: 700 20px/1.2 var(--heading); display: block; font-variant-numeric: tabular-nums; }
 .trend span { font-size: 12px; color: var(--muted); }
 .trend .badge { font-weight: 600; }
 .chart { width: 100%; height: 170px; display: block; }
@@ -377,7 +415,7 @@ dialog .actions.end { justify-content: flex-end; }
 .recent-row { display: flex; gap: 8px; align-items: center; font-size: 14px; padding: 3px 0; }
 .recent-row .name { flex: 1; }
 .recent-row .when { color: var(--muted); font-size: 12px; width: 96px; text-align: right; }
-.section-title { font-weight: 600; margin: 14px 0 6px; }
+.section-title { font: 700 17px/1.25 var(--heading); letter-spacing: -0.01em; margin: 16px 0 8px; }
 hr { border: 0; border-top: 1px solid var(--line); margin: 16px 0; }
 
 .legend { display: flex; height: 14px; border-radius: 4px; overflow: hidden; margin-top: 10px; }
@@ -391,7 +429,7 @@ dialog ul.bullets li { margin: 6px 0; }
 .switch input { opacity: 0; width: 0; height: 0; }
 .switch span { position: absolute; inset: 0; border-radius: 999px; background: var(--fill-strong); transition: background 0.2s; cursor: pointer; }
 .switch span::before { content: ""; position: absolute; left: 2px; top: 2px; width: 26px; height: 26px; border-radius: 50%; background: white; box-shadow: 0 1px 3px rgba(0,0,0,0.3); transition: transform 0.2s; }
-.switch input:checked + span { background: #34c759; }
+.switch input:checked + span { background: var(--accent); }
 .switch input:checked + span::before { transform: translateX(20px); }
 
 .toast {
@@ -452,7 +490,7 @@ dialog ul.bullets li { margin: 6px 0; }
 
 /* Keşfettiklerim */
 .discovery-head { font-size: 15px; margin-bottom: 6px; }
-.discovery-head b { font-size: 20px; }
+.discovery-head b { font: 700 22px var(--heading); }
 .discovery-bar { height: 6px; border-radius: 3px; background: var(--fill-strong); overflow: hidden; margin-bottom: 8px; }
 .discovery-bar span { display: block; height: 100%; background: var(--found); }
 .discovery-map { width: 100%; height: 190px; display: block; border-radius: 8px; }
@@ -590,6 +628,11 @@ dialog ul.bullets li { margin: 6px 0; }
   color: var(--brand-cream);
   text-align: left;
 }
+:root[data-theme="dark"] .level-card { box-shadow: inset 0 0 0 1px rgba(249, 246, 241, 0.09); background: #17263a; }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .level-card { box-shadow: inset 0 0 0 1px rgba(249, 246, 241, 0.09); background: #17263a; }
+}
+.cat-status { white-space: nowrap; }
 .level-up {
   align-self: center;
   font: 500 13px/1 ui-monospace, "JetBrains Mono", "SF Mono", Menlo, monospace;
@@ -607,7 +650,7 @@ dialog ul.bullets li { margin: 6px 0; }
   font: 800 34px "Bricolage Grotesque", -apple-system, sans-serif;
   fill: var(--brand-navy);
 }
-.level-name { font-size: 22px; font-weight: 800; }
+.level-name { font: 700 24px/1.15 var(--heading); }
 .xp-gain {
   font: 500 12px/1.4 ui-monospace, "JetBrains Mono", "SF Mono", Menlo, monospace;
   color: var(--brand-orange);
@@ -621,4 +664,46 @@ dialog ul.bullets li { margin: 6px 0; }
   display: flex; justify-content: space-between;
   font: 500 12px ui-monospace, "JetBrains Mono", "SF Mono", Menlo, monospace;
   opacity: .7;
+}
+
+/* MARK: - Kategori seçici (kartlar) */
+
+dialog.sheet.picker { width: min(720px, calc(100vw - 24px)); padding: 22px; }
+.picker-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; margin-bottom: 14px; }
+.picker-head h2 { margin: 0; }
+.picker-head p { margin: 2px 0 0; color: var(--muted); font-size: 14px; }
+.picker-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+.cat-card {
+  display: flex; flex-direction: column;
+  padding: 0; overflow: hidden;
+  border: 1.5px solid var(--line);
+  border-radius: 14px;
+  background: var(--card);
+  text-align: left;
+  transition: transform .15s ease-out, border-color .15s, box-shadow .15s;
+}
+.cat-card:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(20, 32, 48, 0.12); }
+.cat-card:focus-visible { outline: 3px solid color-mix(in srgb, var(--accent) 45%, transparent); outline-offset: 2px; }
+.cat-card.selected { border-color: var(--accent); box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 22%, transparent); }
+.cat-thumb { display: block; width: 100%; height: 92px; }
+.cat-info { display: flex; flex-direction: column; gap: 1px; padding: 9px 11px 11px; }
+.cat-title { font: 700 16px/1.2 var(--heading); letter-spacing: -0.01em; }
+.cat-count { font-size: 12px; color: var(--muted); }
+.cat-status {
+  align-self: flex-start;
+  margin-top: 6px; padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 11.5px; font-weight: 600;
+  background: var(--fill-strong); color: var(--muted);
+}
+.cat-status.new { background: color-mix(in srgb, var(--accent) 16%, transparent); color: var(--primary-text); }
+.cat-status.won { background: color-mix(in srgb, var(--found) 18%, transparent); color: var(--found); }
+.cat-status.lost { background: color-mix(in srgb, var(--reveal) 16%, transparent); color: var(--reveal); }
+@media (max-width: 760px) {
+  dialog.sheet.picker { padding: 16px; }
+  .picker-grid { grid-template-columns: repeat(2, 1fr); gap: 8px; }
+  .cat-thumb { height: 78px; }
+  .category-button { padding: 6px 24px 6px 10px; }
+  .category-button::after { right: 9px; }
+  .category-button .category-name { display: none; }
 }
