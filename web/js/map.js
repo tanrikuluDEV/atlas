@@ -609,18 +609,19 @@ export class MapView {
 
   fillFor(place, colors) {
     const game = this.game;
-    if (place.id === game.answer.id) {
+    // Rota tekrarında gizli yer ve sırası gelmemiş tahminler henüz boyanmaz.
+    if (place.id === game.answer.id && game.mapRevealsAnswer) {
       if (game.status === 'won') return colors.found;
       if (game.status === 'lost') return colors.answerReveal;
     }
-    const g = game.guessFor(place);
+    const g = game.mapGuessFor(place);
     if (!g) return colors.unguessed;
     return heatColor(g.distance, this.set.maxDistance);
   }
 
   /** Haritada adı yazılacak yerler: tahmin edilenler ve oyun bitince gizli yer. */
   labelFor(place) {
-    return !!this.game.guessFor(place) || (this.game.isOver && place.id === this.game.answer.id);
+    return !!this.game.mapGuessFor(place) || (this.game.mapRevealsAnswer && place.id === this.game.answer.id);
   }
 
   /**
@@ -631,7 +632,7 @@ export class MapView {
   drawLabels(ctx, labels, colors) {
     if (!labels.length) return;
     const game = this.game;
-    const rank = (p) => (p.id === game.answer.id ? -1 : game.guessFor(p)?.distance ?? 1e9);
+    const rank = (p) => (p.id === game.answer.id ? -1 : game.mapGuessFor(p)?.distance ?? 1e9);
     labels.sort((a, b) => rank(a.place) - rank(b.place));
     ctx.font = LABEL_FONT;
     ctx.textAlign = 'center';
@@ -721,13 +722,13 @@ export class MapView {
 
   hoverLabel(place) {
     const game = this.game;
-    const g = game.guessFor(place);
+    const g = game.mapGuessFor(place);
     if (g) {
       if (place.id === game.answer.id) return `${place.name} ✓`;
       if (g.distance === 0) return `${place.name} · ${t('neighbor')}`;
       return game.showDistance ? `${place.name} · ${formatKm(g.distance)}` : place.name;
     }
-    return game.isOver ? place.name : null;
+    return game.mapRevealsAnswer ? place.name : null;
   }
 
   /** Köşedeki renk skalası: kategorinin mesafelerine göre km işaretleri. */

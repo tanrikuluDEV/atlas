@@ -4,6 +4,7 @@ import { categoryById, categoryIndex, hintsFor, placeSet } from './places.js';
 import { t } from './i18n.js';
 import { store } from './store.js';
 import { progress, totalXP } from './progression.js';
+import { earnedBadgeIds, allBadges } from './badges.js';
 
 export { store };
 
@@ -108,6 +109,23 @@ export class Game {
   get sortedGuesses() { return this.guesses.slice().sort((a, b) => a.distance - b.distance || a.order - b.order); }
   get closest() { return this.sortedGuesses[0] ?? null; }
   guessFor(place) { return this.guesses.find((g) => g.place.id === place.id) ?? null; }
+
+  /** Rota tekrarının adım sayısı: tahminler, pes edildiyse bir de gizli yer. */
+  get replayLength() { return this.guesses.length + (this.status === 'lost' ? 1 : 0); }
+  /** Haritada görünen tahmin (rota tekrarında sırası gelmemiş tahminler gizlenir). */
+  mapGuessFor(place) {
+    const g = this.guessFor(place);
+    if (g && this.replayStep != null && g.order >= this.replayStep) return null;
+    return g;
+  }
+  /** Haritada gizli yer açık mı (oyun bittiyse ve rota tekrarı sona geldiyse). */
+  get mapRevealsAnswer() { return this.isOver && (this.replayStep == null || this.replayStep >= this.replayLength); }
+  /** Rota tekrarında o adımda gösterilen yer. */
+  replayPlace(step) {
+    if (step < 1) return null;
+    const ordered = this.guesses.slice().sort((a, b) => a.order - b.order);
+    return step <= ordered.length ? ordered[step - 1].place : this.answer;
+  }
   /** Gizli yer hakkındaki ipuçları (seçili dilde). */
   get hints() { return hintsFor(this.category, this.answer); }
 
@@ -137,6 +155,7 @@ export class Game {
       return false;
     }
     const g = { place, distance: this.places.distance(place, this.answer), order: this.guesses.length };
+    this.lastImproved = !this.guesses.length || g.distance < this.closest.distance;
     this.guesses.push(g);
     this.lastGuess = g;
     this.message = null;
@@ -202,6 +221,33 @@ export class Game {
     if (this.mode === 'daily') { this.startDaily(); this.emit(); }
   }
 
+  /** Tahminleri sırasıyla haritada yeniden oynatır; harita her adımda o yere uçar ve parlar. */
+  startReplay() {
+    if (!this.isOver || !this.replayLength) return;
+    this.stopReplay(false);
+    const total = this.replayLength;
+    // Uzun oyunlarda adımlar kısalır; tekrar en fazla ~12 sn sürer.
+    const interval = Math.max(450, Math.min(1100, 12000 / total));
+    const token = (this.replayToken = (this.replayToken ?? 0) + 1);
+    this.replayStep = 0;
+    this.emit();
+    const step = (n) => {
+      if (token !== this.replayToken) return;
+      if (n > total) { this.replayStep = null; this.emit(); return; }
+      this.replayStep = n;
+      this.emit();
+      setTimeout(() => step(n + 1), n === total ? 2600 : interval);
+    };
+    setTimeout(() => step(1), 700);
+  }
+
+  stopReplay(emit = true) {
+    this.replayToken = (this.replayToken ?? 0) + 1;
+    if (this.replayStep == null) return;
+    this.replayStep = null;
+    if (emit) this.emit();
+  }
+
   setHighlighted(place) {
     this.highlighted = place;
     this.emit();
@@ -216,6 +262,9 @@ export class Game {
   }
 
   resetRound() {
+    this.stopReplay(false);
+    this.newBadges = [];
+    this.lastImproved = false;
     this.guesses = [];
     this.status = 'playing';
     this.message = null;
@@ -235,6 +284,7 @@ export class Game {
   finish() {
     const won = this.status === 'won';
     const before = totalXP(Stats.load);
+    const badgesBefore = earnedBadgeIds(Stats.load);
     if (this.mode === 'daily') {
       this.dailyStats.recordDaily(won, this.guesses.length, this.hintsUsed, this.answer.id, this.day);
       this.dailyStats.save(this.category, 'daily');
@@ -244,6 +294,7 @@ export class Game {
     }
     // Bu oyunun kazandırdığı puan; sonuç penceresinde canlandırılır.
     this.reward = { before: progress(before), after: progress(totalXP(Stats.load)) };
+    this.newBadges = allBadges(Stats.load).filter((b) => b.earned && !badgesBefore.has(b.id));
     this.showResult = true;
   }
 

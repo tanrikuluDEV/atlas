@@ -116,7 +116,7 @@ private struct CategoryCard: View {
 }
 
 /// Kategorinin küçük haritası: yerleri marka turuncusuyla, çevresi soluk (web: drawCategoryThumb).
-private struct CategoryThumb: View {
+struct CategoryThumb: View {
     let category: GameCategory
     @Environment(\.colorScheme) private var colorScheme
 

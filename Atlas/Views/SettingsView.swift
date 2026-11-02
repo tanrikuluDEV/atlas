@@ -6,6 +6,8 @@ enum AppSettings {
 
 struct SettingsView: View {
     @AppStorage(AppSettings.showDistanceKey) private var showDistance = true
+    @AppStorage(GameFeedback.soundKey) private var sound = false
+    @AppStorage(GameFeedback.hapticsKey) private var haptics = true
 
     @Environment(\.dismiss) private var dismiss
 
@@ -26,7 +28,7 @@ struct SettingsView: View {
                 #endif
         }
         #if os(iOS)
-        .presentationDetents([.medium])
+        .presentationDetents([.medium, .large])
         #endif
         #endif
     }
@@ -41,6 +43,20 @@ struct SettingsView: View {
                     .fixedSize(horizontal: false, vertical: true)
             } header: {
                 Text(L("set.game"))
+            }
+            Section {
+                Toggle(L("set.sound"), isOn: $sound)
+                Text(L("set.soundHint"))
+                    .font(.callout)
+                    .foregroundStyle(.secondary)
+                    .fixedSize(horizontal: false, vertical: true)
+                #if os(iOS)
+                Toggle(L("set.haptics"), isOn: $haptics)
+                Text(L("set.hapticsHint"))
+                    .font(.callout)
+                    .foregroundStyle(.secondary)
+                    .fixedSize(horizontal: false, vertical: true)
+                #endif
             }
         }
         .formStyle(.grouped)

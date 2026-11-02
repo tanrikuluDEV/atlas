@@ -154,6 +154,19 @@ struct ContentView: View {
         }
         #endif
         // Bulunca konfeti (yalnızca tahminle kazanıldığında; kayıtlı oyun açılınca değil).
+        // Ses ve titreşim.
+        .onChange(of: game.lastGuess) { _, guess in
+            guard let guess else { return }
+            if game.status == .won {
+                GameFeedback.shared.won()
+            } else {
+                GameFeedback.shared.guessMade(proximity: proximity(of: guess, max: game.places.maxDistance),
+                                              improved: game.lastImproved && game.guesses.count > 1)
+            }
+        }
+        .onChange(of: game.status) { old, new in
+            if old == .playing && new == .lost { GameFeedback.shared.lost() }
+        }
         .onChange(of: game.lastGuess) { _, guess in
             guard guess != nil, game.status == .won, !reduceMotion else { return }
             let start = Date()
@@ -245,6 +258,8 @@ private struct Sidebar: View {
                     .foregroundStyle(.secondary)
                     .transition(.opacity)
             }
+
+            HeatGauge(game: game)
 
             if let closest = game.closest, !game.isOver {
                 HStack {
@@ -357,6 +372,26 @@ private struct GameOverBanner: View {
                 Button(L("result")) { game.showResult = true }
                 Button(L("newGame")) { game.newPractice() }
                     .defaultActionShortcut()
+            }
+            Button {
+                if game.replayStep == nil { game.startReplay() } else { game.stopReplay() }
+            } label: {
+                Label(L(game.replayStep == nil ? "replay.button" : "replay.stop"),
+                      systemImage: game.replayStep == nil ? "play.circle" : "stop.circle")
+            }
+            #if os(macOS)
+            .buttonStyle(.link)
+            #elseif os(iOS)
+            .buttonStyle(.borderless)
+            #endif
+            .disabled(game.replayLength == 0)
+
+            if game.mode == .daily {
+                Divider().padding(.vertical, 2)
+                DailyCountdown()
+                    .font(.callout)
+                    .foregroundStyle(.secondary)
+                OtherDailies(game: game)
             }
         }
         .frame(maxWidth: .infinity, alignment: .leading)
@@ -487,10 +522,7 @@ private struct GuessList: View {
 
     var body: some View {
         if game.guesses.isEmpty {
-            Text(L("empty.\(game.category.kind)"))
-                .font(.callout)
-                .foregroundStyle(.secondary)
-                .fixedSize(horizontal: false, vertical: true)
+            if !game.isOver { EmptyRoundCard(game: game) }
         } else {
             VStack(alignment: .leading, spacing: 6) {
                 Text(L("guesses.header"))

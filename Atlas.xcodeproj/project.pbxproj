@@ -10,6 +10,7 @@
 		00113AA244B9C57F1702BB9B /* AtlasApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B039968FC134F8A1AC6E2337 /* AtlasApp.swift */; };
 		086C260022A7779A6697E782 /* Platform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8966DBC817BE95BE90215875 /* Platform.swift */; };
 		0D158FA61CE680B78634FED9 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 274F0CF7EF58B24307CCED4E /* SettingsView.swift */; };
+		0DA5FC453037FE45146EE0AF /* Badges.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3B2A7FADF1BCEE80EA07AB9 /* Badges.swift */; };
 		0E2C954889AE78439B391A96 /* Progression.swift in Sources */ = {isa = PBXBuildFile; fileRef = C55E6A3830AF4CC7BC91B879 /* Progression.swift */; };
 		12DE3C652D6808548F5E2355 /* CategoryPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBD42E6296FC6E89B2627B12 /* CategoryPicker.swift */; };
 		13093D1922628596FC94E1A5 /* TurkishText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 014482CAB6307BA9B93C46B9 /* TurkishText.swift */; };
@@ -20,6 +21,7 @@
 		1CCC5A4C2B31BCBAF70F5269 /* MapGeometry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E2B96D3406A1130DE2C723A /* MapGeometry.swift */; };
 		1D7D1496C343A9E1029EE5FD /* Progression.swift in Sources */ = {isa = PBXBuildFile; fileRef = C55E6A3830AF4CC7BC91B879 /* Progression.swift */; };
 		1D883C8A83495FE5C6B84C3C /* BricolageGrotesque-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 12B972CBC916EE61EDF6790C /* BricolageGrotesque-ExtraBold.ttf */; };
+		21083B3F858F511FADE016EE /* RoundExtras.swift in Sources */ = {isa = PBXBuildFile; fileRef = 023ADB7E47AE6B88356251F2 /* RoundExtras.swift */; };
 		21317B473DC86BB83DA39A12 /* Sheets.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0D6074433BEC2769D35BEC6 /* Sheets.swift */; };
 		228091EC9E31E765C035611B /* provinces.json in Resources */ = {isa = PBXBuildFile; fileRef = AD19E18DF83948FAC8D87A4B /* provinces.json */; };
 		22E5267F721D6AB6AE976E17 /* DebugSnapshots.swift in Sources */ = {isa = PBXBuildFile; fileRef = F30335D55EA0CC3488A6727A /* DebugSnapshots.swift */; };
@@ -30,6 +32,7 @@
 		3404ED83B07179C04BE11FE8 /* StatsExtras.swift in Sources */ = {isa = PBXBuildFile; fileRef = 073C1EFD6EA624FB5CA27129 /* StatsExtras.swift */; };
 		341257B7E34D2611511D3252 /* DebugSnapshots.swift in Sources */ = {isa = PBXBuildFile; fileRef = F30335D55EA0CC3488A6727A /* DebugSnapshots.swift */; };
 		35ACA5CC77B371822C812FC1 /* AtlasApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B039968FC134F8A1AC6E2337 /* AtlasApp.swift */; };
+		3C47B18F7228C6BBBCEF0110 /* Badges.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3B2A7FADF1BCEE80EA07AB9 /* Badges.swift */; };
 		3D1D792E8C1B61151BD72252 /* VoiceRemoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D8B429A21D1DE3357DAB066 /* VoiceRemoteView.swift */; };
 		429A5686948A61A427A6A76A /* Localization.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC6C2DE8F8024958218613EE /* Localization.swift */; };
 		44BAD8C2072CDA153F319915 /* TVViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C452AC98790E815E93B523 /* TVViews.swift */; };
@@ -38,12 +41,14 @@
 		4B8276E96EE4017B133DC335 /* VoiceLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B8E0FCE8B21CCBBE19E3D7 /* VoiceLink.swift */; };
 		4CFA038B1168FB47DE9E2FE6 /* Sheets.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0D6074433BEC2769D35BEC6 /* Sheets.swift */; };
 		4EC32720EECC3E33EA635272 /* Place.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CD371632A6A96D14BA6F66C /* Place.swift */; };
+		51B0A73F7A4FD4E4FA6D28C4 /* GameFeedback.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1E04842862D1D05C5F2A021 /* GameFeedback.swift */; };
 		57469922407804A950347D8F /* hints.json in Resources */ = {isa = PBXBuildFile; fileRef = E0A9FEAB54207168722BE498 /* hints.json */; };
 		57541F5560DD69991E0B2FB0 /* provinces.json in Resources */ = {isa = PBXBuildFile; fileRef = AD19E18DF83948FAC8D87A4B /* provinces.json */; };
 		5812964D02223C6272680A7B /* provinces.json in Resources */ = {isa = PBXBuildFile; fileRef = AD19E18DF83948FAC8D87A4B /* provinces.json */; };
 		59D2622C7949138F9EEFE3F6 /* Hints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A9553E85063A5FB584EAB42 /* Hints.swift */; };
 		663323FC22C01E47BE80BB70 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AA986E23356244005C7DA505 /* Assets.xcassets */; };
 		6827FDD02F4B78605B70C6B8 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54BB62A20AA41137A8520563 /* MapView.swift */; };
+		682F3B4BF73F6A264426CE3F /* GameFeedback.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1E04842862D1D05C5F2A021 /* GameFeedback.swift */; };
 		6D66F9166F11647FC52293FD /* strings.json in Resources */ = {isa = PBXBuildFile; fileRef = A38F86C82521E6D9DE6E1419 /* strings.json */; };
 		70FFDEF088629C00FC0F99B3 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 274F0CF7EF58B24307CCED4E /* SettingsView.swift */; };
 		729A9C72E9997F815736A635 /* BricolageGrotesque-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 12B972CBC916EE61EDF6790C /* BricolageGrotesque-ExtraBold.ttf */; };
@@ -65,6 +70,7 @@
 		97F64F47C99747F2D425C52B /* AtlasApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B039968FC134F8A1AC6E2337 /* AtlasApp.swift */; };
 		98A2A17C550A7EE37E55681C /* GameModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B15A1DFC23AFA60D626F836E /* GameModel.swift */; };
 		A74AB6B12C5356D3D8470196 /* ColorScale.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8356D25827C690014A991AE8 /* ColorScale.swift */; };
+		A799E8767D421F466EE0F348 /* GameFeedback.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1E04842862D1D05C5F2A021 /* GameFeedback.swift */; };
 		A7BECAC1CCA30211337290F7 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54BB62A20AA41137A8520563 /* MapView.swift */; };
 		A97C500F2B501AE325483EA8 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AEBDC7BEE7D554C7FA18D29 /* ContentView.swift */; };
 		AA6CB36CCAE29A699F0C9A1D /* VoiceRemoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D8B429A21D1DE3357DAB066 /* VoiceRemoteView.swift */; };
@@ -76,6 +82,8 @@
 		B73C20ABB8AA6D2F960D39A2 /* VoiceLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B8E0FCE8B21CCBBE19E3D7 /* VoiceLink.swift */; };
 		B80C722609F80A67F6AF5EC1 /* DebugSnapshots.swift in Sources */ = {isa = PBXBuildFile; fileRef = F30335D55EA0CC3488A6727A /* DebugSnapshots.swift */; };
 		BFF944916531F1AB5106B3D2 /* ConfettiView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B0AEE80F05E5E3789F2D638 /* ConfettiView.swift */; };
+		C242878C18F54C014FFAA341 /* Badges.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3B2A7FADF1BCEE80EA07AB9 /* Badges.swift */; };
+		C268C0B2806E7AD7308CFC70 /* RoundExtras.swift in Sources */ = {isa = PBXBuildFile; fileRef = 023ADB7E47AE6B88356251F2 /* RoundExtras.swift */; };
 		CAE21F86B4ECD84C4BAA3952 /* Stats.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E994E13C63287E0B942955 /* Stats.swift */; };
 		CD7347FAB205B1B3CB466656 /* Stats.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E994E13C63287E0B942955 /* Stats.swift */; };
 		CE24624743C5A1BDB1ADE257 /* GameModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B15A1DFC23AFA60D626F836E /* GameModel.swift */; };
@@ -84,6 +92,7 @@
 		D9C79E9AEE6454A58329F4E6 /* BricolageGrotesque-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 444C1C6DF9A16811F6E9A4C8 /* BricolageGrotesque-Bold.ttf */; };
 		DC4D6D8DA5663ECCB81656A4 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AEBDC7BEE7D554C7FA18D29 /* ContentView.swift */; };
 		DEC81627DDBCB0E427C4A9F4 /* strings.json in Resources */ = {isa = PBXBuildFile; fileRef = A38F86C82521E6D9DE6E1419 /* strings.json */; };
+		E11484566A8BA34DBB475F7A /* RoundExtras.swift in Sources */ = {isa = PBXBuildFile; fileRef = 023ADB7E47AE6B88356251F2 /* RoundExtras.swift */; };
 		E271EB8E5C52C711E2041654 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54BB62A20AA41137A8520563 /* MapView.swift */; };
 		E42E83E311A854D9BAE9CB9C /* ConfettiView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B0AEE80F05E5E3789F2D638 /* ConfettiView.swift */; };
 		E5CC26E1EC2B25DCD27AE35E /* strings.json in Resources */ = {isa = PBXBuildFile; fileRef = A38F86C82521E6D9DE6E1419 /* strings.json */; };
@@ -104,6 +113,7 @@
 
 /* Begin PBXFileReference section */
 		014482CAB6307BA9B93C46B9 /* TurkishText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TurkishText.swift; sourceTree = "<group>"; };
+		023ADB7E47AE6B88356251F2 /* RoundExtras.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundExtras.swift; sourceTree = "<group>"; };
 		02C452AC98790E815E93B523 /* TVViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVViews.swift; sourceTree = "<group>"; };
 		073C1EFD6EA624FB5CA27129 /* StatsExtras.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsExtras.swift; sourceTree = "<group>"; };
 		12B972CBC916EE61EDF6790C /* BricolageGrotesque-ExtraBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "BricolageGrotesque-ExtraBold.ttf"; sourceTree = "<group>"; };
@@ -135,6 +145,8 @@
 		E0A9FEAB54207168722BE498 /* hints.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = hints.json; sourceTree = "<group>"; };
 		E0D6074433BEC2769D35BEC6 /* Sheets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sheets.swift; sourceTree = "<group>"; };
 		E0E994E13C63287E0B942955 /* Stats.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stats.swift; sourceTree = "<group>"; };
+		E3B2A7FADF1BCEE80EA07AB9 /* Badges.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Badges.swift; sourceTree = "<group>"; };
+		F1E04842862D1D05C5F2A021 /* GameFeedback.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameFeedback.swift; sourceTree = "<group>"; };
 		F30335D55EA0CC3488A6727A /* DebugSnapshots.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugSnapshots.swift; sourceTree = "<group>"; };
 		FBD42E6296FC6E89B2627B12 /* CategoryPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryPicker.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -175,6 +187,7 @@
 		CEF0F8922A1A681679210B66 /* Game */ = {
 			isa = PBXGroup;
 			children = (
+				E3B2A7FADF1BCEE80EA07AB9 /* Badges.swift */,
 				B15A1DFC23AFA60D626F836E /* GameModel.swift */,
 				C55E6A3830AF4CC7BC91B879 /* Progression.swift */,
 				E0E994E13C63287E0B942955 /* Stats.swift */,
@@ -215,10 +228,12 @@
 				2B0AEE80F05E5E3789F2D638 /* ConfettiView.swift */,
 				6AEBDC7BEE7D554C7FA18D29 /* ContentView.swift */,
 				F30335D55EA0CC3488A6727A /* DebugSnapshots.swift */,
+				F1E04842862D1D05C5F2A021 /* GameFeedback.swift */,
 				1E2B96D3406A1130DE2C723A /* MapGeometry.swift */,
 				54BB62A20AA41137A8520563 /* MapView.swift */,
 				8966DBC817BE95BE90215875 /* Platform.swift */,
 				7E8DB256F31E768D1AD48E46 /* ProgressSection.swift */,
+				023ADB7E47AE6B88356251F2 /* RoundExtras.swift */,
 				274F0CF7EF58B24307CCED4E /* SettingsView.swift */,
 				E0D6074433BEC2769D35BEC6 /* Sheets.swift */,
 				073C1EFD6EA624FB5CA27129 /* StatsExtras.swift */,
@@ -388,12 +403,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				35ACA5CC77B371822C812FC1 /* AtlasApp.swift in Sources */,
+				3C47B18F7228C6BBBCEF0110 /* Badges.swift in Sources */,
 				1510FE831157913B7E8C2414 /* Brand.swift in Sources */,
 				23170EEDBDF699705E2F7A2B /* CategoryPicker.swift in Sources */,
 				AB6E170245C08D19CE081947 /* ColorScale.swift in Sources */,
 				F2621F89323ABFA03E84847F /* ConfettiView.swift in Sources */,
 				73FBE2118A78488E818997BB /* ContentView.swift in Sources */,
 				341257B7E34D2611511D3252 /* DebugSnapshots.swift in Sources */,
+				51B0A73F7A4FD4E4FA6D28C4 /* GameFeedback.swift in Sources */,
 				CE24624743C5A1BDB1ADE257 /* GameModel.swift in Sources */,
 				8C765C596682AE3FFE304DE8 /* Hints.swift in Sources */,
 				B6A61987BDA6C9C70A6E22AA /* Localization.swift in Sources */,
@@ -403,6 +420,7 @@
 				8E6D03DECB33D33E28845AA6 /* Platform.swift in Sources */,
 				FF87E2BC14829973408245DB /* ProgressSection.swift in Sources */,
 				83BA462B140CAFE54B9BD6B3 /* Progression.swift in Sources */,
+				E11484566A8BA34DBB475F7A /* RoundExtras.swift in Sources */,
 				0D158FA61CE680B78634FED9 /* SettingsView.swift in Sources */,
 				21317B473DC86BB83DA39A12 /* Sheets.swift in Sources */,
 				CAE21F86B4ECD84C4BAA3952 /* Stats.swift in Sources */,
@@ -419,12 +437,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				00113AA244B9C57F1702BB9B /* AtlasApp.swift in Sources */,
+				C242878C18F54C014FFAA341 /* Badges.swift in Sources */,
 				AA81D0A8A7DE4CBFFB410C92 /* Brand.swift in Sources */,
 				12DE3C652D6808548F5E2355 /* CategoryPicker.swift in Sources */,
 				A74AB6B12C5356D3D8470196 /* ColorScale.swift in Sources */,
 				BFF944916531F1AB5106B3D2 /* ConfettiView.swift in Sources */,
 				DC4D6D8DA5663ECCB81656A4 /* ContentView.swift in Sources */,
 				B80C722609F80A67F6AF5EC1 /* DebugSnapshots.swift in Sources */,
+				A799E8767D421F466EE0F348 /* GameFeedback.swift in Sources */,
 				98A2A17C550A7EE37E55681C /* GameModel.swift in Sources */,
 				59D2622C7949138F9EEFE3F6 /* Hints.swift in Sources */,
 				F3DE2499A2D6F4CCB26C8EC2 /* Localization.swift in Sources */,
@@ -434,6 +454,7 @@
 				086C260022A7779A6697E782 /* Platform.swift in Sources */,
 				F730002126C53E0C5A4BE5B8 /* ProgressSection.swift in Sources */,
 				1D7D1496C343A9E1029EE5FD /* Progression.swift in Sources */,
+				C268C0B2806E7AD7308CFC70 /* RoundExtras.swift in Sources */,
 				F11E0111D93C36F3790C8958 /* SettingsView.swift in Sources */,
 				F34E1A2CF43E101F41CEDD15 /* Sheets.swift in Sources */,
 				AFF4112DCEF21E8A10E2769A /* Stats.swift in Sources */,
@@ -450,12 +471,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				97F64F47C99747F2D425C52B /* AtlasApp.swift in Sources */,
+				0DA5FC453037FE45146EE0AF /* Badges.swift in Sources */,
 				2E1565BD03D665DFD101B7DD /* Brand.swift in Sources */,
 				7AF394AF2F2723CDE9BB3F70 /* CategoryPicker.swift in Sources */,
 				804E4F473D2725520708B399 /* ColorScale.swift in Sources */,
 				E42E83E311A854D9BAE9CB9C /* ConfettiView.swift in Sources */,
 				A97C500F2B501AE325483EA8 /* ContentView.swift in Sources */,
 				22E5267F721D6AB6AE976E17 /* DebugSnapshots.swift in Sources */,
+				682F3B4BF73F6A264426CE3F /* GameFeedback.swift in Sources */,
 				160A261EDA47F94B7A1E8854 /* GameModel.swift in Sources */,
 				17D87F2B60356E26E020E48D /* Hints.swift in Sources */,
 				429A5686948A61A427A6A76A /* Localization.swift in Sources */,
@@ -465,6 +488,7 @@
 				923C03A157077833EAB89E82 /* Platform.swift in Sources */,
 				91F6B06BC7B81A4144751808 /* ProgressSection.swift in Sources */,
 				0E2C954889AE78439B391A96 /* Progression.swift in Sources */,
+				21083B3F858F511FADE016EE /* RoundExtras.swift in Sources */,
 				70FFDEF088629C00FC0F99B3 /* SettingsView.swift in Sources */,
 				4CFA038B1168FB47DE9E2FE6 /* Sheets.swift in Sources */,
 				CD7347FAB205B1B3CB466656 /* Stats.swift in Sources */,

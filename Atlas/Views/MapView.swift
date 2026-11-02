@@ -105,6 +105,17 @@ struct MapView: View {
                 startPulse(guess.place, duration: 1.3, win: false)
             }
         }
+        .onChange(of: game.replayStep) { _, step in
+            // Rota tekrarı: önce tüm harita, sonra her tahmine sırayla uçup parlar; sonunda gizli yer.
+            guard let step else { showRoundStart(); return }
+            guard step > 0, let place = game.replayPlace(at: step) else { resetView(); return }
+            focus(on: place)
+            if step == game.replayLength && place == game.answer {
+                startPulse(place, duration: 2.6, win: game.status == .won)
+            } else {
+                startPulse(place, duration: 1.3, win: false)
+            }
+        }
         .onChange(of: game.highlighted) { _, place in
             if let place { focus(on: place) }
         }
@@ -643,7 +654,7 @@ struct MapLayer: View, Animatable {
     /// (gerekirse komşunun üstüne) kayar ve ince bir çizgiyle yerine bağlanır; ekran kenarında içeri itilir.
     private func drawLabels(_ ctx: inout GraphicsContext, _ items: [LabelItem], size: CGSize) {
         guard !items.isEmpty else { return }
-        func rank(_ p: Place) -> Int { p == game.answer ? -1 : (game.guess(for: p)?.distance ?? .max) }
+        func rank(_ p: Place) -> Int { p == game.answer ? -1 : (game.mapGuess(for: p)?.distance ?? .max) }
         let k = Platform.drawScale
         let font = Font.system(size: 11 * k, weight: .semibold)
         var placed: [CGRect] = []
@@ -702,26 +713,27 @@ struct MapLayer: View, Animatable {
     }
 
     private func fill(for place: Place) -> Color {
-        if place == game.answer {
+        // Rota tekrarında gizli yer ve sırası gelmemiş tahminler henüz boyanmaz.
+        if place == game.answer && game.mapRevealsAnswer {
             if game.status == .won { return ColorScale.found }
             if game.status == .lost { return ColorScale.answerReveal }
         }
-        guard let g = game.guess(for: place) else { return palette.unguessed }
+        guard let g = game.mapGuess(for: place) else { return palette.unguessed }
         return ColorScale.color(forDistance: g.distance, max: places.maxDistance)
     }
 
     /// Haritada adı yazılacak yerler: tahmin edilenler ve oyun bitince gizli yer.
     private func showsLabel(_ place: Place) -> Bool {
-        game.guess(for: place) != nil || (game.isOver && place == game.answer)
+        game.mapGuess(for: place) != nil || (game.mapRevealsAnswer && place == game.answer)
     }
 
     private func hoverLabel(for place: Place) -> String? {
-        if let g = game.guess(for: place) {
+        if let g = game.mapGuess(for: place) {
             if place == game.answer { return "\(place.name) ✓" }
             if g.distance == 0 { return "\(place.name) · \(L("neighbor"))" }
             return showDistance ? "\(place.name) · \(TurkishText.formatKm(g.distance))" : place.name
         }
-        return game.isOver ? place.name : nil
+        return game.mapRevealsAnswer ? place.name : nil
     }
 
     // MARK: Geometri sorguları

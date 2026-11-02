@@ -26,9 +26,17 @@ struct ResultView: View {
             if let reward = game.reward {
                 LevelCard(progress: reward.after, reward: reward)
             }
+            if !game.newBadges.isEmpty {
+                VStack(spacing: 8) {
+                    Text(L("badges.new")).font(Brand.heading(.headline)).foregroundStyle(Brand.accent)
+                    HStack(alignment: .top, spacing: 8) {
+                        ForEach(game.newBadges.prefix(4)) { BadgeView(badge: $0) }
+                    }
+                }
+            }
             StatsSummary(stats: game.currentStats)
             if game.mode == .daily {
-                Text(L("nextPuzzle"))
+                DailyCountdown()
                     .font(.callout)
                     .foregroundStyle(.secondary)
             }
@@ -39,6 +47,13 @@ struct ResultView: View {
                 Button(L("newGame")) { dismiss(); game.newPractice() }
                     .defaultActionShortcut()
                 shareButton
+                // Sayfa kapanınca haritada tahminler sırayla yeniden oynatılır.
+                Button {
+                    dismiss()
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) { game.startReplay() }
+                } label: {
+                    Label(L("replay.button"), systemImage: "play.circle")
+                }
                 Button(L("close")) { dismiss() }
                     .cancelActionShortcut()
             }
@@ -128,6 +143,8 @@ struct StatsView: View {
     private var details: some View {
         VStack(spacing: 18) {
             LevelCard(progress: LevelProgress(xp: Progression.totalXP()))
+            BadgeShelf()
+            Divider()
             StatsSummary(stats: stats, streakLabel: L(tab == .daily ? "stats.streakDays" : "stats.streak"))
 
             VStack(alignment: .leading, spacing: 6) {

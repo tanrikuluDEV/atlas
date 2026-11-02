@@ -9,6 +9,8 @@ import { VERSION } from './version.js';
 import { levelCardHTML, playLevelCard, splashStarted } from './brand.js';
 import { progress, totalXP } from './progression.js';
 import { applyTheme, heatColor, isDark, onThemeChange, setThemePreference, themePreference } from './colors.js';
+import { allBadges } from './badges.js';
+import * as feedback from './feedback.js';
 
 const $ = (id) => document.getElementById(id);
 const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
@@ -19,7 +21,32 @@ const isPhone = () => window.matchMedia('(max-width: 760px)').matches;
 
 let game;
 let map;
-let last = { roundID: -1, lastGuess: null, highlighted: null, category: null, showResult: false, status: null };
+let last = { roundID: -1, lastGuess: null, highlighted: null, category: null, showResult: false, status: null, replayStep: null };
+
+/** Tahminin yakınlığı 0…1 (1 = komşu); renk skalasıyla aynı karekök ölçeği. */
+const proximity = (g, max) => 1 - Math.min(1, Math.max(0, Math.sqrt(g.distance / Math.max(max, 1))));
+const heatLevel = (p) => (p >= 1 ? 5 : p > 0.8 ? 4 : p > 0.6 ? 3 : p > 0.35 ? 2 : 1);
+
+/** Bir sonraki günlük bulmacaya (yerel gece yarısı) kalan süre, "05:12:33". */
+function countdownText() {
+  const now = new Date();
+  const next = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1);
+  const s = Math.max(0, Math.floor((next - now) / 1000));
+  const pad = (n) => String(n).padStart(2, '0');
+  return t('countdown', { time: `${pad(Math.floor(s / 3600))}:${pad(Math.floor(s / 60) % 60)}:${pad(s % 60)}` });
+}
+const countdownHTML = () => `<p class="countdown muted">🕒 <span>${esc(countdownText())}</span></p>`;
+setInterval(() => document.querySelectorAll('.countdown span').forEach((el) => { el.textContent = countdownText(); }), 1000);
+
+function badgeHTML(b) {
+  const pct = b.earned ? 100 : Math.round((b.current / b.target) * 100);
+  const sub = b.earned || b.target === 1 ? b.detail : `${b.current}/${b.target}`;
+  return `<div class="badge-item ${b.earned ? 'earned' : ''}" title="${esc(b.detail)}">
+    <span class="badge-icon" style="--p:${pct}%">${b.icon}</span>
+    <b>${esc(b.name)}</b>
+    <span>${esc(sub)}</span>
+  </div>`;
+}
 
 const splash = splashStarted();
 
@@ -229,6 +256,8 @@ function render() {
     focusInput();
   }
   if (game.lastGuess && game.lastGuess !== last.lastGuess) {
+    if (game.status === 'won') feedback.won();
+    else feedback.guessMade(proximity(game.lastGuess, game.places.maxDistance), game.lastImproved && game.guesses.length > 1);
     map.focus(game.lastGuess.place);
     if (game.status === 'won') {
       // Bulunca: yeşil nabız ve konfeti.
@@ -240,10 +269,25 @@ function render() {
   }
   if (game.highlighted && game.highlighted !== last.highlighted) map.focus(game.highlighted);
   // Pes edilince gizli yer de gösterilsin.
-  if (game.status === 'lost' && last.status === 'playing' && last.roundID === game.roundID) map.focus(game.answer);
+  if (game.status === 'lost' && last.status === 'playing' && last.roundID === game.roundID) {
+    map.focus(game.answer);
+    feedback.lost();
+  }
+  // Rota tekrarı: önce tüm harita, sonra her tahmine sırayla uçup parlar; sonunda gizli yer.
+  if (game.replayStep !== last.replayStep && last.roundID === game.roundID) {
+    const step = game.replayStep;
+    if (step == null) { if (game.isOver) map.focus(game.answer); }
+    else if (step === 0) map.reset();
+    else {
+      const place = game.replayPlace(step);
+      map.focus(place);
+      if (step === game.replayLength && place.id === game.answer.id && game.status === 'won') map.celebrate(place);
+      else map.pulse(place);
+    }
+  }
   if (game.showResult && !last.showResult) setTimeout(openResult, 450);
 
-  last = { roundID: game.roundID, lastGuess: game.lastGuess, highlighted: game.highlighted, category: game.category, showResult: game.showResult, status: game.status };
+  last = { roundID: game.roundID, lastGuess: game.lastGuess, highlighted: game.highlighted, category: game.category, showResult: game.showResult, status: game.status, replayStep: game.replayStep };
 
   // Araç çubuğu
   $('categoryName').textContent = c.title;
@@ -269,8 +313,12 @@ function render() {
       <div class="actions">
         <button class="button" data-action="result">${t('result')}</button>
         <button class="button primary" data-action="new" title="Enter">${t('newGame')}</button>
-      </div>`;
+      </div>
+      <button class="link replay-button" data-action="replay">${game.replayStep == null ? `▶ ${t('replay.button')}` : `■ ${t('replay.stop')}`}</button>
+      ${game.mode === 'daily' ? `<hr>${countdownHTML()}${otherDailiesHTML()}` : ''}`;
     over.querySelector('[data-action="result"]').onclick = openResult;
+    over.querySelector('[data-action="replay"]').onclick = () => (game.replayStep == null ? game.startReplay() : game.stopReplay());
+    over.querySelectorAll('[data-category]').forEach((b) => { b.onclick = () => game.switchCategory(b.dataset.category); });
     over.querySelector('[data-action="new"]').onclick = () => game.newPractice();
   }
 
@@ -279,6 +327,8 @@ function render() {
   if (game.message) fb.textContent = game.message;
   else if (game.lastGuess && !game.isOver) fb.textContent = feedbackText(game.lastGuess);
   else fb.textContent = '';
+
+  renderHeat();
 
   const closest = game.closest;
   const closestEl = $('closest');
@@ -324,12 +374,65 @@ function renderHints() {
   if (b) b.onclick = () => game.useHint();
 }
 
+/** Bugünün bitmemiş diğer günlük bulmacalarına kısayollar. */
+function otherDailiesHTML() {
+  const day = dayIndex();
+  const others = CATEGORIES.filter((c) => c.id !== game.category && !['won', 'lost'].includes(store.get(`atlas.daily.${c.id}.${day}`)?.status));
+  if (!others.length) return `<p class="other-dailies-done">${esc(t('countdown.allDone'))}</p>`;
+  return `<div class="other-dailies"><h2>${esc(t('countdown.others'))}</h2>
+    <div class="chips">${others.map((c) => `<button class="chip" data-category="${c.id}">${c.icon} ${esc(c.title)}</button>`).join('')}</div></div>`;
+}
+
+/** Son tahminin ne kadar yakın olduğu: buzdan ateşe bir çubuk. Öncekinden yakınsa hafifçe titrer. */
+let lastHeatGuess = null;
+let lastHeatP = null;
+function renderHeat() {
+  const el = $('heat');
+  const g = game.lastGuess;
+  el.hidden = !g || game.isOver;
+  if (el.hidden) { lastHeatGuess = null; return; }
+  const max = game.places.maxDistance;
+  const p = proximity(g, max);
+  const best = proximity(game.closest, max);
+  const stops = [1, 0.8, 0.6, 0.4, 0.2, 0].map((f) => heatColor(Math.round(max * f * f), max));
+  const improved = game.lastImproved && game.guesses.length > 1;
+  el.innerHTML = `<div class="heat-head"><b>${esc(t(`heat.${heatLevel(p)}`))}</b>${improved ? `<span>${esc(t('heat.closer'))}</span>` : ''}</div>
+    <div class="heat-track" style="background:linear-gradient(90deg,#9ecdf2,${stops.join(',')})" role="img" aria-label="${esc(t('heat.label'))}: ${esc(t(`heat.${heatLevel(p)}`))}">
+      <i class="heat-best" style="left:calc(${best} * (100% - 2px))"></i>
+      <i class="heat-dot" style="left:calc(${lastHeatGuess && lastHeatGuess !== g ? lastHeatP ?? p : p} * (100% - 16px));background:${heatColor(g.distance, max)}"></i>
+    </div>`;
+  // İşaret eski konumundan yenisine kayar.
+  const dot = el.querySelector('.heat-dot');
+  requestAnimationFrame(() => { dot.style.left = `calc(${p} * (100% - 16px))`; });
+  if (g !== lastHeatGuess && improved && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    el.classList.remove('shake');
+    void el.offsetWidth;
+    el.classList.add('shake');
+  }
+  lastHeatGuess = g;
+  lastHeatP = p;
+}
+
+let emptyKey = null;
 function renderGuesses() {
   const el = $('guesses');
   if (!game.guesses.length) {
-    el.innerHTML = `<p class="muted" style="margin:0">${t(`empty.${game.places.category.kind}`)}</p>`;
+    if (game.isOver) { el.innerHTML = ''; emptyKey = null; return; }
+    // Henüz tahmin yokken: kategorinin silüeti, kaç yer arasından seçildiği ve bir oyun taktiği.
+    const key = `${game.category}|${game.roundID}|${language()}|${isDark()}`;
+    if (key === emptyKey) return;
+    emptyKey = key;
+    const c = game.places.category;
+    el.innerHTML = `<div class="empty-card">
+      <canvas class="empty-thumb" aria-hidden="true"></canvas>
+      <b>${esc(t(`empty.pool.${c.kind}`, { n: game.places.places.length }))}</b>
+      <p class="muted">${esc(t('empty.start'))}</p>
+      <p class="tip">💡 ${esc(t(`tip.${(game.roundID % 4) + 1}`))}</p>
+    </div>`;
+    drawCategoryThumb(el.querySelector('canvas'), game.places);
     return;
   }
+  emptyKey = null;
   const max = game.places.maxDistance;
   el.innerHTML = `<h2>${t('guesses.header')}</h2>` + game.sortedGuesses.map((g) => {
     const isAnswer = g.place.id === game.answer.id;
@@ -440,15 +543,20 @@ function openResult() {
         ? `${bold(t(`result.won.${c.kind}`, { name: `**${game.answer.name}**` }))}<br>${bold(t('result.foundIn', { n: game.guesses.length }))}`
         : bold(t(`result.lost.${c.kind}`, { name: `**${game.answer.name}**` }))}</p>
       ${game.reward ? levelCardHTML(game.reward.after, game.reward) : ''}
+      ${game.newBadges?.length ? `<div class="new-badges"><div class="new-badges-title">${esc(t('badges.new'))}</div>
+        <div class="badge-row">${game.newBadges.slice(0, 4).map(badgeHTML).join('')}</div></div>` : ''}
       ${summaryHTML(game.currentStats)}
-      ${game.mode === 'daily' ? `<p class="muted">${t('nextPuzzle')}</p>` : ''}
+      ${game.mode === 'daily' ? countdownHTML() : ''}
       <div class="actions">
         <button class="button primary" data-action="new" autofocus title="Enter">${t('newGame')}</button>
         <button class="button" data-action="share">${t(navigator.share ? 'share' : 'copy')}</button>
+        <button class="button" data-action="replay">▶ ${t('replay.button')}</button>
         <button class="button" data-close>${t('close')}</button>
       </div>
     </div>`, (d) => {
     d.querySelector('[data-action="share"]').onclick = share;
+    // Pencere kapanınca haritada tahminler sırayla yeniden oynatılır.
+    d.querySelector('[data-action="replay"]').onclick = () => { d.close(); setTimeout(() => game.startReplay(), 300); };
     playLevelCard(d.querySelector('.level-card'), game.reward);
     // Enter doğrudan yeni oyuna geçer (autofocus bu düğmede).
     d.querySelector('[data-action="new"]').onclick = () => { d.close(); game.newPractice(); };
@@ -506,6 +614,8 @@ function renderStats() {
       </div>
     </div>
     ${levelCardHTML(progress(totalXP(Stats.load)))}
+    ${badgeShelfHTML()}
+    <hr>
     ${summaryHTML(stats, t(mode === 'daily' ? 'stats.streakDays' : 'stats.streak'))}
     <div class="section-title">${t('stats.distribution')}</div>
     ${dist.map((d) => `<div class="dist-row"><span class="label">${d.label}</span>
@@ -529,6 +639,13 @@ function renderStats() {
       if (m) { statsState.mode = m; renderStats(); }
     };
   });
+}
+
+/** Rozet rafı (tüm kategoriler birlikte). */
+function badgeShelfHTML() {
+  const badges = allBadges(Stats.load);
+  return `<div class="section-title">${t('badges.title')} <span class="muted" style="font-weight:400;font-size:13px">· ${t('badges.count', { n: badges.filter((b) => b.earned).length, total: badges.length })}</span></div>
+    <div class="badge-grid">${badges.map(badgeHTML).join('')}</div>`;
 }
 
 /** Kategoride bulunan (kazanılan oyunlardaki) yerler; günlük ve alıştırma birlikte. */
@@ -705,6 +822,20 @@ function openSettings() {
       <label class="switch"><input type="checkbox" id="distanceToggle" ${game.showDistance ? 'checked' : ''}><span></span></label>
     </div>
     <div class="toggle-row">
+      <div>
+        <div>${t('set.sound')}</div>
+        <div class="muted" style="font-size:13px">${t('set.soundHint')}</div>
+      </div>
+      <label class="switch"><input type="checkbox" id="soundToggle" ${feedback.soundOn() ? 'checked' : ''}><span></span></label>
+    </div>
+    ${feedback.canVibrate() ? `<div class="toggle-row">
+      <div>
+        <div>${t('set.haptics')}</div>
+        <div class="muted" style="font-size:13px">${t('set.hapticsHint')}</div>
+      </div>
+      <label class="switch"><input type="checkbox" id="hapticsToggle" ${feedback.hapticsOn() ? 'checked' : ''}><span></span></label>
+    </div>` : ''}
+    <div class="toggle-row">
       <div>${t('set.theme')}</div>
       <div class="segmented" id="themeSegmented">
         <button data-theme="system" aria-selected="${themePreference() === 'system'}">${t('set.system')}</button>
@@ -729,6 +860,12 @@ function openSettings() {
       hint();
       render();
     };
+    d.querySelector('#soundToggle').onchange = (e) => {
+      store.set('atlas.sound', e.target.checked);
+      if (e.target.checked) feedback.won(); // örnek ses (tarayıcı sesi ancak dokunuşla açar)
+    };
+    const haptics = d.querySelector('#hapticsToggle');
+    if (haptics) haptics.onchange = (e) => store.set('atlas.haptics', e.target.checked);
     d.querySelector('#settingsHelp').onclick = () => { d.close(); openHelp(); };
     d.querySelector('#themeSegmented').onclick = (e) => {
       const t = e.target.closest('button')?.dataset.theme;

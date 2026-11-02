@@ -46,6 +46,14 @@ final class GameModel {
     private(set) var hintsUsed = 0
     /// Bu turda bitirilen oyunun kazandırdığı puan (sonuç penceresinde gösterilir).
     private(set) var reward: Reward?
+    /// Bu oyunla kazanılan yeni rozetler (sonuç penceresinde gösterilir).
+    private(set) var newBadges: [Badge] = []
+    /// Son tahmin, önceki en yakın tahminden daha yakın mı (sıcaklık göstergesi, ses ve titreşim için).
+    private(set) var lastImproved = false
+    /// Rota tekrarı: nil değilse haritada yalnızca ilk `replayStep` tahmin görünür
+    /// (pes edilen oyunda son adım gizli yeri gösterir).
+    private(set) var replayStep: Int?
+    private var replayTask: Task<Void, Never>?
 
     init() {
         let category = GameCategory(rawValue: UserDefaults.standard.string(forKey: "category") ?? "") ?? .turkey
@@ -71,6 +79,21 @@ final class GameModel {
     var puzzleNumber: Int { dayIndex + 1 }
 
     var currentStats: Stats { mode == .daily ? dailyStats : practiceStats }
+
+    /// Rota tekrarının adım sayısı: tahminler, pes edildiyse bir de gizli yer.
+    var replayLength: Int { guesses.count + (status == .lost ? 1 : 0) }
+
+    /// Haritada görünen tahmin (rota tekrarında henüz sırası gelmemiş tahminler gizlenir).
+    func mapGuess(for place: Place) -> Guess? {
+        guard let g = guess(for: place) else { return nil }
+        if let step = replayStep, g.order >= step { return nil }
+        return g
+    }
+
+    /// Haritada gizli yer açık mı (oyun bittiyse ve rota tekrarı sona geldiyse).
+    var mapRevealsAnswer: Bool {
+        isOver && (replayStep.map { $0 >= replayLength } ?? true)
+    }
 
     func guess(for place: Place) -> Guess? {
         guesses.first { $0.place.id == place.id }
@@ -99,6 +122,7 @@ final class GameModel {
             return false
         }
         let g = Guess(place: place, distance: places.distance(place, answer), order: guesses.count)
+        lastImproved = guesses.isEmpty || g.distance < (closest?.distance ?? .max)
         guesses.append(g)
         lastGuess = g
         message = nil
@@ -122,6 +146,21 @@ final class GameModel {
         message = nil
         finish()
         persistDaily()
+    }
+
+    /// Bugünün günlük bulmacası bitmemiş kategoriler (oyun sonundaki kısayollar için).
+    static func unfinishedDailies(day: Int) -> [GameCategory] {
+        GameCategory.allCases.filter { c in
+            guard let saved = savedDaily(category: c, day: day) else { return true }
+            return saved.status == .playing
+        }
+    }
+
+    /// Bir sonraki günlük bulmacaya (yerel gece yarısı) kalan süre.
+    static func timeUntilNextPuzzle(from now: Date = .now) -> TimeInterval {
+        let cal = Calendar(identifier: .gregorian)
+        let next = cal.date(byAdding: .day, value: 1, to: cal.startOfDay(for: now)) ?? now
+        return max(0, next.timeIntervalSince(now))
     }
 
     func switchMode(_ newMode: GameMode) {
@@ -171,7 +210,45 @@ final class GameModel {
         restoreDaily()
     }
 
+    // MARK: - Rota tekrarı
+
+    /// Tahminleri sırasıyla haritada yeniden oynatır; harita her adımda o yere uçar ve parlar.
+    func startReplay() {
+        guard isOver, replayLength > 0 else { return }
+        stopReplay()
+        let total = replayLength
+        // Uzun oyunlarda adımlar kısalır; tekrar en fazla ~12 sn sürer.
+        let interval = max(0.45, min(1.1, 12 / Double(total)))
+        replayStep = 0
+        replayTask = Task { @MainActor [weak self] in
+            try? await Task.sleep(for: .seconds(0.7))
+            for step in 1...total {
+                guard let self, !Task.isCancelled else { return }
+                self.replayStep = step
+                try? await Task.sleep(for: .seconds(step == total ? 2.6 : interval))
+            }
+            guard let self, !Task.isCancelled else { return }
+            self.replayStep = nil
+        }
+    }
+
+    func stopReplay() {
+        replayTask?.cancel()
+        replayTask = nil
+        replayStep = nil
+    }
+
+    /// Rota tekrarında o adımda gösterilen yer.
+    func replayPlace(at step: Int) -> Place? {
+        guard step >= 1 else { return nil }
+        let ordered = guesses.sorted { $0.order < $1.order }
+        return step <= ordered.count ? ordered[step - 1].place : answer
+    }
+
     private func resetRound() {
+        stopReplay()
+        newBadges = []
+        lastImproved = false
         guesses = []
         status = .playing
         message = nil
@@ -195,6 +272,7 @@ final class GameModel {
     private func finish() {
         let won = status == .won
         let before = Progression.totalXP()
+        let badgesBefore = Badges.earnedIDs()
         switch mode {
         case .daily:
             dailyStats.recordDaily(won: won, guesses: guesses.count, hints: hintsUsed, answerID: answer.id, day: dayIndex)
@@ -204,6 +282,7 @@ final class GameModel {
             practiceStats.save(key: Stats.key(category: category, mode: .practice))
         }
         reward = Reward(before: LevelProgress(xp: before), after: LevelProgress(xp: Progression.totalXP()))
+        newBadges = Badges.all().filter { $0.earned && !badgesBefore.contains($0.id) }
         showResult = true
     }
 

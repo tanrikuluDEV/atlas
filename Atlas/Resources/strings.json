@@ -1510,5 +1510,397 @@
   "fr": "Nouvelle énigme",
   "es": "Reto nuevo",
   "it": "Nuovo enigma"
+ },
+ "replay.button": {
+  "tr": "Rotayı izle",
+  "en": "Watch route",
+  "de": "Route ansehen",
+  "fr": "Voir le parcours",
+  "es": "Ver la ruta",
+  "it": "Guarda il percorso"
+ },
+ "replay.stop": {
+  "tr": "Durdur",
+  "en": "Stop",
+  "de": "Stopp",
+  "fr": "Arrêter",
+  "es": "Detener",
+  "it": "Ferma"
+ },
+ "countdown": {
+  "tr": "Yeni bulmacaya {time}",
+  "en": "Next puzzle in {time}",
+  "de": "Nächstes Rätsel in {time}",
+  "fr": "Prochaine énigme dans {time}",
+  "es": "Próximo reto en {time}",
+  "it": "Prossimo enigma tra {time}"
+ },
+ "countdown.others": {
+  "tr": "Bugünün diğer bulmacaları",
+  "en": "Today's other puzzles",
+  "de": "Weitere Rätsel von heute",
+  "fr": "Autres énigmes du jour",
+  "es": "Otros retos de hoy",
+  "it": "Altri enigmi di oggi"
+ },
+ "countdown.allDone": {
+  "tr": "Bugünün tüm bulmacalarını bitirdin 🎉",
+  "en": "You've finished all of today's puzzles 🎉",
+  "de": "Du hast alle heutigen Rätsel gelöst 🎉",
+  "fr": "Tu as terminé toutes les énigmes du jour 🎉",
+  "es": "Has terminado todos los retos de hoy 🎉",
+  "it": "Hai completato tutti gli enigmi di oggi 🎉"
+ },
+ "heat.5": {
+  "tr": "Yanıyor 🔥",
+  "en": "Burning 🔥",
+  "de": "Brennend heiß 🔥",
+  "fr": "Brûlant 🔥",
+  "es": "¡Te quemas! 🔥",
+  "it": "Bollente 🔥"
+ },
+ "heat.4": {
+  "tr": "Sıcak",
+  "en": "Hot",
+  "de": "Heiß",
+  "fr": "Chaud",
+  "es": "Caliente",
+  "it": "Caldo"
+ },
+ "heat.3": {
+  "tr": "Ilık",
+  "en": "Warm",
+  "de": "Warm",
+  "fr": "Tiède",
+  "es": "Templado",
+  "it": "Tiepido"
+ },
+ "heat.2": {
+  "tr": "Soğuk",
+  "en": "Cold",
+  "de": "Kalt",
+  "fr": "Froid",
+  "es": "Frío",
+  "it": "Freddo"
+ },
+ "heat.1": {
+  "tr": "Buz gibi ❄️",
+  "en": "Freezing ❄️",
+  "de": "Eiskalt ❄️",
+  "fr": "Glacial ❄️",
+  "es": "Helado ❄️",
+  "it": "Gelido ❄️"
+ },
+ "heat.closer": {
+  "tr": "Yaklaştın!",
+  "en": "Getting closer!",
+  "de": "Näher dran!",
+  "fr": "Plus près !",
+  "es": "¡Más cerca!",
+  "it": "Più vicino!"
+ },
+ "heat.label": {
+  "tr": "Son tahmin ne kadar yakın",
+  "en": "How close the last guess is",
+  "de": "Wie nah der letzte Versuch ist",
+  "fr": "Proximité de la dernière proposition",
+  "es": "Cercanía del último intento",
+  "it": "Vicinanza dell'ultimo tentativo"
+ },
+ "empty.pool.province": {
+  "tr": "Gizli il, {n} il arasından biri.",
+  "en": "The hidden province is one of {n}.",
+  "de": "Die gesuchte Provinz ist eine von {n}.",
+  "fr": "La province cachée est l'une des {n}.",
+  "es": "La provincia oculta es una de {n}.",
+  "it": "La provincia nascosta è una delle {n}."
+ },
+ "empty.pool.country": {
+  "tr": "Gizli ülke, {n} ülke arasından biri.",
+  "en": "The hidden country is one of {n}.",
+  "de": "Das gesuchte Land ist eines von {n}.",
+  "fr": "Le pays caché est l'un des {n}.",
+  "es": "El país oculto es uno de {n}.",
+  "it": "Il paese nascosto è uno dei {n}."
+ },
+ "empty.start": {
+  "tr": "İlk tahminini yap; harita, ne kadar yakın olduğunu renklerle gösterecek.",
+  "en": "Make your first guess; the map will show with colors how close you are.",
+  "de": "Gib deinen ersten Tipp ab; die Karte zeigt dir mit Farben, wie nah du bist.",
+  "fr": "Fais ta première proposition ; la carte te montrera en couleurs si tu es proche.",
+  "es": "Haz tu primer intento; el mapa te mostrará con colores lo cerca que estás.",
+  "it": "Fai il tuo primo tentativo; la mappa ti mostrerà con i colori quanto sei vicino."
+ },
+ "tip.1": {
+  "tr": "Önce haritanın ortasından bir yer dene; renk, hangi yöne gideceğini söyler.",
+  "en": "Start with a place in the middle of the map; the color tells you which way to go.",
+  "de": "Beginne mit einem Ort in der Mitte der Karte; die Farbe zeigt dir die Richtung.",
+  "fr": "Commence par un lieu au centre de la carte ; la couleur t'indique la direction.",
+  "es": "Empieza por un lugar en el centro del mapa; el color te indica hacia dónde ir.",
+  "it": "Inizia da un luogo al centro della mappa; il colore ti dice dove andare."
+ },
+ "tip.2": {
+  "tr": "Koyu kırmızı komşu demek: gizli yer onun hemen yanında.",
+  "en": "Dark red means neighbor: the hidden place borders it.",
+  "de": "Dunkelrot heißt Nachbar: der gesuchte Ort grenzt direkt daran.",
+  "fr": "Rouge foncé signifie voisin : le lieu caché le touche.",
+  "es": "Rojo oscuro significa vecino: el lugar oculto limita con él.",
+  "it": "Rosso scuro significa confinante: il luogo nascosto lo tocca."
+ },
+ "tip.3": {
+  "tr": "Takılırsan ipucu alabilirsin; her ipucu puanı biraz azaltır.",
+  "en": "Stuck? Take a hint; each hint lowers your points a little.",
+  "de": "Kommst du nicht weiter? Nimm einen Hinweis; jeder kostet ein paar Punkte.",
+  "fr": "Bloqué ? Prends un indice ; chacun réduit un peu tes points.",
+  "es": "¿Atascado? Pide una pista; cada una resta algunos puntos.",
+  "it": "Bloccato? Chiedi un indizio; ognuno toglie qualche punto."
+ },
+ "tip.4": {
+  "tr": "Listeden bir tahmini seçince harita oraya gider.",
+  "en": "Select a guess in the list and the map flies there.",
+  "de": "Wähle einen Eintrag in der Liste, und die Karte fliegt dorthin.",
+  "fr": "Choisis une proposition dans la liste et la carte s'y rend.",
+  "es": "Elige un intento de la lista y el mapa irá allí.",
+  "it": "Scegli un tentativo nella lista e la mappa ci va."
+ },
+ "badges.title": {
+  "tr": "Rozetler",
+  "en": "Badges",
+  "de": "Abzeichen",
+  "fr": "Badges",
+  "es": "Insignias",
+  "it": "Medaglie"
+ },
+ "badges.count": {
+  "tr": "{n}/{total} kazanıldı",
+  "en": "{n}/{total} earned",
+  "de": "{n}/{total} erhalten",
+  "fr": "{n}/{total} obtenus",
+  "es": "{n}/{total} conseguidas",
+  "it": "{n}/{total} ottenute"
+ },
+ "badges.new": {
+  "tr": "Yeni rozet!",
+  "en": "New badge!",
+  "de": "Neues Abzeichen!",
+  "fr": "Nouveau badge !",
+  "es": "¡Nueva insignia!",
+  "it": "Nuova medaglia!"
+ },
+ "badge.firstWin.name": {
+  "tr": "İlk Zafer",
+  "en": "First Win",
+  "de": "Erster Sieg",
+  "fr": "Première victoire",
+  "es": "Primera victoria",
+  "it": "Prima vittoria"
+ },
+ "badge.firstWin.desc": {
+  "tr": "İlk bulmacanı çöz.",
+  "en": "Solve your first puzzle.",
+  "de": "Löse dein erstes Rätsel.",
+  "fr": "Résous ta première énigme.",
+  "es": "Resuelve tu primer reto.",
+  "it": "Risolvi il tuo primo enigma."
+ },
+ "badge.sharp.name": {
+  "tr": "Keskin Göz",
+  "en": "Sharp Eye",
+  "de": "Adlerauge",
+  "fr": "Œil de lynx",
+  "es": "Ojo de halcón",
+  "it": "Occhio di lince"
+ },
+ "badge.sharp.desc": {
+  "tr": "3 ya da daha az tahminde bul.",
+  "en": "Find it in 3 guesses or fewer.",
+  "de": "Finde es in höchstens 3 Versuchen.",
+  "fr": "Trouve-le en 3 propositions ou moins.",
+  "es": "Acierta en 3 intentos o menos.",
+  "it": "Trovalo in 3 tentativi o meno."
+ },
+ "badge.ace.name": {
+  "tr": "Tek Atış",
+  "en": "One Shot",
+  "de": "Volltreffer",
+  "fr": "Du premier coup",
+  "es": "A la primera",
+  "it": "Al primo colpo"
+ },
+ "badge.ace.desc": {
+  "tr": "İlk tahminde bul.",
+  "en": "Find it on the first guess.",
+  "de": "Finde es beim ersten Versuch.",
+  "fr": "Trouve-le à la première proposition.",
+  "es": "Acierta en el primer intento.",
+  "it": "Trovalo al primo tentativo."
+ },
+ "badge.streak3.name": {
+  "tr": "Isınma Turu",
+  "en": "Warming Up",
+  "de": "Aufgewärmt",
+  "fr": "Échauffement",
+  "es": "Calentando",
+  "it": "Riscaldamento"
+ },
+ "badge.streak3.desc": {
+  "tr": "Günlük bulmacayı 3 gün üst üste çöz.",
+  "en": "Solve the daily puzzle 3 days in a row.",
+  "de": "Löse das Tagesrätsel 3 Tage in Folge.",
+  "fr": "Résous l'énigme du jour 3 jours de suite.",
+  "es": "Resuelve el reto diario 3 días seguidos.",
+  "it": "Risolvi l'enigma del giorno 3 giorni di fila."
+ },
+ "badge.streak7.name": {
+  "tr": "Bir Hafta",
+  "en": "One Week",
+  "de": "Eine Woche",
+  "fr": "Une semaine",
+  "es": "Una semana",
+  "it": "Una settimana"
+ },
+ "badge.streak7.desc": {
+  "tr": "Günlük bulmacayı 7 gün üst üste çöz.",
+  "en": "Solve the daily puzzle 7 days in a row.",
+  "de": "Löse das Tagesrätsel 7 Tage in Folge.",
+  "fr": "Résous l'énigme du jour 7 jours de suite.",
+  "es": "Resuelve el reto diario 7 días seguidos.",
+  "it": "Risolvi l'enigma del giorno 7 giorni di fila."
+ },
+ "badge.streak30.name": {
+  "tr": "Bir Ay",
+  "en": "One Month",
+  "de": "Ein Monat",
+  "fr": "Un mois",
+  "es": "Un mes",
+  "it": "Un mese"
+ },
+ "badge.streak30.desc": {
+  "tr": "Günlük bulmacayı 30 gün üst üste çöz.",
+  "en": "Solve the daily puzzle 30 days in a row.",
+  "de": "Löse das Tagesrätsel 30 Tage in Folge.",
+  "fr": "Résous l'énigme du jour 30 jours de suite.",
+  "es": "Resuelve el reto diario 30 días seguidos.",
+  "it": "Risolvi l'enigma del giorno 30 giorni di fila."
+ },
+ "badge.wins10.name": {
+  "tr": "Gezgin",
+  "en": "Traveler",
+  "de": "Reisender",
+  "fr": "Voyageur",
+  "es": "Viajero",
+  "it": "Viaggiatore"
+ },
+ "badge.wins10.desc": {
+  "tr": "10 bulmaca çöz.",
+  "en": "Solve 10 puzzles.",
+  "de": "Löse 10 Rätsel.",
+  "fr": "Résous 10 énigmes.",
+  "es": "Resuelve 10 retos.",
+  "it": "Risolvi 10 enigmi."
+ },
+ "badge.wins50.name": {
+  "tr": "Seyyah",
+  "en": "Globetrotter",
+  "de": "Weltenbummler",
+  "fr": "Globe-trotteur",
+  "es": "Trotamundos",
+  "it": "Giramondo"
+ },
+ "badge.wins50.desc": {
+  "tr": "50 bulmaca çöz.",
+  "en": "Solve 50 puzzles.",
+  "de": "Löse 50 Rätsel.",
+  "fr": "Résous 50 énigmes.",
+  "es": "Resuelve 50 retos.",
+  "it": "Risolvi 50 enigmi."
+ },
+ "badge.wins100.name": {
+  "tr": "Atlas Ustası",
+  "en": "Atlas Master",
+  "de": "Atlas-Meister",
+  "fr": "Maître de l'Atlas",
+  "es": "Maestro del Atlas",
+  "it": "Maestro dell'Atlas"
+ },
+ "badge.wins100.desc": {
+  "tr": "100 bulmaca çöz.",
+  "en": "Solve 100 puzzles.",
+  "de": "Löse 100 Rätsel.",
+  "fr": "Résous 100 énigmes.",
+  "es": "Resuelve 100 retos.",
+  "it": "Risolvi 100 enigmi."
+ },
+ "badge.allCategories.name": {
+  "tr": "Dünya Turu",
+  "en": "World Tour",
+  "de": "Weltreise",
+  "fr": "Tour du monde",
+  "es": "Vuelta al mundo",
+  "it": "Giro del mondo"
+ },
+ "badge.allCategories.desc": {
+  "tr": "8 kategorinin hepsinde en az bir bulmaca çöz.",
+  "en": "Solve at least one puzzle in all 8 categories.",
+  "de": "Löse in allen 8 Kategorien mindestens ein Rätsel.",
+  "fr": "Résous au moins une énigme dans les 8 catégories.",
+  "es": "Resuelve al menos un reto en las 8 categorías.",
+  "it": "Risolvi almeno un enigma in tutte le 8 categorie."
+ },
+ "badge.explorer.name": {
+  "tr": "{cat} Kâşifi",
+  "en": "{cat} Explorer",
+  "de": "Entdecker: {cat}",
+  "fr": "Explorateur : {cat}",
+  "es": "Explorador: {cat}",
+  "it": "Esploratore: {cat}"
+ },
+ "badge.explorer.desc.province": {
+  "tr": "{n} ilin hepsini bul.",
+  "en": "Find all {n} provinces.",
+  "de": "Finde alle {n} Provinzen.",
+  "fr": "Trouve les {n} provinces.",
+  "es": "Encuentra las {n} provincias.",
+  "it": "Trova tutte le {n} province."
+ },
+ "badge.explorer.desc.country": {
+  "tr": "{n} ülkenin hepsini bul.",
+  "en": "Find all {n} countries.",
+  "de": "Finde alle {n} Länder.",
+  "fr": "Trouve les {n} pays.",
+  "es": "Encuentra los {n} países.",
+  "it": "Trova tutti i {n} paesi."
+ },
+ "set.sound": {
+  "tr": "Sesler",
+  "en": "Sounds",
+  "de": "Töne",
+  "fr": "Sons",
+  "es": "Sonidos",
+  "it": "Suoni"
+ },
+ "set.soundHint": {
+  "tr": "Her tahminde kısa bir ton; yaklaştıkça incelir.",
+  "en": "A short tone on each guess; it gets higher as you get closer.",
+  "de": "Ein kurzer Ton bei jedem Versuch; je näher, desto höher.",
+  "fr": "Un bref son à chaque proposition ; plus aigu quand tu approches.",
+  "es": "Un tono corto en cada intento; más agudo cuanto más cerca.",
+  "it": "Un breve suono a ogni tentativo; più acuto quando ti avvicini."
+ },
+ "set.haptics": {
+  "tr": "Titreşim",
+  "en": "Haptics",
+  "de": "Vibration",
+  "fr": "Vibrations",
+  "es": "Vibración",
+  "it": "Vibrazione"
+ },
+ "set.hapticsHint": {
+  "tr": "Yaklaşınca hafif, bulunca güçlü titreşim.",
+  "en": "A light tap when you get closer, a strong one when you find it.",
+  "de": "Leichtes Vibrieren beim Näherkommen, starkes beim Finden.",
+  "fr": "Vibration légère quand tu approches, forte quand tu trouves.",
+  "es": "Vibración suave al acercarte y fuerte al acertar.",
+  "it": "Vibrazione leggera quando ti avvicini, forte quando lo trovi."
  }
 }
