@@ -2686,5 +2686,93 @@
   "fr": "Rejoindre",
   "es": "Unirse",
   "it": "Entra"
+ },
+ "party.on": {
+  "tr": "Parti modunu aç",
+  "en": "Start party mode",
+  "de": "Partymodus starten",
+  "fr": "Activer le mode fête",
+  "es": "Activar modo fiesta",
+  "it": "Attiva modalità festa"
+ },
+ "party.off": {
+  "tr": "Parti modunu kapat",
+  "en": "End party mode",
+  "de": "Partymodus beenden",
+  "fr": "Désactiver le mode fête",
+  "es": "Desactivar modo fiesta",
+  "it": "Disattiva modalità festa"
+ },
+ "party.title": {
+  "tr": "Parti modu",
+  "en": "Party mode",
+  "de": "Partymodus",
+  "fr": "Mode fête",
+  "es": "Modo fiesta",
+  "it": "Modalità festa"
+ },
+ "party.empty": {
+  "tr": "Telefonlardan Atlas → ••• → TV'ye söyle ile katılın. Herkes sırayla tahmin eder; gizli yeri bulan puan alır.",
+  "en": "Join from your phones: Atlas → ••• → Say it on TV. Take turns guessing; whoever finds the hidden place scores.",
+  "de": "Mit dem Telefon beitreten: Atlas → ••• → Am TV sagen. Reihum raten; wer den Ort findet, punktet.",
+  "fr": "Rejoignez depuis vos téléphones : Atlas → ••• → Dire à la TV. Chacun son tour ; qui trouve le lieu marque un point.",
+  "es": "Uníos desde los móviles: Atlas → ••• → Decir en la TV. Por turnos; quien encuentre el lugar suma un punto.",
+  "it": "Entrate dai telefoni: Atlas → ••• → Di' alla TV. A turno; chi trova il luogo fa punto."
+ },
+ "party.player": {
+  "tr": "Oyuncu {n}",
+  "en": "Player {n}",
+  "de": "Spieler {n}",
+  "fr": "Joueur {n}",
+  "es": "Jugador {n}",
+  "it": "Giocatore {n}"
+ },
+ "party.notYourTurn": {
+  "tr": "Sıra {name} oyuncusunda.",
+  "en": "It's {name}'s turn.",
+  "de": "{name} ist dran.",
+  "fr": "C'est au tour de {name}.",
+  "es": "Es el turno de {name}.",
+  "it": "Tocca a {name}."
+ },
+ "party.found": {
+  "tr": "🎉 {name} buldu: {place}!",
+  "en": "🎉 {name} found it: {place}!",
+  "de": "🎉 {name} hat es: {place}!",
+  "fr": "🎉 {name} a trouvé : {place} !",
+  "es": "🎉 ¡{name} lo encontró: {place}!",
+  "it": "🎉 {name} l'ha trovato: {place}!"
+ },
+ "party.yourTurn": {
+  "tr": "Sıra sende!",
+  "en": "Your turn!",
+  "de": "Du bist dran!",
+  "fr": "À toi !",
+  "es": "¡Te toca!",
+  "it": "Tocca a te!"
+ },
+ "party.turnOf": {
+  "tr": "Sıra: {name}",
+  "en": "Turn: {name}",
+  "de": "Am Zug: {name}",
+  "fr": "Au tour de : {name}",
+  "es": "Turno de: {name}",
+  "it": "Turno di: {name}"
+ },
+ "party.yourName": {
+  "tr": "Adın:",
+  "en": "Your name:",
+  "de": "Dein Name:",
+  "fr": "Ton nom :",
+  "es": "Tu nombre:",
+  "it": "Il tuo nome:"
+ },
+ "party.namePlaceholder": {
+  "tr": "ör. Azi",
+  "en": "e.g. Sam",
+  "de": "z. B. Max",
+  "fr": "ex. Léa",
+  "es": "p. ej. Lucía",
+  "it": "es. Giulia"
  }
 }

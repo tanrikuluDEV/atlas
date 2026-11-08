@@ -10,6 +10,7 @@ struct VoiceRemoteView: View {
     @State private var releaseHaptic = UIImpactFeedbackGenerator(style: .light)
     /// Pes et ilk basışta onay ister; birkaç saniye içinde ikinci basış gerekir.
     @State private var confirmGiveUp = false
+    @State private var nameDraft = ""
     @Environment(\.dismiss) private var dismiss
 
     var body: some View {
@@ -21,6 +22,7 @@ struct VoiceRemoteView: View {
                     hintButton
                 }
                 status
+                if remote.connection == .connected && remote.party { partyBox }
                 Spacer()
                 micButton
                 Text(caption)
@@ -73,6 +75,7 @@ struct VoiceRemoteView: View {
                     case "hint": remote.requestHint()
                     case "giveup": remote.requestGiveUp()
                     case "newgame": remote.requestNewGame()
+                    case let c where c.hasPrefix("name:"): remote.playerName = String(c.dropFirst(5))
                     case let c where c.hasPrefix("cat:"):
                         if let cat = GameCategory(rawValue: String(c.dropFirst(4))) { remote.requestCategory(cat) }
                     default: remote.debugSend(String(t))
@@ -86,6 +89,38 @@ struct VoiceRemoteView: View {
 
     private func hideKeyboard() {
         UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+    }
+
+    /// Parti modu: sıra kimde, skorlar ve bu telefonun adı.
+    private var partyBox: some View {
+        VStack(spacing: 8) {
+            Text(remote.yourTurn ? L("party.yourTurn") : L("party.turnOf", ["name": remote.turn ?? "…"]))
+                .font(.title3.weight(.bold))
+                .foregroundStyle(remote.yourTurn ? ColorScale.found : .secondary)
+            HStack(spacing: 14) {
+                ForEach(remote.partyPlayers, id: \.name) { p in
+                    VStack(spacing: 0) {
+                        Text("\(p.score)").font(Brand.heading(.title3)).monospacedDigit()
+                        Text(p.name).font(.caption).lineLimit(1)
+                            .fontWeight(p.name == remote.turn ? .bold : .regular)
+                    }
+                }
+            }
+            HStack(spacing: 6) {
+                Text(L("party.yourName")).font(.footnote).foregroundStyle(.secondary)
+                TextField(L("party.namePlaceholder"), text: $nameDraft)
+                    .textFieldStyle(.roundedBorder)
+                    .font(.footnote)
+                    .frame(maxWidth: 160)
+                    .submitLabel(.done)
+                    .onSubmit { remote.playerName = nameDraft.trimmingCharacters(in: .whitespaces) }
+            }
+        }
+        .padding(12)
+        .frame(maxWidth: .infinity)
+        .background(Brand.orange.opacity(0.12), in: RoundedRectangle(cornerRadius: 12))
+        .onAppear { nameDraft = remote.playerName }
+        .onChange(of: remote.playerName) { nameDraft = remote.playerName }
     }
 
     private var status: some View {
@@ -137,7 +172,8 @@ struct VoiceRemoteView: View {
     }
 
     private var micButton: some View {
-        let enabled = remote.connection == .connected
+        // Parti modunda yalnızca sıra bu telefondayken konuşulur.
+        let enabled = remote.connection == .connected && (!remote.party || remote.yourTurn)
         return ZStack {
             Circle()
                 .fill(Brand.orange.opacity(pressing ? 0.25 : 0))

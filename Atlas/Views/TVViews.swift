@@ -37,6 +37,13 @@ struct TVHeader: View {
                     if game.mode != .daily {
                         Button { game.newRound() } label: { Label(L("newGame"), systemImage: "arrow.clockwise") }
                     }
+                    Button {
+                        VoiceHost.shared.partyOn.toggle()
+                        // Parti modu sınırsız turlarla oynanır: günlükteyse alıştırmaya geçilir.
+                        if VoiceHost.shared.partyOn && game.mode == .daily { game.switchMode(.practice) }
+                    } label: {
+                        Label(L(VoiceHost.shared.partyOn ? "party.off" : "party.on"), systemImage: "person.3.fill")
+                    }
                     Button { showStats = true } label: { Label(L("stats"), systemImage: "chart.bar.fill") }
                     Button { showSettings = true } label: { Label(L("settings"), systemImage: "gearshape") }
                     Button { showHelp = true } label: { Label(L("help"), systemImage: "questionmark.circle") }
@@ -126,6 +133,8 @@ struct TVGuessInput: View {
                 FileHandle.standardError.write(Data("VOICE \(t) → \(game.places.voiceMatch(String(t)) { _ in true })\n".utf8))
             }
             if env["ATLAS_PRACTICE"] != nil { game.newPractice() }
+            // ATLAS_PARTY: parti modunu açar (birkaç telefon simülatörüyle sıra ve skoru denemek için).
+            if env["ATLAS_PARTY"] != nil { VoiceHost.shared.partyOn = true; game.switchMode(.practice) }
             DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                 for t in env["ATLAS_GUESSES"]?.split(separator: "|") ?? [] {
                     text = String(t)
@@ -144,6 +153,11 @@ struct TVGuessInput: View {
         .onChange(of: voice.incoming?.id) {
             if let spoken = voice.incoming, !game.isOver {
                 voice.handledID = spoken.id
+                // Parti modunda yalnızca sırası gelen oyuncunun tahmini girilir.
+                if voice.partyOn, let player = spoken.player, let current = voice.currentPlayer, player != current {
+                    voice.reply(L("party.notYourTurn", ["name": current]), to: player)
+                    return
+                }
                 fromPhone(spoken.text, alternatives: spoken.alternatives)
             }
         }
@@ -164,7 +178,11 @@ struct TVGuessInput: View {
         if !choices.isEmpty {
             voice.reply(L("tv.didYouMean") + " " + choices.map(\.name).joined(separator: " · "))
         } else if game.status == .won {
-            voice.reply("\(L("over.won")) \(game.answer.name)")
+            if voice.partyOn, let who = voice.currentPlayer {
+                voice.reply(L("party.found", ["name": who, "place": game.answer.name]))
+            } else {
+                voice.reply("\(L("over.won")) \(game.answer.name)")
+            }
         } else if let message = game.message {
             voice.reply(message)
         } else if let last = game.lastGuess {
@@ -209,6 +227,17 @@ struct TVVoiceBridge: ViewModifier {
             .onChange(of: game.category) { sync() }
             .onChange(of: hintsLeft) { sync() }
             .onChange(of: game.isOver) { sync() }
+            // Parti modu: geçerli her tahminden sonra sıra döner; bulan oyuncu puan alır.
+            .onChange(of: game.guesses.count) { old, new in
+                guard voice.partyOn, new > old else { return }
+                if game.status == .won { voice.award(voice.currentPlayer) }
+                voice.advanceTurn()
+            }
+            .onChange(of: game.timedFound.count) { old, new in
+                guard voice.partyOn, new > old else { return }
+                voice.award(voice.currentPlayer)
+                voice.advanceTurn()
+            }
             .onChange(of: voice.incoming?.id) {
                 // Oyun sürerken adları tahmin kutusu (`TVGuessInput`) işler; o işlemediyse oyun bitmiştir.
                 guard let id = voice.incoming?.id else { return }
@@ -218,6 +247,12 @@ struct TVVoiceBridge: ViewModifier {
             }
             .onChange(of: voice.command?.id) {
                 guard let kind = voice.command?.kind else { return }
+                // Parti modunda ipucu ve pes etme yalnızca sırası gelen oyuncudan.
+                if voice.partyOn, kind == .hint || kind == .giveUp, let player = voice.command?.player,
+                   let current = voice.currentPlayer, player != current {
+                    voice.reply(L("party.notYourTurn", ["name": current]), to: player)
+                    return
+                }
                 switch kind {
                 case .hint: hint()
                 case .newGame:
@@ -248,6 +283,46 @@ struct TVVoiceBridge: ViewModifier {
         withAnimation { game.useHint() }
         sync()
         voice.reply("💡 " + game.hints[game.hintsUsed - 1])
+    }
+}
+
+/// Parti modu paneli: oyuncular, skorlar ve sıradaki oyuncu (TV'nin sağ sütununda).
+struct TVPartyPanel: View {
+    @State private var voice = VoiceHost.shared
+
+    var body: some View {
+        if voice.partyOn {
+            VStack(alignment: .leading, spacing: 10) {
+                Label(L("party.title"), systemImage: "person.3.fill")
+                    .font(.headline)
+                    .foregroundStyle(Brand.accent)
+                if voice.players.isEmpty {
+                    Text(L("party.empty"))
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
+                        .fixedSize(horizontal: false, vertical: true)
+                } else {
+                    // Yer kaplamasın diye oyuncular yan yana; sırası gelen turuncu.
+                    FlowLayout(spacing: 10) {
+                        ForEach(voice.players, id: \.self) { name in
+                            let isTurn = name == voice.currentPlayer
+                            HStack(spacing: 8) {
+                                Text(name).fontWeight(isTurn ? .bold : .regular).lineLimit(1)
+                                Text("\(voice.scores[name] ?? 0)").font(Brand.heading(.headline)).monospacedDigit()
+                            }
+                            .font(.caption)
+                            .padding(.horizontal, 12)
+                            .padding(.vertical, 6)
+                            .foregroundStyle(isTurn ? Color.white : Color.primary)
+                            .background(isTurn ? AnyShapeStyle(Brand.accent) : AnyShapeStyle(Color.primary.opacity(0.1)), in: Capsule())
+                        }
+                    }
+                }
+            }
+            .padding(14)
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .background(Brand.accent.opacity(0.1), in: RoundedRectangle(cornerRadius: 14))
+        }
     }
 }
 

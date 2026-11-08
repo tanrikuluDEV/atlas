@@ -28,6 +28,8 @@ enum VoiceLink {
             case giveUp
             /// iPhone → TV: kategoriyi değiştir (`category`).
             case setCategory
+            /// iPhone → TV: oyuncunun adı (`text`; parti modunda sıra ve skor için).
+            case join
         }
         var kind: Kind
         var text: String?
@@ -38,6 +40,12 @@ enum VoiceLink {
         var hintsLeft: Int?
         /// TV → iPhone: oyun bitti mi (yeni oyun / pes et düğmeleri için).
         var over: Bool?
+        /// TV → iPhone: parti modu açık mı; sıradaki oyuncu, sıra bu telefonda mı, skorlar (katılma sırasıyla).
+        var party: Bool?
+        var turn: String?
+        var yourTurn: Bool?
+        var players: [String]?
+        var scores: [Int]?
     }
 
     /// Tek bir TCP bağlantısı: mesajları satır sonuyla ayırarak gönderir ve okur. Tüm geri çağrılar ana kuyrukta.
@@ -102,29 +110,76 @@ enum VoiceLink {
 import Network
 
 /// Apple TV tarafı: ağda kendini duyurur (Bonjour), gelen iPhone bağlantılarını kabul eder, söylenen adları iletir.
+/// Parti modunda bağlı telefonlar birer oyuncudur: sırayla tahmin ederler, gizli yeri bulan puan alır.
 @Observable
 final class VoiceHost {
     static let shared = VoiceHost()
 
     /// Bağlı iPhone sayısı (TV'de "iPhone bağlı" göstergesi için).
     private(set) var connectedCount = 0
-    /// Son gelen ad ve olası diğer yazımları; her gelişte yeni kimlik alır, böylece aynı ad iki kez söylenince de işlenir.
-    private(set) var incoming: (id: UUID, text: String, alternatives: [String])?
+    /// Son gelen ad, olası diğer yazımları ve gönderen oyuncu; her gelişte yeni kimlik alır, böylece aynı ad iki kez söylenince de işlenir.
+    private(set) var incoming: (id: UUID, text: String, alternatives: [String], player: String?)?
     /// Tahmin kutusunun işlediği son ad (işlenmediyse oyun bitmiştir).
     @ObservationIgnored var handledID: UUID?
     /// Telefondan son istek (ipucu, yeni oyun, pes et); her istekte yeni kimlik alır.
-    private(set) var command: (id: UUID, kind: VoiceLink.Message.Kind, category: String?)?
+    private(set) var command: (id: UUID, kind: VoiceLink.Message.Kind, category: String?, player: String?)?
     /// Telefona hangi kategorinin adlarını ipucu olarak vereceğini söylemek için.
-    var category: String = "" { didSet { if category != oldValue { broadcast(hello) } } }
+    var category: String = "" { didSet { if category != oldValue { broadcastHello() } } }
     /// Kalan ipucu sayısı; değişince telefondaki ampul düğmesi güncellenir.
-    var hintsLeft = 0 { didSet { if hintsLeft != oldValue { broadcast(hello) } } }
+    var hintsLeft = 0 { didSet { if hintsLeft != oldValue { broadcastHello() } } }
     /// Oyun bitti mi; değişince telefondaki düğmeler güncellenir.
-    var isOver = false { didSet { if isOver != oldValue { broadcast(hello) } } }
+    var isOver = false { didSet { if isOver != oldValue { broadcastHello() } } }
+
+    // MARK: Parti modu
+
+    /// Parti modu: telefonlar sırayla tahmin eder.
+    var partyOn = false {
+        didSet {
+            guard partyOn != oldValue else { return }
+            scores = [:]
+            turn = 0
+            broadcastHello()
+        }
+    }
+    /// Bağlı oyuncular, katılma sırasıyla (adı olmayan telefonlar "Oyuncu 2" gibi adlandırılır).
+    private(set) var players: [String] = []
+    private(set) var scores: [String: Int] = [:]
+    private(set) var turn = 0
+    /// Sırası gelen oyuncu.
+    var currentPlayer: String? { players.isEmpty ? nil : players[turn % players.count] }
+
+    /// Geçerli bir tahminden sonra sıra bir sonraki oyuncuya geçer.
+    func advanceTurn() {
+        guard partyOn, !players.isEmpty else { return }
+        turn = (turn + 1) % players.count
+        broadcastHello()
+    }
+
+    /// Gizli yeri bulan oyuncu puan alır; sonraki turu bir sonraki oyuncu başlatır.
+    func award(_ player: String?) {
+        guard partyOn, let player else { return }
+        scores[player, default: 0] += 1
+        broadcastHello()
+    }
 
     @ObservationIgnored private var listener: NWListener?
     @ObservationIgnored private var connections: [VoiceLink.Channel] = []
+    /// Bağlantı başına oyuncu adı.
+    @ObservationIgnored private var names: [ObjectIdentifier: String] = [:]
 
-    private var hello: VoiceLink.Message { VoiceLink.Message(kind: .hello, category: category, hintsLeft: hintsLeft, over: isOver) }
+    private func hello(for channel: VoiceLink.Channel) -> VoiceLink.Message {
+        var m = VoiceLink.Message(kind: .hello, category: category, hintsLeft: hintsLeft, over: isOver)
+        if partyOn {
+            m.party = true
+            m.turn = currentPlayer
+            m.yourTurn = names[ObjectIdentifier(channel)] == currentPlayer
+            m.players = players
+            m.scores = players.map { scores[$0] ?? 0 }
+        } else {
+            m.party = false
+        }
+        return m
+    }
 
     func start() {
         guard listener == nil, let l = try? NWListener(using: .tcp) else { return }
@@ -142,31 +197,81 @@ final class VoiceHost {
         listener = l
     }
 
-    func reply(_ text: String) { broadcast(VoiceLink.Message(kind: .reply, text: text, hintsLeft: hintsLeft, over: isOver)) }
+    /// Tüm telefonlara yanıt (parti modunda herkes ne olduğunu görür).
+    func reply(_ text: String) {
+        for c in connections where c.isReady {
+            var m = hello(for: c)
+            m.kind = .reply
+            m.text = text
+            c.send(m)
+        }
+    }
 
-    private func broadcast(_ message: VoiceLink.Message) {
-        for c in connections where c.isReady { c.send(message) }
+    /// Yalnızca bir oyuncunun telefonuna yanıt ("Sıra Ali'de").
+    func reply(_ text: String, to player: String) {
+        for c in connections where c.isReady && names[ObjectIdentifier(c)] == player {
+            var m = hello(for: c)
+            m.kind = .reply
+            m.text = text
+            c.send(m)
+        }
+    }
+
+    private func broadcastHello() {
+        for c in connections where c.isReady { c.send(hello(for: c)) }
+    }
+
+    /// Oyuncu listesini bağlı telefonlardan yeniden kurar (katılma sırası korunur).
+    private func refreshPlayers() {
+        let current = currentPlayer
+        let ready = connections.filter(\.isReady).compactMap { names[ObjectIdentifier($0)] }
+        players = players.filter(ready.contains) + ready.filter { !players.contains($0) }
+        if let current, let i = players.firstIndex(of: current) { turn = i } else if !players.isEmpty { turn %= players.count }
+        connectedCount = connections.filter(\.isReady).count
+        broadcastHello()
+    }
+
+    /// Aynı adla ikinci bir telefon gelirse adın sonuna sayı eklenir.
+    private func uniqueName(_ raw: String, for channel: VoiceLink.Channel) -> String {
+        let base = raw.trimmingCharacters(in: .whitespacesAndNewlines).prefix(20)
+        let others = Set(names.filter { $0.key != ObjectIdentifier(channel) }.values)
+        var name = base.isEmpty ? L("party.player", ["n": names.count + 1]) : String(base)
+        var n = 2
+        while others.contains(name) { name = "\(base.isEmpty ? L("party.player", ["n": 0]) : String(base)) \(n)"; n += 1 }
+        return name
     }
 
     private func accept(_ connection: NWConnection) {
         let channel = VoiceLink.Channel(connection)
+        let key = ObjectIdentifier(channel)
         channel.onReady = { [weak self, weak channel] in
             guard let self, let channel else { return }
-            self.connectedCount = self.connections.filter(\.isReady).count
-            channel.send(self.hello)
+            if self.names[key] == nil { self.names[key] = self.uniqueName("", for: channel) }
+            self.refreshPlayers()
         }
         channel.onClose = { [weak self, weak channel] in
             guard let self else { return }
             self.connections.removeAll { $0 === channel }
-            self.connectedCount = self.connections.filter(\.isReady).count
+            self.names[key] = nil
+            self.refreshPlayers()
         }
-        channel.onMessage = { [weak self] message in
+        channel.onMessage = { [weak self, weak channel] message in
+            guard let self, let channel else { return }
+            let player = self.names[key]
             switch message.kind {
             case .guess:
                 guard let text = message.text else { return }
-                self?.incoming = (UUID(), text, message.alternatives ?? [])
+                self.incoming = (UUID(), text, message.alternatives ?? [], player)
             case .hint, .newGame, .giveUp, .setCategory:
-                self?.command = (UUID(), message.kind, message.category)
+                self.command = (UUID(), message.kind, message.category, player)
+            case .join:
+                let old = self.names[key]
+                let name = self.uniqueName(message.text ?? "", for: channel)
+                self.names[key] = name
+                // Ad değişince skor yeni ada taşınır.
+                if let old, old != name, let score = self.scores.removeValue(forKey: old) { self.scores[name] = score }
+                if let old, let i = self.players.firstIndex(of: old) { self.players[i] = name }
+                self.refreshPlayers()
             case .hello, .reply:
                 break
             }
@@ -206,6 +311,20 @@ final class VoiceRemote {
     private(set) var tvOver = false
     /// Bağlanılan Apple TV'nin adı.
     private(set) var tvName: String?
+    /// Parti modu: TV'de açık mı, sıra kimde, sıra bu telefonda mı, oyuncular ve skorları.
+    private(set) var party = false
+    private(set) var turn: String?
+    private(set) var yourTurn = false
+    private(set) var partyPlayers: [(name: String, score: Int)] = []
+
+    static let playerNameKey = "voice.playerName"
+    /// Parti modunda TV'de görünen ad.
+    var playerName: String = UserDefaults.standard.string(forKey: VoiceRemote.playerNameKey) ?? "" {
+        didSet {
+            UserDefaults.standard.set(playerName, forKey: Self.playerNameKey)
+            send(VoiceLink.Message(kind: .join, text: playerName))
+        }
+    }
 
     @ObservationIgnored private var browser: NWBrowser?
     @ObservationIgnored private var channel: VoiceLink.Channel?
@@ -275,7 +394,11 @@ final class VoiceRemote {
         connection = .connecting
         tvName = Self.name(of: found)
         let c = VoiceLink.Channel(NWConnection(to: found, using: .tcp))
-        c.onReady = { [weak self] in self?.connection = .connected }
+        c.onReady = { [weak self] in
+            guard let self else { return }
+            self.connection = .connected
+            self.send(VoiceLink.Message(kind: .join, text: self.playerName))
+        }
         c.onClose = { [weak self, weak c] in
             guard let self, self.channel === c else { return }
             self.channel = nil
@@ -290,7 +413,14 @@ final class VoiceRemote {
                 self.tvCategory = message.category.flatMap(GameCategory.init(rawValue:))
                 self.prepareCustomModel()
             case .reply: self.reply = message.text
-            case .guess, .hint, .newGame, .giveUp, .setCategory: break
+            case .guess, .hint, .newGame, .giveUp, .setCategory, .join: break
+            }
+            if let party = message.party {
+                self.party = party
+                self.turn = message.turn
+                self.yourTurn = message.yourTurn ?? false
+                let names = message.players ?? [], scores = message.scores ?? []
+                self.partyPlayers = zip(names, scores).map { ($0, $1) }
             }
             if let n = message.hintsLeft { self.hintsLeft = n }
             if let over = message.over {

@@ -30,8 +30,11 @@ struct ContentView: View {
         }
         // Büyük harfe çevirme, tarih ve sayı biçimleri seçili dile uysun (Türkçede "i" → "İ").
         .environment(\.locale, l10n.language.locale)
-        // Bağlantılar, düğmeler ve seçimler sistem vurgusu yerine marka turuncusuyla.
+        // Bağlantılar, düğmeler ve seçimler sistem vurgusu yerine marka turuncusuyla. Apple TV'de düğmeler
+        // tint rengiyle dolduğu için yazılar okunmuyordu; orada sistem görünümü kalır.
+        #if !os(tvOS)
         .tint(Brand.accent)
+        #endif
     }
 
     @ViewBuilder
@@ -51,6 +54,7 @@ struct ContentView: View {
                 .ignoresSafeArea(edges: [.leading, .top, .bottom])
             VStack(alignment: .leading, spacing: 24) {
                 TVHeader(game: game, showStats: $showStats, showHelp: $showHelp, showSettings: $showSettings)
+                TVPartyPanel()
                 Sidebar(game: game)
             }
             .frame(width: 480)
