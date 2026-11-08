@@ -2,9 +2,22 @@ import Foundation
 import Observation
 
 enum GameMode: String, CaseIterable, Identifiable {
-    case daily, practice
+    case daily, practice, timed, chain
     var id: String { rawValue }
     var title: String { L("mode.\(rawValue)") }
+
+    var symbol: String {
+        switch self {
+        case .daily: "calendar"
+        case .practice: "shuffle"
+        case .timed: "timer"
+        case .chain: "link"
+        }
+    }
+
+    /// Gizli yeri bulma modları; istatistikleri `Stats`'ta, puanları `Progression.points`'te.
+    var isClassic: Bool { self == .daily || self == .practice }
+    static let classic: [GameMode] = [.daily, .practice]
 }
 
 enum GameStatus: String, Codable {
@@ -57,6 +70,27 @@ final class GameModel {
     /// Bu turun uzman modu, ilk tahminde ayardan alınıp sabitlenir (tur ortasında ayar değişse de değişmez).
     private var roundExpert: Bool?
 
+    // Zamana karşı: süre ilk tahminde ya da "Başla" ile başlar; bulunan her yerden sonra yenisi gelir.
+    static let timedDuration: TimeInterval = 180
+    static let skipPenalty: TimeInterval = 10
+    private(set) var timedStart: Date?
+    /// Bitiş anı; pas geçince öne çekilir.
+    private(set) var timedEnd: Date?
+    private(set) var timedFound: [Place] = []
+    private(set) var timedSkipped: [Place] = []
+    private(set) var timedResult: TimedResult?
+    private var timerTask: Task<Void, Never>?
+
+    // Komşu zinciri: başlangıçtan bitişe komşu yerlerden bir rota kur.
+    private(set) var chainStart: Place?
+    private(set) var chainEnd: Place?
+    /// En kısa rotalardan biri (uçlar dahil); kaybedince gösterilir.
+    private(set) var chainShortest: [Place] = []
+    /// Kazanınca kurulan rota (uçlar dahil).
+    private(set) var chainPath: [Place]?
+    private var chainFromStart: [Int: Int] = [:]
+    private var chainFromEnd: [Int: Int] = [:]
+
     init() {
         let category = GameCategory(rawValue: UserDefaults.standard.string(forKey: "category") ?? "") ?? .turkey
         let today = DailyPuzzle.dayIndex(for: .now)
@@ -83,7 +117,8 @@ final class GameModel {
     var currentStats: Stats { mode == .daily ? dailyStats : practiceStats }
 
     /// Uzman modu: haritada adlar ve mesafeler gizli, yalnızca renk. Tur başlamadan ayar değişirse hemen uyar.
-    var expert: Bool { roundExpert ?? GameSettings.shared.expert }
+    /// Yalnızca günlük ve alıştırmada geçerli.
+    var expert: Bool { mode.isClassic && (roundExpert ?? GameSettings.shared.expert) }
 
     /// Mesafe kilometre olarak gösterilsin mi (ayar açık ve uzman modu kapalı).
     func showsKm(_ setting: Bool) -> Bool { setting && !expert }
@@ -128,10 +163,12 @@ final class GameModel {
     @discardableResult
     func submit(_ place: Place) -> Bool {
         guard !isOver else { return false }
+        if mode == .chain { return submitChain(place) }
         if guess(for: place) != nil {
             message = L("msg.already", ["name": place.name])
             return false
         }
+        if mode == .timed && timedStart == nil { startTimer() }
         if roundExpert == nil { roundExpert = GameSettings.shared.expert }
         let g = Guess(place: place, distance: places.distance(place, answer), order: guesses.count)
         lastImproved = guesses.isEmpty || g.distance < (closest?.distance ?? .max)
@@ -139,6 +176,12 @@ final class GameModel {
         lastGuess = g
         message = nil
         if place == answer {
+            if mode == .timed {
+                timedFound.append(place)
+                nextTimedTarget()
+                message = L("timed.found", ["name": place.name])
+                return true
+            }
             status = .won
             finish()
         }
@@ -154,6 +197,15 @@ final class GameModel {
 
     func giveUp() {
         guard !isOver else { return }
+        switch mode {
+        case .timed: finishTimed(); return
+        case .chain:
+            status = .lost
+            message = nil
+            finishChain()
+            return
+        default: break
+        }
         if roundExpert == nil { roundExpert = GameSettings.shared.expert }
         status = .lost
         message = nil
@@ -179,10 +231,25 @@ final class GameModel {
     func switchMode(_ newMode: GameMode) {
         guard newMode != mode else { return }
         mode = newMode
-        if newMode == .daily {
-            startDaily()
-        } else {
-            newPractice()
+        startMode()
+    }
+
+    /// Seçili modda baştan başlar (kategori ya da mod değişince).
+    private func startMode() {
+        switch mode {
+        case .daily: startDaily()
+        case .practice: newPractice()
+        case .timed: newTimed()
+        case .chain: newChain()
+        }
+    }
+
+    /// "Yeni oyun": alıştırma, zamana karşı ve zincirde aynı modda yeni tur; günlükten alıştırmaya geçer.
+    func newRound() {
+        switch mode {
+        case .timed: newTimed()
+        case .chain: newChain()
+        default: newPractice()
         }
     }
 
@@ -192,15 +259,12 @@ final class GameModel {
         places = PlaceSet.forCategory(newCategory)
         defaults.set(newCategory.rawValue, forKey: "category")
         loadStats()
-        if mode == .daily {
-            startDaily()
-        } else {
-            newPractice()
-        }
+        startMode()
     }
 
     func newPractice() {
         mode = .practice
+        stopTimer()
         var next = places.places.randomElement()!
         while next == answer { next = places.places.randomElement()! }
         answer = next
@@ -218,16 +282,283 @@ final class GameModel {
     }
 
     private func startDaily() {
+        stopTimer()
         dayIndex = DailyPuzzle.dayIndex(for: .now)
         answer = DailyPuzzle.answer(for: dayIndex, category: category)
         restoreDaily()
+    }
+
+    // MARK: - Zamana karşı
+
+    func newTimed() {
+        mode = .timed
+        stopTimer()
+        timedStart = nil
+        timedEnd = nil
+        timedFound = []
+        timedSkipped = []
+        timedResult = nil
+        answer = randomTimedTarget()
+        resetRound()
+    }
+
+    /// Süreyi başlatır ("Başla" düğmesi ya da ilk tahmin).
+    func startTimer() {
+        guard mode == .timed, timedStart == nil, !isOver else { return }
+        timedStart = .now
+        timedEnd = Date.now.addingTimeInterval(Self.timedDuration)
+        scheduleTimedEnd()
+    }
+
+    /// Kalan süre (başlamadıysa tam süre).
+    func timedRemaining(at date: Date = .now) -> TimeInterval {
+        guard let timedEnd else { return Self.timedDuration }
+        return max(0, timedEnd.timeIntervalSince(date))
+    }
+
+    /// Pas: gizli yer gösterilir, 10 sn düşülür, sıradaki yere geçilir.
+    func skipTimed() {
+        guard mode == .timed, !isOver else { return }
+        if timedStart == nil { startTimer() }
+        let skipped = answer
+        timedSkipped.append(skipped)
+        timedEnd = timedEnd?.addingTimeInterval(-Self.skipPenalty)
+        if timedRemaining() <= 0 { finishTimed(); return }
+        scheduleTimedEnd()
+        nextTimedTarget()
+        message = L("timed.skipped", ["name": skipped.name])
+    }
+
+    private func scheduleTimedEnd() {
+        timerTask?.cancel()
+        let remaining = timedRemaining()
+        timerTask = Task { @MainActor [weak self] in
+            try? await Task.sleep(for: .seconds(remaining))
+            guard let self, !Task.isCancelled else { return }
+            self.finishTimed()
+        }
+    }
+
+    private func stopTimer() {
+        timerTask?.cancel()
+        timerTask = nil
+    }
+
+    private func randomTimedTarget() -> Place {
+        let used = Set((timedFound + timedSkipped + [answer]).map(\.id))
+        return places.places.filter { !used.contains($0.id) }.randomElement() ?? places.places.randomElement()!
+    }
+
+    /// Bulunan ya da pas geçilen yerden sonra yeni gizli yer; tahminler sıfırlanır, süre devam eder.
+    private func nextTimedTarget() {
+        answer = randomTimedTarget()
+        guesses = []
+        lastGuess = nil
+        lastImproved = false
+        highlighted = nil
+        message = nil
+        roundID += 1
+    }
+
+    /// Süre dolunca ya da "Bitir" ile: skor kaydedilir, son gizli yer gösterilir.
+    func finishTimed() {
+        guard mode == .timed, status == .playing, timedStart != nil else { return }
+        stopTimer()
+        let before = Progression.totalXP()
+        let badgesBefore = Badges.earnedIDs()
+        var stats = TimedStats.load(category)
+        let previousBest = stats.best
+        stats.record(score: timedFound.count, skipped: timedSkipped.count)
+        stats.save(category)
+        timedResult = TimedResult(score: timedFound.count, best: stats.best,
+                                  isRecord: timedFound.count > previousBest && timedFound.count > 0)
+        status = .lost
+        message = nil
+        reward = Reward(before: LevelProgress(xp: before), after: LevelProgress(xp: Progression.totalXP()))
+        newBadges = Badges.all().filter { $0.earned && !badgesBefore.contains($0.id) }
+        showResult = true
+    }
+
+    // MARK: - Komşu zinciri
+
+    /// Bu kategoride zincir oynanabilir mi (Okyanusya'da kara sınırı neredeyse yok).
+    var chainAvailable: Bool { places.supportsChain }
+    /// En kısa rotadaki ara yer sayısı.
+    var chainOptimal: Int { max(0, chainShortest.count - 2) }
+    /// En çok tahmin hakkı: en kısa rota + 4.
+    var chainLimit: Int { chainOptimal + 4 }
+    var chainGuessesLeft: Int { max(0, chainLimit - guesses.count) }
+
+    func newChain() {
+        mode = .chain
+        stopTimer()
+        resetRound()
+        chainPath = nil
+        guard let pair = places.randomChainPair() else {
+            chainStart = nil
+            chainEnd = nil
+            chainShortest = []
+            chainFromStart = [:]
+            chainFromEnd = [:]
+            return
+        }
+        chainStart = pair.start
+        chainEnd = pair.end
+        chainShortest = pair.path
+        chainFromStart = places.hopDistances(from: pair.start)
+        chainFromEnd = places.hopDistances(from: pair.end)
+        answer = pair.end
+    }
+
+    /// Bir yerin en kısa rotaya göre durumu.
+    func chainClass(of place: Place) -> ChainClass {
+        guard let a = chainFromStart[place.id], let b = chainFromEnd[place.id] else { return .far }
+        let extra = a + b - (chainShortest.count - 1)
+        return extra == 0 ? .onPath : extra <= 2 ? .near : .far
+    }
+
+    private func submitChain(_ place: Place) -> Bool {
+        guard chainStart != nil, let end = chainEnd, let start = chainStart else { return false }
+        if place == start || place == end {
+            message = L("chain.endpoint", ["name": place.name])
+            return false
+        }
+        if guess(for: place) != nil {
+            message = L("msg.already", ["name": place.name])
+            return false
+        }
+        let cls = chainClass(of: place)
+        let g = Guess(place: place, distance: cls.rawValue, order: guesses.count)
+        lastImproved = cls == .onPath
+        guesses.append(g)
+        lastGuess = g
+        message = nil
+        let allowed = Set(guesses.map(\.place.id))
+        if let path = places.shortestPath(from: start, to: end, through: allowed) {
+            chainPath = path
+            status = .won
+            finishChain()
+        } else if guesses.count >= chainLimit {
+            status = .lost
+            finishChain()
+        }
+        return true
+    }
+
+    private func finishChain() {
+        let before = Progression.totalXP()
+        let badgesBefore = Badges.earnedIDs()
+        var stats = ChainStats.load(category)
+        stats.runs.append(ChainStats.Run(date: .now, won: status == .won, guesses: guesses.count, optimal: chainOptimal))
+        stats.save(category)
+        reward = Reward(before: LevelProgress(xp: before), after: LevelProgress(xp: Progression.totalXP()))
+        newBadges = Badges.all().filter { $0.earned && !badgesBefore.contains($0.id) }
+        showResult = true
+    }
+
+    // MARK: - Harita boyaması (moddan bağımsız; MapView bunları kullanır)
+
+    enum MapMark: Equatable {
+        case plain
+        /// Gizli yere uzaklık (km).
+        case heat(Int)
+        case found
+        case reveal
+        case chainEnd
+        case chain(ChainClass)
+        /// Kaybedilen zincirde gösterilen en kısa rota.
+        case chainHint
+    }
+
+    func mapMark(for place: Place) -> MapMark {
+        switch mode {
+        case .chain:
+            if place == chainStart || place == chainEnd { return .chainEnd }
+            if let g = guess(for: place) { return .chain(ChainClass(rawValue: g.distance) ?? .far) }
+            if status == .lost && chainShortest.contains(place) { return .chainHint }
+            return .plain
+        case .timed:
+            if timedFound.contains(place) { return .found }
+            if timedSkipped.contains(place) { return .reveal }
+        default:
+            break
+        }
+        // Rota tekrarında gizli yer ve sırası gelmemiş tahminler henüz boyanmaz.
+        if place == answer && mapRevealsAnswer {
+            if status == .won { return .found }
+            if status == .lost { return .reveal }
+        }
+        if let g = mapGuess(for: place) { return .heat(g.distance) }
+        return .plain
+    }
+
+    /// Haritada adı yazılacak yerler.
+    func mapShowsLabel(_ place: Place) -> Bool {
+        switch mode {
+        case .chain:
+            return place == chainStart || place == chainEnd || guess(for: place) != nil
+                || (status == .lost && chainShortest.contains(place))
+        case .timed:
+            if timedFound.contains(place) || timedSkipped.contains(place) { return true }
+        default:
+            break
+        }
+        return (showsGuessNames && mapGuess(for: place) != nil) || (mapRevealsAnswer && place == answer)
+    }
+
+    /// Ad yerleşim sırası: küçük olan önce yerleşir.
+    func mapLabelRank(_ place: Place) -> Int {
+        if mode == .chain {
+            if place == chainStart || place == chainEnd { return -1 }
+            return guess(for: place)?.order ?? 1_000
+        }
+        if place == answer { return -1 }
+        return mapGuess(for: place)?.distance ?? .max
+    }
+
+    /// Üzerine gelince ya da dokununca görünen etiket.
+    func mapHoverText(for place: Place, showDistance: Bool) -> String? {
+        let name = place.flaggedName
+        switch mode {
+        case .chain:
+            if place == chainStart || place == chainEnd { return name }
+            if let g = guess(for: place) {
+                return "\(name) · \(L("chain.class.\(g.distance)"))"
+            }
+            return status == .lost && chainShortest.contains(place) ? name : nil
+        case .timed:
+            if timedFound.contains(place) { return "\(name) ✓" }
+            if timedSkipped.contains(place) { return name }
+        default:
+            break
+        }
+        // Uzman modunda oyun sürerken adlar ve mesafeler gizli.
+        if !showsGuessNames { return nil }
+        if let g = mapGuess(for: place) {
+            if place == answer { return "\(name) ✓" }
+            if g.distance == 0 { return "\(name) · \(L("neighbor"))" }
+            return showsKm(showDistance) ? "\(name) · \(TurkishText.formatKm(g.distance))" : name
+        }
+        return mapRevealsAnswer ? name : nil
+    }
+
+    /// Ses için tahminin yakınlığı 0…1.
+    func feedbackProximity(of guess: Guess) -> Double {
+        if mode == .chain {
+            switch ChainClass(rawValue: guess.distance) ?? .far {
+            case .onPath: return 1
+            case .near: return 0.6
+            case .far: return 0.2
+            }
+        }
+        return 1 - min(1, max(0, sqrt(Double(guess.distance) / Double(max(places.maxDistance, 1)))))
     }
 
     // MARK: - Rota tekrarı
 
     /// Tahminleri sırasıyla haritada yeniden oynatır; harita her adımda o yere uçar ve parlar.
     func startReplay() {
-        guard isOver, replayLength > 0 else { return }
+        guard mode.isClassic, isOver, replayLength > 0 else { return }
         stopReplay()
         let total = replayLength
         // Uzun oyunlarda adımlar kısalır; tekrar en fazla ~12 sn sürer.
@@ -296,6 +627,8 @@ final class GameModel {
             practiceStats.recordPractice(won: won, guesses: guesses.count, hints: hintsUsed, answerID: answer.id,
                                          expert: expert)
             practiceStats.save(key: Stats.key(category: category, mode: .practice))
+        case .timed, .chain:
+            break
         }
         reward = Reward(before: LevelProgress(xp: before), after: LevelProgress(xp: Progression.totalXP()))
         newBadges = Badges.all().filter { $0.earned && !badgesBefore.contains($0.id) }
@@ -347,6 +680,21 @@ final class GameModel {
     // MARK: - Paylaşım
 
     var shareText: String {
+        switch mode {
+        case .timed:
+            let squares = String(repeating: "🟩", count: timedFound.count) + String(repeating: "⏭️", count: timedSkipped.count)
+            return "Atlas · \(category.title) · \(L("mode.timed"))\n\(L("share.timed", ["n": timedFound.count]))\n\(squares)"
+        case .chain:
+            guard let start = chainStart, let end = chainEnd else { return "Atlas" }
+            let squares = guesses.map { ["🟩", "🟨", "⬜️"][$0.distance] }.joined()
+            let result = status == .won ? L("share.chainWon", ["n": guesses.count, "m": chainOptimal]) : L("share.chainLost")
+            return "Atlas · \(category.title) · \(L("mode.chain"))\n\(start.name) → \(end.name)\n\(result)\n\(squares)"
+        default:
+            return classicShareText
+        }
+    }
+
+    private var classicShareText: String {
         let title = mode == .daily ? "Atlas #\(puzzleNumber) · \(category.title)" : "Atlas · \(category.title) (\(L("share.practice")))"
         // Renk bantları kategorinin ölçeğine göre: Türkiye'de 150 km yakın, dünyada ~1.800 km.
         let scale = Double(places.maxDistance)

@@ -811,7 +811,7 @@ function openHelp() {
     <h2>${t('help')}</h2>
     <p>${t('help.intro')}</p>
     <ul class="bullets">
-      ${['help.b1', 'help.b2', 'help.b3', 'help.b4', 'help.b5', 'help.hints', 'help.xp'].map((k) => `<li>${t(k)}</li>`).join('')}
+      ${['help.b1', 'help.b2', 'help.b3', 'help.b4', 'help.b5', 'help.modes', 'help.hints', 'help.xp'].map((k) => `<li>${t(k)}</li>`).join('')}
     </ul>
     <div class="legend">${legend}</div>
     <div class="legend-labels"><span>${t('help.near')}</span><span>${t('help.far')}</span></div>

@@ -21,6 +21,9 @@ enum Badges {
         var maxStreak = 0
         var categoriesWon = 0
         var expertWins = 0
+        var timedBest = 0
+        var chainWins = 0
+        var chainPerfect = 0
         var explorers: [Badge] = []
 
         for c in GameCategory.allCases {
@@ -32,6 +35,10 @@ enum Badges {
             if let m = (daily.winningGuessCounts + practice.winningGuessCounts).min() { best = min(best, m) }
             maxStreak = max(maxStreak, daily.maxStreak)
             expertWins += (daily.history + practice.history).filter { $0.won && $0.expert == true }.count
+            timedBest = max(timedBest, TimedStats.load(c).best)
+            let chain = ChainStats.load(c)
+            chainWins += chain.won
+            chainPerfect += chain.perfect
 
             let places = PlaceSet.forCategory(c)
             let found = Set((daily.history + practice.history).filter(\.won).map(\.answerID))
@@ -59,6 +66,10 @@ enum Badges {
             badge("allCategories", "globe.europe.africa.fill", categoriesWon, GameCategory.allCases.count),
             badge("expert", "eye.slash.fill", expertWins, 1),
             badge("expert10", "graduationcap.fill", expertWins, 10),
+            badge("timed5", "timer", timedBest, 5),
+            badge("timed10", "bolt.fill", timedBest, 10),
+            badge("chainWin", "link", chainWins, 1),
+            badge("chainPerfect", "point.topleft.down.to.point.bottomright.curvepath.fill", chainPerfect, 1),
         ] + explorers
     }
 

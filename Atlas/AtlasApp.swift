@@ -22,7 +22,7 @@ struct AtlasApp: App {
         .defaultSize(width: 1180, height: 720)
         .commands {
             CommandGroup(replacing: .newItem) {
-                Button(L("newPractice")) { game.newPractice() }
+                Button(L("newGame")) { game.newRound() }
                     .keyboardShortcut("n")
                 Button(L("dailyPuzzle")) { game.switchMode(.daily) }
                     .keyboardShortcut("d")

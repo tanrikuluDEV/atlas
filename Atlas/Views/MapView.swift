@@ -59,7 +59,7 @@ struct MapView: View {
 
                 #if os(tvOS)
                 // TV'de harita ekran kenarına kadar uzanır; lejant ve düğmeler güvenli alanın içinde kalsın.
-                LegendView(places: places, expert: game.expert)
+                legend
                     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomLeading)
                     .padding(.leading, 80)
                     .padding(.bottom, 60)
@@ -69,7 +69,7 @@ struct MapView: View {
                     .padding(.trailing, 24)
                     .padding(.bottom, 60)
                 #else
-                LegendView(places: places, expert: game.expert)
+                legend
                     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomLeading)
                     .padding(Platform.isMac ? 12 : 8)
 
@@ -95,9 +95,23 @@ struct MapView: View {
             committed = nil
             DispatchQueue.main.async { showRoundStart() }
         }
-        .onChange(of: game.answer) { showRoundStart() }
+        .onChange(of: game.roundID) { showRoundStart() }
+        .onChange(of: game.timedFound.count) { old, new in
+            // Zamana karşı: bulunan yer yeşil nabızla parlar, harita yeniden bütün görünür.
+            guard new > old, let place = game.timedFound.last else { return }
+            startPulse(place, duration: 2.6, win: true)
+        }
         .onChange(of: game.lastGuess) { _, guess in
             guard let guess else { return }
+            if game.mode == .chain {
+                // Zincirde kamera iki ucu göstermeye devam eder; tahmin parlar, rota tamamlanınca yeşil nabız.
+                if game.status == .won, let path = game.chainPath {
+                    for p in path { startPulse(p, duration: 2.6, win: true) }
+                } else {
+                    startPulse(guess.place, duration: 1.3, win: false)
+                }
+                return
+            }
             // Uzman modunda kamera tahmine uçmaz (yerini bilmek oyunun parçası); yalnızca parlar.
             if !game.expert || game.status == .won { focus(on: guess.place) }
             if game.status == .won {
@@ -121,15 +135,46 @@ struct MapView: View {
             if let place { focus(on: place) }
         }
         .onChange(of: game.status) { old, new in
-            // Pes edilince gizli yer de gösterilsin.
-            if old == .playing && new == .lost { focus(on: game.answer) }
+            // Pes edilince gizli yer de gösterilsin (zincirde en kısa rota, iki uç birlikte).
+            guard old == .playing && new == .lost else { return }
+            if game.mode == .chain { focusChain() } else { focus(on: game.answer) }
         }
     }
 
     /// Yeni tura geçince: bitmiş bir oyuna dönüldüyse (ör. çözülmüş günlük bulmaca) gizli yere odaklan,
     /// değilse tüm haritayı göster.
     private func showRoundStart() {
-        if game.isOver { focus(on: game.answer) } else { resetView() }
+        if game.mode == .chain { focusChain() }
+        else if game.isOver { focus(on: game.answer) } else { resetView() }
+    }
+
+    /// Zincir: başlangıç, bitiş ve (görünüyorsa) rota birlikte görünsün.
+    private func focusChain() {
+        guard let start = game.chainStart, let end = game.chainEnd else { resetView(); return }
+        focus(on: [start, end] + (game.status == .lost ? game.chainShortest : []))
+    }
+
+    /// Birkaç yeri birlikte gösterir.
+    private func focus(on list: [Place]) {
+        let indices = list.compactMap { places.places.firstIndex(of: $0) }
+        guard viewSize.width > 0, !indices.isEmpty else { return }
+        if places.usesGlobe {
+            let focuses = indices.map { places.globeGeometry.places[$0].focus }
+            fly(to: MapCamera.globeTarget(covering: focuses))
+        } else {
+            let rect = indices.map { places.geometry.focusRects[$0] }.reduce(CGRect.null) { $0.union($1) }
+            fly(to: MapCamera.focusTarget(for: rect, bounds: places.geometry.bounds, size: viewSize, maxZoom: maxZoom * 0.75,
+                                          category: game.category, spanScale: 1.4, maxFraction: 1))
+        }
+    }
+
+    @ViewBuilder
+    private var legend: some View {
+        if game.mode == .chain {
+            ChainLegendView()
+        } else {
+            LegendView(places: places, expert: game.expert)
+        }
     }
 
     // MARK: - Animasyonlar
@@ -333,11 +378,11 @@ enum MapCamera {
     /// Düz harita: yerin ana toprağının ~5 katı genişlikte bir alan, `spanFractions` sınırları içinde.
     /// Kamera, görünen alan haritanın dışına fazla taşmayacak şekilde kaydırılır.
     static func focusTarget(for rect: CGRect, bounds: CGRect, size: CGSize, maxZoom: CGFloat,
-                            category: GameCategory) -> Camera {
+                            category: GameCategory, spanScale: CGFloat = 5.2, maxFraction: CGFloat? = nil) -> Camera {
         let fit = fit(size: size, bounds: bounds)
         let fractions = spanFractions(for: category)
         let mapSpan = max(bounds.width, bounds.height)
-        let span = min(max(max(rect.width, rect.height) * 5.2, mapSpan * fractions.min), mapSpan * fractions.max)
+        let span = min(max(max(rect.width, rect.height) * spanScale, mapSpan * fractions.min), mapSpan * (maxFraction ?? fractions.max))
         var z = min((size.width - padding * 2) / (fit * span), (size.height - padding * 2) / (fit * span))
         if z <= 1.05 { return Camera(zoom: 1, a: bounds.midX, b: bounds.midY) }
         z = min(z, maxZoom)
@@ -357,6 +402,24 @@ enum MapCamera {
         // Yakınlaştırma z'de görünen yarı açı θ için sin θ = 1/z.
         let zoom = max(1, 1 / sin(span / 2 * .pi / 180))
         return Camera(zoom: zoom, a: focus.lon, b: max(-70, min(75, focus.lat)))
+    }
+
+    /// Küre: birkaç yeri birlikte gösterecek görünüm (merkez ortalama yön, açı en uzak çiftle).
+    static func globeTarget(covering focuses: [(lon: Double, lat: Double, size: Double)]) -> Camera {
+        let r = Double.pi / 180
+        var x = 0.0, y = 0.0, z = 0.0
+        for f in focuses {
+            x += cos(f.lat * r) * cos(f.lon * r)
+            y += cos(f.lat * r) * sin(f.lon * r)
+            z += sin(f.lat * r)
+        }
+        let lon = atan2(y, x) / r, lat = atan2(z, hypot(x, y)) / r
+        var spread = 0.0
+        for f in focuses {
+            spread = max(spread, angularDistance(Camera(zoom: 1, a: lon, b: lat), Camera(zoom: 1, a: f.lon, b: f.lat)) + f.size / 2)
+        }
+        let span = min(max(spread * 2 * 1.3, globeSpan.lowerBound), 160)
+        return Camera(zoom: max(1, 1 / sin(span / 2 * r)), a: lon, b: max(-70, min(75, lat)))
     }
 
     static func wrapLon(_ l: Double) -> Double {
@@ -655,7 +718,7 @@ struct MapLayer: View, Animatable {
     /// (gerekirse komşunun üstüne) kayar ve ince bir çizgiyle yerine bağlanır; ekran kenarında içeri itilir.
     private func drawLabels(_ ctx: inout GraphicsContext, _ items: [LabelItem], size: CGSize) {
         guard !items.isEmpty else { return }
-        func rank(_ p: Place) -> Int { p == game.answer ? -1 : (game.mapGuess(for: p)?.distance ?? .max) }
+        func rank(_ p: Place) -> Int { game.mapLabelRank(p) }
         let k = Platform.drawScale
         let font = Font.system(size: 11 * k, weight: .semibold)
         var placed: [CGRect] = []
@@ -713,31 +776,24 @@ struct MapLayer: View, Animatable {
                       labelText: hex(0x142030), labelHalo: hex(0xfbf9f5, 0.88))
     }
 
+    /// Yerin rengi; hangi yerin nasıl boyanacağına mod kurallarıyla `GameModel.mapMark` karar verir.
     private func fill(for place: Place) -> Color {
-        // Rota tekrarında gizli yer ve sırası gelmemiş tahminler henüz boyanmaz.
-        if place == game.answer && game.mapRevealsAnswer {
-            if game.status == .won { return ColorScale.found }
-            if game.status == .lost { return ColorScale.answerReveal }
+        switch game.mapMark(for: place) {
+        case .plain: palette.unguessed
+        case .heat(let km): ColorScale.color(forDistance: km, max: places.maxDistance)
+        case .found: ColorScale.found
+        case .reveal: ColorScale.answerReveal
+        case .chainEnd: ColorScale.chainEnd
+        case .chain(let c): ColorScale.chain(c)
+        case .chainHint: ColorScale.chainHint
         }
-        guard let g = game.mapGuess(for: place) else { return palette.unguessed }
-        return ColorScale.color(forDistance: g.distance, max: places.maxDistance)
     }
 
-    /// Haritada adı yazılacak yerler: tahmin edilenler ve oyun bitince gizli yer.
-    private func showsLabel(_ place: Place) -> Bool {
-        (game.showsGuessNames && game.mapGuess(for: place) != nil) || (game.mapRevealsAnswer && place == game.answer)
-    }
+    /// Haritada adı yazılacak yerler: tahmin edilenler, oyun bitince gizli yer; zincirde uçlar.
+    private func showsLabel(_ place: Place) -> Bool { game.mapShowsLabel(place) }
 
     private func hoverLabel(for place: Place) -> String? {
-        let name = place.flaggedName
-        // Uzman modunda oyun sürerken adlar ve mesafeler gizli.
-        if !game.showsGuessNames { return nil }
-        if let g = game.mapGuess(for: place) {
-            if place == game.answer { return "\(name) ✓" }
-            if g.distance == 0 { return "\(name) · \(L("neighbor"))" }
-            return showDistance ? "\(name) · \(TurkishText.formatKm(g.distance))" : name
-        }
-        return game.mapRevealsAnswer ? name : nil
+        game.mapHoverText(for: place, showDistance: showDistance)
     }
 
     // MARK: Geometri sorguları
@@ -841,6 +897,32 @@ struct LegendView: View {
         .background(.regularMaterial, in: RoundedRectangle(cornerRadius: 8))
         .overlay(RoundedRectangle(cornerRadius: 8).strokeBorder(.separator))
         .allowsHitTesting(false)
+    }
+}
+
+/// Zincir modunda lejant: uçlar, rotada, yakın, uzak.
+struct ChainLegendView: View {
+    var body: some View {
+        HStack(spacing: 10 * Platform.drawScale) {
+            item(ColorScale.chainEnd, L("chain.legend.end"))
+            item(ColorScale.chainOnPath, L("chain.class.0"))
+            item(ColorScale.chainNear, L("chain.class.1"))
+            item(ColorScale.chainFar, L("chain.class.2"))
+        }
+        .font(.system(size: 10 * Platform.drawScale))
+        .foregroundStyle(.secondary)
+        .padding(.horizontal, 9)
+        .padding(.vertical, 6)
+        .background(.regularMaterial, in: RoundedRectangle(cornerRadius: 8))
+        .overlay(RoundedRectangle(cornerRadius: 8).strokeBorder(.separator))
+        .allowsHitTesting(false)
+    }
+
+    private func item(_ color: Color, _ text: String) -> some View {
+        HStack(spacing: 4) {
+            RoundedRectangle(cornerRadius: 2).fill(color).frame(width: 10 * Platform.drawScale, height: 10 * Platform.drawScale)
+            Text(text)
+        }
     }
 }
 

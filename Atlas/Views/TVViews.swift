@@ -14,7 +14,7 @@ struct TVHeader: View {
         VStack(alignment: .leading, spacing: 16) {
             HStack(spacing: 20) {
                 VStack(alignment: .leading, spacing: 2) {
-                    Text(game.mode == .daily ? "Atlas #\(game.puzzleNumber)" : "Atlas · \(L("mode.practice"))")
+                    Text(game.mode == .daily ? "Atlas #\(game.puzzleNumber)" : "Atlas · \(game.mode.title)")
                         .font(.headline)
                         .lineLimit(1)
                         .fixedSize()
@@ -34,8 +34,8 @@ struct TVHeader: View {
                 }
                 .fixedSize()
                 Menu {
-                    if game.mode == .practice {
-                        Button { game.newPractice() } label: { Label(L("newGame"), systemImage: "arrow.clockwise") }
+                    if game.mode != .daily {
+                        Button { game.newRound() } label: { Label(L("newGame"), systemImage: "arrow.clockwise") }
                     }
                     Button { showStats = true } label: { Label(L("stats"), systemImage: "chart.bar.fill") }
                     Button { showSettings = true } label: { Label(L("settings"), systemImage: "gearshape") }
@@ -60,7 +60,7 @@ struct TVHeader: View {
                         ForEach(GameMode.allCases) { Text($0.title).tag($0) }
                     }
                 } label: {
-                    Label(game.mode.title, systemImage: game.mode == .daily ? "calendar" : "shuffle").lineLimit(1)
+                    Label(game.mode.title, systemImage: game.mode.symbol).lineLimit(1)
                 }
             }
             .font(.callout)
@@ -223,7 +223,7 @@ struct TVVoiceBridge: ViewModifier {
                 case .newGame:
                     guard game.isOver else { return }
                     game.showResult = false
-                    game.newPractice()
+                    game.newRound()
                 case .setCategory:
                     if let c = voice.command?.category.flatMap(GameCategory.init(rawValue:)) { game.switchCategory(c) }
                 case .giveUp:

@@ -1966,5 +1966,477 @@
   "fr": "Résous 10 énigmes en mode expert.",
   "es": "Resuelve 10 retos en modo experto.",
   "it": "Risolvi 10 sfide in modalità esperto."
+ },
+ "mode.timed": {
+  "tr": "Süreli",
+  "en": "Timed",
+  "de": "Zeit",
+  "fr": "Chrono",
+  "es": "Contrarreloj",
+  "it": "A tempo"
+ },
+ "mode.chain": {
+  "tr": "Zincir",
+  "en": "Chain",
+  "de": "Kette",
+  "fr": "Chaîne",
+  "es": "Cadena",
+  "it": "Catena"
+ },
+ "timed.title": {
+  "tr": "Zamana karşı",
+  "en": "Against the clock",
+  "de": "Gegen die Uhr",
+  "fr": "Contre la montre",
+  "es": "Contra el reloj",
+  "it": "Contro il tempo"
+ },
+ "timed.intro.province": {
+  "tr": "3 dakikada bulabildiğin kadar il bul. Her bulduğun ilden sonra yenisi gelir.",
+  "en": "Find as many provinces as you can in 3 minutes. A new one appears after each one you find.",
+  "de": "Finde in 3 Minuten so viele Provinzen wie möglich. Nach jedem Treffer kommt eine neue.",
+  "fr": "Trouve autant de provinces que possible en 3 minutes. Une nouvelle apparaît après chaque réussite.",
+  "es": "Encuentra tantas provincias como puedas en 3 minutos. Tras cada acierto aparece otra.",
+  "it": "Trova più province che puoi in 3 minuti. Dopo ogni risposta giusta ne arriva una nuova."
+ },
+ "timed.intro.country": {
+  "tr": "3 dakikada bulabildiğin kadar ülke bul. Her bulduğun ülkeden sonra yenisi gelir.",
+  "en": "Find as many countries as you can in 3 minutes. A new one appears after each one you find.",
+  "de": "Finde in 3 Minuten so viele Länder wie möglich. Nach jedem Treffer kommt ein neues.",
+  "fr": "Trouve autant de pays que possible en 3 minutes. Un nouveau apparaît après chaque réussite.",
+  "es": "Encuentra tantos países como puedas en 3 minutos. Tras cada acierto aparece otro.",
+  "it": "Trova più paesi che puoi in 3 minuti. Dopo ogni risposta giusta ne arriva uno nuovo."
+ },
+ "timed.skipHint": {
+  "tr": "Takılırsan pas geçebilirsin ama süreden 10 saniye düşer. Süre ilk tahminde de başlar.",
+  "en": "Stuck? Skip, but it costs 10 seconds. The clock also starts with your first guess.",
+  "de": "Hängst du fest? Überspringen kostet 10 Sekunden. Die Zeit startet auch mit dem ersten Tipp.",
+  "fr": "Bloqué ? Passe, mais cela coûte 10 secondes. Le chrono démarre aussi au premier essai.",
+  "es": "¿Atascado? Puedes pasar, pero cuesta 10 segundos. El reloj también arranca con el primer intento.",
+  "it": "Bloccato? Puoi passare, ma costa 10 secondi. Il tempo parte anche col primo tentativo."
+ },
+ "timed.start": {
+  "tr": "Başla",
+  "en": "Start",
+  "de": "Los",
+  "fr": "Commencer",
+  "es": "Empezar",
+  "it": "Inizia"
+ },
+ "timed.notStarted": {
+  "tr": "hazır",
+  "en": "ready",
+  "de": "bereit",
+  "fr": "prêt",
+  "es": "listo",
+  "it": "pronto"
+ },
+ "timed.remaining": {
+  "tr": "kalan süre",
+  "en": "time left",
+  "de": "Restzeit",
+  "fr": "temps restant",
+  "es": "tiempo restante",
+  "it": "tempo rimasto"
+ },
+ "timed.foundLabel": {
+  "tr": "bulundu",
+  "en": "found",
+  "de": "gefunden",
+  "fr": "trouvés",
+  "es": "encontrados",
+  "it": "trovati"
+ },
+ "timed.found": {
+  "tr": "Buldun: {name}! Sıradaki geliyor.",
+  "en": "Found: {name}! Here comes the next one.",
+  "de": "Gefunden: {name}! Weiter geht's.",
+  "fr": "Trouvé : {name} ! Au suivant.",
+  "es": "¡Encontrado: {name}! Va el siguiente.",
+  "it": "Trovato: {name}! Ecco il prossimo."
+ },
+ "timed.skipped": {
+  "tr": "Pas geçildi: {name} idi.",
+  "en": "Skipped: it was {name}.",
+  "de": "Übersprungen: es war {name}.",
+  "fr": "Passé : c'était {name}.",
+  "es": "Pasado: era {name}.",
+  "it": "Saltato: era {name}."
+ },
+ "timed.skip": {
+  "tr": "Pas (−10 sn)",
+  "en": "Skip (−10 s)",
+  "de": "Weiter (−10 s)",
+  "fr": "Passer (−10 s)",
+  "es": "Pasar (−10 s)",
+  "it": "Passa (−10 s)"
+ },
+ "timed.finish": {
+  "tr": "Bitir",
+  "en": "Finish",
+  "de": "Beenden",
+  "fr": "Terminer",
+  "es": "Terminar",
+  "it": "Termina"
+ },
+ "timed.score": {
+  "tr": "{n} bulundu",
+  "en": "{n} found",
+  "de": "{n} gefunden",
+  "fr": "{n} trouvé(s)",
+  "es": "{n} encontrados",
+  "it": "{n} trovati"
+ },
+ "timed.foundList": {
+  "tr": "Bu turda",
+  "en": "This round",
+  "de": "Diese Runde",
+  "fr": "Cette partie",
+  "es": "Esta ronda",
+  "it": "Questo round"
+ },
+ "timed.over": {
+  "tr": "Süre doldu!",
+  "en": "Time's up!",
+  "de": "Zeit ist um!",
+  "fr": "Temps écoulé !",
+  "es": "¡Se acabó el tiempo!",
+  "it": "Tempo scaduto!"
+ },
+ "timed.result.province": {
+  "tr": "{n} il buldun",
+  "en": "You found {n} provinces",
+  "de": "{n} Provinzen gefunden",
+  "fr": "{n} provinces trouvées",
+  "es": "Encontraste {n} provincias",
+  "it": "Hai trovato {n} province"
+ },
+ "timed.result.country": {
+  "tr": "{n} ülke buldun",
+  "en": "You found {n} countries",
+  "de": "{n} Länder gefunden",
+  "fr": "{n} pays trouvés",
+  "es": "Encontraste {n} países",
+  "it": "Hai trovato {n} paesi"
+ },
+ "timed.best": {
+  "tr": "En iyi skorun: {n}",
+  "en": "Your best: {n}",
+  "de": "Dein Bestwert: {n}",
+  "fr": "Ton record : {n}",
+  "es": "Tu mejor marca: {n}",
+  "it": "Il tuo record: {n}"
+ },
+ "timed.record": {
+  "tr": "Yeni rekor! 🏆",
+  "en": "New record! 🏆",
+  "de": "Neuer Rekord! 🏆",
+  "fr": "Nouveau record ! 🏆",
+  "es": "¡Nuevo récord! 🏆",
+  "it": "Nuovo record! 🏆"
+ },
+ "timed.lastHidden": {
+  "tr": "Son gizli yer: {name}",
+  "en": "Last hidden place: {name}",
+  "de": "Letzter gesuchter Ort: {name}",
+  "fr": "Dernier lieu caché : {name}",
+  "es": "Último lugar oculto: {name}",
+  "it": "Ultimo luogo nascosto: {name}"
+ },
+ "share.timed": {
+  "tr": "⏱️ 3 dakikada {n} yer",
+  "en": "⏱️ {n} places in 3 minutes",
+  "de": "⏱️ {n} Orte in 3 Minuten",
+  "fr": "⏱️ {n} lieux en 3 minutes",
+  "es": "⏱️ {n} lugares en 3 minutos",
+  "it": "⏱️ {n} luoghi in 3 minuti"
+ },
+ "chain.title": {
+  "tr": "Komşu zinciri",
+  "en": "Neighbor chain",
+  "de": "Nachbarkette",
+  "fr": "Chaîne de voisins",
+  "es": "Cadena de vecinos",
+  "it": "Catena di vicini"
+ },
+ "chain.intro.province": {
+  "tr": "{a} ilinden {b} iline, sınır komşusu illerden bir zincir kur. Aradaki illeri yaz.",
+  "en": "Build a chain of bordering provinces from {a} to {b}. Type the provinces in between.",
+  "de": "Baue eine Kette benachbarter Provinzen von {a} nach {b}. Gib die Provinzen dazwischen ein.",
+  "fr": "Construis une chaîne de provinces voisines de {a} à {b}. Écris les provinces intermédiaires.",
+  "es": "Construye una cadena de provincias vecinas de {a} a {b}. Escribe las provincias intermedias.",
+  "it": "Costruisci una catena di province confinanti da {a} a {b}. Scrivi le province intermedie."
+ },
+ "chain.intro.country": {
+  "tr": "{a} ülkesinden {b} ülkesine, kara sınırı olan komşulardan bir zincir kur. Aradaki ülkeleri yaz.",
+  "en": "Build a chain of countries sharing land borders from {a} to {b}. Type the countries in between.",
+  "de": "Baue eine Kette von Ländern mit Landgrenze von {a} nach {b}. Gib die Länder dazwischen ein.",
+  "fr": "Construis une chaîne de pays frontaliers de {a} à {b}. Écris les pays intermédiaires.",
+  "es": "Construye una cadena de países con frontera terrestre de {a} a {b}. Escribe los países intermedios.",
+  "it": "Costruisci una catena di paesi confinanti da {a} a {b}. Scrivi i paesi intermedi."
+ },
+ "chain.left": {
+  "tr": "Kalan hak: {n}",
+  "en": "Guesses left: {n}",
+  "de": "Verbleibend: {n}",
+  "fr": "Essais restants : {n}",
+  "es": "Intentos restantes: {n}",
+  "it": "Tentativi rimasti: {n}"
+ },
+ "chain.optimal": {
+  "tr": "en kısa: {n}",
+  "en": "shortest: {n}",
+  "de": "kürzeste: {n}",
+  "fr": "le plus court : {n}",
+  "es": "más corta: {n}",
+  "it": "più breve: {n}"
+ },
+ "chain.class.0": {
+  "tr": "Rotada",
+  "en": "On route",
+  "de": "Auf der Route",
+  "fr": "Sur la route",
+  "es": "En la ruta",
+  "it": "Sul percorso"
+ },
+ "chain.class.1": {
+  "tr": "Yakın",
+  "en": "Close",
+  "de": "Nah",
+  "fr": "Proche",
+  "es": "Cerca",
+  "it": "Vicino"
+ },
+ "chain.class.2": {
+  "tr": "Uzak",
+  "en": "Off route",
+  "de": "Abseits",
+  "fr": "Loin",
+  "es": "Lejos",
+  "it": "Lontano"
+ },
+ "chain.legend.end": {
+  "tr": "Uçlar",
+  "en": "Ends",
+  "de": "Enden",
+  "fr": "Extrémités",
+  "es": "Extremos",
+  "it": "Estremi"
+ },
+ "chain.feedback.0": {
+  "tr": "{name} en kısa rotalardan birinin üstünde!",
+  "en": "{name} is on a shortest route!",
+  "de": "{name} liegt auf einer kürzesten Route!",
+  "fr": "{name} est sur un plus court chemin !",
+  "es": "¡{name} está en una ruta más corta!",
+  "it": "{name} è su un percorso più breve!"
+ },
+ "chain.feedback.1": {
+  "tr": "{name} rotaya yakın ama en kısa yolda değil.",
+  "en": "{name} is close, but not on a shortest route.",
+  "de": "{name} ist nah, aber nicht auf einer kürzesten Route.",
+  "fr": "{name} est proche, mais pas sur un plus court chemin.",
+  "es": "{name} está cerca, pero no en una ruta más corta.",
+  "it": "{name} è vicino, ma non su un percorso più breve."
+ },
+ "chain.feedback.2": {
+  "tr": "{name} rotadan uzak.",
+  "en": "{name} is off the route.",
+  "de": "{name} liegt abseits der Route.",
+  "fr": "{name} est loin de la route.",
+  "es": "{name} está lejos de la ruta.",
+  "it": "{name} è lontano dal percorso."
+ },
+ "chain.endpoint": {
+  "tr": "{name} zincirin ucu; aradaki yerleri yaz.",
+  "en": "{name} is an end of the chain; type the places in between.",
+  "de": "{name} ist ein Ende der Kette; gib die Orte dazwischen ein.",
+  "fr": "{name} est une extrémité ; écris les lieux intermédiaires.",
+  "es": "{name} es un extremo; escribe los lugares intermedios.",
+  "it": "{name} è un estremo; scrivi i luoghi intermedi."
+ },
+ "chain.guesses": {
+  "tr": "Tahminler (sırayla)",
+  "en": "Guesses (in order)",
+  "de": "Tipps (der Reihe nach)",
+  "fr": "Essais (dans l'ordre)",
+  "es": "Intentos (en orden)",
+  "it": "Tentativi (in ordine)"
+ },
+ "chain.won": {
+  "tr": "Rota tamam!",
+  "en": "Route complete!",
+  "de": "Route komplett!",
+  "fr": "Chemin complet !",
+  "es": "¡Ruta completa!",
+  "it": "Percorso completo!"
+ },
+ "chain.lost": {
+  "tr": "Rota kurulamadı",
+  "en": "No route this time",
+  "de": "Keine Route diesmal",
+  "fr": "Pas de chemin cette fois",
+  "es": "Esta vez no hubo ruta",
+  "it": "Niente percorso stavolta"
+ },
+ "chain.perfect": {
+  "tr": "Kusursuz! En kısa rotayı ilk seferde buldun.",
+  "en": "Perfect! You found the shortest route.",
+  "de": "Perfekt! Du hast die kürzeste Route gefunden.",
+  "fr": "Parfait ! Tu as trouvé le plus court chemin.",
+  "es": "¡Perfecto! Encontraste la ruta más corta.",
+  "it": "Perfetto! Hai trovato il percorso più breve."
+ },
+ "chain.foundIn": {
+  "tr": "{n} tahminde bağladın (en az {m} gerekiyordu).",
+  "en": "Connected in {n} guesses (minimum {m}).",
+  "de": "In {n} Tipps verbunden (mindestens {m}).",
+  "fr": "Relié en {n} essais (minimum {m}).",
+  "es": "Conectado en {n} intentos (mínimo {m}).",
+  "it": "Collegato in {n} tentativi (minimo {m})."
+ },
+ "chain.yourRoute": {
+  "tr": "Senin rotan",
+  "en": "Your route",
+  "de": "Deine Route",
+  "fr": "Ton chemin",
+  "es": "Tu ruta",
+  "it": "Il tuo percorso"
+ },
+ "chain.shortest": {
+  "tr": "En kısa rota",
+  "en": "Shortest route",
+  "de": "Kürzeste Route",
+  "fr": "Plus court chemin",
+  "es": "Ruta más corta",
+  "it": "Percorso più breve"
+ },
+ "chain.unavailable": {
+  "tr": "Bu kategoride kara sınırı olan ülke çok az; zincir kurulamaz. Başka bir kategori seç:",
+  "en": "Too few countries share land borders here to build a chain. Pick another category:",
+  "de": "Hier haben zu wenige Länder Landgrenzen für eine Kette. Wähle eine andere Kategorie:",
+  "fr": "Trop peu de pays ont des frontières terrestres ici. Choisis une autre catégorie :",
+  "es": "Aquí hay muy pocos países con frontera terrestre. Elige otra categoría:",
+  "it": "Qui troppi pochi paesi hanno confini terrestri. Scegli un'altra categoria:"
+ },
+ "share.chainWon": {
+  "tr": "🔗 {n} tahminde bağlandı (en az {m})",
+  "en": "🔗 Connected in {n} guesses (min {m})",
+  "de": "🔗 In {n} Tipps verbunden (min. {m})",
+  "fr": "🔗 Relié en {n} essais (min {m})",
+  "es": "🔗 Conectado en {n} intentos (mín. {m})",
+  "it": "🔗 Collegato in {n} tentativi (min {m})"
+ },
+ "share.chainLost": {
+  "tr": "🔗 Rota kurulamadı",
+  "en": "🔗 No route",
+  "de": "🔗 Keine Route",
+  "fr": "🔗 Pas de chemin",
+  "es": "🔗 Sin ruta",
+  "it": "🔗 Nessun percorso"
+ },
+ "stats.timedBest": {
+  "tr": "süreli rekor",
+  "en": "timed best",
+  "de": "Zeit-Rekord",
+  "fr": "record chrono",
+  "es": "récord contrarreloj",
+  "it": "record a tempo"
+ },
+ "stats.timedRuns": {
+  "tr": "süreli tur",
+  "en": "timed runs",
+  "de": "Zeitrunden",
+  "fr": "parties chrono",
+  "es": "rondas contrarreloj",
+  "it": "round a tempo"
+ },
+ "stats.chainWon": {
+  "tr": "zincir",
+  "en": "chains",
+  "de": "Ketten",
+  "fr": "chaînes",
+  "es": "cadenas",
+  "it": "catene"
+ },
+ "stats.chainPerfect": {
+  "tr": "kusursuz",
+  "en": "perfect",
+  "de": "perfekt",
+  "fr": "parfaites",
+  "es": "perfectas",
+  "it": "perfette"
+ },
+ "badge.timed5.name": {
+  "tr": "Hızlı Gezgin",
+  "en": "Quick Traveler",
+  "de": "Schnellreisender",
+  "fr": "Voyageur rapide",
+  "es": "Viajero veloz",
+  "it": "Viaggiatore veloce"
+ },
+ "badge.timed5.desc": {
+  "tr": "Zamana karşı bir turda 5 yer bul.",
+  "en": "Find 5 places in one timed round.",
+  "de": "Finde 5 Orte in einer Zeitrunde.",
+  "fr": "Trouve 5 lieux en une partie chrono.",
+  "es": "Encuentra 5 lugares en una ronda contrarreloj.",
+  "it": "Trova 5 luoghi in un round a tempo."
+ },
+ "badge.timed10.name": {
+  "tr": "Şimşek",
+  "en": "Lightning",
+  "de": "Blitz",
+  "fr": "Éclair",
+  "es": "Relámpago",
+  "it": "Fulmine"
+ },
+ "badge.timed10.desc": {
+  "tr": "Zamana karşı bir turda 10 yer bul.",
+  "en": "Find 10 places in one timed round.",
+  "de": "Finde 10 Orte in einer Zeitrunde.",
+  "fr": "Trouve 10 lieux en une partie chrono.",
+  "es": "Encuentra 10 lugares en una ronda contrarreloj.",
+  "it": "Trova 10 luoghi in un round a tempo."
+ },
+ "badge.chainWin.name": {
+  "tr": "Zincirci",
+  "en": "Chain Maker",
+  "de": "Kettenbauer",
+  "fr": "Bâtisseur",
+  "es": "Constructor",
+  "it": "Costruttore"
+ },
+ "badge.chainWin.desc": {
+  "tr": "Bir komşu zinciri tamamla.",
+  "en": "Complete a neighbor chain.",
+  "de": "Vervollständige eine Nachbarkette.",
+  "fr": "Termine une chaîne de voisins.",
+  "es": "Completa una cadena de vecinos.",
+  "it": "Completa una catena di vicini."
+ },
+ "badge.chainPerfect.name": {
+  "tr": "Kusursuz Rota",
+  "en": "Perfect Route",
+  "de": "Perfekte Route",
+  "fr": "Chemin parfait",
+  "es": "Ruta perfecta",
+  "it": "Percorso perfetto"
+ },
+ "badge.chainPerfect.desc": {
+  "tr": "Bir zinciri en kısa rotayla, hiç fazla tahmin yapmadan tamamla.",
+  "en": "Complete a chain using only the shortest route.",
+  "de": "Vervollständige eine Kette nur über die kürzeste Route.",
+  "fr": "Termine une chaîne uniquement par le plus court chemin.",
+  "es": "Completa una cadena solo con la ruta más corta.",
+  "it": "Completa una catena solo col percorso più breve."
+ },
+ "help.modes": {
+  "tr": "Dört mod var: Günlük (herkese aynı bulmaca), Alıştırma (sınırsız), Süreli (3 dakikada bulabildiğin kadar yer) ve Zincir (iki yer arasına komşu yerlerden rota kur).",
+  "en": "There are four modes: Daily (same puzzle for everyone), Practice (unlimited), Timed (as many places as you can in 3 minutes) and Chain (build a route of neighbors between two places).",
+  "de": "Es gibt vier Modi: Täglich (gleiches Rätsel für alle), Übung (unbegrenzt), Zeit (so viele Orte wie möglich in 3 Minuten) und Kette (eine Route aus Nachbarn zwischen zwei Orten).",
+  "fr": "Quatre modes : Du jour (même énigme pour tous), Libre (illimité), Chrono (le plus de lieux en 3 minutes) et Chaîne (un chemin de voisins entre deux lieux).",
+  "es": "Hay cuatro modos: Diario (mismo reto para todos), Práctica (sin límite), Contrarreloj (tantos lugares como puedas en 3 minutos) y Cadena (una ruta de vecinos entre dos lugares).",
+  "it": "Ci sono quattro modalità: Oggi (stessa sfida per tutti), Libera (illimitata), A tempo (più luoghi possibili in 3 minuti) e Catena (un percorso di vicini tra due luoghi)."
  }
 }

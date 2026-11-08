@@ -92,18 +92,37 @@ struct ContentView: View {
                 #endif
             }
             ToolbarItem(placement: .principal) {
+                #if os(macOS)
                 Picker(L("mode"), selection: Binding(get: { game.mode }, set: { game.switchMode($0) })) {
                     ForEach(GameMode.allCases) { Text($0.title).tag($0) }
                 }
                 .pickerStyle(.segmented)
-                .frame(width: Platform.isMac ? 200 : 180)
+                .frame(width: 360)
+                #else
+                // iPhone'da dört mod dar araç çubuğuna sığmaz; seçili mod bir menü olarak görünür.
+                Menu {
+                    Picker(L("mode"), selection: Binding(get: { game.mode }, set: { game.switchMode($0) })) {
+                        ForEach(GameMode.allCases) { Label($0.title, systemImage: $0.symbol).tag($0) }
+                    }
+                } label: {
+                    HStack(spacing: 4) {
+                        Image(systemName: game.mode.symbol)
+                        Text(game.mode.title).fontWeight(.semibold)
+                        Image(systemName: "chevron.down").font(.caption2.weight(.bold))
+                    }
+                    .padding(.horizontal, 12)
+                    .padding(.vertical, 6)
+                    .background(.quaternary.opacity(0.6), in: Capsule())
+                }
+                .accessibilityLabel("\(L("mode")): \(game.mode.title)")
+                #endif
             }
             #if os(macOS)
             ToolbarItemGroup(placement: .primaryAction) {
                 languageMenu
-                if game.mode == .practice {
-                    Button { game.newPractice() } label: { Label(L("newGame"), systemImage: "arrow.clockwise") }
-                        .help("\(L("newPractice")) (⌘N)")
+                if game.mode != .daily {
+                    Button { game.newRound() } label: { Label(L("newGame"), systemImage: "arrow.clockwise") }
+                        .help("\(L("newGame")) (⌘N)")
                 }
                 Button { showStats = true } label: { Label(L("stats"), systemImage: "chart.bar.fill") }
                     .help(L("stats"))
@@ -115,8 +134,8 @@ struct ContentView: View {
             ToolbarItemGroup(placement: .primaryAction) {
                 languageMenu
                 Menu {
-                    if game.mode == .practice {
-                        Button { game.newPractice() } label: { Label(L("newGame"), systemImage: "arrow.clockwise") }
+                    if game.mode != .daily {
+                        Button { game.newRound() } label: { Label(L("newGame"), systemImage: "arrow.clockwise") }
                     }
                     Button { showStats = true } label: { Label(L("stats"), systemImage: "chart.bar.fill") }
                     Button { showVoiceRemote = true } label: { Label(L("voice.title"), systemImage: "appletv") }
@@ -128,7 +147,7 @@ struct ContentView: View {
             }
             #endif
         }
-        .navigationTitle(game.mode == .daily ? "Atlas #\(game.puzzleNumber)" : "Atlas · \(L("mode.practice"))")
+        .navigationTitle(game.mode == .daily ? "Atlas #\(game.puzzleNumber)" : "Atlas · \(game.mode.title)")
         #if os(macOS)
         .navigationSubtitle(game.category.title)
         #endif
@@ -144,6 +163,29 @@ struct ContentView: View {
         .sheet(isPresented: $showSettings) { SettingsView() }
         #endif
         .onReceive(dayTimer) { _ in game.refreshDayIfNeeded() }
+        #if DEBUG
+        // Geliştirme: ATLAS_MODE=timed|chain, ATLAS_CATEGORY=europe, ATLAS_START (süreyi başlatır),
+        // ATLAS_PLAY="Fransa|@route|@answer|@skip" (tahminler; @route zincirin en kısa rotası, @answer gizli yer).
+        .onAppear {
+            let env = ProcessInfo.processInfo.environment
+            if let c = env["ATLAS_CATEGORY"].flatMap(GameCategory.init(rawValue:)) { game.switchCategory(c) }
+            if let m = env["ATLAS_MODE"].flatMap(GameMode.init(rawValue:)) { game.switchMode(m) }
+            if env["ATLAS_START"] != nil { game.startTimer() }
+            guard let play = env["ATLAS_PLAY"] else { return }
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2.5) {
+                for t in play.split(separator: "|").map(String.init) {
+                    switch t {
+                    case "@route": for p in game.chainShortest.dropFirst().dropLast() { game.submit(p) }
+                    case "@answer": game.submit(game.answer)
+                    case "@skip": game.skipTimed()
+                    case "@giveup": game.giveUp()
+                    default: game.submit(t)
+                    }
+                }
+                if env["ATLAS_HIDE_RESULT"] != nil { DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { game.showResult = false } }
+            }
+        }
+        #endif
         #if DEBUG && os(iOS)
         .onAppear {
             if ProcessInfo.processInfo.environment["ATLAS_VOICE_SEND"] != nil { showVoiceRemote = true }
@@ -160,9 +202,12 @@ struct ContentView: View {
             if game.status == .won {
                 GameFeedback.shared.won()
             } else {
-                GameFeedback.shared.guessMade(proximity: proximity(of: guess, max: game.places.maxDistance),
-                                              improved: game.lastImproved && game.guesses.count > 1)
+                GameFeedback.shared.guessMade(proximity: game.feedbackProximity(of: guess),
+                                              improved: game.lastImproved && (game.guesses.count > 1 || game.mode == .chain))
             }
+        }
+        .onChange(of: game.timedFound.count) { old, new in
+            if new > old { GameFeedback.shared.won() }
         }
         .onChange(of: game.status) { old, new in
             if old == .playing && new == .lost { GameFeedback.shared.lost() }
@@ -220,7 +265,8 @@ private struct Sidebar: View {
             // iPhone'da ekran alanı dar; yalnızca tek satırlık kategori bilgisi gösterilir.
             if !Platform.isMac && !Platform.isTV {
                 HStack {
-                    Label(game.category.subtitle, systemImage: game.category.symbol)
+                    Label(game.mode.isClassic ? game.category.subtitle : "\(game.category.title) · \(panelTitle(game))",
+                          systemImage: game.category.symbol)
                         .font(.footnote)
                         .foregroundStyle(.secondary)
                     if game.expert { Spacer(minLength: 4); ExpertTag() }
@@ -234,7 +280,7 @@ private struct Sidebar: View {
                         .font(.headline)
                         .foregroundStyle(.secondary)
                     HStack(alignment: .firstTextBaseline, spacing: 8) {
-                        Text(game.mode == .daily ? L("panel.daily.\(game.category.kind)") : L("mode.practice"))
+                        Text(panelTitle(game))
                             .font(Brand.heading(.title2))
                         if game.expert { ExpertTag() }
                     }
@@ -244,8 +290,17 @@ private struct Sidebar: View {
                 }
             }
 
-            if game.isOver {
-                GameOverBanner(game: game)
+            if game.mode == .timed && !game.isOver && game.timedStart != nil { TimedBar(game: game) }
+            if game.mode == .chain { ChainCard(game: game) }
+
+            if game.mode == .chain && !game.chainAvailable {
+                ChainUnavailableCard(game: game)
+            } else if game.isOver {
+                switch game.mode {
+                case .timed: TimedOverBanner(game: game)
+                case .chain: ChainOverBanner(game: game)
+                default: GameOverBanner(game: game)
+                }
             } else {
                 #if os(tvOS)
                 TVGuessInput(game: game)
@@ -267,9 +322,9 @@ private struct Sidebar: View {
                     .transition(.opacity)
             }
 
-            if !game.expert { HeatGauge(game: game) }
+            if !game.expert && game.mode != .chain { HeatGauge(game: game) }
 
-            if let closest = game.closest, !game.isOver {
+            if game.mode != .chain, let closest = game.closest, !game.isOver {
                 HStack {
                     Text(L("closest"))
                         .foregroundStyle(.secondary)
@@ -286,18 +341,36 @@ private struct Sidebar: View {
                 .background(.quaternary.opacity(0.5), in: RoundedRectangle(cornerRadius: 8))
             }
 
-            HintsSection(game: game)
-
-            GuessList(game: game)
+            switch game.mode {
+            case .timed:
+                if game.timedStart == nil && !game.isOver { TimedStartCard(game: game) }
+                if !game.isOver { GuessList(game: game) }
+                TimedFoundList(game: game)
+            case .chain:
+                // Oyun bitince rota bannerda yazılı; liste yer kaplamasın.
+                if !game.isOver { ChainGuessList(game: game) }
+            default:
+                HintsSection(game: game)
+                GuessList(game: game)
+            }
 
             Spacer(minLength: 0)
 
             HStack {
-                Text(L("guesses", ["n": game.guesses.count]))
+                Text(footerText)
                     .foregroundStyle(.secondary)
                 Spacer()
-                if !game.isOver && !game.guesses.isEmpty {
-                    Button(L("giveUp"), role: .destructive) { game.giveUp() }
+                if game.mode == .timed && !game.isOver && game.timedStart != nil {
+                    Button(L("timed.skip")) { game.skipTimed() }
+                        #if os(macOS)
+                        .buttonStyle(.link)
+                        .keyboardShortcut("s", modifiers: .command)
+                        #else
+                        .buttonStyle(.borderless)
+                        #endif
+                }
+                if !game.isOver && (game.mode == .timed ? game.timedStart != nil : !game.guesses.isEmpty) {
+                    Button(L(game.mode == .timed ? "timed.finish" : "giveUp"), role: .destructive) { game.giveUp() }
                         #if os(macOS)
                         .buttonStyle(.link)
                         #else
@@ -315,7 +388,25 @@ private struct Sidebar: View {
     }
 
     private func feedback(for guess: Guess) -> String {
-        guessFeedback(guess, category: game.category, showDistance: showDistance, expert: game.expert)
+        if game.mode == .chain { return L("chain.feedback.\(guess.distance)", ["name": guess.place.name]) }
+        return guessFeedback(guess, category: game.category, showDistance: showDistance, expert: game.expert)
+    }
+
+    private var footerText: String {
+        switch game.mode {
+        case .timed: L("timed.score", ["n": game.timedFound.count])
+        default: L("guesses", ["n": game.guesses.count])
+        }
+    }
+}
+
+/// Paneldeki başlık: moda göre.
+func panelTitle(_ game: GameModel) -> String {
+    switch game.mode {
+    case .daily: L("panel.daily.\(game.category.kind)")
+    case .practice: L("mode.practice")
+    case .timed: L("timed.title")
+    case .chain: L("chain.title")
     }
 }
 
@@ -397,7 +488,7 @@ private struct GameOverBanner: View {
             .font(Brand.heading(.title))
             HStack {
                 Button(L("result")) { game.showResult = true }
-                Button(L("newGame")) { game.newPractice() }
+                Button(L("newGame")) { game.newRound() }
                     .defaultActionShortcut()
             }
             Button {
@@ -550,7 +641,7 @@ private struct GuessList: View {
 
     var body: some View {
         if game.guesses.isEmpty {
-            if !game.isOver { EmptyRoundCard(game: game) }
+            if !game.isOver && game.mode.isClassic { EmptyRoundCard(game: game) }
         } else {
             VStack(alignment: .leading, spacing: 6) {
                 Text(L("guesses.header"))

@@ -10,17 +10,10 @@ struct ResultView: View {
 
     var body: some View {
         VStack(spacing: 16) {
-            Image(systemName: game.status == .won ? "party.popper.fill" : "map.fill")
-                .font(.system(size: 40))
-                .foregroundStyle(game.status == .won ? ColorScale.found : ColorScale.answerReveal)
-
-            if game.status == .won {
-                Text(L("congrats")).font(Brand.heading(.largeTitle))
-                Text(LocalizedStringKey(L("result.won.\(game.category.kind)", ["name": "**\(game.answer.flaggedName)**"])
-                                        + "\n" + L("result.foundIn", ["n": game.guesses.count])))
-            } else {
-                Text(L("nextTime")).font(Brand.heading(.largeTitle))
-                Text(LocalizedStringKey(L("result.lost.\(game.category.kind)", ["name": "**\(game.answer.flaggedName)**"])))
+            switch game.mode {
+            case .timed: timedHeader
+            case .chain: chainHeader
+            default: classicHeader
             }
 
             if let reward = game.reward {
@@ -34,7 +27,7 @@ struct ResultView: View {
                     }
                 }
             }
-            StatsSummary(stats: game.currentStats)
+            if game.mode.isClassic { StatsSummary(stats: game.currentStats) }
             if game.mode == .daily {
                 DailyCountdown()
                     .font(.callout)
@@ -44,15 +37,17 @@ struct ResultView: View {
             let layout = Platform.isMac ? AnyLayout(HStackLayout()) : AnyLayout(VStackLayout(spacing: 10))
             layout {
                 // Enter doğrudan yeni oyuna geçer.
-                Button(L("newGame")) { dismiss(); game.newPractice() }
+                Button(L("newGame")) { dismiss(); game.newRound() }
                     .defaultActionShortcut()
                 shareButton
                 // Sayfa kapanınca haritada tahminler sırayla yeniden oynatılır.
-                Button {
-                    dismiss()
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) { game.startReplay() }
-                } label: {
-                    Label(L("replay.button"), systemImage: "play.circle")
+                if game.mode.isClassic {
+                    Button {
+                        dismiss()
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) { game.startReplay() }
+                    } label: {
+                        Label(L("replay.button"), systemImage: "play.circle")
+                    }
                 }
                 Button(L("close")) { dismiss() }
                     .cancelActionShortcut()
@@ -69,6 +64,56 @@ struct ResultView: View {
         // Seviye kartı varken içerik yarım sayfaya sığmaz.
         .presentationDetents(game.reward == nil ? [.medium, .large] : [.large])
         #endif
+    }
+
+    @ViewBuilder
+    private var timedHeader: some View {
+        Image(systemName: "timer")
+            .font(.system(size: 40))
+            .foregroundStyle(Brand.accent)
+        Text(L("timed.over")).font(Brand.heading(.largeTitle))
+        Text(L("timed.result.\(game.category.kind)", ["n": game.timedFound.count])).font(Brand.heading(.title2))
+        if let r = game.timedResult {
+            Text(r.isRecord ? L("timed.record") : L("timed.best", ["n": r.best]))
+                .fontWeight(r.isRecord ? .bold : .regular)
+                .foregroundStyle(r.isRecord ? ColorScale.found : .secondary)
+        }
+    }
+
+    @ViewBuilder
+    private var chainHeader: some View {
+        let won = game.status == .won
+        Image(systemName: won ? "link" : "map.fill")
+            .font(.system(size: 40))
+            .foregroundStyle(won ? ColorScale.found : ColorScale.answerReveal)
+        Text(L(won ? "chain.won" : "chain.lost")).font(Brand.heading(.largeTitle))
+        if won {
+            Text(L(game.guesses.count == game.chainOptimal ? "chain.perfect" : "chain.foundIn",
+                   ["n": game.guesses.count, "m": game.chainOptimal]))
+        }
+        VStack(spacing: 4) {
+            Text(L(won ? "chain.yourRoute" : "chain.shortest"))
+                .font(.caption.weight(.semibold))
+                .foregroundStyle(.secondary)
+                .textCase(.uppercase)
+            Text(routeText(won ? (game.chainPath ?? []) : game.chainShortest)).fontWeight(.semibold)
+        }
+    }
+
+    @ViewBuilder
+    private var classicHeader: some View {
+            Image(systemName: game.status == .won ? "party.popper.fill" : "map.fill")
+                .font(.system(size: 40))
+                .foregroundStyle(game.status == .won ? ColorScale.found : ColorScale.answerReveal)
+
+            if game.status == .won {
+                Text(L("congrats")).font(Brand.heading(.largeTitle))
+                Text(LocalizedStringKey(L("result.won.\(game.category.kind)", ["name": "**\(game.answer.flaggedName)**"])
+                                        + "\n" + L("result.foundIn", ["n": game.guesses.count])))
+            } else {
+                Text(L("nextTime")).font(Brand.heading(.largeTitle))
+                Text(LocalizedStringKey(L("result.lost.\(game.category.kind)", ["name": "**\(game.answer.flaggedName)**"])))
+            }
     }
 
     @ViewBuilder
@@ -97,7 +142,7 @@ struct StatsView: View {
 
     init(game: GameModel) {
         self.game = game
-        _tab = State(initialValue: game.mode)
+        _tab = State(initialValue: game.mode.isClassic ? game.mode : .practice)
         _category = State(initialValue: game.category)
     }
 
@@ -121,7 +166,7 @@ struct StatsView: View {
                 .labelsHidden()
                 .fixedSize()
                 Picker(L("mode"), selection: $tab) {
-                    ForEach(GameMode.allCases) { Text($0.title).tag($0) }
+                    ForEach(GameMode.classic) { Text($0.title).tag($0) }
                 }
                 .pickerStyle(.segmented)
                 .labelsHidden()
@@ -169,6 +214,7 @@ struct StatsView: View {
                 Text(L("stats.average", ["v": avg.formatted(.number.precision(.fractionLength(1)).locale(L10n.shared.language.locale))]))
                     .foregroundStyle(.secondary)
             }
+            ModesSummary(category: category)
             Divider()
             CalendarSection(stats: stats, mode: tab)
             Divider()
@@ -180,6 +226,37 @@ struct StatsView: View {
                 .font(.caption)
                 .foregroundStyle(.secondary)
         }
+    }
+}
+
+/// Kategorinin zamana karşı rekoru ve zincir sonuçları.
+private struct ModesSummary: View {
+    let category: GameCategory
+
+    var body: some View {
+        let timed = TimedStats.load(category)
+        let chain = ChainStats.load(category)
+        if !timed.runs.isEmpty || !chain.runs.isEmpty {
+            Divider()
+            HStack(spacing: 20) {
+                if !timed.runs.isEmpty {
+                    item("\(timed.best)", L("stats.timedBest"), "timer")
+                    item("\(timed.runs.count)", L("stats.timedRuns"), "timer")
+                }
+                if !chain.runs.isEmpty {
+                    item("\(chain.won)/\(chain.played)", L("stats.chainWon"), "link")
+                    item("\(chain.perfect)", L("stats.chainPerfect"), "link")
+                }
+            }
+        }
+    }
+
+    private func item(_ value: String, _ label: String, _ symbol: String) -> some View {
+        VStack(spacing: 2) {
+            Text(value).font(Brand.heading(.title2)).monospacedDigit()
+            Label(label, systemImage: symbol).font(.caption).foregroundStyle(.secondary)
+        }
+        .frame(minWidth: 64)
     }
 }
 
@@ -219,6 +296,7 @@ struct HelpView: View {
                 bullet(L("help.b2"))
                 bullet(L("help.b3"))
                 bullet(L("help.b4"))
+                bullet(L("help.modes"))
                 bullet(L("help.hints"))
                 bullet(L("help.xp"))
                 bullet(L(Platform.isMac ? "help.kmMac" : "help.kmPhone"))

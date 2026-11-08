@@ -67,11 +67,11 @@ enum Progression {
     static func totalXP() -> Int {
         var total = 0
         for category in GameCategory.allCases {
-            for mode in GameMode.allCases {
+            for mode in GameMode.classic {
                 total += xp(of: Stats.load(key: Stats.key(category: category, mode: mode)), category: category, mode: mode)
             }
         }
-        return total
+        return total + modesXP()
     }
 }
 

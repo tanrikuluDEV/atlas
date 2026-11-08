@@ -7,6 +7,26 @@ enum ColorScale {
     /// Listeden seçilen yerin vurgusu; sıcaklık renkleriyle karışmasın diye mor.
     static let highlight = Color(red: 0.58, green: 0.24, blue: 0.96)
 
+    // Komşu zinciri (web: colors.js CHAIN)
+    /// Başlangıç ve bitiş.
+    static let chainEnd = Color(red: 0.58, green: 0.24, blue: 0.96)
+    /// En kısa rotada.
+    static let chainOnPath = found
+    /// Rotaya 1–2 adım uzak.
+    static let chainNear = Color(red: 0.96, green: 0.66, blue: 0.13)
+    /// Rotadan uzak.
+    static let chainFar = Color(red: 0.40, green: 0.46, blue: 0.56)
+    /// Kaybedilen zincirde gösterilen en kısa rota.
+    static let chainHint = answerReveal.opacity(0.6)
+
+    static func chain(_ c: ChainClass) -> Color {
+        switch c {
+        case .onPath: chainOnPath
+        case .near: chainNear
+        case .far: chainFar
+        }
+    }
+
     private static let stops: [(Double, Double, Double)] = [
         (0.45, 0.00, 0.06), // komşu
         (0.72, 0.07, 0.12),
