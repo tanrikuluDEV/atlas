@@ -817,3 +817,20 @@ dialog.sheet.picker { width: min(720px, calc(100vw - 24px)); padding: 22px; }
   .toolbar .segmented button { flex: 1; padding: 5px 4px; }
   .map-legend:has(.chain-legend) { width: auto; padding-bottom: 6px; }
 }
+
+/* Grup tablosu (board.js) */
+.board-cats { margin: 8px 0 12px; }
+.chip.selected { background: var(--accent); color: #fff; border-color: transparent; }
+.chip b { font-size: 11px; margin-left: 2px; opacity: .8; }
+.board-list { list-style: none; padding: 0; margin: 0; display: grid; gap: 4px; }
+.board-list li { display: flex; align-items: center; gap: 10px; padding: 8px 10px; border-radius: 8px; background: color-mix(in srgb, var(--muted) 10%, transparent); }
+.board-list li.me { background: color-mix(in srgb, var(--accent) 14%, transparent); }
+.board-list .pos { width: 20px; font: 700 15px/1 var(--heading); text-align: center; }
+.board-list .nick { flex: 1; font-weight: 600; }
+.board-list .res { color: var(--muted); font-size: 14px; white-space: nowrap; }
+.field { display: grid; gap: 4px; margin: 12px 0; font-size: 14px; }
+.field input { font: inherit; font-size: 16px; padding: 9px 11px; border-radius: 8px; border: 1px solid var(--line); background: var(--card); color: inherit; }
+.field.inline { margin: 0 0 10px; }
+.board-footer .actions { flex-wrap: wrap; }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.board-link { display: block; margin-top: 6px; }

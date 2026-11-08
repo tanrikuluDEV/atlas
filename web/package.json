@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "description": "Atlas web: yalnızca /api/board için Vercel Blob bağımlılığı (arayüz derleme gerektirmez).",
+  "dependencies": {
+    "@vercel/blob": "2.8.2"
+  }
+}

@@ -13,6 +13,7 @@ import { COLORS, applyTheme, heatColor, isDark, onThemeChange, setThemePreferenc
 import { allBadges } from './badges.js';
 import * as feedback from './feedback.js';
 import { flagHTML, flaggedName } from './flags.js';
+import * as board from './board.js';
 
 const $ = (id) => document.getElementById(id);
 const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
@@ -77,10 +78,14 @@ async function start() {
 
   // İlk açılışta yardım, açılış animasyonu bitince gelir.
   await splash.done();
-  if (!store.get('atlas.helpSeen', false)) {
+  // Davet bağlantısıyla gelindiyse gruba katılma penceresi (yardımdan önce).
+  const invite = board.takeInviteFromURL();
+  if (invite && invite !== board.group()?.id) openJoin(invite);
+  else if (!store.get('atlas.helpSeen', false)) {
     store.set('atlas.helpSeen', true);
     openHelp();
   }
+  board.syncResults();
   // Gün değişince günlük bulmacayı yenile.
   setInterval(() => game.refreshDayIfNeeded(), 60_000);
   document.addEventListener('visibilitychange', () => { if (!document.hidden) game.refreshDayIfNeeded(); });
@@ -99,6 +104,7 @@ function setupToolbar() {
   });
   $('newGameButton').addEventListener('click', () => game.newRound());
   $('statsButton').addEventListener('click', () => openStats());
+  $('boardButton').addEventListener('click', () => openBoard());
   $('settingsButton').addEventListener('click', () => openSettings());
   $('themeButton').addEventListener('click', () => setThemePreference(isDark() ? 'light' : 'dark'));
   applyTheme();
@@ -141,6 +147,7 @@ function applyStaticTexts() {
   set('newGameButton', t('newGame'), ['aria-label']);
   set('themeButton', t('theme.toggle'));
   set('statsButton', t('stats'));
+  set('boardButton', t('board.title'));
   set('settingsButton', t('settings'));
   set('helpButton', t('help'));
   set('mapCanvas', t('map'), ['aria-label']);
@@ -303,6 +310,8 @@ function render() {
     }
   }
   if (game.showResult && !last.showResult) setTimeout(openResult, 450);
+  // Günlük bulmaca bitince sonuç arkadaş grubuna gider.
+  if (game.mode === 'daily' && game.isOver && last.status === 'playing' && last.roundID === game.roundID) board.syncResults();
 
   last = { roundID: game.roundID, lastGuess: game.lastGuess, highlighted: game.highlighted, category: game.category, showResult: game.showResult, status: game.status, replayStep: game.replayStep, expert: last.expert, mode: game.mode, timedFound: game.timedFound.length };
 
@@ -342,7 +351,8 @@ function render() {
         <button class="button primary" data-action="new" title="Enter">${t('newGame')}</button>
       </div>
       <button class="link replay-button" data-action="replay">${game.replayStep == null ? `▶ ${t('replay.button')}` : `■ ${t('replay.stop')}`}</button>
-      ${game.mode === 'daily' ? `<hr>${countdownHTML()}${otherDailiesHTML()}` : ''}`;
+      ${game.mode === 'daily' ? `<button class="link board-link" data-action="board">🏆 ${t(board.group() ? 'board.title' : 'board.invitePrompt')}</button><hr>${countdownHTML()}${otherDailiesHTML()}` : ''}`;
+    over.querySelector('[data-action="board"]')?.addEventListener('click', () => openBoard());
     over.querySelector('[data-action="result"]').onclick = openResult;
     over.querySelector('[data-action="replay"]').onclick = () => (game.replayStep == null ? game.startReplay() : game.stopReplay());
     over.querySelectorAll('[data-category]').forEach((b) => { b.onclick = () => game.switchCategory(b.dataset.category); });
@@ -686,6 +696,7 @@ function openResult() {
         <div class="badge-row">${game.newBadges.slice(0, 4).map(badgeHTML).join('')}</div></div>` : ''}
       ${isClassic(game.mode) ? summaryHTML(game.currentStats) : ''}
       ${game.mode === 'daily' ? countdownHTML() : ''}
+      ${game.mode === 'daily' ? `<button class="link" data-action="board" style="margin:4px auto">🏆 ${t(board.group() ? 'board.title' : 'board.invitePrompt')}</button>` : ''}
       <div class="actions">
         <button class="button primary" data-action="new" autofocus title="Enter">${t('newGame')}</button>
         <button class="button" data-action="share">${t(navigator.share ? 'share' : 'copy')}</button>
@@ -695,6 +706,7 @@ function openResult() {
     </div>`, (d) => {
     d.querySelector('[data-action="share"]').onclick = share;
     // Pencere kapanınca haritada tahminler sırayla yeniden oynatılır.
+    d.querySelector('[data-action="board"]')?.addEventListener('click', () => { d.close(); openBoard(); });
     const replay = d.querySelector('[data-action="replay"]');
     if (replay) replay.onclick = () => { d.close(); setTimeout(() => game.startReplay(), 300); };
     playLevelCard(d.querySelector('.level-card'), game.reward);
@@ -943,6 +955,104 @@ function progressHTML(stats, set) {
     <p class="muted" style="font-size:12px;margin:4px 0">${t('prog.legend')}</p>
     <div class="section-title">${t('prog.recent')}</div>
     <div class="recent">${recentRows}</div>`;
+}
+
+// MARK: - Arkadaş grubu ve skor tablosu
+
+let boardCategory = null;
+
+async function openBoard() {
+  const g = board.group();
+  if (!g) {
+    showDialog('boardDialog', `
+      <h2>🏆 ${esc(t('board.title'))}</h2>
+      <p>${esc(t('board.intro'))}</p>
+      <label class="field"><span>${esc(t('board.nick'))}</span><input id="nickInput" maxlength="20" autocomplete="nickname" placeholder="${esc(t('board.nickPlaceholder'))}"></label>
+      <div class="actions"><button class="button" data-close>${esc(t('close'))}</button>
+        <button class="button primary" id="createGroup" disabled>${esc(t('board.create'))}</button></div>`, (d) => {
+      const input = d.querySelector('#nickInput');
+      const btn = d.querySelector('#createGroup');
+      input.oninput = () => { btn.disabled = !board.cleanNick(input.value); };
+      btn.onclick = () => { board.createGroup(input.value); board.syncResults().then(() => openBoard()); openBoard(); };
+      setTimeout(() => input.focus(), 50);
+    });
+    return;
+  }
+  boardCategory ??= game.category;
+  renderBoard(null);
+  const data = await board.fetchBoard();
+  if ($('boardDialog').open) renderBoard(data);
+}
+
+function renderBoard(data) {
+  const g = board.group();
+  const me = board.playerId();
+  const results = data?.results ?? {};
+  const list = board.rank(results[boardCategory] ?? []);
+  const mine = store.get(`atlas.daily.${boardCategory}.${dayIndex()}`);
+  const finished = mine && mine.status !== 'playing';
+  const rows = !data ? `<p class="muted center">${esc(t('board.loading'))}</p>`
+    : data.error ? `<p class="muted center">${esc(t(data.error === 'storage' ? 'board.noStorage' : 'board.offline'))}</p>`
+    : list.length ? `<ol class="board-list">${list.map((e, i) => `<li class="${e.player === me ? 'me' : ''}">
+        <span class="pos">${e.won ? i + 1 : '–'}</span><span class="nick">${esc(e.nick)}${e.player === me ? ` <span class="muted">(${esc(t('board.you'))})</span>` : ''}</span>
+        <span class="res">${e.won ? esc(t('guesses', { n: e.guesses })) : esc(t('board.gaveUp'))}${e.hints ? ` · 💡${e.hints}` : ''}${e.expert ? ' · 🙈' : ''}</span></li>`).join('')}</ol>`
+    : `<p class="muted center">${esc(t('board.empty'))}</p>`;
+  showDialog('boardDialog', `
+    <h2>🏆 ${esc(t('board.title'))}</h2>
+    <p class="muted" style="margin-top:-6px">${esc(t('board.today', { n: game.puzzleNumber }))}</p>
+    <div class="chips board-cats">${CATEGORIES.map((c) => `<button class="chip ${c.id === boardCategory ? 'selected' : ''}" data-cat="${c.id}">${c.icon} ${esc(c.title)}${results[c.id]?.length ? ` <b>${results[c.id].length}</b>` : ''}</button>`).join('')}</div>
+    ${rows}
+    ${!finished ? `<p class="muted" style="font-size:13px">${esc(t('board.notYet'))}</p>` : ''}
+    <hr>
+    <div class="board-footer">
+      <label class="field inline"><span>${esc(t('board.nick'))}</span><input id="nickInput" maxlength="20" value="${esc(g.nick)}"></label>
+      <div class="actions">
+        <button class="button primary" id="inviteButton">${esc(t('board.invite'))}</button>
+        <button class="button" id="leaveGroup">${esc(t('board.leave'))}</button>
+        <button class="button" data-close>${esc(t('close'))}</button>
+      </div>
+    </div>`, (d) => {
+    d.querySelectorAll('[data-cat]').forEach((b) => { b.onclick = () => { boardCategory = b.dataset.cat; renderBoard(data); }; });
+    const nick = d.querySelector('#nickInput');
+    nick.onchange = () => {
+      if (!board.cleanNick(nick.value)) { nick.value = g.nick; return; }
+      board.setNick(nick.value);
+      board.syncResults().then(() => openBoard());
+    };
+    d.querySelector('#inviteButton').onclick = async () => {
+      const text = `${t('board.inviteText')} ${board.inviteLink()}`;
+      if (navigator.share) { try { await navigator.share({ text }); } catch {} return; }
+      try { await navigator.clipboard.writeText(board.inviteLink()); toast(t('board.copied')); } catch { toast(board.inviteLink()); }
+    };
+    d.querySelector('#leaveGroup').onclick = () => {
+      if (!confirm(t('board.leaveConfirm'))) return;
+      board.leaveGroup();
+      d.close();
+    };
+  });
+}
+
+/** Davet bağlantısıyla gelen: takma adla gruba katılma. */
+function openJoin(code) {
+  const current = board.group();
+  showDialog('boardDialog', `
+    <h2>🏆 ${esc(t('board.joinTitle'))}</h2>
+    <p>${esc(t('board.joinIntro'))}</p>
+    ${current ? `<p class="muted" style="font-size:13px">${esc(t('board.switchWarning'))}</p>` : ''}
+    <label class="field"><span>${esc(t('board.nick'))}</span><input id="nickInput" maxlength="20" autocomplete="nickname" value="${esc(current?.nick ?? '')}" placeholder="${esc(t('board.nickPlaceholder'))}"></label>
+    <div class="actions"><button class="button" data-close>${esc(t('cancel'))}</button>
+      <button class="button primary" id="joinGroup" ${current?.nick ? '' : 'disabled'}>${esc(t('board.join'))}</button></div>`, (d) => {
+    const input = d.querySelector('#nickInput');
+    const btn = d.querySelector('#joinGroup');
+    input.oninput = () => { btn.disabled = !board.cleanNick(input.value); };
+    btn.onclick = () => {
+      board.joinGroup(code, input.value);
+      store.set('atlas.helpSeen', true);
+      board.syncResults().then(() => openBoard());
+      openBoard();
+    };
+    setTimeout(() => input.focus(), 50);
+  });
 }
 
 // Yardım ve ayarlar

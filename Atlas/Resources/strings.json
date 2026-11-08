@@ -2494,5 +2494,197 @@
   "fr": "Tu as une série de {n} jours. L'énigme du jour t'attend.",
   "es": "Llevas una racha de {n} días. El reto de hoy te espera.",
   "it": "Hai una serie di {n} giorni. La sfida di oggi ti aspetta."
+ },
+ "cancel": {
+  "tr": "Vazgeç",
+  "en": "Cancel",
+  "de": "Abbrechen",
+  "fr": "Annuler",
+  "es": "Cancelar",
+  "it": "Annulla"
+ },
+ "board.title": {
+  "tr": "Grup tablosu",
+  "en": "Group leaderboard",
+  "de": "Gruppenrangliste",
+  "fr": "Classement du groupe",
+  "es": "Clasificación del grupo",
+  "it": "Classifica del gruppo"
+ },
+ "board.invitePrompt": {
+  "tr": "Arkadaşlarınla yarış",
+  "en": "Compete with friends",
+  "de": "Tritt gegen Freunde an",
+  "fr": "Affronte tes amis",
+  "es": "Compite con tus amigos",
+  "it": "Sfida i tuoi amici"
+ },
+ "board.intro": {
+  "tr": "Bir arkadaş grubu kur, davet bağlantısını paylaş. Günlük bulmacaları bitirdikçe herkesin sonucu bu tabloda yan yana görünür. Hesap gerekmez; bir takma ad yeter.",
+  "en": "Create a friends group and share the invite link. As everyone finishes the daily puzzles, results show up side by side here. No account needed, just a nickname.",
+  "de": "Gründe eine Freundesgruppe und teile den Einladungslink. Sobald alle die Tagesrätsel lösen, stehen die Ergebnisse hier nebeneinander. Kein Konto nötig, nur ein Spitzname.",
+  "fr": "Crée un groupe d'amis et partage le lien d'invitation. Au fil des énigmes du jour, les résultats de chacun s'affichent ici côte à côte. Pas de compte, juste un pseudo.",
+  "es": "Crea un grupo de amigos y comparte el enlace de invitación. Cuando todos terminen los retos diarios, los resultados aparecerán aquí. Sin cuenta, solo un apodo.",
+  "it": "Crea un gruppo di amici e condividi il link d'invito. Man mano che finite le sfide del giorno, i risultati compaiono qui affiancati. Niente account, basta un nickname."
+ },
+ "board.nick": {
+  "tr": "Takma adın",
+  "en": "Your nickname",
+  "de": "Dein Spitzname",
+  "fr": "Ton pseudo",
+  "es": "Tu apodo",
+  "it": "Il tuo nickname"
+ },
+ "board.nickPlaceholder": {
+  "tr": "ör. Azi",
+  "en": "e.g. Sam",
+  "de": "z. B. Max",
+  "fr": "ex. Léa",
+  "es": "p. ej. Lucía",
+  "it": "es. Giulia"
+ },
+ "board.create": {
+  "tr": "Grup kur",
+  "en": "Create group",
+  "de": "Gruppe gründen",
+  "fr": "Créer le groupe",
+  "es": "Crear grupo",
+  "it": "Crea gruppo"
+ },
+ "board.today": {
+  "tr": "Bugün · Atlas #{n}",
+  "en": "Today · Atlas #{n}",
+  "de": "Heute · Atlas #{n}",
+  "fr": "Aujourd'hui · Atlas #{n}",
+  "es": "Hoy · Atlas #{n}",
+  "it": "Oggi · Atlas #{n}"
+ },
+ "board.loading": {
+  "tr": "Yükleniyor…",
+  "en": "Loading…",
+  "de": "Wird geladen…",
+  "fr": "Chargement…",
+  "es": "Cargando…",
+  "it": "Caricamento…"
+ },
+ "board.offline": {
+  "tr": "Tabloya ulaşılamadı. Bağlantını kontrol edip yeniden dene.",
+  "en": "Couldn't reach the leaderboard. Check your connection and try again.",
+  "de": "Rangliste nicht erreichbar. Prüfe die Verbindung und versuche es erneut.",
+  "fr": "Classement inaccessible. Vérifie ta connexion et réessaie.",
+  "es": "No se pudo cargar la clasificación. Revisa tu conexión e inténtalo de nuevo.",
+  "it": "Classifica non raggiungibile. Controlla la connessione e riprova."
+ },
+ "board.noStorage": {
+  "tr": "Grup tablosu henüz kurulmadı (sunucuda depo yok).",
+  "en": "The leaderboard isn't set up yet (no storage on the server).",
+  "de": "Die Rangliste ist noch nicht eingerichtet (kein Speicher auf dem Server).",
+  "fr": "Le classement n'est pas encore configuré (pas de stockage sur le serveur).",
+  "es": "La clasificación aún no está configurada (sin almacenamiento en el servidor).",
+  "it": "La classifica non è ancora configurata (nessuno spazio sul server)."
+ },
+ "board.empty": {
+  "tr": "Bu kategoride bugün henüz kimse bitirmedi.",
+  "en": "Nobody has finished this category today yet.",
+  "de": "Heute hat diese Kategorie noch niemand beendet.",
+  "fr": "Personne n'a encore fini cette catégorie aujourd'hui.",
+  "es": "Nadie ha terminado esta categoría hoy todavía.",
+  "it": "Nessuno ha ancora finito questa categoria oggi."
+ },
+ "board.you": {
+  "tr": "sen",
+  "en": "you",
+  "de": "du",
+  "fr": "toi",
+  "es": "tú",
+  "it": "tu"
+ },
+ "board.gaveUp": {
+  "tr": "pes etti",
+  "en": "gave up",
+  "de": "aufgegeben",
+  "fr": "abandon",
+  "es": "se rindió",
+  "it": "si è arreso"
+ },
+ "board.notYet": {
+  "tr": "Bu kategorideki bugünkü bulmacayı bitirince senin sonucun da eklenir.",
+  "en": "Your result is added once you finish today's puzzle in this category.",
+  "de": "Dein Ergebnis kommt hinzu, sobald du das heutige Rätsel dieser Kategorie beendest.",
+  "fr": "Ton résultat s'ajoutera quand tu auras fini l'énigme du jour de cette catégorie.",
+  "es": "Tu resultado se añadirá cuando termines el reto de hoy de esta categoría.",
+  "it": "Il tuo risultato si aggiunge quando finisci la sfida di oggi di questa categoria."
+ },
+ "board.invite": {
+  "tr": "Arkadaş davet et",
+  "en": "Invite friends",
+  "de": "Freunde einladen",
+  "fr": "Inviter des amis",
+  "es": "Invitar amigos",
+  "it": "Invita amici"
+ },
+ "board.inviteText": {
+  "tr": "Atlas'ta günlük bulmacada yarışalım! Grubuma katıl:",
+  "en": "Let's compete on the Atlas daily puzzle! Join my group:",
+  "de": "Lass uns beim Atlas-Tagesrätsel antreten! Tritt meiner Gruppe bei:",
+  "fr": "Affrontons-nous sur l'énigme du jour d'Atlas ! Rejoins mon groupe :",
+  "es": "¡Compitamos en el reto diario de Atlas! Únete a mi grupo:",
+  "it": "Sfidiamoci sulla sfida del giorno di Atlas! Entra nel mio gruppo:"
+ },
+ "board.copied": {
+  "tr": "Davet bağlantısı kopyalandı",
+  "en": "Invite link copied",
+  "de": "Einladungslink kopiert",
+  "fr": "Lien d'invitation copié",
+  "es": "Enlace de invitación copiado",
+  "it": "Link d'invito copiato"
+ },
+ "board.leave": {
+  "tr": "Gruptan çık",
+  "en": "Leave group",
+  "de": "Gruppe verlassen",
+  "fr": "Quitter le groupe",
+  "es": "Salir del grupo",
+  "it": "Esci dal gruppo"
+ },
+ "board.leaveConfirm": {
+  "tr": "Gruptan çıkmak istediğine emin misin? Davet bağlantısıyla yeniden katılabilirsin.",
+  "en": "Leave the group? You can rejoin with the invite link.",
+  "de": "Gruppe verlassen? Mit dem Einladungslink kannst du wieder beitreten.",
+  "fr": "Quitter le groupe ? Tu pourras revenir avec le lien d'invitation.",
+  "es": "¿Salir del grupo? Puedes volver con el enlace de invitación.",
+  "it": "Uscire dal gruppo? Puoi rientrare col link d'invito."
+ },
+ "board.joinTitle": {
+  "tr": "Bir gruba davet edildin",
+  "en": "You've been invited to a group",
+  "de": "Du wurdest in eine Gruppe eingeladen",
+  "fr": "Tu es invité dans un groupe",
+  "es": "Te han invitado a un grupo",
+  "it": "Sei stato invitato in un gruppo"
+ },
+ "board.joinIntro": {
+  "tr": "Bir takma ad seç; günlük bulmaca sonuçların gruptaki arkadaşlarınla yan yana görünsün.",
+  "en": "Pick a nickname so your daily puzzle results appear next to your friends'.",
+  "de": "Wähle einen Spitznamen, damit deine Tagesergebnisse neben denen deiner Freunde erscheinen.",
+  "fr": "Choisis un pseudo pour que tes résultats du jour apparaissent à côté de ceux de tes amis.",
+  "es": "Elige un apodo para que tus resultados diarios aparezcan junto a los de tus amigos.",
+  "it": "Scegli un nickname perché i tuoi risultati compaiano accanto a quelli dei tuoi amici."
+ },
+ "board.switchWarning": {
+  "tr": "Şu anki grubundan çıkıp bu gruba geçersin.",
+  "en": "You'll leave your current group and switch to this one.",
+  "de": "Du verlässt deine aktuelle Gruppe und wechselst in diese.",
+  "fr": "Tu quitteras ton groupe actuel pour celui-ci.",
+  "es": "Saldrás de tu grupo actual y pasarás a este.",
+  "it": "Lascerai il gruppo attuale per passare a questo."
+ },
+ "board.join": {
+  "tr": "Katıl",
+  "en": "Join",
+  "de": "Beitreten",
+  "fr": "Rejoindre",
+  "es": "Unirse",
+  "it": "Entra"
  }
 }
