@@ -5,6 +5,7 @@
 // - Günlük bulmaca ×1,5; kategori zorluğu ×0,6–1,5; her ipucu −%15; uzman modu ×1,3. Sonuç 5'in katına yuvarlanır.
 // Seviye L'ye ulaşmak için toplam 125·L·(L−1) XP gerekir. Toplam XP oyun geçmişinden hesaplanır.
 import { CATEGORIES } from './places.js';
+import { ChainStats, TimedStats } from './modes.js';
 
 const CATEGORY_FACTOR = {
   world: 1.5, turkey: 1.2, europe: 1, asia: 1, africa: 1, northAmerica: 0.8, southAmerica: 0.6, oceania: 0.6,
@@ -24,6 +25,17 @@ export function points(guesses, hints, category, mode, expert = false) {
   const raw = basePoints(guesses) * hintFactor * CATEGORY_FACTOR[category] * modeFactor * expertFactor;
   // Swift'teki .rounded() ile aynı (pozitif sayılarda yarımlar yukarı); işlem sırası da aynı.
   return Math.round(raw / 5) * 5;
+}
+
+/** Zamana karşı: bulunan her yer 25 XP × kategori zorluğu. */
+export function timedPoints(score, category) {
+  return Math.round((score * 25 * CATEGORY_FACTOR[category]) / 5) * 5;
+}
+
+/** Zincir: en kısa rotayla 150, her fazla tahminde 25 eksik (en az 40) × kategori zorluğu. */
+export function chainPoints(guesses, optimal, category) {
+  const base = Math.max(40, 150 - 25 * Math.max(0, guesses - optimal));
+  return Math.round((base * CATEGORY_FACTOR[category]) / 5) * 5;
 }
 
 export const threshold = (level) => 125 * level * (level - 1);
@@ -51,6 +63,8 @@ export function totalXP(loadStats) {
         if (r.won) total += points(r.guesses, r.hints ?? 0, c.id, mode, !!r.expert);
       }
     }
+    for (const r of TimedStats.load(c.id).runs) total += timedPoints(r.score, c.id);
+    for (const r of ChainStats.load(c.id).runs) if (r.won) total += chainPoints(r.guesses, r.optimal, c.id);
   }
   return total;
 }

@@ -51,6 +51,8 @@
       <div class="segmented" id="modeSegmented" role="tablist" aria-label="Mod">
         <button data-mode="daily" role="tab">Günlük</button>
         <button data-mode="practice" role="tab">Alıştırma</button>
+        <button data-mode="timed" role="tab">Süreli</button>
+        <button data-mode="chain" role="tab">Zincir</button>
       </div>
       <div class="toolbar-right">
         <label class="category-select lang-select" id="languageLabel" title="Dil">
@@ -97,6 +99,7 @@
           <p class="muted" id="panelSubtitle"></p>
         </div>
 
+        <div id="modeBox" class="mode-box" hidden></div>
         <div id="gameOver" class="game-over" hidden></div>
 
         <form class="guess-form" id="guessForm" autocomplete="off">
@@ -116,7 +119,10 @@
 
         <footer class="panel-footer">
           <span class="muted" id="guessCount">0 tahmin</span>
-          <button class="link danger" id="giveUpButton" hidden>Pes et</button>
+          <span class="footer-actions">
+            <button class="link" id="skipButton" hidden>Pas</button>
+            <button class="link danger" id="giveUpButton" hidden>Pes et</button>
+          </span>
         </footer>
       </aside>
     </main>

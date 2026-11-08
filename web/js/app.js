@@ -1,14 +1,15 @@
 // Arayüz: panel, arama, tahmin listesi, pencereler. Harita map.js'te, oyun mantığı game.js'te.
 import { CATEGORIES, categoryById, loadData, placeSet } from './places.js';
 import { LANGUAGES, detectLanguage, languageInfo, nativeName, formatKm, formatNumber, language, loadStrings, locale, onLanguageChange, setLanguage, t } from './i18n.js';
-import { Game, Stats, store } from './game.js';
+import { Game, Stats, TIMED_DURATION, isClassic, store } from './game.js';
+import { ChainStats, TimedStats, supportsChain } from './modes.js';
 import { MapView, drawCategoryThumb, drawDiscoveryMap } from './map.js';
 import { dayIndex } from './daily.js';
 import { confetti } from './confetti.js';
 import { VERSION } from './version.js';
 import { levelCardHTML, playLevelCard, splashStarted } from './brand.js';
 import { progress, totalXP } from './progression.js';
-import { applyTheme, heatColor, isDark, onThemeChange, setThemePreference, themePreference } from './colors.js';
+import { COLORS, applyTheme, heatColor, isDark, onThemeChange, setThemePreference, themePreference } from './colors.js';
 import { allBadges } from './badges.js';
 import * as feedback from './feedback.js';
 import { flagHTML, flaggedName } from './flags.js';
@@ -96,20 +97,21 @@ function setupToolbar() {
     const mode = e.target.closest('button')?.dataset.mode;
     if (mode) game.switchMode(mode);
   });
-  $('newGameButton').addEventListener('click', () => game.newPractice());
+  $('newGameButton').addEventListener('click', () => game.newRound());
   $('statsButton').addEventListener('click', () => openStats());
   $('settingsButton').addEventListener('click', () => openSettings());
   $('themeButton').addEventListener('click', () => setThemePreference(isDark() ? 'light' : 'dark'));
   applyTheme();
   $('helpButton').addEventListener('click', () => openHelp());
   $('giveUpButton').addEventListener('click', () => game.giveUp());
+  $('skipButton').addEventListener('click', () => { game.skipTimed(); $('guessInput').focus(); });
 
   // Oyun bittiyse Enter yeni oyunu başlatır (düğmeler kendi Enter'ını işler).
   document.addEventListener('keydown', (e) => {
     if (e.key !== 'Enter' || !game.isOver || document.querySelector('dialog[open]')) return;
     if (e.target.closest?.('button, select, input, a')) return;
     e.preventDefault();
-    game.newPractice();
+    game.newRound();
   });
   // Sekmeye ya da pencereye geri dönülünce tahmin kutusu yeniden seçilsin.
   window.addEventListener('focus', restoreFocus);
@@ -117,7 +119,7 @@ function setupToolbar() {
   // Mac uygulamasındaki kısayollar
   document.addEventListener('keydown', (e) => {
     if (!(e.metaKey || e.ctrlKey) || e.altKey) return;
-    if (e.key === 'n' || e.key === 'N') { e.preventDefault(); closeDialogs(); game.newPractice(); }
+    if (e.key === 'n' || e.key === 'N') { e.preventDefault(); closeDialogs(); game.newRound(); }
     else if (e.key === 'd') { e.preventDefault(); game.switchMode('daily'); }
     else if (e.key === 'i') { e.preventDefault(); openStats(); }
     else if (/^[1-8]$/.test(e.key)) { e.preventDefault(); game.switchCategory(CATEGORIES[Number(e.key) - 1].id); }
@@ -150,6 +152,7 @@ function applyStaticTexts() {
   reset.title = t('map.reset');
   set('guessButton', t('guess'), ['text']);
   set('giveUpButton', t('giveUp'), ['text']);
+  set('skipButton', t('timed.skip'), ['text']);
   $('languageSelect').value = language();
   $('languageFlag').textContent = languageInfo().flag;
   document.querySelector('meta[name="description"]')?.setAttribute('content', `Atlas · ${t('app.tagline')}`);
@@ -248,15 +251,26 @@ function render() {
     map.setPlaces(game.places);
     $('guessInput').placeholder = t(`placeholder.${c.kind}`);
   }
+  if (last.mode !== game.mode) map.updateLegend();
   if (last.roundID !== game.roundID) {
     $('guessInput').value = '';
     renderSuggestions();
-    // Bitmiş bir oyuna dönülünce (ör. çözülmüş günlük bulmaca) gizli yer odakta kalsın.
-    if (game.isOver) map.focus(game.answer);
+    // Bitmiş bir oyuna dönülünce (ör. çözülmüş günlük bulmaca) gizli yer odakta kalsın; zincirde iki uç görünsün.
+    if (game.mode === 'chain' && game.chainStart) setTimeout(() => map.focusMany([game.chainStart, game.chainEnd]), last.category === game.category ? 0 : 60);
+    else if (game.isOver) map.focus(game.answer);
     else if (last.category === game.category) map.reset();
     focusInput();
   }
-  if (game.lastGuess && game.lastGuess !== last.lastGuess) {
+  // Zamana karşı: bulunan yer yeşil nabızla parlar.
+  if (game.timedFound.length > (last.timedFound ?? 0) && game.mode === 'timed') {
+    map.celebrate(game.timedFound[game.timedFound.length - 1]);
+    feedback.won();
+  }
+  if (game.mode === 'chain' && game.lastGuess && game.lastGuess !== last.lastGuess) {
+    // Zincirde kamera iki ucu göstermeye devam eder; rota tamamlanınca yeşil nabız.
+    if (game.status === 'won') { game.chainPath.forEach((p) => map.celebrate(p)); feedback.won(); confetti(); }
+    else feedback.guessMade(game.feedbackProximity(game.lastGuess), game.lastImproved), map.pulse(game.lastGuess.place);
+  } else if (game.lastGuess && game.lastGuess !== last.lastGuess) {
     if (game.status === 'won') feedback.won();
     else feedback.guessMade(proximity(game.lastGuess, game.places.maxDistance), game.lastImproved && game.guesses.length > 1);
     // Uzman modunda kamera tahmine uçmaz (yerini bilmek oyunun parçası); yalnızca parlar.
@@ -272,7 +286,8 @@ function render() {
   if (game.highlighted && game.highlighted !== last.highlighted) map.focus(game.highlighted);
   // Pes edilince gizli yer de gösterilsin.
   if (game.status === 'lost' && last.status === 'playing' && last.roundID === game.roundID) {
-    map.focus(game.answer);
+    if (game.mode === 'chain') map.focusMany([game.chainStart, game.chainEnd, ...game.chainShortest]);
+    else map.focus(game.answer);
     feedback.lost();
   }
   // Rota tekrarı: önce tüm harita, sonra her tahmine sırayla uçup parlar; sonunda gizli yer.
@@ -289,28 +304,35 @@ function render() {
   }
   if (game.showResult && !last.showResult) setTimeout(openResult, 450);
 
-  last = { roundID: game.roundID, lastGuess: game.lastGuess, highlighted: game.highlighted, category: game.category, showResult: game.showResult, status: game.status, replayStep: game.replayStep, expert: last.expert };
+  last = { roundID: game.roundID, lastGuess: game.lastGuess, highlighted: game.highlighted, category: game.category, showResult: game.showResult, status: game.status, replayStep: game.replayStep, expert: last.expert, mode: game.mode, timedFound: game.timedFound.length };
 
   // Araç çubuğu
   $('categoryName').textContent = c.title;
   $('categoryIcon').textContent = c.icon;
   document.querySelectorAll('#modeSegmented button').forEach((b) => b.setAttribute('aria-selected', b.dataset.mode === game.mode));
-  $('newGameButton').hidden = game.mode !== 'practice';
+  $('newGameButton').hidden = game.mode === 'daily';
   document.title = game.mode === 'daily' ? `Atlas #${game.puzzleNumber} · ${c.title}` : `Atlas · ${c.title}`;
 
   // Başlık
-  $('panelCategory').textContent = isPhone() ? `${c.icon} ${game.places.subtitle()}` : `${c.icon} ${c.title}`;
-  $('panelTitle').innerHTML = esc(game.mode === 'daily' ? t(`panel.daily.${c.kind}`) : t('mode.practice'))
+  $('panelCategory').textContent = isPhone() && isClassic(game.mode) ? `${c.icon} ${game.places.subtitle()}` : `${c.icon} ${c.title}`;
+  $('panelTitle').innerHTML = esc(panelTitle())
     + (game.expert ? ` <span class="expert-tag" title="${esc(t('set.expertHint'))}">🙈 ${esc(t('expert.tag'))}</span>` : '');
   // Lejant uzman moduna göre (km ya da yakın/uzak).
   if (last.expert !== game.expert) { last.expert = game.expert; map.updateLegend(); }
-  $('panelSubtitle').textContent = game.places.subtitle();
+  $('panelSubtitle').textContent = isClassic(game.mode) ? game.places.subtitle() : '';
+  $('panelSubtitle').hidden = !isClassic(game.mode);
 
   // Oyun sonu / giriş
-  $('guessForm').hidden = game.isOver;
+  const chainBlocked = game.mode === 'chain' && !game.chainAvailable;
+  $('guessForm').hidden = game.isOver || chainBlocked;
+  renderModeBox();
   const over = $('gameOver');
   over.hidden = !game.isOver;
-  if (game.isOver) {
+  if (game.isOver && !isClassic(game.mode)) {
+    over.innerHTML = game.mode === 'timed' ? timedOverHTML() : chainOverHTML();
+    over.querySelector('[data-action="result"]').onclick = openResult;
+    over.querySelector('[data-action="new"]').onclick = () => game.newRound();
+  } else if (game.isOver) {
     const won = game.status === 'won';
     over.innerHTML = `
       <div class="status ${won ? 'won' : 'lost'}">${won ? `✓ ${t('over.won')}` : t(`over.hidden.${c.kind}`)}</div>
@@ -337,16 +359,95 @@ function render() {
 
   const closest = game.closest;
   const closestEl = $('closest');
-  closestEl.hidden = !closest || game.isOver;
+  closestEl.hidden = !closest || game.isOver || game.mode === 'chain';
   if (closest && !game.isOver) {
     closestEl.innerHTML = `<span class="muted">${t('closest')}</span><strong>${esc(distanceLabel(closest, true))}</strong>`;
   }
 
   renderHints();
   renderGuesses();
-  $('guessCount').textContent = t('guesses', { n: game.guesses.length });
-  $('giveUpButton').hidden = game.isOver || !game.guesses.length;
+  $('guessCount').textContent = game.mode === 'timed' ? t('timed.score', { n: game.timedFound.length }) : t('guesses', { n: game.guesses.length });
+  const started = game.mode === 'timed' ? !!game.timedStart : game.guesses.length > 0;
+  $('giveUpButton').hidden = game.isOver || !started;
+  $('giveUpButton').textContent = t(game.mode === 'timed' ? 'timed.finish' : 'giveUp');
+  $('skipButton').hidden = game.mode !== 'timed' || game.isOver || !game.timedStart;
   map.draw();
+}
+
+function panelTitle() {
+  const c = game.places.category;
+  return { daily: t(`panel.daily.${c.kind}`), practice: t('mode.practice'), timed: t('timed.title'), chain: t('chain.title') }[game.mode];
+}
+
+const routeText = (path) => path.map((p) => esc(p.name)).join(' → ');
+const timedClock = (ms) => { const s = Math.ceil(ms / 1000); return `${Math.floor(s / 60)}:${String(s % 60).padStart(2, '0')}`; };
+
+/** Süreli: sayaç ya da "Başla" kartı. Zincir: başlangıç → bitiş kartı ya da kategori uyarısı. */
+function renderModeBox() {
+  const box = $('modeBox');
+  const c = game.places.category;
+  let html = '';
+  if (game.mode === 'timed' && !game.isOver) {
+    html = game.timedStart
+      ? `<div class="timed-bar"><div><b class="timed-clock">${timedClock(game.timedRemaining())}</b><span>${esc(t('timed.remaining'))}</span></div>
+          <div class="right"><b class="timed-score">${game.timedFound.length}</b><span>${esc(t('timed.foundLabel'))}</span></div>
+          <i class="timed-progress" style="width:${(game.timedRemaining() / TIMED_DURATION) * 100}%"></i></div>`
+      : `<div class="timed-start"><b>⏱️ ${esc(t('timed.title'))}</b><p>${esc(t(`timed.intro.${c.kind}`))}</p>
+          <p class="muted">${esc(t('timed.skipHint'))}</p><button class="button primary" data-action="start">▶ ${esc(t('timed.start'))}</button></div>`;
+  } else if (game.mode === 'chain' && !game.chainAvailable) {
+    html = `<div class="chain-card"><b>🔗 ${esc(t('chain.title'))}</b><p>${esc(t('chain.unavailable'))}</p>
+      <div class="chips">${CATEGORIES.filter((x) => supportsChain(placeSet(x.id))).map((x) => `<button class="chip" data-category="${x.id}">${x.icon} ${esc(x.title)}</button>`).join('')}</div></div>`;
+  } else if (game.mode === 'chain' && game.chainStart) {
+    const s = game.chainStart, e = game.chainEnd;
+    html = `<div class="chain-card"><div class="chain-ends">${flagHTML(s)}${esc(s.name)} <span class="muted">→</span> ${flagHTML(e)}${esc(e.name)}</div>
+      ${game.isOver ? '' : `<p class="muted">${esc(t(`chain.intro.${c.kind}`, { a: s.name, b: e.name }))}</p>
+      <div class="chain-left"><b class="${game.chainGuessesLeft <= 2 ? 'danger-text' : ''}">${esc(t('chain.left', { n: game.chainGuessesLeft }))}</b><span class="muted">${esc(t('chain.optimal', { n: game.chainOptimal }))}</span></div>`}</div>`;
+  }
+  box.hidden = !html;
+  // Sayaç her saniye kendi güncellenir; kutuyu yalnızca içerik türü değişince yeniden yaz.
+  const key = `${game.mode}|${game.roundID}|${game.isOver}|${!!game.timedStart}|${game.timedFound.length}|${game.guesses.length}|${language()}|${game.category}`;
+  if (box.dataset.key === key) return;
+  box.dataset.key = key;
+  box.innerHTML = html;
+  box.querySelector('[data-action="start"]')?.addEventListener('click', () => { game.startTimer(); $('guessInput').focus(); });
+  box.querySelectorAll('[data-category]').forEach((b) => { b.onclick = () => game.switchCategory(b.dataset.category); });
+}
+
+setInterval(() => {
+  if (!game || game.mode !== 'timed' || !game.timedStart || game.isOver) return;
+  const ms = game.timedRemaining();
+  const clock = document.querySelector('.timed-clock');
+  if (clock) { clock.textContent = timedClock(ms); clock.classList.toggle('danger-text', ms <= 20_000); }
+  const bar = document.querySelector('.timed-progress');
+  if (bar) bar.style.width = `${(ms / TIMED_DURATION) * 100}%`;
+}, 250);
+
+function timedOverHTML() {
+  const r = game.timedResult;
+  return `<div class="status" style="color:var(--accent)">⏱️ ${esc(t('timed.over'))}</div>
+    <div class="answer">${esc(t(`timed.result.${game.places.category.kind}`, { n: game.timedFound.length }))}</div>
+    ${r ? `<p class="${r.isRecord ? 'record' : 'muted'}">${esc(r.isRecord ? t('timed.record') : t('timed.best', { n: r.best }))}</p>` : ''}
+    <p class="muted">${esc(t('timed.lastHidden', { name: game.answer.name }))}</p>
+    ${foundChipsHTML()}
+    <div class="actions"><button class="button" data-action="result">${t('result')}</button>
+      <button class="button primary" data-action="new" title="Enter">${t('newGame')}</button></div>`;
+}
+
+function chainOverHTML() {
+  const won = game.status === 'won';
+  return `<div class="status ${won ? 'won' : 'lost'}">${won ? `✓ ${esc(t('chain.won'))}` : esc(t('chain.lost'))}</div>
+    ${won ? `<p>${esc(t(game.guesses.length === game.chainOptimal ? 'chain.perfect' : 'chain.foundIn', { n: game.guesses.length, m: game.chainOptimal }))}</p>` : ''}
+    <h2>${esc(t(won ? 'chain.yourRoute' : 'chain.shortest'))}</h2>
+    <p class="route">${routeText(won ? game.chainPath : game.chainShortest)}</p>
+    <div class="actions"><button class="button" data-action="result">${t('result')}</button>
+      <button class="button primary" data-action="new" title="Enter">${t('newGame')}</button></div>`;
+}
+
+/** Süreli turda bulunan ve pas geçilen yerler. */
+function foundChipsHTML() {
+  if (!game.timedFound.length && !game.timedSkipped.length) return '';
+  const chip = (p, found) => `<span class="chip ${found ? 'found' : 'skipped'}">${flagHTML(p)}${esc(p.name)} ${found ? '✓' : '⏭'}</span>`;
+  return `<div class="found-chips"><h2>${esc(t('timed.foundList'))}</h2><div class="chips">${game.timedFound.map((p) => chip(p, true)).join('')}${game.timedSkipped.map((p) => chip(p, false)).join('')}</div></div>`;
 }
 
 function distanceLabel(g, withName) {
@@ -359,6 +460,7 @@ function distanceLabel(g, withName) {
 
 function feedbackText(g) {
   const kind = game.places.category.kind;
+  if (game.mode === 'chain') return t(`chain.feedback.${g.distance}`, { name: g.place.name });
   if (game.expert) return t('feedback.colored', { name: g.place.name });
   if (g.distance === 0) return t(`feedback.neighbor.${kind}`, { name: g.place.name });
   if (!game.showDistance) return t('feedback.colored', { name: g.place.name });
@@ -368,7 +470,7 @@ function feedbackText(g) {
 /** Açılan ipuçları ve "İpucu al" düğmesi; oyun bitince üç ipucu da "Bu yer hakkında" olarak görünür. */
 function renderHints() {
   const el = $('hints');
-  const hints = game.hints;
+  const hints = isClassic(game.mode) ? game.hints : [];
   const shown = game.isOver ? hints : hints.slice(0, game.hintsUsed);
   const canAsk = !game.isOver && game.hintsUsed < hints.length;
   el.hidden = !hints.length;
@@ -395,7 +497,7 @@ let lastHeatP = null;
 function renderHeat() {
   const el = $('heat');
   const g = game.lastGuess;
-  el.hidden = !g || game.isOver || game.expert;
+  el.hidden = !g || game.isOver || game.expert || game.mode === 'chain';
   if (el.hidden) { lastHeatGuess = null; return; }
   const max = game.places.maxDistance;
   const p = proximity(g, max);
@@ -422,6 +524,19 @@ function renderHeat() {
 let emptyKey = null;
 function renderGuesses() {
   const el = $('guesses');
+  if (game.mode === 'chain') {
+    emptyKey = null;
+    const colors = COLORS();
+    el.innerHTML = game.isOver || !game.guesses.length ? '' : `<h2>${t('chain.guesses')}</h2>` + game.guesses.map((g) =>
+      `<div class="guess"><span class="swatch" style="background:${colors.chain[g.distance]}"></span>
+        <span class="name">${flagHTML(g.place)}${esc(g.place.name)}</span><span class="dist">${esc(t(`chain.class.${g.distance}`))}</span></div>`).join('');
+    return;
+  }
+  if (game.mode === 'timed') {
+    emptyKey = null;
+    if (game.isOver) { el.innerHTML = ''; return; }
+    if (!game.guesses.length) { el.innerHTML = foundChipsHTML(); return; }
+  }
   if (!game.guesses.length) {
     if (game.isOver) { el.innerHTML = ''; emptyKey = null; return; }
     // Henüz tahmin yokken: kategorinin silüeti, kaç yer arasından seçildiği ve bir oyun taktiği.
@@ -453,6 +568,7 @@ function renderGuesses() {
       <span class="dist">${dist}</span>
     </button>`;
   }).join('');
+  if (game.mode === 'timed') el.insertAdjacentHTML('beforeend', foundChipsHTML());
   el.querySelectorAll('.guess').forEach((b) => {
     b.onclick = () => {
       if (!game.showsGuessNames) return; // uzman modunda oyun sürerken yer haritada gösterilmez
@@ -544,31 +660,46 @@ function openResult() {
   if (!game.isOver) return;
   const c = game.places.category;
   const won = game.status === 'won';
-  showDialog('resultDialog', `
-    <div class="center">
-      <div style="font-size:44px">${won ? '🎉' : '🗺️'}</div>
+  let head;
+  if (game.mode === 'timed') {
+    const r = game.timedResult;
+    head = `<div style="font-size:44px">⏱️</div><h2>${esc(t('timed.over'))}</h2>
+      <p><b>${esc(t(`timed.result.${c.kind}`, { n: game.timedFound.length }))}</b><br>
+      ${r ? `<span class="${r.isRecord ? 'record' : 'muted'}">${esc(r.isRecord ? t('timed.record') : t('timed.best', { n: r.best }))}</span>` : ''}</p>`;
+  } else if (game.mode === 'chain') {
+    head = `<div style="font-size:44px">${won ? '🔗' : '🗺️'}</div><h2>${esc(t(won ? 'chain.won' : 'chain.lost'))}</h2>
+      ${won ? `<p>${esc(t(game.guesses.length === game.chainOptimal ? 'chain.perfect' : 'chain.foundIn', { n: game.guesses.length, m: game.chainOptimal }))}</p>` : ''}
+      <p class="muted" style="margin-bottom:2px">${esc(t(won ? 'chain.yourRoute' : 'chain.shortest'))}</p>
+      <p class="route">${routeText(won ? game.chainPath : game.chainShortest)}</p>`;
+  } else {
+    head = `<div style="font-size:44px">${won ? '🎉' : '🗺️'}</div>
       <h2>${t(won ? 'congrats' : 'nextTime')}</h2>
       <p>${won
         ? `${bold(t(`result.won.${c.kind}`, { name: `**${flaggedName(game.answer)}**` }))}<br>${bold(t('result.foundIn', { n: game.guesses.length }))}`
-        : bold(t(`result.lost.${c.kind}`, { name: `**${flaggedName(game.answer)}**` }))}</p>
+        : bold(t(`result.lost.${c.kind}`, { name: `**${flaggedName(game.answer)}**` }))}</p>`;
+  }
+  showDialog('resultDialog', `
+    <div class="center">
+      ${head}
       ${game.reward ? levelCardHTML(game.reward.after, game.reward) : ''}
       ${game.newBadges?.length ? `<div class="new-badges"><div class="new-badges-title">${esc(t('badges.new'))}</div>
         <div class="badge-row">${game.newBadges.slice(0, 4).map(badgeHTML).join('')}</div></div>` : ''}
-      ${summaryHTML(game.currentStats)}
+      ${isClassic(game.mode) ? summaryHTML(game.currentStats) : ''}
       ${game.mode === 'daily' ? countdownHTML() : ''}
       <div class="actions">
         <button class="button primary" data-action="new" autofocus title="Enter">${t('newGame')}</button>
         <button class="button" data-action="share">${t(navigator.share ? 'share' : 'copy')}</button>
-        <button class="button" data-action="replay">▶ ${t('replay.button')}</button>
+        ${isClassic(game.mode) ? `<button class="button" data-action="replay">▶ ${t('replay.button')}</button>` : ''}
         <button class="button" data-close>${t('close')}</button>
       </div>
     </div>`, (d) => {
     d.querySelector('[data-action="share"]').onclick = share;
     // Pencere kapanınca haritada tahminler sırayla yeniden oynatılır.
-    d.querySelector('[data-action="replay"]').onclick = () => { d.close(); setTimeout(() => game.startReplay(), 300); };
+    const replay = d.querySelector('[data-action="replay"]');
+    if (replay) replay.onclick = () => { d.close(); setTimeout(() => game.startReplay(), 300); };
     playLevelCard(d.querySelector('.level-card'), game.reward);
     // Enter doğrudan yeni oyuna geçer (autofocus bu düğmede).
-    d.querySelector('[data-action="new"]').onclick = () => { d.close(); game.newPractice(); };
+    d.querySelector('[data-action="new"]').onclick = () => { d.close(); game.newRound(); };
   });
 }
 
@@ -599,7 +730,7 @@ function toast(message) {
 let statsState = null;
 
 function openStats() {
-  statsState = { category: game.category, mode: game.mode };
+  statsState = { category: game.category, mode: isClassic(game.mode) ? game.mode : 'practice' };
   renderStats();
 }
 
@@ -626,6 +757,7 @@ function renderStats() {
     ${badgeShelfHTML()}
     <hr>
     ${summaryHTML(stats, t(mode === 'daily' ? 'stats.streakDays' : 'stats.streak'))}
+    ${modesSummaryHTML(category)}
     <div class="section-title">${t('stats.distribution')}</div>
     ${dist.map((d) => `<div class="dist-row"><span class="label">${d.label}</span>
       <span class="bar-track"><div class="bar ${d.count ? '' : 'empty'}" style="width:${(d.count / maxCount) * 100}%"></div></span>
@@ -648,6 +780,16 @@ function renderStats() {
       if (m) { statsState.mode = m; renderStats(); }
     };
   });
+}
+
+/** Kategorinin zamana karşı rekoru ve zincir sonuçları. */
+function modesSummaryHTML(category) {
+  const timed = TimedStats.load(category), chain = ChainStats.load(category);
+  if (!timed.runs.length && !chain.runs.length) return '';
+  return `<div class="summary">
+    ${timed.runs.length ? `<div><b>${timed.best}</b><span>⏱️ ${t('stats.timedBest')}</span></div><div><b>${timed.runs.length}</b><span>⏱️ ${t('stats.timedRuns')}</span></div>` : ''}
+    ${chain.runs.length ? `<div><b>${chain.won}/${chain.played}</b><span>🔗 ${t('stats.chainWon')}</span></div><div><b>${chain.perfect}</b><span>🔗 ${t('stats.chainPerfect')}</span></div>` : ''}
+  </div>`;
 }
 
 /** Rozet rafı (tüm kategoriler birlikte). */

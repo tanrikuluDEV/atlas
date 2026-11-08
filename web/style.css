@@ -779,3 +779,41 @@ dialog.sheet.picker { width: min(720px, calc(100vw - 24px)); padding: 22px; }
 
 /* Uzman modu etiketi */
 .expert-tag { display: inline-block; vertical-align: middle; font: 600 12px/1 -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; color: var(--accent); background: color-mix(in srgb, var(--accent) 12%, transparent); padding: 4px 8px; border-radius: 999px; letter-spacing: 0; margin-left: 4px; }
+
+/* Zamana karşı ve komşu zinciri */
+.mode-box { margin-bottom: 10px; }
+.timed-bar { position: relative; display: flex; justify-content: space-between; align-items: center; padding: 10px 14px 14px; border-radius: 10px; background: var(--card, rgba(127,127,127,.1)); overflow: hidden; }
+.timed-bar > div { display: flex; flex-direction: column; }
+.timed-bar .right { align-items: flex-end; }
+.timed-bar b { font: 700 34px/1 var(--heading); font-variant-numeric: tabular-nums; }
+.timed-bar .timed-score { color: var(--found); }
+.timed-bar span { font-size: 12px; color: var(--muted); }
+.timed-progress { position: absolute; left: 10px; bottom: 5px; height: 3px; border-radius: 2px; background: var(--accent); transition: width .25s linear; max-width: calc(100% - 20px); }
+.timed-start, .chain-card { padding: 12px 14px; border-radius: 10px; background: color-mix(in srgb, var(--accent) 8%, transparent); }
+.chain-card { background: rgba(148, 61, 245, 0.08); }
+.timed-start p, .chain-card p { margin: 6px 0; font-size: 14px; }
+.timed-start .button { margin-top: 4px; }
+.chain-ends { font: 700 19px/1.25 var(--heading); }
+.chain-left { display: flex; justify-content: space-between; font-size: 14px; }
+.danger-text { color: #e03131 !important; }
+.record { color: var(--found); font-weight: 700; }
+.route { font-weight: 600; line-height: 1.45; }
+.game-over h2, .found-chips h2 { font-size: 11px; text-transform: uppercase; letter-spacing: .04em; color: var(--muted); margin: 10px 0 4px; }
+.found-chips { margin-top: 8px; }
+.chip.found { background: color-mix(in srgb, var(--found) 16%, transparent); }
+.chip.skipped { background: rgba(41, 115, 217, 0.15); }
+.footer-actions { display: flex; gap: 14px; }
+.chain-legend { display: flex; gap: 10px; flex-wrap: wrap; font-size: 11px; color: var(--muted); }
+.chain-legend-item { display: inline-flex; align-items: center; gap: 4px; }
+.chain-legend-item i { width: 10px; height: 10px; border-radius: 2px; display: inline-block; }
+.map-legend:has(.chain-legend) { width: auto; }
+
+/* Telefonda dört mod tek satıra sığmaz: mod seçici araç çubuğunun altında tam genişlikte. */
+@media (max-width: 760px) {
+  .toolbar { grid-template-columns: auto 1fr; row-gap: 6px; }
+  .toolbar-left { grid-column: 1; grid-row: 1; }
+  .toolbar-right { grid-column: 2; grid-row: 1; }
+  .toolbar .segmented { grid-column: 1 / -1; grid-row: 2; justify-self: stretch; display: flex; }
+  .toolbar .segmented button { flex: 1; padding: 5px 4px; }
+  .map-legend:has(.chain-legend) { width: auto; padding-bottom: 6px; }
+}

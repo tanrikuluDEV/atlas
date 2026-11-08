@@ -45,6 +45,9 @@ const DARK = {
 const SHARED = {
   found: 'rgb(46, 158, 79)', answerReveal: 'rgb(41, 115, 217)',
   highlight: 'rgb(148, 61, 245)', highlightGlow: 'rgba(148, 61, 245, 0.35)',
+  // Komşu zinciri: uçlar, rotada, yakın, uzak, kaybedince gösterilen rota (Swift: ColorScale.chain*).
+  chainEnd: 'rgb(148, 61, 245)', chain: ['rgb(46, 158, 79)', 'rgb(245, 168, 33)', 'rgb(102, 117, 143)'],
+  chainHint: 'rgba(41, 115, 217, 0.6)',
 };
 
 // Tema tercihi: 'system' (cihazı izle), 'light' ya da 'dark'. index.html'deki küçük betik

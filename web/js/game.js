@@ -1,10 +1,18 @@
 // Oyun durumu ve istatistikler. Mac/iPhone uygulamasındaki GameModel.swift ve Stats.swift'in karşılığı.
 import { answerIndex, dayIndex } from './daily.js';
 import { categoryById, categoryIndex, hintsFor, placeSet } from './places.js';
-import { t } from './i18n.js';
+import { formatKm, t } from './i18n.js';
 import { store } from './store.js';
 import { progress, totalXP } from './progression.js';
 import { earnedBadgeIds, allBadges } from './badges.js';
+import { CHAIN, ChainStats, TimedStats, hopDistances, randomChainPair, shortestPath, supportsChain } from './modes.js';
+import { flaggedName } from './flags.js';
+
+/** Gizli yeri bulma modları (istatistikleri Stats'ta). */
+export const isClassic = (mode) => mode === 'daily' || mode === 'practice';
+export const MODES = ['daily', 'practice', 'timed', 'chain'];
+export const TIMED_DURATION = 180_000;
+const SKIP_PENALTY = 10_000;
 
 export { store };
 
@@ -98,6 +106,11 @@ export class Game {
     this.lastGuess = null;
     this.highlighted = null;
     this.roundID = 0;
+    this.timedFound = [];
+    this.timedSkipped = [];
+    this.timedStart = null;
+    this.timedEnd = null;
+    this.chainShortest = [];
     this.loadStats();
     this.startDaily();
   }
@@ -127,7 +140,7 @@ export class Game {
     return step <= ordered.length ? ordered[step - 1].place : this.answer;
   }
   /** Uzman modu: haritada adlar ve mesafeler gizli, yalnızca renk. İlk tahminde ayardan alınıp tur boyunca sabit kalır. */
-  get expert() { return this.roundExpert ?? store.get('atlas.expert', false); }
+  get expert() { return isClassic(this.mode) && (this.roundExpert ?? store.get('atlas.expert', false)); }
   /** Mesafe kilometre olarak gösterilsin mi (ayar açık ve uzman modu kapalı). */
   get showsKm() { return this.showDistance && !this.expert; }
   /** Haritada tahmin edilen yerlerin adları yazılsın mı (uzman modunda oyun bitene kadar yazılmaz). */
@@ -156,11 +169,13 @@ export class Game {
 
   submit(place) {
     if (this.isOver) return false;
+    if (this.mode === 'chain') return this.submitChain(place);
     if (this.guessFor(place)) {
       this.message = () => t('msg.already', { name: place.name });
       this.emit();
       return false;
     }
+    if (this.mode === 'timed' && !this.timedStart) this.startTimer(false);
     if (this.roundExpert == null) this.roundExpert = store.get('atlas.expert', false);
     const g = { place, distance: this.places.distance(place, this.answer), order: this.guesses.length };
     this.lastImproved = !this.guesses.length || g.distance < this.closest.distance;
@@ -168,6 +183,13 @@ export class Game {
     this.lastGuess = g;
     this.message = null;
     if (place.id === this.answer.id) {
+      if (this.mode === 'timed') {
+        this.timedFound.push(place);
+        this.nextTimedTarget();
+        this.message = () => t('timed.found', { name: place.name });
+        this.emit();
+        return true;
+      }
       this.status = 'won';
       this.finish();
     }
@@ -185,6 +207,14 @@ export class Game {
 
   giveUp() {
     if (this.isOver) return;
+    if (this.mode === 'timed') { this.finishTimed(); return; }
+    if (this.mode === 'chain') {
+      this.status = 'lost';
+      this.message = null;
+      this.finishChain();
+      this.emit();
+      return;
+    }
     if (this.roundExpert == null) this.roundExpert = store.get('atlas.expert', false);
     this.status = 'lost';
     this.message = null;
@@ -196,9 +226,22 @@ export class Game {
   switchMode(mode) {
     if (mode === this.mode) return;
     this.mode = mode;
-    if (mode === 'daily') this.startDaily();
-    else this.newPractice(false);
+    this.startMode();
     this.emit();
+  }
+
+  startMode() {
+    if (this.mode === 'daily') this.startDaily();
+    else if (this.mode === 'timed') this.newTimed(false);
+    else if (this.mode === 'chain') this.newChain(false);
+    else this.newPractice(false);
+  }
+
+  /** "Yeni oyun": süreli ve zincirde aynı modda yeni tur; günlük ve alıştırmada yeni alıştırma. */
+  newRound() {
+    if (this.mode === 'timed') this.newTimed();
+    else if (this.mode === 'chain') this.newChain();
+    else this.newPractice();
   }
 
   switchCategory(id) {
@@ -207,13 +250,13 @@ export class Game {
     this.places = placeSet(id);
     store.set('atlas.category', id);
     this.loadStats();
-    if (this.mode === 'daily') this.startDaily();
-    else this.newPractice(false);
+    this.startMode();
     this.emit();
   }
 
   newPractice(emit = true) {
     this.mode = 'practice';
+    this.stopTimer();
     const list = this.places.places;
     let next;
     do { next = list[Math.floor(Math.random() * list.length)]; } while (this.answer && next.id === this.answer.id);
@@ -232,7 +275,7 @@ export class Game {
 
   /** Tahminleri sırasıyla haritada yeniden oynatır; harita her adımda o yere uçar ve parlar. */
   startReplay() {
-    if (!this.isOver || !this.replayLength) return;
+    if (!isClassic(this.mode) || !this.isOver || !this.replayLength) return;
     this.stopReplay(false);
     const total = this.replayLength;
     // Uzun oyunlarda adımlar kısalır; tekrar en fazla ~12 sn sürer.
@@ -264,6 +307,7 @@ export class Game {
 
   // İç işler
   startDaily() {
+    this.stopTimer();
     this.day = dayIndex();
     const byId = this.places.placesById;
     this.answer = byId[answerIndex(this.day, categoryById(this.category).seed, byId.length)];
@@ -302,6 +346,10 @@ export class Game {
       this.practiceStats.recordPractice(won, this.guesses.length, this.hintsUsed, this.answer.id, this.expert);
       this.practiceStats.save(this.category, 'practice');
     }
+    this.rewardAndBadges(before, badgesBefore);
+  }
+
+  rewardAndBadges(before, badgesBefore) {
     // Bu oyunun kazandırdığı puan; sonuç penceresinde canlandırılır.
     this.reward = { before: progress(before), after: progress(totalXP(Stats.load)) };
     this.newBadges = allBadges(Stats.load).filter((b) => b.earned && !badgesBefore.has(b.id));
@@ -329,7 +377,237 @@ export class Game {
     if (this.guesses.length || this.status !== 'playing') this.roundExpert = saved.expert ?? false;
   }
 
+  // MARK: Zamana karşı
+
+  newTimed(emit = true) {
+    this.mode = 'timed';
+    this.stopTimer();
+    this.timedStart = null;
+    this.timedEnd = null;
+    this.timedFound = [];
+    this.timedSkipped = [];
+    this.timedResult = null;
+    this.answer = this.randomTimedTarget();
+    this.resetRound();
+    if (emit) this.emit();
+  }
+
+  startTimer(emit = true) {
+    if (this.mode !== 'timed' || this.timedStart || this.isOver) return;
+    this.timedStart = Date.now();
+    this.timedEnd = this.timedStart + TIMED_DURATION;
+    this.scheduleTimedEnd();
+    if (emit) this.emit();
+  }
+
+  /** Kalan süre (ms; başlamadıysa tam süre). */
+  timedRemaining(now = Date.now()) {
+    return this.timedEnd ? Math.max(0, this.timedEnd - now) : TIMED_DURATION;
+  }
+
+  skipTimed() {
+    if (this.mode !== 'timed' || this.isOver) return;
+    if (!this.timedStart) this.startTimer(false);
+    const skipped = this.answer;
+    this.timedSkipped.push(skipped);
+    this.timedEnd -= SKIP_PENALTY;
+    if (this.timedRemaining() <= 0) { this.finishTimed(); return; }
+    this.scheduleTimedEnd();
+    this.nextTimedTarget();
+    this.message = () => t('timed.skipped', { name: skipped.name });
+    this.emit();
+  }
+
+  scheduleTimedEnd() {
+    clearTimeout(this.timer);
+    this.timer = setTimeout(() => this.finishTimed(), this.timedRemaining() + 20);
+  }
+
+  stopTimer() { clearTimeout(this.timer); this.timer = null; }
+
+  randomTimedTarget() {
+    const used = new Set([...this.timedFound, ...this.timedSkipped, this.answer].filter(Boolean).map((p) => p.id));
+    const open = this.places.places.filter((p) => !used.has(p.id));
+    const list = open.length ? open : this.places.places;
+    return list[Math.floor(Math.random() * list.length)];
+  }
+
+  nextTimedTarget() {
+    this.answer = this.randomTimedTarget();
+    this.guesses = [];
+    this.lastGuess = null;
+    this.lastImproved = false;
+    this.highlighted = null;
+    this.message = null;
+    this.roundID += 1;
+  }
+
+  finishTimed() {
+    if (this.mode !== 'timed' || this.status !== 'playing' || !this.timedStart) return;
+    this.stopTimer();
+    const before = totalXP(Stats.load);
+    const badgesBefore = earnedBadgeIds(Stats.load);
+    const previousBest = TimedStats.load(this.category).best;
+    const s = TimedStats.record(this.category, this.timedFound.length, this.timedSkipped.length);
+    const score = this.timedFound.length;
+    this.timedResult = { score, best: s.best, isRecord: score > previousBest && score > 0 };
+    this.status = 'lost';
+    this.message = null;
+    this.rewardAndBadges(before, badgesBefore);
+    this.emit();
+  }
+
+  // MARK: Komşu zinciri
+
+  get chainAvailable() { return supportsChain(this.places); }
+  get chainOptimal() { return Math.max(0, this.chainShortest.length - 2); }
+  get chainLimit() { return this.chainOptimal + 4; }
+  get chainGuessesLeft() { return Math.max(0, this.chainLimit - this.guesses.length); }
+
+  newChain(emit = true) {
+    this.mode = 'chain';
+    this.stopTimer();
+    this.resetRound();
+    this.chainPath = null;
+    const pair = randomChainPair(this.places);
+    this.chainStart = pair?.start ?? null;
+    this.chainEnd = pair?.end ?? null;
+    this.chainShortest = pair?.path ?? [];
+    this.chainFromStart = pair ? hopDistances(this.places, pair.start) : new Map();
+    this.chainFromEnd = pair ? hopDistances(this.places, pair.end) : new Map();
+    if (pair) this.answer = pair.end;
+    if (emit) this.emit();
+  }
+
+  chainClass(place) {
+    const a = this.chainFromStart?.get(place.id), b = this.chainFromEnd?.get(place.id);
+    if (a == null || b == null) return CHAIN.far;
+    const extra = a + b - (this.chainShortest.length - 1);
+    return extra === 0 ? CHAIN.onPath : extra <= 2 ? CHAIN.near : CHAIN.far;
+  }
+
+  isChainEnd(place) { return place.id === this.chainStart?.id || place.id === this.chainEnd?.id; }
+
+  submitChain(place) {
+    if (!this.chainStart) return false;
+    if (this.isChainEnd(place)) {
+      this.message = () => t('chain.endpoint', { name: place.name });
+      this.emit();
+      return false;
+    }
+    if (this.guessFor(place)) {
+      this.message = () => t('msg.already', { name: place.name });
+      this.emit();
+      return false;
+    }
+    const cls = this.chainClass(place);
+    const g = { place, distance: cls, order: this.guesses.length };
+    this.lastImproved = cls === CHAIN.onPath;
+    this.guesses.push(g);
+    this.lastGuess = g;
+    this.message = null;
+    const path = shortestPath(this.places, this.chainStart, this.chainEnd, new Set(this.guesses.map((x) => x.place.id)));
+    if (path) {
+      this.chainPath = path;
+      this.status = 'won';
+      this.finishChain();
+    } else if (this.guesses.length >= this.chainLimit) {
+      this.status = 'lost';
+      this.finishChain();
+    }
+    this.emit();
+    return true;
+  }
+
+  finishChain() {
+    const before = totalXP(Stats.load);
+    const badgesBefore = earnedBadgeIds(Stats.load);
+    ChainStats.record(this.category, { won: this.status === 'won', guesses: this.guesses.length, optimal: this.chainOptimal });
+    this.rewardAndBadges(before, badgesBefore);
+  }
+
+  // MARK: Harita boyaması (map.js bunları kullanır; Swift: GameModel.mapMark)
+
+  /** { kind: 'plain'|'heat'|'found'|'reveal'|'chainEnd'|'chain'|'chainHint', value } */
+  mapMark(place) {
+    const has = (list) => list.some((p) => p.id === place.id);
+    if (this.mode === 'chain') {
+      if (this.isChainEnd(place)) return { kind: 'chainEnd' };
+      const g = this.guessFor(place);
+      if (g) return { kind: 'chain', value: g.distance };
+      if (this.status === 'lost' && has(this.chainShortest)) return { kind: 'chainHint' };
+      return { kind: 'plain' };
+    }
+    if (this.mode === 'timed') {
+      if (has(this.timedFound)) return { kind: 'found' };
+      if (has(this.timedSkipped)) return { kind: 'reveal' };
+    }
+    if (place.id === this.answer.id && this.mapRevealsAnswer) {
+      if (this.status === 'won') return { kind: 'found' };
+      if (this.status === 'lost') return { kind: 'reveal' };
+    }
+    const g = this.mapGuessFor(place);
+    return g ? { kind: 'heat', value: g.distance } : { kind: 'plain' };
+  }
+
+  mapShowsLabel(place) {
+    const has = (list) => list.some((p) => p.id === place.id);
+    if (this.mode === 'chain') {
+      return this.isChainEnd(place) || !!this.guessFor(place) || (this.status === 'lost' && has(this.chainShortest));
+    }
+    if (this.mode === 'timed' && (has(this.timedFound) || has(this.timedSkipped))) return true;
+    return (this.showsGuessNames && !!this.mapGuessFor(place)) || (this.mapRevealsAnswer && place.id === this.answer.id);
+  }
+
+  mapLabelRank(place) {
+    if (this.mode === 'chain') return this.isChainEnd(place) ? -1 : this.guessFor(place)?.order ?? 1000;
+    return place.id === this.answer.id ? -1 : this.mapGuessFor(place)?.distance ?? 1e9;
+  }
+
+  mapHoverText(place) {
+    const has = (list) => list.some((p) => p.id === place.id);
+    const name = flaggedName(place);
+    if (this.mode === 'chain') {
+      if (this.isChainEnd(place)) return name;
+      const g = this.guessFor(place);
+      if (g) return `${name} · ${t(`chain.class.${g.distance}`)}`;
+      return this.status === 'lost' && has(this.chainShortest) ? name : null;
+    }
+    if (this.mode === 'timed') {
+      if (has(this.timedFound)) return `${name} ✓`;
+      if (has(this.timedSkipped)) return name;
+    }
+    // Uzman modunda oyun sürerken adlar ve mesafeler gizli.
+    if (!this.showsGuessNames) return null;
+    const g = this.mapGuessFor(place);
+    if (g) {
+      if (place.id === this.answer.id) return `${name} ✓`;
+      if (g.distance === 0) return `${name} · ${t('neighbor')}`;
+      return this.showsKm ? `${name} · ${formatKm(g.distance)}` : name;
+    }
+    return this.mapRevealsAnswer ? name : null;
+  }
+
+  /** Ses için tahminin yakınlığı 0…1. */
+  feedbackProximity(g) {
+    if (this.mode === 'chain') return [1, 0.6, 0.2][g.distance];
+    return 1 - Math.min(1, Math.max(0, Math.sqrt(g.distance / Math.max(this.places.maxDistance, 1))));
+  }
+
   get shareText() {
+    if (this.mode === 'timed') {
+      const squares = '🟩'.repeat(this.timedFound.length) + '⏭️'.repeat(this.timedSkipped.length);
+      return `Atlas · ${this.places.category.title} · ${t('mode.timed')}\n${t('share.timed', { n: this.timedFound.length })}\n${squares}`;
+    }
+    if (this.mode === 'chain') {
+      const squares = this.guesses.map((g) => ['🟩', '🟨', '⬜️'][g.distance]).join('');
+      const result = this.status === 'won' ? t('share.chainWon', { n: this.guesses.length, m: this.chainOptimal }) : t('share.chainLost');
+      return `Atlas · ${this.places.category.title} · ${t('mode.chain')}\n${this.chainStart.name} → ${this.chainEnd.name}\n${result}\n${squares}`;
+    }
+    return this.classicShareText;
+  }
+
+  get classicShareText() {
     const c = this.places.category;
     const title = this.mode === 'daily' ? `Atlas #${this.puzzleNumber} · ${c.title}` : `Atlas · ${c.title} (${t('share.practice')})`;
     const scale = this.places.maxDistance;

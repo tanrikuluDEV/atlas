@@ -608,22 +608,22 @@ export class MapView {
     ctx.restore();
   }
 
+  /** Yerin rengi; hangi yerin nasıl boyanacağına mod kurallarıyla `game.mapMark` karar verir. */
   fillFor(place, colors) {
-    const game = this.game;
-    // Rota tekrarında gizli yer ve sırası gelmemiş tahminler henüz boyanmaz.
-    if (place.id === game.answer.id && game.mapRevealsAnswer) {
-      if (game.status === 'won') return colors.found;
-      if (game.status === 'lost') return colors.answerReveal;
+    const m = this.game.mapMark(place);
+    switch (m.kind) {
+      case 'heat': return heatColor(m.value, this.set.maxDistance);
+      case 'found': return colors.found;
+      case 'reveal': return colors.answerReveal;
+      case 'chainEnd': return colors.chainEnd;
+      case 'chain': return colors.chain[m.value];
+      case 'chainHint': return colors.chainHint;
+      default: return colors.unguessed;
     }
-    const g = game.mapGuessFor(place);
-    if (!g) return colors.unguessed;
-    return heatColor(g.distance, this.set.maxDistance);
   }
 
-  /** Haritada adı yazılacak yerler: tahmin edilenler ve oyun bitince gizli yer. */
-  labelFor(place) {
-    return (this.game.showsGuessNames && !!this.game.mapGuessFor(place)) || (this.game.mapRevealsAnswer && place.id === this.game.answer.id);
-  }
+  /** Haritada adı yazılacak yerler: tahmin edilenler, oyun bitince gizli yer; zincirde uçlar. */
+  labelFor(place) { return this.game.mapShowsLabel(place); }
 
   /**
    * Tahmin edilen her yerin adı mutlaka yazılır. Önce gizli yer, sonra en yakın tahminler yerleşir.
@@ -633,7 +633,7 @@ export class MapView {
   drawLabels(ctx, labels, colors) {
     if (!labels.length) return;
     const game = this.game;
-    const rank = (p) => (p.id === game.answer.id ? -1 : game.mapGuessFor(p)?.distance ?? 1e9);
+    const rank = (p) => game.mapLabelRank(p);
     labels.sort((a, b) => rank(a.place) - rank(b.place));
     ctx.font = LABEL_FONT;
     ctx.textAlign = 'center';
@@ -721,23 +721,17 @@ export class MapView {
     }
   }
 
-  hoverLabel(place) {
-    const game = this.game;
-    const g = game.mapGuessFor(place);
-    const name = flaggedName(place);
-    // Uzman modunda oyun sürerken adlar ve mesafeler gizli.
-    if (!game.showsGuessNames) return null;
-    if (g) {
-      if (place.id === game.answer.id) return `${name} ✓`;
-      if (g.distance === 0) return `${name} · ${t('neighbor')}`;
-      return game.showsKm ? `${name} · ${formatKm(g.distance)}` : name;
-    }
-    return game.mapRevealsAnswer ? name : null;
-  }
+  hoverLabel(place) { return this.game.mapHoverText(place); }
 
   /** Köşedeki renk skalası: kategorinin mesafelerine göre km işaretleri. */
   updateLegend() {
     if (!this.legend) return;
+    if (this.game.mode === 'chain') {
+      const c = COLORS();
+      const item = (color, text) => `<span class="chain-legend-item"><i style="background:${color}"></i>${text}</span>`;
+      this.legend.innerHTML = `<div class="chain-legend">${item(c.chainEnd, t('chain.legend.end'))}${[0, 1, 2].map((i) => item(c.chain[i], t(`chain.class.${i}`))).join('')}</div>`;
+      return;
+    }
     const max = this.set.maxDistance;
     const stops = [];
     for (let i = 0; i <= 10; i++) {
@@ -844,6 +838,44 @@ export class MapView {
       a: clamp(rect.x + rect.w / 2, b.x + hw, b.x + b.w - hw, b.x + b.w / 2),
       b: clamp(rect.y + rect.h / 2, b.y + hh, b.y + b.h - hh, b.y + b.h / 2),
     });
+  }
+
+  /** Birkaç yeri birlikte gösterir (zincirin iki ucu). */
+  focusMany(list) {
+    const idx = list.map((place) => this.set.places.findIndex((p) => p.id === place.id)).filter((i) => i >= 0);
+    if (!idx.length) return;
+    if (this.isGlobe) {
+      let x = 0, y = 0, z = 0;
+      const fs = idx.map((i) => this.globe.places[i].focus);
+      for (const f of fs) {
+        x += Math.cos(f.lat * DEG) * Math.cos(f.lon * DEG);
+        y += Math.cos(f.lat * DEG) * Math.sin(f.lon * DEG);
+        z += Math.sin(f.lat * DEG);
+      }
+      const lon = Math.atan2(y, x) / DEG, lat = Math.atan2(z, Math.hypot(x, y)) / DEG;
+      let spread = 0;
+      for (const f of fs) {
+        const c = Math.sin(lat * DEG) * Math.sin(f.lat * DEG) + Math.cos(lat * DEG) * Math.cos(f.lat * DEG) * Math.cos((f.lon - lon) * DEG);
+        spread = Math.max(spread, Math.acos(Math.max(-1, Math.min(1, c))) / DEG + f.size / 2);
+      }
+      const span = Math.min(Math.max(spread * 2 * 1.3, GLOBE_SPAN[0]), 160);
+      return this.fly({ zoom: Math.max(1, 1 / Math.sin((span / 2) * DEG)), a: lon, b: Math.max(-70, Math.min(75, lat)) });
+    }
+    let x0 = Infinity, y0 = Infinity, x1 = -Infinity, y1 = -Infinity;
+    for (const i of idx) {
+      const r = this.geo.places[i].focus;
+      x0 = Math.min(x0, r.x); y0 = Math.min(y0, r.y); x1 = Math.max(x1, r.x + r.w); y1 = Math.max(y1, r.y + r.h);
+    }
+    const b = this.geo.bounds, fit = this.fit;
+    const [minF] = spanFractions(this.set.category.id);
+    const mapSpan = Math.max(b.w, b.h);
+    const span = Math.min(Math.max(Math.max(x1 - x0, y1 - y0) * 1.4, mapSpan * minF), mapSpan);
+    let zoom = Math.min((this.size.w - PADDING * 2) / (fit * span), (this.size.h - PADDING * 2) / (fit * span));
+    if (zoom <= 1.05) return this.fly(this.homeCamera());
+    zoom = Math.min(zoom, maxZoomFor(this.set.category.id) * 0.75);
+    const hw = (this.size.w / 2 / (fit * zoom)) * 0.8, hh = (this.size.h / 2 / (fit * zoom)) * 0.8;
+    const clamp = (v, lo, hi, mid) => (lo <= hi ? Math.min(Math.max(v, lo), hi) : mid);
+    this.fly({ zoom, a: clamp((x0 + x1) / 2, b.x + hw, b.x + b.w - hw, b.x + b.w / 2), b: clamp((y0 + y1) / 2, b.y + hh, b.y + b.h - hh, b.y + b.h / 2) });
   }
 
   /** Küre: ülkeyi ortaya getirecek şekilde döndür ve çevresiyle birlikte görünecek kadar yaklaş. */

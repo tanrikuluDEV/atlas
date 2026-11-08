@@ -2,7 +2,7 @@
 const CACHE = 'atlas-v13';
 const ASSETS = [
   './', 'index.html', 'style.css', 'manifest.webmanifest',
-  'js/app.js', 'js/game.js', 'js/map.js', 'js/places.js', 'js/daily.js', 'js/colors.js', 'js/confetti.js', 'js/i18n.js', 'js/store.js', 'js/version.js', 'js/brand.js', 'js/progression.js', 'js/badges.js', 'js/feedback.js', 'js/flags.js',
+  'js/app.js', 'js/game.js', 'js/map.js', 'js/places.js', 'js/daily.js', 'js/colors.js', 'js/confetti.js', 'js/i18n.js', 'js/store.js', 'js/version.js', 'js/brand.js', 'js/progression.js', 'js/badges.js', 'js/feedback.js', 'js/flags.js', 'js/modes.js',
   'data/world.json', 'data/provinces.json', 'data/strings.json', 'data/hints.json',
   'icons/icon-192.png', 'icons/icon-512.png', 'icons/apple-touch-icon.png', 'icons/favicon-32.png', 'fonts/bricolage-800.woff2', 'fonts/bricolage-700.woff2',
 ];
