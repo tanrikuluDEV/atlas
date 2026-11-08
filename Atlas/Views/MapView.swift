@@ -59,7 +59,7 @@ struct MapView: View {
 
                 #if os(tvOS)
                 // TV'de harita ekran kenarına kadar uzanır; lejant ve düğmeler güvenli alanın içinde kalsın.
-                LegendView(places: places)
+                LegendView(places: places, expert: game.expert)
                     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomLeading)
                     .padding(.leading, 80)
                     .padding(.bottom, 60)
@@ -69,7 +69,7 @@ struct MapView: View {
                     .padding(.trailing, 24)
                     .padding(.bottom, 60)
                 #else
-                LegendView(places: places)
+                LegendView(places: places, expert: game.expert)
                     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomLeading)
                     .padding(Platform.isMac ? 12 : 8)
 
@@ -98,7 +98,8 @@ struct MapView: View {
         .onChange(of: game.answer) { showRoundStart() }
         .onChange(of: game.lastGuess) { _, guess in
             guard let guess else { return }
-            focus(on: guess.place)
+            // Uzman modunda kamera tahmine uçmaz (yerini bilmek oyunun parçası); yalnızca parlar.
+            if !game.expert || game.status == .won { focus(on: guess.place) }
             if game.status == .won {
                 startPulse(game.answer, duration: 2.6, win: true)
             } else {
@@ -724,11 +725,13 @@ struct MapLayer: View, Animatable {
 
     /// Haritada adı yazılacak yerler: tahmin edilenler ve oyun bitince gizli yer.
     private func showsLabel(_ place: Place) -> Bool {
-        game.mapGuess(for: place) != nil || (game.mapRevealsAnswer && place == game.answer)
+        (game.showsGuessNames && game.mapGuess(for: place) != nil) || (game.mapRevealsAnswer && place == game.answer)
     }
 
     private func hoverLabel(for place: Place) -> String? {
         let name = place.flaggedName
+        // Uzman modunda oyun sürerken adlar ve mesafeler gizli.
+        if !game.showsGuessNames { return nil }
         if let g = game.mapGuess(for: place) {
             if place == game.answer { return "\(name) ✓" }
             if g.distance == 0 { return "\(name) · \(L("neighbor"))" }
@@ -802,7 +805,11 @@ struct MapLayer: View, Animatable {
 /// Harita köşesindeki lejant: kategorinin mesafelerine göre km işaretleri.
 struct LegendView: View {
     let places: PlaceSet
-    @AppStorage(AppSettings.showDistanceKey) private var showDistance = true
+    /// Uzman modunda km yerine "yakın / uzak".
+    var expert = false
+    @AppStorage(AppSettings.showDistanceKey) private var showDistanceSetting = true
+
+    private var showDistance: Bool { showDistanceSetting && !expert }
 
     private var max: Int { places.maxDistance }
 

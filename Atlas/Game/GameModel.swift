@@ -54,6 +54,8 @@ final class GameModel {
     /// (pes edilen oyunda son adım gizli yeri gösterir).
     private(set) var replayStep: Int?
     private var replayTask: Task<Void, Never>?
+    /// Bu turun uzman modu, ilk tahminde ayardan alınıp sabitlenir (tur ortasında ayar değişse de değişmez).
+    private var roundExpert: Bool?
 
     init() {
         let category = GameCategory(rawValue: UserDefaults.standard.string(forKey: "category") ?? "") ?? .turkey
@@ -79,6 +81,15 @@ final class GameModel {
     var puzzleNumber: Int { dayIndex + 1 }
 
     var currentStats: Stats { mode == .daily ? dailyStats : practiceStats }
+
+    /// Uzman modu: haritada adlar ve mesafeler gizli, yalnızca renk. Tur başlamadan ayar değişirse hemen uyar.
+    var expert: Bool { roundExpert ?? GameSettings.shared.expert }
+
+    /// Mesafe kilometre olarak gösterilsin mi (ayar açık ve uzman modu kapalı).
+    func showsKm(_ setting: Bool) -> Bool { setting && !expert }
+
+    /// Haritada tahmin edilen yerlerin adları yazılsın mı (uzman modunda oyun bitene kadar yazılmaz).
+    var showsGuessNames: Bool { !expert || isOver }
 
     /// Rota tekrarının adım sayısı: tahminler, pes edildiyse bir de gizli yer.
     var replayLength: Int { guesses.count + (status == .lost ? 1 : 0) }
@@ -121,6 +132,7 @@ final class GameModel {
             message = L("msg.already", ["name": place.name])
             return false
         }
+        if roundExpert == nil { roundExpert = GameSettings.shared.expert }
         let g = Guess(place: place, distance: places.distance(place, answer), order: guesses.count)
         lastImproved = guesses.isEmpty || g.distance < (closest?.distance ?? .max)
         guesses.append(g)
@@ -142,6 +154,7 @@ final class GameModel {
 
     func giveUp() {
         guard !isOver else { return }
+        if roundExpert == nil { roundExpert = GameSettings.shared.expert }
         status = .lost
         message = nil
         finish()
@@ -257,6 +270,7 @@ final class GameModel {
         highlighted = nil
         hintsUsed = 0
         reward = nil
+        roundExpert = nil
         roundID += 1
     }
 
@@ -275,10 +289,12 @@ final class GameModel {
         let badgesBefore = Badges.earnedIDs()
         switch mode {
         case .daily:
-            dailyStats.recordDaily(won: won, guesses: guesses.count, hints: hintsUsed, answerID: answer.id, day: dayIndex)
+            dailyStats.recordDaily(won: won, guesses: guesses.count, hints: hintsUsed, answerID: answer.id, day: dayIndex,
+                                   expert: expert)
             dailyStats.save(key: Stats.key(category: category, mode: .daily))
         case .practice:
-            practiceStats.recordPractice(won: won, guesses: guesses.count, hints: hintsUsed, answerID: answer.id)
+            practiceStats.recordPractice(won: won, guesses: guesses.count, hints: hintsUsed, answerID: answer.id,
+                                         expert: expert)
             practiceStats.save(key: Stats.key(category: category, mode: .practice))
         }
         reward = Reward(before: LevelProgress(xp: before), after: LevelProgress(xp: Progression.totalXP()))
@@ -302,7 +318,7 @@ final class GameModel {
 
     private func persistDaily() {
         guard mode == .daily else { return }
-        let saved = SavedDaily(guessIDs: guesses.map(\.place.id), status: status, hints: hintsUsed)
+        let saved = SavedDaily(guessIDs: guesses.map(\.place.id), status: status, hints: hintsUsed, expert: roundExpert)
         if let data = try? JSONEncoder().encode(saved) { defaults.set(data, forKey: dailyKey) }
     }
 
@@ -316,6 +332,8 @@ final class GameModel {
         }
         status = saved.status
         hintsUsed = saved.hints ?? 0
+        // Başlamış bir turun uzman modu kayıttan gelir (eski kayıtlar normal mod).
+        if !guesses.isEmpty || status != .playing { roundExpert = saved.expert ?? false }
     }
 
     private struct SavedDaily: Codable {
@@ -323,6 +341,7 @@ final class GameModel {
         let status: GameStatus
         /// Eski kayıtlarda yok.
         var hints: Int?
+        var expert: Bool?
     }
 
     // MARK: - Paylaşım
@@ -343,6 +362,7 @@ final class GameModel {
         }.joined()
         var result = status == .won ? L("share.won", ["n": guesses.count]) : L("share.lost")
         if hintsUsed > 0 { result += " · " + L("share.hints", ["n": hintsUsed]) }
+        if expert { result += " · " + L("share.expert") }
         return "\(title)\n\(result)\n\(squares)"
     }
 }

@@ -168,7 +168,7 @@ struct TVGuessInput: View {
         } else if let message = game.message {
             voice.reply(message)
         } else if let last = game.lastGuess {
-            voice.reply(guessFeedback(last, category: game.category, showDistance: showDistance))
+            voice.reply(guessFeedback(last, category: game.category, showDistance: showDistance, expert: game.expert))
         }
     }
 

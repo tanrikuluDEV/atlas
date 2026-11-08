@@ -1902,5 +1902,69 @@
   "fr": "Vibration légère quand tu approches, forte quand tu trouves.",
   "es": "Vibración suave al acercarte y fuerte al acertar.",
   "it": "Vibrazione leggera quando ti avvicini, forte quando lo trovi."
+ },
+ "set.expert": {
+  "tr": "Uzman modu",
+  "en": "Expert mode",
+  "de": "Expertenmodus",
+  "fr": "Mode expert",
+  "es": "Modo experto",
+  "it": "Modalità esperto"
+ },
+ "set.expertHint": {
+  "tr": "Haritada tahminlerin adları ve mesafeler gizlenir, yalnızca renkler kalır. Kazandığın puan %30 fazla. Başlamış bir turu etkilemez.",
+  "en": "Guess names and distances are hidden on the map; only the colors remain. You earn 30% more XP. Doesn't affect a round already in progress.",
+  "de": "Namen und Entfernungen der Tipps werden auf der Karte ausgeblendet, nur die Farben bleiben. Du bekommst 30 % mehr XP. Gilt nicht für eine bereits begonnene Runde.",
+  "fr": "Les noms et distances des essais sont masqués sur la carte ; seules les couleurs restent. Tu gagnes 30 % d'XP en plus. Sans effet sur une partie déjà commencée.",
+  "es": "Los nombres y distancias de los intentos se ocultan en el mapa; solo quedan los colores. Ganas un 30 % más de XP. No afecta a una ronda ya empezada.",
+  "it": "Nomi e distanze dei tentativi sono nascosti sulla mappa; restano solo i colori. Guadagni il 30% di XP in più. Non vale per un round già iniziato."
+ },
+ "expert.tag": {
+  "tr": "Uzman",
+  "en": "Expert",
+  "de": "Experte",
+  "fr": "Expert",
+  "es": "Experto",
+  "it": "Esperto"
+ },
+ "share.expert": {
+  "tr": "🙈 Uzman modu",
+  "en": "🙈 Expert mode",
+  "de": "🙈 Expertenmodus",
+  "fr": "🙈 Mode expert",
+  "es": "🙈 Modo experto",
+  "it": "🙈 Modalità esperto"
+ },
+ "badge.expert.name": {
+  "tr": "Kör Uçuş",
+  "en": "Flying Blind",
+  "de": "Blindflug",
+  "fr": "Vol à l'aveugle",
+  "es": "Vuelo a ciegas",
+  "it": "Volo alla cieca"
+ },
+ "badge.expert.desc": {
+  "tr": "Uzman modunda bir bulmaca çöz.",
+  "en": "Solve a puzzle in expert mode.",
+  "de": "Löse ein Rätsel im Expertenmodus.",
+  "fr": "Résous une énigme en mode expert.",
+  "es": "Resuelve un reto en modo experto.",
+  "it": "Risolvi una sfida in modalità esperto."
+ },
+ "badge.expert10.name": {
+  "tr": "Coğrafya Profesörü",
+  "en": "Geography Professor",
+  "de": "Geografie-Professor",
+  "fr": "Professeur de géo",
+  "es": "Profesor de geografía",
+  "it": "Professore di geografia"
+ },
+ "badge.expert10.desc": {
+  "tr": "Uzman modunda 10 bulmaca çöz.",
+  "en": "Solve 10 puzzles in expert mode.",
+  "de": "Löse 10 Rätsel im Expertenmodus.",
+  "fr": "Résous 10 énigmes en mode expert.",
+  "es": "Resuelve 10 retos en modo experto.",
+  "it": "Risolvi 10 sfide in modalità esperto."
  }
 }

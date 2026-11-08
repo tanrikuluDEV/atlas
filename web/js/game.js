@@ -53,11 +53,11 @@ export class Stats {
     return buckets.map(([label, lo, hi]) => ({ label, count: w.filter((g) => g >= lo && g <= hi).length }));
   }
 
-  recordDaily(won, guesses, hints, answerID, day) {
+  recordDaily(won, guesses, hints, answerID, day, expert = false) {
     if (this.lastPlayedDay === day) return;
     this.lastPlayedDay = day;
     this.played += 1;
-    this.history.push({ date: Date.now(), guesses, won, answerID, hints });
+    this.history.push({ date: Date.now(), guesses, won, answerID, hints, ...(expert ? { expert: true } : {}) });
     if (won) {
       this.won += 1;
       this.currentStreak = this.lastWonDay === day - 1 ? this.currentStreak + 1 : 1;
@@ -68,9 +68,9 @@ export class Stats {
     }
   }
 
-  recordPractice(won, guesses, hints, answerID) {
+  recordPractice(won, guesses, hints, answerID, expert = false) {
     this.played += 1;
-    this.history.push({ date: Date.now(), guesses, won, answerID, hints });
+    this.history.push({ date: Date.now(), guesses, won, answerID, hints, ...(expert ? { expert: true } : {}) });
     if (won) {
       this.won += 1;
       this.currentStreak += 1;
@@ -126,6 +126,13 @@ export class Game {
     const ordered = this.guesses.slice().sort((a, b) => a.order - b.order);
     return step <= ordered.length ? ordered[step - 1].place : this.answer;
   }
+  /** Uzman modu: haritada adlar ve mesafeler gizli, yalnızca renk. İlk tahminde ayardan alınıp tur boyunca sabit kalır. */
+  get expert() { return this.roundExpert ?? store.get('atlas.expert', false); }
+  /** Mesafe kilometre olarak gösterilsin mi (ayar açık ve uzman modu kapalı). */
+  get showsKm() { return this.showDistance && !this.expert; }
+  /** Haritada tahmin edilen yerlerin adları yazılsın mı (uzman modunda oyun bitene kadar yazılmaz). */
+  get showsGuessNames() { return !this.expert || this.isOver; }
+
   /** Gizli yer hakkındaki ipuçları (seçili dilde). */
   get hints() { return hintsFor(this.category, this.answer); }
 
@@ -154,6 +161,7 @@ export class Game {
       this.emit();
       return false;
     }
+    if (this.roundExpert == null) this.roundExpert = store.get('atlas.expert', false);
     const g = { place, distance: this.places.distance(place, this.answer), order: this.guesses.length };
     this.lastImproved = !this.guesses.length || g.distance < this.closest.distance;
     this.guesses.push(g);
@@ -177,6 +185,7 @@ export class Game {
 
   giveUp() {
     if (this.isOver) return;
+    if (this.roundExpert == null) this.roundExpert = store.get('atlas.expert', false);
     this.status = 'lost';
     this.message = null;
     this.finish();
@@ -273,6 +282,7 @@ export class Game {
     this.hintsUsed = 0;
     this.reward = null;
     this.showResult = false;
+    this.roundExpert = null;
     this.roundID += 1;
   }
 
@@ -286,10 +296,10 @@ export class Game {
     const before = totalXP(Stats.load);
     const badgesBefore = earnedBadgeIds(Stats.load);
     if (this.mode === 'daily') {
-      this.dailyStats.recordDaily(won, this.guesses.length, this.hintsUsed, this.answer.id, this.day);
+      this.dailyStats.recordDaily(won, this.guesses.length, this.hintsUsed, this.answer.id, this.day, this.expert);
       this.dailyStats.save(this.category, 'daily');
     } else {
-      this.practiceStats.recordPractice(won, this.guesses.length, this.hintsUsed, this.answer.id);
+      this.practiceStats.recordPractice(won, this.guesses.length, this.hintsUsed, this.answer.id, this.expert);
       this.practiceStats.save(this.category, 'practice');
     }
     // Bu oyunun kazandırdığı puan; sonuç penceresinde canlandırılır.
@@ -302,7 +312,7 @@ export class Game {
 
   persistDaily() {
     if (this.mode !== 'daily') return;
-    store.set(this.dailyKey, { guessIDs: this.guesses.map((g) => g.place.id), status: this.status, hints: this.hintsUsed });
+    store.set(this.dailyKey, { guessIDs: this.guesses.map((g) => g.place.id), status: this.status, hints: this.hintsUsed, ...(this.roundExpert != null ? { expert: this.roundExpert } : {}) });
   }
 
   restoreDaily() {
@@ -315,6 +325,8 @@ export class Game {
     }
     this.status = saved.status;
     this.hintsUsed = saved.hints ?? 0;
+    // Başlamış bir turun uzman modu kayıttan gelir (eski kayıtlar normal mod).
+    if (this.guesses.length || this.status !== 'playing') this.roundExpert = saved.expert ?? false;
   }
 
   get shareText() {
@@ -331,6 +343,7 @@ export class Game {
     }).join('');
     let result = this.status === 'won' ? t('share.won', { n: this.guesses.length }) : t('share.lost');
     if (this.hintsUsed) result += ` · ${t('share.hints', { n: this.hintsUsed })}`;
+    if (this.expert) result += ` · ${t('share.expert')}`;
     return `${title}\n${result}\n${squares}`;
   }
 }

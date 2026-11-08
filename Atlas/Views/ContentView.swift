@@ -219,17 +219,25 @@ private struct Sidebar: View {
         VStack(alignment: .leading, spacing: Platform.isMac ? 14 : 10) {
             // iPhone'da ekran alanı dar; yalnızca tek satırlık kategori bilgisi gösterilir.
             if !Platform.isMac && !Platform.isTV {
-                Label(game.category.subtitle, systemImage: game.category.symbol)
-                    .font(.footnote)
-                    .foregroundStyle(.secondary)
+                HStack {
+                    Label(game.category.subtitle, systemImage: game.category.symbol)
+                        .font(.footnote)
+                        .foregroundStyle(.secondary)
+                    if game.expert { Spacer(minLength: 4); ExpertTag() }
+                }
+            } else if Platform.isTV && game.expert {
+                ExpertTag()
             }
             if Platform.isMac {
                 VStack(alignment: .leading, spacing: 2) {
                     Label(game.category.title, systemImage: game.category.symbol)
                         .font(.headline)
                         .foregroundStyle(.secondary)
-                    Text(game.mode == .daily ? L("panel.daily.\(game.category.kind)") : L("mode.practice"))
-                        .font(Brand.heading(.title2))
+                    HStack(alignment: .firstTextBaseline, spacing: 8) {
+                        Text(game.mode == .daily ? L("panel.daily.\(game.category.kind)") : L("mode.practice"))
+                            .font(Brand.heading(.title2))
+                        if game.expert { ExpertTag() }
+                    }
                     Text(game.category.subtitle)
                         .font(.callout)
                         .foregroundStyle(.secondary)
@@ -259,15 +267,16 @@ private struct Sidebar: View {
                     .transition(.opacity)
             }
 
-            HeatGauge(game: game)
+            if !game.expert { HeatGauge(game: game) }
 
             if let closest = game.closest, !game.isOver {
                 HStack {
                     Text(L("closest"))
                         .foregroundStyle(.secondary)
                     Spacer()
-                    // Kilometre kapalıyken de komşuluk gösterilir; yalnızca km değeri gizlenir.
-                    Text(closest.distance == 0 ? "\(closest.place.name) · \(L("neighbor"))"
+                    // Kilometre kapalıyken de komşuluk gösterilir; yalnızca km değeri gizlenir. Uzman modunda ikisi de gizli.
+                    Text(game.expert ? closest.place.name
+                         : closest.distance == 0 ? "\(closest.place.name) · \(L("neighbor"))"
                          : showDistance ? "\(closest.place.name) · \(TurkishText.formatKm(closest.distance))"
                          : closest.place.name)
                         .fontWeight(.semibold)
@@ -306,13 +315,27 @@ private struct Sidebar: View {
     }
 
     private func feedback(for guess: Guess) -> String {
-        guessFeedback(guess, category: game.category, showDistance: showDistance)
+        guessFeedback(guess, category: game.category, showDistance: showDistance, expert: game.expert)
+    }
+}
+
+/// Uzman modunda panelde görünen küçük etiket.
+struct ExpertTag: View {
+    var body: some View {
+        Label(L("expert.tag"), systemImage: "eye.slash.fill")
+            .font(.caption.weight(.semibold))
+            .foregroundStyle(Brand.accent)
+            .padding(.horizontal, 8)
+            .padding(.vertical, 3)
+            .background(Brand.accent.opacity(0.12), in: Capsule())
+            .help(L("set.expertHint"))
     }
 }
 
 /// Son tahminin panelde (ve Apple TV'den iPhone'a giden yanıtta) gösterilen açıklaması.
-func guessFeedback(_ guess: Guess, category: GameCategory, showDistance: Bool) -> String {
+func guessFeedback(_ guess: Guess, category: GameCategory, showDistance: Bool, expert: Bool = false) -> String {
     let kind = category.kind
+    if expert { return L("feedback.colored", ["name": guess.place.name]) }
     if guess.distance == 0 { return L("feedback.neighbor.\(kind)", ["name": guess.place.name]) }
     guard showDistance else { return L("feedback.colored", ["name": guess.place.name]) }
     return L("feedback.distance.\(kind)", ["name": guess.place.name, "km": TurkishText.formatKm(guess.distance)])
@@ -538,7 +561,9 @@ private struct GuessList: View {
                     LazyVStack(spacing: 4) {
                         ForEach(game.sortedGuesses) { g in
                             GuessRow(guess: g, isAnswer: g.place == game.answer, maxDistance: game.places.maxDistance,
-                                     isSelected: game.highlighted == g.place) {
+                                     isSelected: game.highlighted == g.place, expert: game.expert && !game.isOver) {
+                                // Uzman modunda oyun sürerken yer haritada gösterilmez.
+                                guard game.showsGuessNames else { return }
                                 game.highlighted = game.highlighted == g.place ? nil : g.place
                             }
                         }
@@ -554,6 +579,8 @@ private struct GuessRow: View {
     let isAnswer: Bool
     let maxDistance: Int
     let isSelected: Bool
+    /// Uzman modunda yalnızca renk görünür.
+    var expert = false
     let onSelect: () -> Void
     @AppStorage(AppSettings.showDistanceKey) private var showDistance = true
 
@@ -575,7 +602,7 @@ private struct GuessRow: View {
                     .fontWeight(isAnswer ? .bold : .regular)
             }
             Spacer()
-            if isAnswer || showDistance || guess.distance == 0 {
+            if isAnswer || (!expert && (showDistance || guess.distance == 0)) {
                 Text(isAnswer ? L("found") : guess.distance == 0 ? L("Neighbor") : TurkishText.formatKm(guess.distance))
                     .monospacedDigit()
                     .foregroundStyle(.secondary)

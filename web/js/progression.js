@@ -2,7 +2,7 @@
 //
 // Yalnızca kazanılan oyun puan getirir:
 // - Taban puan tahmin sayısına göre: 1 → 200, 2 → 150, 3 → 120, sonra her tahminde 10 eksik (en az 20).
-// - Günlük bulmaca ×1,5; kategori zorluğu ×0,6–1,5; her ipucu −%15. Sonuç 5'in katına yuvarlanır.
+// - Günlük bulmaca ×1,5; kategori zorluğu ×0,6–1,5; her ipucu −%15; uzman modu ×1,3. Sonuç 5'in katına yuvarlanır.
 // Seviye L'ye ulaşmak için toplam 125·L·(L−1) XP gerekir. Toplam XP oyun geçmişinden hesaplanır.
 import { CATEGORIES } from './places.js';
 
@@ -17,10 +17,11 @@ export function basePoints(guesses) {
   return Math.max(20, 150 - 10 * guesses);
 }
 
-export function points(guesses, hints, category, mode) {
+export function points(guesses, hints, category, mode, expert = false) {
   const hintFactor = 1 - 0.15 * Math.min(Math.max(hints ?? 0, 0), 3);
   const modeFactor = mode === 'daily' ? 1.5 : 1;
-  const raw = basePoints(guesses) * hintFactor * CATEGORY_FACTOR[category] * modeFactor;
+  const expertFactor = expert ? 1.3 : 1;
+  const raw = basePoints(guesses) * hintFactor * CATEGORY_FACTOR[category] * modeFactor * expertFactor;
   // Swift'teki .rounded() ile aynı (pozitif sayılarda yarımlar yukarı); işlem sırası da aynı.
   return Math.round(raw / 5) * 5;
 }
@@ -47,7 +48,7 @@ export function totalXP(loadStats) {
   for (const c of CATEGORIES) {
     for (const mode of ['daily', 'practice']) {
       for (const r of loadStats(c.id, mode).history) {
-        if (r.won) total += points(r.guesses, r.hints ?? 0, c.id, mode);
+        if (r.won) total += points(r.guesses, r.hints ?? 0, c.id, mode, !!r.expert);
       }
     }
   }

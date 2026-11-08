@@ -7,11 +7,12 @@ import { t } from './i18n.js';
 const ICONS = {
   firstWin: '🏁', sharp: '👁️', ace: '🎯', streak3: '🔥', streak7: '🔥', streak30: '☀️',
   wins10: '🥾', wins50: '✈️', wins100: '👑', allCategories: '🌍', explorer: '🗺️',
+  expert: '🙈', expert10: '🎓',
 };
 
 /** `loadStats(category, mode)` bir Stats nesnesi döndürür (döngüsel içe aktarmayı önlemek için dışarıdan verilir). */
 export function allBadges(loadStats) {
-  let wins = 0, best = Infinity, maxStreak = 0, categoriesWon = 0;
+  let wins = 0, best = Infinity, maxStreak = 0, categoriesWon = 0, expertWins = 0;
   const explorers = [];
   for (const c of CATEGORIES) {
     const daily = loadStats(c.id, 'daily');
@@ -21,6 +22,7 @@ export function allBadges(loadStats) {
     if (won > 0) categoriesWon += 1;
     for (const r of [...daily.history, ...practice.history]) if (r.won) best = Math.min(best, r.guesses);
     maxStreak = Math.max(maxStreak, daily.maxStreak);
+    expertWins += [...daily.history, ...practice.history].filter((r) => r.won && r.expert).length;
     const set = placeSet(c.id);
     const found = new Set([...daily.history, ...practice.history].filter((r) => r.won && set.place(r.answerID)).map((r) => r.answerID));
     const total = set.places.length;
@@ -45,6 +47,8 @@ export function allBadges(loadStats) {
     badge('wins50', wins, 50),
     badge('wins100', wins, 100),
     badge('allCategories', categoriesWon, CATEGORIES.length),
+    badge('expert', expertWins, 1),
+    badge('expert10', expertWins, 10),
     ...explorers,
   ];
 }

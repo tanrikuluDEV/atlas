@@ -259,7 +259,8 @@ function render() {
   if (game.lastGuess && game.lastGuess !== last.lastGuess) {
     if (game.status === 'won') feedback.won();
     else feedback.guessMade(proximity(game.lastGuess, game.places.maxDistance), game.lastImproved && game.guesses.length > 1);
-    map.focus(game.lastGuess.place);
+    // Uzman modunda kamera tahmine uçmaz (yerini bilmek oyunun parçası); yalnızca parlar.
+    if (!game.expert || game.status === 'won') map.focus(game.lastGuess.place);
     if (game.status === 'won') {
       // Bulunca: yeşil nabız ve konfeti.
       map.celebrate(game.answer);
@@ -288,7 +289,7 @@ function render() {
   }
   if (game.showResult && !last.showResult) setTimeout(openResult, 450);
 
-  last = { roundID: game.roundID, lastGuess: game.lastGuess, highlighted: game.highlighted, category: game.category, showResult: game.showResult, status: game.status, replayStep: game.replayStep };
+  last = { roundID: game.roundID, lastGuess: game.lastGuess, highlighted: game.highlighted, category: game.category, showResult: game.showResult, status: game.status, replayStep: game.replayStep, expert: last.expert };
 
   // Araç çubuğu
   $('categoryName').textContent = c.title;
@@ -299,7 +300,10 @@ function render() {
 
   // Başlık
   $('panelCategory').textContent = isPhone() ? `${c.icon} ${game.places.subtitle()}` : `${c.icon} ${c.title}`;
-  $('panelTitle').textContent = game.mode === 'daily' ? t(`panel.daily.${c.kind}`) : t('mode.practice');
+  $('panelTitle').innerHTML = esc(game.mode === 'daily' ? t(`panel.daily.${c.kind}`) : t('mode.practice'))
+    + (game.expert ? ` <span class="expert-tag" title="${esc(t('set.expertHint'))}">🙈 ${esc(t('expert.tag'))}</span>` : '');
+  // Lejant uzman moduna göre (km ya da yakın/uzak).
+  if (last.expert !== game.expert) { last.expert = game.expert; map.updateLegend(); }
   $('panelSubtitle').textContent = game.places.subtitle();
 
   // Oyun sonu / giriş
@@ -348,13 +352,14 @@ function render() {
 function distanceLabel(g, withName) {
   const name = withName ? `${g.place.name}` : '';
   // Kilometre kapalıyken de komşuluk gösterilir; yalnızca km değeri gizlenir.
-  const d = g.distance === 0 ? t('neighbor') : game.showDistance ? formatKm(g.distance) : '';
+  const d = game.expert ? '' : g.distance === 0 ? t('neighbor') : game.showDistance ? formatKm(g.distance) : '';
   if (!d) return name;
   return withName ? `${name} · ${d}` : d;
 }
 
 function feedbackText(g) {
   const kind = game.places.category.kind;
+  if (game.expert) return t('feedback.colored', { name: g.place.name });
   if (g.distance === 0) return t(`feedback.neighbor.${kind}`, { name: g.place.name });
   if (!game.showDistance) return t('feedback.colored', { name: g.place.name });
   return t(`feedback.distance.${kind}`, { name: g.place.name, km: formatKm(g.distance) });
@@ -390,7 +395,7 @@ let lastHeatP = null;
 function renderHeat() {
   const el = $('heat');
   const g = game.lastGuess;
-  el.hidden = !g || game.isOver;
+  el.hidden = !g || game.isOver || game.expert;
   if (el.hidden) { lastHeatGuess = null; return; }
   const max = game.places.maxDistance;
   const p = proximity(g, max);
@@ -439,7 +444,9 @@ function renderGuesses() {
     const isAnswer = g.place.id === game.answer.id;
     const selected = game.highlighted?.id === g.place.id;
     const color = isAnswer ? 'var(--found)' : heatColor(g.distance, max);
-    const dist = isAnswer ? t('found') : g.distance === 0 ? t('Neighbor') : game.showDistance ? formatKm(g.distance) : '';
+    // Uzman modunda oyun sürerken yalnızca renk görünür.
+    const hide = game.expert && !game.isOver;
+    const dist = isAnswer ? t('found') : hide ? '' : g.distance === 0 ? t('Neighbor') : game.showDistance ? formatKm(g.distance) : '';
     return `<button class="guess ${isAnswer ? 'answer' : ''} ${selected ? 'selected' : ''}" data-id="${g.place.id}" title="${t(selected ? 'highlight.remove' : 'highlight.show')}">
       <span class="swatch" style="background:${color}"></span>
       <span class="name">${flagHTML(g.place)}${esc(g.place.name)}</span>
@@ -448,6 +455,7 @@ function renderGuesses() {
   }).join('');
   el.querySelectorAll('.guess').forEach((b) => {
     b.onclick = () => {
+      if (!game.showsGuessNames) return; // uzman modunda oyun sürerken yer haritada gösterilmez
       const p = game.places.place(Number(b.dataset.id));
       game.setHighlighted(game.highlighted?.id === p.id ? null : p);
     };
@@ -824,6 +832,13 @@ function openSettings() {
     </div>
     <div class="toggle-row">
       <div>
+        <div>${t('set.expert')}</div>
+        <div class="muted" style="font-size:13px">${t('set.expertHint')}</div>
+      </div>
+      <label class="switch"><input type="checkbox" id="expertToggle" ${store.get('atlas.expert', false) ? 'checked' : ''}><span></span></label>
+    </div>
+    <div class="toggle-row">
+      <div>
         <div>${t('set.sound')}</div>
         <div class="muted" style="font-size:13px">${t('set.soundHint')}</div>
       </div>
@@ -859,6 +874,10 @@ function openSettings() {
       store.set('atlas.showDistance', game.showDistance);
       map.updateLegend();
       hint();
+      render();
+    };
+    d.querySelector('#expertToggle').onchange = (e) => {
+      store.set('atlas.expert', e.target.checked);
       render();
     };
     d.querySelector('#soundToggle').onchange = (e) => {

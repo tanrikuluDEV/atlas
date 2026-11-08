@@ -4,7 +4,7 @@ import Foundation
 ///
 /// Yalnızca kazanılan oyun puan getirir:
 /// - Taban puan tahmin sayısına göre: 1 → 200, 2 → 150, 3 → 120, sonra her tahminde 10 eksik (en az 20).
-/// - Günlük bulmaca ×1,5 (günde bir kez oynanır); kategori zorluğu ×0,6–1,5; her ipucu −%15.
+/// - Günlük bulmaca ×1,5 (günde bir kez oynanır); kategori zorluğu ×0,6–1,5; her ipucu −%15; uzman modu ×1,3.
 /// - Sonuç 5'in katına yuvarlanır.
 ///
 /// Seviye L'ye ulaşmak için toplam 125·L·(L−1) XP gerekir (2 → 250, 5 → 2.500, 10 → 11.250).
@@ -29,10 +29,11 @@ enum Progression {
         }
     }
 
-    static func points(guesses: Int, hints: Int, category: GameCategory, mode: GameMode) -> Int {
+    static func points(guesses: Int, hints: Int, category: GameCategory, mode: GameMode, expert: Bool = false) -> Int {
         let hintFactor = 1 - 0.15 * Double(min(max(hints, 0), 3))
         let modeFactor = mode == .daily ? 1.5 : 1
-        let raw = basePoints(guesses: guesses) * hintFactor * categoryFactor(category) * modeFactor
+        let expertFactor = expert ? 1.3 : 1
+        let raw = basePoints(guesses: guesses) * hintFactor * categoryFactor(category) * modeFactor * expertFactor
         return Int((raw / 5).rounded()) * 5
     }
 
@@ -57,7 +58,8 @@ enum Progression {
             total += points(guesses: guesses, hints: 0, category: category, mode: mode)
         }
         for record in recordedWins {
-            total += points(guesses: record.guesses, hints: record.hints ?? 0, category: category, mode: mode)
+            total += points(guesses: record.guesses, hints: record.hints ?? 0, category: category, mode: mode,
+                            expert: record.expert ?? false)
         }
         return total
     }

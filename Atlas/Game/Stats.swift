@@ -8,6 +8,8 @@ struct GameRecord: Codable, Identifiable, Hashable {
     let answerID: Int
     /// Açılan ipucu sayısı (puan hesabı için); bu alandan önceki kayıtlarda yok.
     var hints: Int?
+    /// Uzman modunda mı oynandı (puan %30 fazla); eski kayıtlarda yok.
+    var expert: Bool?
     var id: Date { date }
 }
 
@@ -64,11 +66,12 @@ struct Stats: Codable {
     }
 
     /// Günlük oyun: aynı gün bir kez sayılır, seri art arda günlerle ilerler.
-    mutating func recordDaily(won didWin: Bool, guesses: Int, hints: Int, answerID: Int, day: Int) {
+    mutating func recordDaily(won didWin: Bool, guesses: Int, hints: Int, answerID: Int, day: Int, expert: Bool = false) {
         guard lastPlayedDay != day else { return }
         lastPlayedDay = day
         played += 1
-        history.append(GameRecord(date: .now, guesses: guesses, won: didWin, answerID: answerID, hints: hints))
+        history.append(GameRecord(date: .now, guesses: guesses, won: didWin, answerID: answerID, hints: hints,
+                                  expert: expert ? true : nil))
         if didWin {
             won += 1
             winningGuessCounts.append(guesses)
@@ -81,9 +84,10 @@ struct Stats: Codable {
     }
 
     /// Alıştırma: her oyun sayılır, seri art arda kazanılan oyun sayısıdır.
-    mutating func recordPractice(won didWin: Bool, guesses: Int, hints: Int, answerID: Int) {
+    mutating func recordPractice(won didWin: Bool, guesses: Int, hints: Int, answerID: Int, expert: Bool = false) {
         played += 1
-        history.append(GameRecord(date: .now, guesses: guesses, won: didWin, answerID: answerID, hints: hints))
+        history.append(GameRecord(date: .now, guesses: guesses, won: didWin, answerID: answerID, hints: hints,
+                                  expert: expert ? true : nil))
         if didWin {
             won += 1
             winningGuessCounts.append(guesses)

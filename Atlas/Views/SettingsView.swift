@@ -2,12 +2,25 @@ import SwiftUI
 
 enum AppSettings {
     static let showDistanceKey = "showDistance"
+    static let expertKey = "expert"
+}
+
+/// Oyunu etkileyen ayarlar; `GameModel` gözlemleyebilsin diye @Observable (UserDefaults'ta saklanır).
+@Observable
+final class GameSettings {
+    static let shared = GameSettings()
+
+    /// Uzman modu: haritada adlar ve mesafeler gizlenir, yalnızca renk kalır; kazanılan puan %30 fazla.
+    var expert: Bool = UserDefaults.standard.bool(forKey: AppSettings.expertKey) {
+        didSet { UserDefaults.standard.set(expert, forKey: AppSettings.expertKey) }
+    }
 }
 
 struct SettingsView: View {
     @AppStorage(AppSettings.showDistanceKey) private var showDistance = true
     @AppStorage(GameFeedback.soundKey) private var sound = false
     @AppStorage(GameFeedback.hapticsKey) private var haptics = true
+    @State private var settings = GameSettings.shared
 
     @Environment(\.dismiss) private var dismiss
 
@@ -38,6 +51,11 @@ struct SettingsView: View {
             Section {
                 Toggle(L("set.distance"), isOn: $showDistance)
                 Text(L(showDistance ? "set.distanceOn" : "set.distanceOff"))
+                    .font(.callout)
+                    .foregroundStyle(.secondary)
+                    .fixedSize(horizontal: false, vertical: true)
+                Toggle(L("set.expert"), isOn: $settings.expert)
+                Text(L("set.expertHint"))
                     .font(.callout)
                     .foregroundStyle(.secondary)
                     .fixedSize(horizontal: false, vertical: true)

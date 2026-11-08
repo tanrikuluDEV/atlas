@@ -20,6 +20,7 @@ enum Badges {
         var best = Int.max
         var maxStreak = 0
         var categoriesWon = 0
+        var expertWins = 0
         var explorers: [Badge] = []
 
         for c in GameCategory.allCases {
@@ -30,6 +31,7 @@ enum Badges {
             if won > 0 { categoriesWon += 1 }
             if let m = (daily.winningGuessCounts + practice.winningGuessCounts).min() { best = min(best, m) }
             maxStreak = max(maxStreak, daily.maxStreak)
+            expertWins += (daily.history + practice.history).filter { $0.won && $0.expert == true }.count
 
             let places = PlaceSet.forCategory(c)
             let found = Set((daily.history + practice.history).filter(\.won).map(\.answerID))
@@ -55,6 +57,8 @@ enum Badges {
             badge("wins50", "airplane", wins, 50),
             badge("wins100", "crown.fill", wins, 100),
             badge("allCategories", "globe.europe.africa.fill", categoriesWon, GameCategory.allCases.count),
+            badge("expert", "eye.slash.fill", expertWins, 1),
+            badge("expert10", "graduationcap.fill", expertWins, 10),
         ] + explorers
     }
 

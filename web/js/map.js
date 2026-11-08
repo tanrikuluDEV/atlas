@@ -622,7 +622,7 @@ export class MapView {
 
   /** Haritada adı yazılacak yerler: tahmin edilenler ve oyun bitince gizli yer. */
   labelFor(place) {
-    return !!this.game.mapGuessFor(place) || (this.game.mapRevealsAnswer && place.id === this.game.answer.id);
+    return (this.game.showsGuessNames && !!this.game.mapGuessFor(place)) || (this.game.mapRevealsAnswer && place.id === this.game.answer.id);
   }
 
   /**
@@ -725,10 +725,12 @@ export class MapView {
     const game = this.game;
     const g = game.mapGuessFor(place);
     const name = flaggedName(place);
+    // Uzman modunda oyun sürerken adlar ve mesafeler gizli.
+    if (!game.showsGuessNames) return null;
     if (g) {
       if (place.id === game.answer.id) return `${name} ✓`;
       if (g.distance === 0) return `${name} · ${t('neighbor')}`;
-      return game.showDistance ? `${name} · ${formatKm(g.distance)}` : name;
+      return game.showsKm ? `${name} · ${formatKm(g.distance)}` : name;
     }
     return game.mapRevealsAnswer ? name : null;
   }
@@ -746,7 +748,7 @@ export class MapView {
       const p = 10 ** Math.floor(Math.log10(v));
       return Math.max(p, Math.round(v / p) * p);
     };
-    const ticks = this.game.showDistance
+    const ticks = this.game.showsKm
       ? [{ t: 0, text: t('neighbor') }, { t: 0.5, text: formatKm(nice(max * 0.25)) }, { t: 1, text: formatKm(nice(max)) }]
       : [{ t: 0, text: t('near') }, { t: 1, text: t('far') }];
     this.legend.innerHTML = `
