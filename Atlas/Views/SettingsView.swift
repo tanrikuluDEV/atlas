@@ -21,6 +21,12 @@ struct SettingsView: View {
     @AppStorage(GameFeedback.soundKey) private var sound = false
     @AppStorage(GameFeedback.hapticsKey) private var haptics = true
     @State private var settings = GameSettings.shared
+    #if os(iOS) || os(macOS)
+    @AppStorage(Reminders.enabledKey) private var reminder = false
+    @AppStorage(Reminders.hourKey) private var reminderHour = 19
+    @AppStorage(Reminders.minuteKey) private var reminderMinute = 0
+    @State private var reminderDenied = false
+    #endif
 
     @Environment(\.dismiss) private var dismiss
 
@@ -76,7 +82,40 @@ struct SettingsView: View {
                     .fixedSize(horizontal: false, vertical: true)
                 #endif
             }
+            #if os(iOS) || os(macOS)
+            reminderSection
+            #endif
         }
         .formStyle(.grouped)
     }
+
+    #if os(iOS) || os(macOS)
+    private var reminderSection: some View {
+        Section {
+            Toggle(L("set.reminder"), isOn: Binding(get: { reminder }, set: { on in
+                guard on else { reminder = false; Reminders.refresh(); return }
+                Task { @MainActor in
+                    let granted = await Reminders.requestPermission()
+                    reminderDenied = !granted
+                    reminder = granted
+                    Reminders.refresh()
+                }
+            }))
+            if reminder {
+                DatePicker(L("set.reminderTime"), selection: Binding(get: {
+                    Calendar.current.date(from: DateComponents(hour: reminderHour, minute: reminderMinute)) ?? .now
+                }, set: { date in
+                    let parts = Calendar.current.dateComponents([.hour, .minute], from: date)
+                    reminderHour = parts.hour ?? 19
+                    reminderMinute = parts.minute ?? 0
+                    Reminders.refresh()
+                }), displayedComponents: .hourAndMinute)
+            }
+            Text(L(reminderDenied ? "set.reminderDenied" : "set.reminderHint"))
+                .font(.callout)
+                .foregroundStyle(reminderDenied ? AnyShapeStyle(Color.red) : AnyShapeStyle(.secondary))
+                .fixedSize(horizontal: false, vertical: true)
+        }
+    }
+    #endif
 }

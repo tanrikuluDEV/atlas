@@ -2438,5 +2438,61 @@
   "fr": "Quatre modes : Du jour (même énigme pour tous), Libre (illimité), Chrono (le plus de lieux en 3 minutes) et Chaîne (un chemin de voisins entre deux lieux).",
   "es": "Hay cuatro modos: Diario (mismo reto para todos), Práctica (sin límite), Contrarreloj (tantos lugares como puedas en 3 minutos) y Cadena (una ruta de vecinos entre dos lugares).",
   "it": "Ci sono quattro modalità: Oggi (stessa sfida per tutti), Libera (illimitata), A tempo (più luoghi possibili in 3 minuti) e Catena (un percorso di vicini tra due luoghi)."
+ },
+ "set.reminder": {
+  "tr": "Günlük hatırlatma",
+  "en": "Daily reminder",
+  "de": "Tägliche Erinnerung",
+  "fr": "Rappel quotidien",
+  "es": "Recordatorio diario",
+  "it": "Promemoria giornaliero"
+ },
+ "set.reminderTime": {
+  "tr": "Saat",
+  "en": "Time",
+  "de": "Uhrzeit",
+  "fr": "Heure",
+  "es": "Hora",
+  "it": "Ora"
+ },
+ "set.reminderHint": {
+  "tr": "O gün henüz günlük bulmaca çözmediysen seçtiğin saatte bir bildirim gelir.",
+  "en": "If you haven't solved a daily puzzle yet that day, you get a notification at the chosen time.",
+  "de": "Hast du an dem Tag noch kein Tagesrätsel gelöst, kommt zur gewählten Zeit eine Mitteilung.",
+  "fr": "Si tu n'as pas encore résolu d'énigme du jour, une notification arrive à l'heure choisie.",
+  "es": "Si ese día aún no has resuelto un reto diario, recibirás un aviso a la hora elegida.",
+  "it": "Se quel giorno non hai ancora risolto una sfida, ricevi una notifica all'ora scelta."
+ },
+ "set.reminderDenied": {
+  "tr": "Bildirim izni kapalı. Sistem Ayarları → Bildirimler → Atlas'tan açabilirsin.",
+  "en": "Notifications are off. Turn them on in Settings → Notifications → Atlas.",
+  "de": "Mitteilungen sind aus. Aktiviere sie unter Einstellungen → Mitteilungen → Atlas.",
+  "fr": "Les notifications sont désactivées. Active-les dans Réglages → Notifications → Atlas.",
+  "es": "Las notificaciones están desactivadas. Actívalas en Ajustes → Notificaciones → Atlas.",
+  "it": "Le notifiche sono disattivate. Attivale in Impostazioni → Notifiche → Atlas."
+ },
+ "reminder.body": {
+  "tr": "Bugünün bulmacası hazır. Gizli yeri bulabilecek misin?",
+  "en": "Today's puzzle is ready. Can you find the hidden place?",
+  "de": "Das heutige Rätsel ist bereit. Findest du den gesuchten Ort?",
+  "fr": "L'énigme du jour est prête. Trouveras-tu le lieu caché ?",
+  "es": "El reto de hoy está listo. ¿Encontrarás el lugar oculto?",
+  "it": "La sfida di oggi è pronta. Troverai il luogo nascosto?"
+ },
+ "reminder.streakTitle": {
+  "tr": "Serin bozulmasın 🔥",
+  "en": "Keep your streak 🔥",
+  "de": "Halte deine Serie 🔥",
+  "fr": "Garde ta série 🔥",
+  "es": "Mantén tu racha 🔥",
+  "it": "Mantieni la serie 🔥"
+ },
+ "reminder.streakBody": {
+  "tr": "{n} günlük serin var. Bugünün bulmacası seni bekliyor.",
+  "en": "You're on a {n}-day streak. Today's puzzle is waiting.",
+  "de": "Du hast eine Serie von {n} Tagen. Das heutige Rätsel wartet.",
+  "fr": "Tu as une série de {n} jours. L'énigme du jour t'attend.",
+  "es": "Llevas una racha de {n} días. El reto de hoy te espera.",
+  "it": "Hai una serie di {n} giorni. La sfida di oggi ti aspetta."
  }
 }

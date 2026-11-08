@@ -12,6 +12,7 @@ struct ContentView: View {
     /// Açılış animasyonu; `-renderSnapshots` ile ekran dışı çizimde atlanır.
     @State private var showSplash = !ProcessInfo.processInfo.arguments.contains("-renderSnapshots")
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
+    @Environment(\.scenePhase) private var scenePhase
     @State private var l10n = L10n.shared
 
     private let dayTimer = Timer.publish(every: 60, on: .main, in: .common).autoconnect()
@@ -163,6 +164,11 @@ struct ContentView: View {
         .sheet(isPresented: $showSettings) { SettingsView() }
         #endif
         .onReceive(dayTimer) { _ in game.refreshDayIfNeeded() }
+        #if os(iOS) || os(macOS)
+        // Hatırlatmalar her açılışta yeniden kurulur (bugün oynandıysa bugünkü atlanır, seri metni güncellenir).
+        .onAppear { Reminders.refresh() }
+        .onChange(of: scenePhase) { _, phase in if phase == .active { Reminders.refresh() } }
+        #endif
         #if DEBUG
         // Geliştirme: ATLAS_MODE=timed|chain, ATLAS_CATEGORY=europe, ATLAS_START (süreyi başlatır),
         // ATLAS_PLAY="Fransa|@route|@answer|@skip" (tahminler; @route zincirin en kısa rotası, @answer gizli yer).

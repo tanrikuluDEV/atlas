@@ -630,6 +630,10 @@ final class GameModel {
         case .timed, .chain:
             break
         }
+        #if os(iOS) || os(macOS)
+        // Bugün oynandı: bugünkü hatırlatma kaldırılır.
+        if mode == .daily { Reminders.refresh() }
+        #endif
         reward = Reward(before: LevelProgress(xp: before), after: LevelProgress(xp: Progression.totalXP()))
         newBadges = Badges.all().filter { $0.earned && !badgesBefore.contains($0.id) }
         showResult = true

@@ -27,8 +27,10 @@
 		228091EC9E31E765C035611B /* provinces.json in Resources */ = {isa = PBXBuildFile; fileRef = AD19E18DF83948FAC8D87A4B /* provinces.json */; };
 		22E5267F721D6AB6AE976E17 /* DebugSnapshots.swift in Sources */ = {isa = PBXBuildFile; fileRef = F30335D55EA0CC3488A6727A /* DebugSnapshots.swift */; };
 		23170EEDBDF699705E2F7A2B /* CategoryPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBD42E6296FC6E89B2627B12 /* CategoryPicker.swift */; };
+		2383DBB8EEA48173B82F25A9 /* Reminders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E4591CF4420EB5DD08550EB /* Reminders.swift */; };
 		281ABB335BD23E0D75F3AEB6 /* VoiceRemoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D8B429A21D1DE3357DAB066 /* VoiceRemoteView.swift */; };
 		28FF4376C4E3B315A6B81465 /* TVViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C452AC98790E815E93B523 /* TVViews.swift */; };
+		2DB6BF8709DD83FF33BF83CA /* Reminders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E4591CF4420EB5DD08550EB /* Reminders.swift */; };
 		2E1565BD03D665DFD101B7DD /* Brand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B0329F2374D6A94596CD083 /* Brand.swift */; };
 		2ED33EDDA76C299240957146 /* ModeViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51D1B03E80E1323735F180B /* ModeViews.swift */; };
 		3404ED83B07179C04BE11FE8 /* StatsExtras.swift in Sources */ = {isa = PBXBuildFile; fileRef = 073C1EFD6EA624FB5CA27129 /* StatsExtras.swift */; };
@@ -49,6 +51,7 @@
 		57541F5560DD69991E0B2FB0 /* provinces.json in Resources */ = {isa = PBXBuildFile; fileRef = AD19E18DF83948FAC8D87A4B /* provinces.json */; };
 		5812964D02223C6272680A7B /* provinces.json in Resources */ = {isa = PBXBuildFile; fileRef = AD19E18DF83948FAC8D87A4B /* provinces.json */; };
 		59D2622C7949138F9EEFE3F6 /* Hints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A9553E85063A5FB584EAB42 /* Hints.swift */; };
+		5CA945FC436DD4FB99FE4AF7 /* Reminders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E4591CF4420EB5DD08550EB /* Reminders.swift */; };
 		663323FC22C01E47BE80BB70 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AA986E23356244005C7DA505 /* Assets.xcassets */; };
 		6827FDD02F4B78605B70C6B8 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54BB62A20AA41137A8520563 /* MapView.swift */; };
 		682F3B4BF73F6A264426CE3F /* GameFeedback.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1E04842862D1D05C5F2A021 /* GameFeedback.swift */; };
@@ -141,6 +144,7 @@
 		5A9553E85063A5FB584EAB42 /* Hints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hints.swift; sourceTree = "<group>"; };
 		6AEBDC7BEE7D554C7FA18D29 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		6B0329F2374D6A94596CD083 /* Brand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Brand.swift; sourceTree = "<group>"; };
+		6E4591CF4420EB5DD08550EB /* Reminders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reminders.swift; sourceTree = "<group>"; };
 		7E8DB256F31E768D1AD48E46 /* ProgressSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressSection.swift; sourceTree = "<group>"; };
 		8356D25827C690014A991AE8 /* ColorScale.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorScale.swift; sourceTree = "<group>"; };
 		8966DBC817BE95BE90215875 /* Platform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Platform.swift; sourceTree = "<group>"; };
@@ -203,6 +207,7 @@
 				B15A1DFC23AFA60D626F836E /* GameModel.swift */,
 				3F8DB438A306650A8E64B2B4 /* Modes.swift */,
 				C55E6A3830AF4CC7BC91B879 /* Progression.swift */,
+				6E4591CF4420EB5DD08550EB /* Reminders.swift */,
 				E0E994E13C63287E0B942955 /* Stats.swift */,
 			);
 			path = Game;
@@ -438,6 +443,7 @@
 				8E6D03DECB33D33E28845AA6 /* Platform.swift in Sources */,
 				FF87E2BC14829973408245DB /* ProgressSection.swift in Sources */,
 				83BA462B140CAFE54B9BD6B3 /* Progression.swift in Sources */,
+				2383DBB8EEA48173B82F25A9 /* Reminders.swift in Sources */,
 				E11484566A8BA34DBB475F7A /* RoundExtras.swift in Sources */,
 				0D158FA61CE680B78634FED9 /* SettingsView.swift in Sources */,
 				21317B473DC86BB83DA39A12 /* Sheets.swift in Sources */,
@@ -475,6 +481,7 @@
 				086C260022A7779A6697E782 /* Platform.swift in Sources */,
 				F730002126C53E0C5A4BE5B8 /* ProgressSection.swift in Sources */,
 				1D7D1496C343A9E1029EE5FD /* Progression.swift in Sources */,
+				2DB6BF8709DD83FF33BF83CA /* Reminders.swift in Sources */,
 				C268C0B2806E7AD7308CFC70 /* RoundExtras.swift in Sources */,
 				F11E0111D93C36F3790C8958 /* SettingsView.swift in Sources */,
 				F34E1A2CF43E101F41CEDD15 /* Sheets.swift in Sources */,
@@ -512,6 +519,7 @@
 				923C03A157077833EAB89E82 /* Platform.swift in Sources */,
 				91F6B06BC7B81A4144751808 /* ProgressSection.swift in Sources */,
 				0E2C954889AE78439B391A96 /* Progression.swift in Sources */,
+				5CA945FC436DD4FB99FE4AF7 /* Reminders.swift in Sources */,
 				21083B3F858F511FADE016EE /* RoundExtras.swift in Sources */,
 				70FFDEF088629C00FC0F99B3 /* SettingsView.swift in Sources */,
 				4CFA038B1168FB47DE9E2FE6 /* Sheets.swift in Sources */,
