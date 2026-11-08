@@ -16,7 +16,7 @@ Kullanıcıyla Türkçe konuşulur; arayüz metinleri ve kod yorumları da Türk
 - `Atlas/Models/Place.swift`: `Place`, `GameCategory` (8 kategori), `PlaceSet` (kategori başına yerler, mesafeler, harita görünümü, arama), `WorldData`.
 - `Atlas/Game/GameModel.swift`: oyun durumu, `DailyPuzzle` (günlük seçim, SplitMix64 + Swift `shuffled`).
 - `Atlas/Game/Stats.swift`: kategori ve mod başına istatistik, oyun geçmişi (`GameRecord`, ipucu sayısıyla).
-- `Atlas/Game/Badges.swift`: rozetler (18 rozet; saklanmaz, tüm istatistiklerden hesaplanır). Web karşılığı `web/js/badges.js`.
+- `Atlas/Game/Badges.swift`: rozetler (24 rozet; saklanmaz, tüm istatistiklerden hesaplanır). Web karşılığı `web/js/badges.js`.
 - `Atlas/Game/Modes.swift`: zamana karşı (`TimedStats`, `TimedResult`) ve komşu zinciri (`ChainStats`, `ChainClass`, `PlaceSet.neighbors` / `hopDistances` / `shortestPath` / `randomChainPair`) kayıtları ve puanları. Mod kuralları `GameModel`'de; haritada hangi yerin nasıl boyanacağına moddan bağımsız olarak `GameModel.mapMark` / `mapShowsLabel` / `mapHoverText` / `mapLabelRank` karar verir. Web karşılığı `web/js/modes.js` + `game.js`.
 - `Atlas/Game/Reminders.swift` (iPhone + Mac): günlük hatırlatma bildirimi.
 - `Atlas/Views/ModeViews.swift`: zamana karşı ve zincir panel parçaları (`TimedBar`, `TimedStartCard`, `ChainCard`, `ChainOverBanner`…) ve `FlowLayout`.
