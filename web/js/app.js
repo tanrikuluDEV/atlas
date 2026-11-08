@@ -11,6 +11,7 @@ import { progress, totalXP } from './progression.js';
 import { applyTheme, heatColor, isDark, onThemeChange, setThemePreference, themePreference } from './colors.js';
 import { allBadges } from './badges.js';
 import * as feedback from './feedback.js';
+import { flagHTML, flaggedName } from './flags.js';
 
 const $ = (id) => document.getElementById(id);
 const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
@@ -223,7 +224,7 @@ function renderSuggestions() {
   const showCode = game.category === 'turkey';
   list.innerHTML = suggestionItems.map((p, i) =>
     `<li role="option" data-id="${p.id}" data-index="${i}" class="${i === activeSuggestion ? 'active' : ''}">
-       <span>${esc(p.name)}</span>${showCode ? `<span class="code">${p.code}</span>` : ''}
+       <span>${flagHTML(p)}${esc(p.name)}</span>${showCode ? `<span class="code">${p.code}</span>` : ''}
      </li>`).join('');
   list.hidden = false;
 }
@@ -309,7 +310,7 @@ function render() {
     const won = game.status === 'won';
     over.innerHTML = `
       <div class="status ${won ? 'won' : 'lost'}">${won ? `✓ ${t('over.won')}` : t(`over.hidden.${c.kind}`)}</div>
-      <div class="answer">${esc(game.answer.name)}</div>
+      <div class="answer">${flagHTML(game.answer)}${esc(game.answer.name)}</div>
       <div class="actions">
         <button class="button" data-action="result">${t('result')}</button>
         <button class="button primary" data-action="new" title="Enter">${t('newGame')}</button>
@@ -441,7 +442,7 @@ function renderGuesses() {
     const dist = isAnswer ? t('found') : g.distance === 0 ? t('Neighbor') : game.showDistance ? formatKm(g.distance) : '';
     return `<button class="guess ${isAnswer ? 'answer' : ''} ${selected ? 'selected' : ''}" data-id="${g.place.id}" title="${t(selected ? 'highlight.remove' : 'highlight.show')}">
       <span class="swatch" style="background:${color}"></span>
-      <span class="name">${esc(g.place.name)}</span>
+      <span class="name">${flagHTML(g.place)}${esc(g.place.name)}</span>
       <span class="dist">${dist}</span>
     </button>`;
   }).join('');
@@ -540,8 +541,8 @@ function openResult() {
       <div style="font-size:44px">${won ? '🎉' : '🗺️'}</div>
       <h2>${t(won ? 'congrats' : 'nextTime')}</h2>
       <p>${won
-        ? `${bold(t(`result.won.${c.kind}`, { name: `**${game.answer.name}**` }))}<br>${bold(t('result.foundIn', { n: game.guesses.length }))}`
-        : bold(t(`result.lost.${c.kind}`, { name: `**${game.answer.name}**` }))}</p>
+        ? `${bold(t(`result.won.${c.kind}`, { name: `**${flaggedName(game.answer)}**` }))}<br>${bold(t('result.foundIn', { n: game.guesses.length }))}`
+        : bold(t(`result.lost.${c.kind}`, { name: `**${flaggedName(game.answer)}**` }))}</p>
       ${game.reward ? levelCardHTML(game.reward.after, game.reward) : ''}
       ${game.newBadges?.length ? `<div class="new-badges"><div class="new-badges-title">${esc(t('badges.new'))}</div>
         <div class="badge-row">${game.newBadges.slice(0, 4).map(badgeHTML).join('')}</div></div>` : ''}

@@ -57,9 +57,11 @@ const TURKEY_ALIASES = { afyon: 3, maras: 46, urfa: 63, antep: 27, icel: 33, izm
 const collator = new Intl.Collator('tr');
 
 class Place {
-  constructor({ id, code, name, names = {}, aliases = [], rings }) {
+  constructor({ id, code, name, names = {}, aliases = [], rings, iso2 = null }) {
     this.id = id;
     this.code = code;
+    /** Ülkelerde iki harfli ISO kodu ("DE"); KKTC'de "CY-N". İllerde null. */
+    this.iso2 = iso2;
     /** Türkçe ad; sıralama ve kayıtlar bunu kullanır. */
     this.trName = name;
     /** Diğer dillerdeki adlar (yalnızca ülkelerde). */
@@ -71,6 +73,12 @@ class Place {
 
   /** Seçili dildeki ad. */
   get name() { return (language() !== 'tr' && this.names[language()]) || this.trName; }
+
+  /** Bayrak emojisi ("🇩🇪"); KKTC'nin emojisi yok (app.js `flagHTML` onu çizer), illerde null. */
+  get flag() {
+    if (!this.iso2 || this.iso2.length !== 2) return null;
+    return String.fromCodePoint(...[...this.iso2.toUpperCase()].map((c) => 127397 + c.charCodeAt(0)));
+  }
 
   get primaryKey() {
     if (this._keyLang !== language()) { this._keyLang = language(); this._key = normalize(this.name); }

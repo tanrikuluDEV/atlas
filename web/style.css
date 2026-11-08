@@ -772,3 +772,7 @@ dialog.sheet.picker { width: min(720px, calc(100vw - 24px)); padding: 22px; }
   .empty-card .empty-thumb { height: 64px; }
   .empty-card { gap: 6px; }
 }
+
+/* Bayraklar (flags.js) */
+.flag { display: inline-block; margin-right: 6px; line-height: 1; }
+.flag-svg { width: 1.35em; height: 0.9em; vertical-align: -0.08em; }

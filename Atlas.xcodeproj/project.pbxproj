@@ -42,6 +42,7 @@
 		4CFA038B1168FB47DE9E2FE6 /* Sheets.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0D6074433BEC2769D35BEC6 /* Sheets.swift */; };
 		4EC32720EECC3E33EA635272 /* Place.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CD371632A6A96D14BA6F66C /* Place.swift */; };
 		51B0A73F7A4FD4E4FA6D28C4 /* GameFeedback.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1E04842862D1D05C5F2A021 /* GameFeedback.swift */; };
+		561B1A60C915EACF5F2A5A19 /* FlagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 332CF25857391C2DF31D1C57 /* FlagView.swift */; };
 		57469922407804A950347D8F /* hints.json in Resources */ = {isa = PBXBuildFile; fileRef = E0A9FEAB54207168722BE498 /* hints.json */; };
 		57541F5560DD69991E0B2FB0 /* provinces.json in Resources */ = {isa = PBXBuildFile; fileRef = AD19E18DF83948FAC8D87A4B /* provinces.json */; };
 		5812964D02223C6272680A7B /* provinces.json in Resources */ = {isa = PBXBuildFile; fileRef = AD19E18DF83948FAC8D87A4B /* provinces.json */; };
@@ -57,6 +58,7 @@
 		7AF394AF2F2723CDE9BB3F70 /* CategoryPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBD42E6296FC6E89B2627B12 /* CategoryPicker.swift */; };
 		7DB02561C4B3C4290B86D5F5 /* BricolageGrotesque-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 444C1C6DF9A16811F6E9A4C8 /* BricolageGrotesque-Bold.ttf */; };
 		804E4F473D2725520708B399 /* ColorScale.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8356D25827C690014A991AE8 /* ColorScale.swift */; };
+		80FCCF65E78929278D7C39A5 /* FlagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 332CF25857391C2DF31D1C57 /* FlagView.swift */; };
 		82893E684D2475DE99F105E5 /* VoiceLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B8E0FCE8B21CCBBE19E3D7 /* VoiceLink.swift */; };
 		83BA462B140CAFE54B9BD6B3 /* Progression.swift in Sources */ = {isa = PBXBuildFile; fileRef = C55E6A3830AF4CC7BC91B879 /* Progression.swift */; };
 		843771A12DEE87E93B78639A /* world.json in Resources */ = {isa = PBXBuildFile; fileRef = 9BB43DB9C755082BFFA2AA5E /* world.json */; };
@@ -84,6 +86,7 @@
 		BFF944916531F1AB5106B3D2 /* ConfettiView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B0AEE80F05E5E3789F2D638 /* ConfettiView.swift */; };
 		C242878C18F54C014FFAA341 /* Badges.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3B2A7FADF1BCEE80EA07AB9 /* Badges.swift */; };
 		C268C0B2806E7AD7308CFC70 /* RoundExtras.swift in Sources */ = {isa = PBXBuildFile; fileRef = 023ADB7E47AE6B88356251F2 /* RoundExtras.swift */; };
+		C691EEF17704EBE816FDB5A1 /* FlagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 332CF25857391C2DF31D1C57 /* FlagView.swift */; };
 		CAE21F86B4ECD84C4BAA3952 /* Stats.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E994E13C63287E0B942955 /* Stats.swift */; };
 		CD7347FAB205B1B3CB466656 /* Stats.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E994E13C63287E0B942955 /* Stats.swift */; };
 		CE24624743C5A1BDB1ADE257 /* GameModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B15A1DFC23AFA60D626F836E /* GameModel.swift */; };
@@ -124,6 +127,7 @@
 		22B8E0FCE8B21CCBBE19E3D7 /* VoiceLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceLink.swift; sourceTree = "<group>"; };
 		274F0CF7EF58B24307CCED4E /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		2B0AEE80F05E5E3789F2D638 /* ConfettiView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfettiView.swift; sourceTree = "<group>"; };
+		332CF25857391C2DF31D1C57 /* FlagView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlagView.swift; sourceTree = "<group>"; };
 		413A56C9FFE04C7BBD65B964 /* Atlas.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Atlas.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		444C1C6DF9A16811F6E9A4C8 /* BricolageGrotesque-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "BricolageGrotesque-Bold.ttf"; sourceTree = "<group>"; };
 		54BB62A20AA41137A8520563 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
@@ -228,6 +232,7 @@
 				2B0AEE80F05E5E3789F2D638 /* ConfettiView.swift */,
 				6AEBDC7BEE7D554C7FA18D29 /* ContentView.swift */,
 				F30335D55EA0CC3488A6727A /* DebugSnapshots.swift */,
+				332CF25857391C2DF31D1C57 /* FlagView.swift */,
 				F1E04842862D1D05C5F2A021 /* GameFeedback.swift */,
 				1E2B96D3406A1130DE2C723A /* MapGeometry.swift */,
 				54BB62A20AA41137A8520563 /* MapView.swift */,
@@ -410,6 +415,7 @@
 				F2621F89323ABFA03E84847F /* ConfettiView.swift in Sources */,
 				73FBE2118A78488E818997BB /* ContentView.swift in Sources */,
 				341257B7E34D2611511D3252 /* DebugSnapshots.swift in Sources */,
+				80FCCF65E78929278D7C39A5 /* FlagView.swift in Sources */,
 				51B0A73F7A4FD4E4FA6D28C4 /* GameFeedback.swift in Sources */,
 				CE24624743C5A1BDB1ADE257 /* GameModel.swift in Sources */,
 				8C765C596682AE3FFE304DE8 /* Hints.swift in Sources */,
@@ -444,6 +450,7 @@
 				BFF944916531F1AB5106B3D2 /* ConfettiView.swift in Sources */,
 				DC4D6D8DA5663ECCB81656A4 /* ContentView.swift in Sources */,
 				B80C722609F80A67F6AF5EC1 /* DebugSnapshots.swift in Sources */,
+				561B1A60C915EACF5F2A5A19 /* FlagView.swift in Sources */,
 				A799E8767D421F466EE0F348 /* GameFeedback.swift in Sources */,
 				98A2A17C550A7EE37E55681C /* GameModel.swift in Sources */,
 				59D2622C7949138F9EEFE3F6 /* Hints.swift in Sources */,
@@ -478,6 +485,7 @@
 				E42E83E311A854D9BAE9CB9C /* ConfettiView.swift in Sources */,
 				A97C500F2B501AE325483EA8 /* ContentView.swift in Sources */,
 				22E5267F721D6AB6AE976E17 /* DebugSnapshots.swift in Sources */,
+				C691EEF17704EBE816FDB5A1 /* FlagView.swift in Sources */,
 				682F3B4BF73F6A264426CE3F /* GameFeedback.swift in Sources */,
 				160A261EDA47F94B7A1E8854 /* GameModel.swift in Sources */,
 				17D87F2B60356E26E020E48D /* Hints.swift in Sources */,

@@ -15,10 +15,14 @@ struct Place: Identifiable, Hashable {
     let rings: [[[Double]]]
     /// Aramada kabul edilen normalize edilmiş adlar: her dildeki ad ve takma adlar.
     let searchKeys: [String]
+    /// Ülkelerde iki harfli ISO kodu ("DE"); KKTC'de "CY-N". İllerde nil.
+    let iso2: String?
 
-    init(id: Int, code: String, name: String, names: [String: String] = [:], aliases: [String], rings: [[[Double]]]) {
+    init(id: Int, code: String, name: String, names: [String: String] = [:], aliases: [String], rings: [[[Double]]],
+         iso2: String? = nil) {
         self.id = id
         self.code = code
+        self.iso2 = iso2
         trName = name
         self.names = names
         self.rings = rings
@@ -31,6 +35,15 @@ struct Place: Identifiable, Hashable {
         let lang = L10n.shared.language
         return lang == .tr ? trName : names[lang.rawValue] ?? trName
     }
+
+    /// Bayrak emojisi ("🇩🇪"). KKTC'nin emojisi yok (`FlagView` onu kendisi çizer); illerde nil.
+    var flag: String? {
+        guard let iso2, iso2.count == 2 else { return nil }
+        return String(String.UnicodeScalarView(iso2.uppercased().unicodeScalars.compactMap { Unicode.Scalar(127_397 + $0.value) }))
+    }
+
+    /// Adın önünde bayrakla (varsa); harita etiketleri ve TV'ye giden yanıtlar için.
+    var flaggedName: String { flag.map { "\($0) \(name)" } ?? name }
 
     static func == (lhs: Place, rhs: Place) -> Bool { lhs.id == rhs.id }
     func hash(into hasher: inout Hasher) { hasher.combine(id) }
@@ -200,7 +213,8 @@ final class PlaceSet {
         let world = WorldData.shared
         let members = world.countries.filter { category == .world || $0.continents.contains(category.rawValue) }
         let memberCodes = Set(members.map(\.code))
-        let places = members.map { Place(id: $0.id, code: $0.code, name: $0.name, names: $0.names, aliases: $0.aliases, rings: $0.rings) }
+        let places = members.map { Place(id: $0.id, code: $0.code, name: $0.name, names: $0.names, aliases: $0.aliases, rings: $0.rings,
+                                         iso2: $0.iso2) }
         let background = world.countries.filter { !memberCodes.contains($0.code) }.map(\.rings) + world.background
 
         // Görünüm alanları: minX = batı boylamı, minY = güney enlemi.
@@ -231,6 +245,7 @@ final class WorldData {
         let aliases: [String]
         let continents: [String]
         let rings: [[[Double]]]
+        let iso2: String?
     }
 
     private struct Payload: Decodable {

@@ -728,12 +728,13 @@ struct MapLayer: View, Animatable {
     }
 
     private func hoverLabel(for place: Place) -> String? {
+        let name = place.flaggedName
         if let g = game.mapGuess(for: place) {
-            if place == game.answer { return "\(place.name) ✓" }
-            if g.distance == 0 { return "\(place.name) · \(L("neighbor"))" }
-            return showDistance ? "\(place.name) · \(TurkishText.formatKm(g.distance))" : place.name
+            if place == game.answer { return "\(name) ✓" }
+            if g.distance == 0 { return "\(name) · \(L("neighbor"))" }
+            return showDistance ? "\(name) · \(TurkishText.formatKm(g.distance))" : name
         }
-        return game.mapRevealsAnswer ? place.name : nil
+        return game.mapRevealsAnswer ? name : nil
     }
 
     // MARK: Geometri sorguları

@@ -102,6 +102,7 @@ struct TVGuessInput: View {
                 ForEach(choices, id: \.id) { p in
                     Button { guess(p) } label: {
                         HStack {
+                            FlagView(place: p, height: 26)
                             Text(p.name)
                             Spacer()
                             if game.category == .turkey {

@@ -16,11 +16,11 @@ struct ResultView: View {
 
             if game.status == .won {
                 Text(L("congrats")).font(Brand.heading(.largeTitle))
-                Text(LocalizedStringKey(L("result.won.\(game.category.kind)", ["name": "**\(game.answer.name)**"])
+                Text(LocalizedStringKey(L("result.won.\(game.category.kind)", ["name": "**\(game.answer.flaggedName)**"])
                                         + "\n" + L("result.foundIn", ["n": game.guesses.count])))
             } else {
                 Text(L("nextTime")).font(Brand.heading(.largeTitle))
-                Text(LocalizedStringKey(L("result.lost.\(game.category.kind)", ["name": "**\(game.answer.name)**"])))
+                Text(LocalizedStringKey(L("result.lost.\(game.category.kind)", ["name": "**\(game.answer.flaggedName)**"])))
             }
 
             if let reward = game.reward {

@@ -367,7 +367,11 @@ private struct GameOverBanner: View {
             Label(game.status == .won ? L("over.won") : L("over.hidden.\(game.category.kind)"), systemImage: game.status == .won ? "checkmark.seal.fill" : "flag.fill")
                 .font(.headline)
                 .foregroundStyle(game.status == .won ? ColorScale.found : ColorScale.answerReveal)
-            Text(game.answer.name).font(Brand.heading(.title))
+            HStack(spacing: 8) {
+                FlagView(place: game.answer, height: 22)
+                Text(game.answer.name)
+            }
+            .font(Brand.heading(.title))
             HStack {
                 Button(L("result")) { game.showResult = true }
                 Button(L("newGame")) { game.newPractice() }
@@ -460,7 +464,8 @@ private struct GuessInput: View {
                 VStack(spacing: 0) {
                     ForEach(Array(items.enumerated()), id: \.element.id) { i, p in
                         Button { guess(p) } label: {
-                            HStack {
+                            HStack(spacing: 6) {
+                                FlagView(place: p)
                                 Text(p.name)
                                 Spacer()
                                 if game.category == .turkey {
@@ -564,8 +569,11 @@ private struct GuessRow: View {
                 .fill(isAnswer ? ColorScale.found : ColorScale.color(forDistance: guess.distance, max: maxDistance))
                 .overlay(RoundedRectangle(cornerRadius: 4).strokeBorder(.black.opacity(0.1)))
                 .frame(width: 18, height: 18)
-            Text(guess.place.name)
-                .fontWeight(isAnswer ? .bold : .regular)
+            HStack(spacing: 6) {
+                FlagView(place: guess.place)
+                Text(guess.place.name)
+                    .fontWeight(isAnswer ? .bold : .regular)
+            }
             Spacer()
             if isAnswer || showDistance || guess.distance == 0 {
                 Text(isAnswer ? L("found") : guess.distance == 0 ? L("Neighbor") : TurkishText.formatKm(guess.distance))

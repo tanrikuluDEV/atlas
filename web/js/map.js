@@ -1,6 +1,7 @@
 // Harita: Canvas çizimi (düz harita ya da Dünya için 3D küre), kamera uçuşları,
 // sürükleme/yakınlaştırma, adlar, renk skalası ve animasyonlar.
 // Mac/iPhone uygulamasındaki MapView.swift / GlobeView'in karşılığı.
+import { flaggedName } from './flags.js';
 import { formatKm } from './places.js';
 import { t } from './i18n.js';
 import { heatColor, COLORS } from './colors.js';
@@ -723,12 +724,13 @@ export class MapView {
   hoverLabel(place) {
     const game = this.game;
     const g = game.mapGuessFor(place);
+    const name = flaggedName(place);
     if (g) {
-      if (place.id === game.answer.id) return `${place.name} ✓`;
-      if (g.distance === 0) return `${place.name} · ${t('neighbor')}`;
-      return game.showDistance ? `${place.name} · ${formatKm(g.distance)}` : place.name;
+      if (place.id === game.answer.id) return `${name} ✓`;
+      if (g.distance === 0) return `${name} · ${t('neighbor')}`;
+      return game.showDistance ? `${name} · ${formatKm(g.distance)}` : name;
     }
-    return game.mapRevealsAnswer ? place.name : null;
+    return game.mapRevealsAnswer ? name : null;
   }
 
   /** Köşedeki renk skalası: kategorinin mesafelerine göre km işaretleri. */
