@@ -30,6 +30,10 @@ enum VoiceLink {
             case setCategory
             /// iPhone → TV: oyuncunun adı (`text`; parti modunda sıra ve skor için).
             case join
+            /// iPhone → TV: modu değiştir (`mode`: daily, practice, timed, chain).
+            case setMode
+            /// iPhone → TV: oyun bittiyse rotayı izlet (sürüyorsa durdur).
+            case replay
         }
         var kind: Kind
         var text: String?
@@ -40,6 +44,10 @@ enum VoiceLink {
         var hintsLeft: Int?
         /// TV → iPhone: oyun bitti mi (yeni oyun / pes et düğmeleri için).
         var over: Bool?
+        /// TV → iPhone: TV'deki mod, rota izlenebilir mi ve şu an izleniyor mu.
+        var mode: String?
+        var canReplay: Bool?
+        var replaying: Bool?
         /// TV → iPhone: parti modu açık mı; sıradaki oyuncu, sıra bu telefonda mı, skorlar (katılma sırasıyla).
         var party: Bool?
         var turn: String?
@@ -129,6 +137,11 @@ final class VoiceHost {
     var hintsLeft = 0 { didSet { if hintsLeft != oldValue { broadcastHello() } } }
     /// Oyun bitti mi; değişince telefondaki düğmeler güncellenir.
     var isOver = false { didSet { if isOver != oldValue { broadcastHello() } } }
+    /// TV'deki mod; telefondaki mod menüsü için.
+    var mode: String = "" { didSet { if mode != oldValue { broadcastHello() } } }
+    /// Oyun bitti ve rota izlenebilir mi (yalnızca günlük ve alıştırma); izleniyor mu.
+    var canReplay = false { didSet { if canReplay != oldValue { broadcastHello() } } }
+    var replaying = false { didSet { if replaying != oldValue { broadcastHello() } } }
 
     // MARK: Parti modu
 
@@ -168,7 +181,8 @@ final class VoiceHost {
     @ObservationIgnored private var names: [ObjectIdentifier: String] = [:]
 
     private func hello(for channel: VoiceLink.Channel) -> VoiceLink.Message {
-        var m = VoiceLink.Message(kind: .hello, category: category, hintsLeft: hintsLeft, over: isOver)
+        var m = VoiceLink.Message(kind: .hello, category: category, hintsLeft: hintsLeft, over: isOver,
+                                  mode: mode, canReplay: canReplay, replaying: replaying)
         if partyOn {
             m.party = true
             m.turn = currentPlayer
@@ -262,8 +276,10 @@ final class VoiceHost {
             case .guess:
                 guard let text = message.text else { return }
                 self.incoming = (UUID(), text, message.alternatives ?? [], player)
-            case .hint, .newGame, .giveUp, .setCategory:
+            case .hint, .newGame, .giveUp, .setCategory, .replay:
                 self.command = (UUID(), message.kind, message.category, player)
+            case .setMode:
+                self.command = (UUID(), message.kind, message.mode, player)
             case .join:
                 let old = self.names[key]
                 let name = self.uniqueName(message.text ?? "", for: channel)
@@ -309,6 +325,10 @@ final class VoiceRemote {
     private(set) var hintsLeft = 0
     /// TV'deki oyun bitti mi.
     private(set) var tvOver = false
+    /// TV'deki mod; oyun bitince rota izlenebilir mi, şu an izleniyor mu.
+    private(set) var tvMode: GameMode?
+    private(set) var tvCanReplay = false
+    private(set) var tvReplaying = false
     /// Bağlanılan Apple TV'nin adı.
     private(set) var tvName: String?
     /// Parti modu: TV'de açık mı, sıra kimde, sıra bu telefonda mı, oyuncular ve skorları.
@@ -413,7 +433,7 @@ final class VoiceRemote {
                 self.tvCategory = message.category.flatMap(GameCategory.init(rawValue:))
                 self.prepareCustomModel()
             case .reply: self.reply = message.text
-            case .guess, .hint, .newGame, .giveUp, .setCategory, .join: break
+            case .guess, .hint, .newGame, .giveUp, .setCategory, .join, .setMode, .replay: break
             }
             if let party = message.party {
                 self.party = party
@@ -423,6 +443,9 @@ final class VoiceRemote {
                 self.partyPlayers = zip(names, scores).map { ($0, $1) }
             }
             if let n = message.hintsLeft { self.hintsLeft = n }
+            if let m = message.mode.flatMap(GameMode.init(rawValue:)) { self.tvMode = m }
+            if let c = message.canReplay { self.tvCanReplay = c }
+            if let r = message.replaying { self.tvReplaying = r }
             if let over = message.over {
                 // Yeni oyun başlayınca önceki oyunun yanıtı silinir.
                 if self.tvOver && !over { self.reply = nil; self.transcript = "" }
@@ -446,6 +469,14 @@ final class VoiceRemote {
         tvCategory = category
         send(VoiceLink.Message(kind: .setCategory, category: category.rawValue))
     }
+
+    /// TV'de modu değiştirir.
+    func requestMode(_ mode: GameMode) {
+        tvMode = mode
+        send(VoiceLink.Message(kind: .setMode, mode: mode.rawValue))
+    }
+    /// Oyun bittiyse TV'de rotayı izletir (sürüyorsa durdurur).
+    func requestReplay() { send(VoiceLink.Message(kind: .replay)) }
 
     // MARK: Özel dil modeli
 

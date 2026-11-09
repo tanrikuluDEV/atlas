@@ -18,7 +18,8 @@ struct TVHeader: View {
                         .font(.headline)
                         .lineLimit(1)
                         .fixedSize()
-                    Text(game.category.subtitle)
+                    // Süreli ve zincirde "81 ilden birini bul" yanlış olur; kategori adı yazar.
+                    Text(game.mode.isClassic ? game.category.subtitle : game.category.title)
                         .font(.caption2)
                         .foregroundStyle(.secondary)
                         .lineLimit(2)
@@ -216,7 +217,8 @@ struct TVVoiceBridge: ViewModifier {
     let game: GameModel
     @State private var voice = VoiceHost.shared
 
-    private var hintsLeft: Int { game.isOver ? 0 : game.hints.count - game.hintsUsed }
+    /// Süreli ve zincirde ipucu yok.
+    private var hintsLeft: Int { game.isOver || !game.mode.isClassic ? 0 : game.hints.count - game.hintsUsed }
 
     func body(content: Content) -> some View {
         content
@@ -227,6 +229,8 @@ struct TVVoiceBridge: ViewModifier {
             .onChange(of: game.category) { sync() }
             .onChange(of: hintsLeft) { sync() }
             .onChange(of: game.isOver) { sync() }
+            .onChange(of: game.mode) { sync() }
+            .onChange(of: game.replayStep == nil) { sync() }
             // Parti modu: geçerli her tahminden sonra sıra döner; bulan oyuncu puan alır.
             .onChange(of: game.guesses.count) { old, new in
                 guard voice.partyOn, new > old else { return }
@@ -261,6 +265,16 @@ struct TVVoiceBridge: ViewModifier {
                     game.newRound()
                 case .setCategory:
                     if let c = voice.command?.category.flatMap(GameCategory.init(rawValue:)) { game.switchCategory(c) }
+                case .setMode:
+                    // Mod adı `category` alanında gelir (VoiceHost komutu tek alanla taşır).
+                    if let m = voice.command?.category.flatMap(GameMode.init(rawValue:)), m != game.mode {
+                        game.showResult = false
+                        game.switchMode(m)
+                    }
+                case .replay:
+                    guard game.isOver else { return }
+                    game.showResult = false
+                    if game.replayStep == nil { game.startReplay() } else { game.stopReplay() }
                 case .giveUp:
                     guard !game.isOver else { return }
                     game.giveUp()
@@ -274,6 +288,9 @@ struct TVVoiceBridge: ViewModifier {
         voice.category = game.category.rawValue
         voice.hintsLeft = hintsLeft
         voice.isOver = game.isOver
+        voice.mode = game.mode.rawValue
+        voice.canReplay = game.mode.isClassic && game.isOver && game.replayLength > 0
+        voice.replaying = game.replayStep != nil
     }
 
     /// Telefondaki ampul: sıradaki ipucunu açar, metnini telefona yollar.

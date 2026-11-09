@@ -16,9 +16,10 @@ struct VoiceRemoteView: View {
     var body: some View {
         NavigationStack {
             VStack(spacing: 20) {
-                HStack(alignment: .top) {
+                HStack(alignment: .top, spacing: 10) {
                     newGameButton
-                    Spacer()
+                    if remote.connection == .connected && remote.tvOver && remote.tvCanReplay { replayButton }
+                    Spacer(minLength: 0)
                     hintButton
                 }
                 status
@@ -75,6 +76,9 @@ struct VoiceRemoteView: View {
                     case "hint": remote.requestHint()
                     case "giveup": remote.requestGiveUp()
                     case "newgame": remote.requestNewGame()
+                    case "replay": remote.requestReplay()
+                    case let c where c.hasPrefix("mode:"):
+                        if let m = GameMode(rawValue: String(c.dropFirst(5))) { remote.requestMode(m) }
                     case let c where c.hasPrefix("name:"): remote.playerName = String(c.dropFirst(5))
                     case let c where c.hasPrefix("cat:"):
                         if let cat = GameCategory(rawValue: String(c.dropFirst(4))) { remote.requestCategory(cat) }
@@ -127,24 +131,51 @@ struct VoiceRemoteView: View {
         VStack(spacing: 6) {
             statusLine
             // TV'deki kategori: adlar bu kategoride aranır; buradan TV'nin kategorisi değiştirilir.
+            // TV'deki mod da buradan değiştirilir.
             if remote.connection == .connected, let c = remote.tvCategory {
-                Menu {
-                    Picker(L("category"), selection: Binding(get: { c }, set: { remote.requestCategory($0) })) {
-                        ForEach(GameCategory.allCases) { Label($0.title, systemImage: $0.symbol).tag($0) }
-                    }
-                } label: {
-                    HStack(spacing: 6) {
-                        Label(c.title, systemImage: c.symbol)
-                        Image(systemName: "chevron.up.chevron.down").font(.caption)
-                    }
-                    .font(.headline)
-                    .padding(.horizontal, 14)
-                    .padding(.vertical, 8)
-                    .background(.quaternary.opacity(0.6), in: Capsule())
+                ViewThatFits(in: .horizontal) {
+                    HStack(spacing: 8) { categoryMenu(c); modeMenu }
+                    VStack(spacing: 8) { categoryMenu(c); modeMenu }
                 }
-                .buttonStyle(.plain)
             }
         }
+    }
+
+    private func categoryMenu(_ c: GameCategory) -> some View {
+        Menu {
+            Picker(L("category"), selection: Binding(get: { c }, set: { remote.requestCategory($0) })) {
+                ForEach(GameCategory.allCases) { Label($0.title, systemImage: $0.symbol).tag($0) }
+            }
+        } label: {
+            menuLabel(c.title, symbol: c.symbol)
+        }
+        .buttonStyle(.plain)
+    }
+
+    @ViewBuilder private var modeMenu: some View {
+        if let m = remote.tvMode {
+            Menu {
+                Picker(L("mode"), selection: Binding(get: { m }, set: { remote.requestMode($0) })) {
+                    ForEach(GameMode.allCases) { Label($0.title, systemImage: $0.symbol).tag($0) }
+                }
+            } label: {
+                menuLabel(m.title, symbol: m.symbol)
+            }
+            .buttonStyle(.plain)
+            .accessibilityLabel("\(L("mode")): \(m.title)")
+        }
+    }
+
+    private func menuLabel(_ title: String, symbol: String) -> some View {
+        HStack(spacing: 6) {
+            Label(title, systemImage: symbol).lineLimit(1)
+            Image(systemName: "chevron.up.chevron.down").font(.caption)
+        }
+        .font(.headline)
+        .padding(.horizontal, 14)
+        .padding(.vertical, 8)
+        .background(.quaternary.opacity(0.6), in: Capsule())
+        .fixedSize()
     }
 
     private var statusLine: some View {
@@ -218,16 +249,41 @@ struct VoiceRemoteView: View {
             remote.requestNewGame()
         } label: {
             Label(L("newGame"), systemImage: "arrow.clockwise")
-                .font(.headline)
+                .font(.subheadline.weight(.semibold))
                 .foregroundStyle(Brand.navy)
-                .padding(.horizontal, 18)
-                .frame(height: 52)
+                .padding(.horizontal, 14)
+                .frame(height: 48)
                 .background(Brand.orange, in: Capsule())
         }
         .buttonStyle(.plain)
         .opacity(remote.connection == .connected && remote.tvOver ? 1 : 0)
         .disabled(!(remote.connection == .connected && remote.tvOver))
         .animation(.default, value: remote.tvOver)
+        .fixedSize()
+    }
+
+    /// "Yeni oyun"un yanında: TV'de rotayı izletir (yalnızca günlük ve alıştırmada, oyun bitince); izlenirken "Durdur".
+    private var replayButton: some View {
+        let title = L(remote.tvReplaying ? "replay.stop" : "replay.button")
+        let symbol = remote.tvReplaying ? "stop.circle.fill" : "play.circle.fill"
+        return Button {
+            UIImpactFeedbackGenerator(style: .light).impactOccurred()
+            remote.requestReplay()
+        } label: {
+            // Dar ekranda (uzun dillerde) yalnızca simge kalır.
+            ViewThatFits(in: .horizontal) {
+                Label(title, systemImage: symbol).fixedSize()
+                Image(systemName: symbol)
+            }
+            .font(.subheadline.weight(.semibold))
+            .foregroundStyle(.primary)
+            .padding(.horizontal, 14)
+            .frame(height: 48)
+            .background(Brand.orange.opacity(0.25), in: Capsule())
+        }
+        .buttonStyle(.plain)
+        .accessibilityLabel(title)
+        .transition(.opacity)
     }
 
     /// Küçük "Pes et": ilk basış onay ister, 3 sn içinde ikinci basış TV'de pes eder.
