@@ -133,7 +133,7 @@ node tools/cdp.mjs http://127.0.0.1:8765/ 1280 800 1 adimlar.json <klasör>
 - Animasyonlar: yeni tahminde 1,3 sn beyaz parlama; bulununca 2,6 sn yeşil nabız ve konfeti (azaltılmış hareket ayarında konfeti yok).
 
 **Veri (siyasi tercihler)**
-- Kaynak: Natural Earth 1:50m (ülkeler), geoBoundaries TUR ADM1 (iller, gbOpen, CC BY 4.0). İller 10 Kasım 2026'ya kadar cihadturhan/tr-geojson'dandı; o veri çok kabaydı (Zonguldak 22 nokta, Bolu ile arasında 15 km boşluk) ve 5 komşuluk eksik (Bolu–Zonguldak, Afyon–Burdur, Bilecik–Kocaeli, Çankırı–Kırıkkale, İstanbul–Kırklareli), 2 komşuluk fazlaydı (Bursa–Sakarya, Erzurum–Trabzon). Yeni veri ortak kenarları koruyarak sadeleştirilir (`shapely.coverage_simplify`, 0,005°): iki il aynı çizgiyi paylaşır, 200 komşu çifti.
+- Kaynak: Natural Earth 1:50m (ülkeler), geoBoundaries TUR ADM1 (iller, gbOpen, CC BY 4.0). İller 10 Kasım 2026'ya kadar cihadturhan/tr-geojson'dandı; o veri çok kabaydı (Zonguldak 22 nokta, Bolu ile arasında 15 km boşluk) ve 5 komşuluk eksik (Bolu–Zonguldak, Afyon–Burdur, Bilecik–Kocaeli, Çankırı–Kırıkkale, İstanbul–Kırklareli), 2 komşuluk fazlaydı (Bursa–Sakarya, Erzurum–Trabzon). Yeni veri ortak kenarları koruyarak sadeleştirilir (`shapely.coverage_simplify`): iki il aynı çizgiyi paylaşır, 200 komşu çifti. Çizim 0,08° toleransla (~2.000 nokta; daha ayrıntılısı çok kıvrımlıydı, kullanıcı göz yorduğunu söyledi), mesafeler 0,005°'lik isabetli sınırlardan hesaplanır.
 - Oyunda olanlar: BM üyeleri, Vatikan, Filistin, Kosova, Tayvan, Batı Sahra, Grönland, KKTC (ayrı ülke). Güney Kıbrıs "Güney Kıbrıs" adıyla.
 - Somaliland, Somali'ye birleştirildi. Bağımlı bölgeler (Porto Riko, Jersey…) yalnızca arka planda çiziliyor.
 - Türkiye, Rusya, Kıbrıs ve KKTC hem Avrupa hem Asya kategorisinde.

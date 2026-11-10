@@ -4,7 +4,7 @@
 - Kaynak: geoBoundaries TUR ADM1 (gbOpen, CC BY 4.0), il başına ~4.500 nokta. Eski kaynak
   (cihadturhan/tr-geojson) çok kabaydı: Zonguldak 22 noktaydı, Bolu ile arasında 15 km boşluk
   kalıyordu ve komşu olmayan iller (Bursa–Sakarya) komşu görünüyordu.
-- Sınırlar ortak kenarları koruyarak sadeleştirilir (`shapely.coverage_simplify`): iki il aynı
+- Sınırlar ortak kenarları koruyarak sadeleştirilir (çizim sade, mesafeler isabetli geometriden) (`shapely.coverage_simplify`): iki il aynı
   çizgiyi paylaşır, aralarında boşluk ya da üst üste binme olmaz.
 - Her il çifti için en yakın sınırlar arası mesafe (km) önceden hesaplanır; komşular 0 km.
 - Plaka kodu ISO 3166-2 kodundan (TR-06 → 6) alınır; il sırası (dolayısıyla günlük bulmaca) değişmez.
@@ -42,8 +42,11 @@ PLATES = [
     "Iğdır", "Yalova", "Karabük", "Kilis", "Osmaniye", "Düzce",
 ]
 
-# Sadeleştirme toleransı (derece; ~500 m). Haritada kıyılar ve sınırlar yakınlaştırınca da düzgün görünür.
-TOLERANCE = 0.005
+# Çizim için sadeleştirme toleransı (derece; ~8 km). Daha küçüğü (0,005–0,03) sınırları gerçeğe yakın ama
+# çok kıvrımlı çiziyordu; kullanıcı göz yorduğunu söyledi, atlaslardaki gibi sade çizgiler istendi.
+DRAW_TOLERANCE = 0.08
+# Mesafeler daha isabetli, az sadeleştirilmiş sınırlardan hesaplanır (~500 m).
+DIST_TOLERANCE = 0.005
 # Bundan küçük adalar (km²) çizilmez.
 MIN_ISLAND_KM2 = 2.0
 # Ortak kenarlar birebir aynı olduğundan komşular arası mesafe 0'dır; yuvarlama payı.
@@ -93,8 +96,8 @@ def main():
     assert sorted(ids) == list(range(1, 82)), "81 il bekleniyordu"
     assert shapely.coverage_is_valid(geoms), "il sınırları üst üste biniyor"
 
-    simplified = shapely.coverage_simplify(geoms, TOLERANCE)
-    by_id = dict(zip(ids, simplified))
+    by_id = dict(zip(ids, shapely.coverage_simplify(geoms, DRAW_TOLERANCE)))
+    accurate = dict(zip(ids, shapely.coverage_simplify(geoms, DIST_TOLERANCE)))
 
     provinces = []
     shapes = []
@@ -110,7 +113,7 @@ def main():
             rings.append([[round(x, 4), round(y, 4)] for x, y in p.exterior.coords])
             kept.append(p)
         shape_kept = shapely.MultiPolygon(kept)
-        shapes.append(project(shape_kept))
+        shapes.append(project(accurate[pid]))
         c = shape_kept.representative_point()
         provinces.append({"id": pid, "name": PLATES[pid - 1], "rings": rings,
                           "center": [round(c.x, 4), round(c.y, 4)]})
