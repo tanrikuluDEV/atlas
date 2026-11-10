@@ -1,5 +1,5 @@
 // Çevrimdışı çalışma: dosyalar önbelleğe alınır, internet yokken oradan verilir.
-const CACHE = 'atlas-v15';
+const CACHE = 'atlas-v16';
 const ASSETS = [
   './', 'index.html', 'style.css', 'manifest.webmanifest',
   'js/app.js', 'js/game.js', 'js/map.js', 'js/places.js', 'js/daily.js', 'js/colors.js', 'js/confetti.js', 'js/i18n.js', 'js/store.js', 'js/version.js', 'js/brand.js', 'js/progression.js', 'js/badges.js', 'js/feedback.js', 'js/flags.js', 'js/modes.js', 'js/board.js',

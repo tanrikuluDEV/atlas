@@ -42,9 +42,11 @@ PLATES = [
     "Iğdır", "Yalova", "Karabük", "Kilis", "Osmaniye", "Düzce",
 ]
 
-# Çizim için sadeleştirme toleransı (derece; ~8 km). Daha küçüğü (0,005–0,03) sınırları gerçeğe yakın ama
-# çok kıvrımlı çiziyordu; kullanıcı göz yorduğunu söyledi, atlaslardaki gibi sade çizgiler istendi.
-DRAW_TOLERANCE = 0.08
+# Çizim: hafif sadeleştirme + köşe yuvarlama. 0,005° çok girintili çıkıntılıydı (göz yoruyordu),
+# 0,08° ise illeri tanınmaz, köşeli şekillere çeviriyordu; ikisinin arası seçildi.
+DRAW_TOLERANCE = float(os.environ.get("ATLAS_TOL", "0.03"))
+# Chaikin köşe yuvarlama tekrar sayısı (0 = yok).
+SMOOTH_ITERATIONS = int(os.environ.get("ATLAS_SMOOTH", "1"))
 # Mesafeler daha isabetli, az sadeleştirilmiş sınırlardan hesaplanır (~500 m).
 DIST_TOLERANCE = 0.005
 # Bundan küçük adalar (km²) çizilmez.
@@ -81,6 +83,26 @@ def polygons(g):
     return [p for part in getattr(g, "geoms", []) for p in polygons(part)]
 
 
+def chaikin(ring, fixed, iterations):
+    """Köşeleri yuvarlar (Chaikin). Her kenarın ¼ ve ¾ noktaları kenarın yönünden bağımsız olduğundan iki
+    komşu il ortak kenarda aynı noktaları üretir; üç ilin buluştuğu noktalar (`fixed`) yerinde kalır,
+    böylece köşe kesilirken iller arasında boşluk açılmaz."""
+    pts = ring[:-1]
+    for _ in range(iterations):
+        out = []
+        n = len(pts)
+        for i in range(n):
+            a, b = pts[i], pts[(i + 1) % n]
+            if a in fixed:
+                out.append(a)
+            # ¼ ve ¾ noktaları; toplama sırası iki yönde de aynı sonucu versin diye simetrik yazılır.
+            q = (0.75 * a[0] + 0.25 * b[0], 0.75 * a[1] + 0.25 * b[1])
+            r_ = (0.25 * a[0] + 0.75 * b[0], 0.25 * a[1] + 0.75 * b[1])
+            out += [q, r_]
+        pts = out
+    return pts + [pts[0]]
+
+
 def main():
     if not os.path.exists(SRC):
         os.makedirs(CACHE, exist_ok=True)
@@ -99,6 +121,14 @@ def main():
     by_id = dict(zip(ids, shapely.coverage_simplify(geoms, DRAW_TOLERANCE)))
     accurate = dict(zip(ids, shapely.coverage_simplify(geoms, DIST_TOLERANCE)))
 
+    # Üç ya da daha çok ilin köşe olarak paylaştığı noktalar: yuvarlamada yerinde kalır.
+    owners = {}
+    for pid, g in by_id.items():
+        for p in polygons(g):
+            for c in set(p.exterior.coords):
+                owners.setdefault(c, set()).add(pid)
+    fixed = {c for c, o in owners.items() if len(o) >= 3}
+
     provinces = []
     shapes = []
     for pid in range(1, 82):
@@ -110,7 +140,8 @@ def main():
             if km2 < MIN_ISLAND_KM2 and rings:
                 continue
             # Sadece dış halkalar: il sınırları için delikler önemsiz.
-            rings.append([[round(x, 4), round(y, 4)] for x, y in p.exterior.coords])
+            ring = chaikin(list(p.exterior.coords), fixed, SMOOTH_ITERATIONS)
+            rings.append([[round(x, 4), round(y, 4)] for x, y in ring])
             kept.append(p)
         shape_kept = shapely.MultiPolygon(kept)
         shapes.append(project(accurate[pid]))
