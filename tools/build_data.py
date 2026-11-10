@@ -1,19 +1,32 @@
 #!/usr/bin/env python3
-"""tr-cities.geojson dosyasından uygulamanın kullandığı provinces.json'u üretir.
+"""Türkiye il sınırlarından uygulamanın kullandığı provinces.json'u üretir.
 
-- İl adlarını düzeltir, plaka kodlarını ekler.
-- Her il çifti için en yakın sınırlar arası mesafeyi (km) önceden hesaplar.
-  Komşu iller 0 km olarak kaydedilir.
+- Kaynak: geoBoundaries TUR ADM1 (gbOpen, CC BY 4.0), il başına ~4.500 nokta. Eski kaynak
+  (cihadturhan/tr-geojson) çok kabaydı: Zonguldak 22 noktaydı, Bolu ile arasında 15 km boşluk
+  kalıyordu ve komşu olmayan iller (Bursa–Sakarya) komşu görünüyordu.
+- Sınırlar ortak kenarları koruyarak sadeleştirilir (`shapely.coverage_simplify`): iki il aynı
+  çizgiyi paylaşır, aralarında boşluk ya da üst üste binme olmaz.
+- Her il çifti için en yakın sınırlar arası mesafe (km) önceden hesaplanır; komşular 0 km.
+- Plaka kodu ISO 3166-2 kodundan (TR-06 → 6) alınır; il sırası (dolayısıyla günlük bulmaca) değişmez.
 
-Kaynak: https://github.com/cihadturhan/tr-geojson
+Gerekenler: shapely >= 2.1 (python3 -m pip install shapely).
+Kaynak dosya yoksa indirilir (tools/cache/, git'e girmez).
 Kullanım: python3 tools/build_data.py
 """
 import json
 import math
 import os
+import urllib.request
+
+import shapely
+from shapely.geometry import shape
+from shapely.ops import nearest_points
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-SRC = os.path.join(ROOT, "tools", "tr-cities.geojson")
+CACHE = os.path.join(ROOT, "tools", "cache")
+SRC = os.path.join(CACHE, "geoBoundaries-TUR-ADM1.geojson")
+SRC_URL = ("https://github.com/wmgeolab/geoBoundaries/raw/main/releaseData/gbOpen/TUR/ADM1/"
+           "geoBoundaries-TUR-ADM1.geojson")
 DST = os.path.join(ROOT, "Atlas", "Resources", "provinces.json")
 
 PLATES = [
@@ -28,10 +41,13 @@ PLATES = [
     "Aksaray", "Bayburt", "Karaman", "Kırıkkale", "Batman", "Şırnak", "Bartın", "Ardahan",
     "Iğdır", "Yalova", "Karabük", "Kilis", "Osmaniye", "Düzce",
 ]
-RENAMES = {"Afyon": "Afyonkarahisar"}
 
-# Bu mesafenin altındaki sınırlar "komşu" (0 km) sayılır; veri setindeki küçük kaymaları tolere eder.
-NEIGHBOR_KM = 2.0
+# Sadeleştirme toleransı (derece; ~500 m). Haritada kıyılar ve sınırlar yakınlaştırınca da düzgün görünür.
+TOLERANCE = 0.005
+# Bundan küçük adalar (km²) çizilmez.
+MIN_ISLAND_KM2 = 2.0
+# Ortak kenarlar birebir aynı olduğundan komşular arası mesafe 0'dır; yuvarlama payı.
+NEIGHBOR_KM = 0.5
 R = 6371.0
 
 
@@ -42,55 +58,82 @@ def haversine(a, b):
     return 2 * R * math.asin(math.sqrt(h))
 
 
+# Mesafe aramaları için Türkiye'nin ortasında (39°K) eşit uzaklıklı yaklaşık düzlem (km).
+KX = 111.32 * math.cos(math.radians(39))
+KY = 110.57
+
+
+def project(g):
+    return shapely.transform(g, lambda c: c * [KX, KY])
+
+
+def unproject(p):
+    return (p.x / KX, p.y / KY)
+
+
+def polygons(g):
+    """Geometrideki tüm çokgenler (Polygon, MultiPolygon ya da karışık koleksiyon)."""
+    if g.geom_type == "Polygon":
+        return [g]
+    return [p for part in getattr(g, "geoms", []) for p in polygons(part)]
+
+
 def main():
+    if not os.path.exists(SRC):
+        os.makedirs(CACHE, exist_ok=True)
+        print("indiriliyor:", SRC_URL)
+        urllib.request.urlretrieve(SRC_URL, SRC)
     src = json.load(open(SRC, encoding="utf-8"))
-    provinces = []
+
+    ids, geoms = [], []
     for f in src["features"]:
-        name = RENAMES.get(f["properties"]["name"], f["properties"]["name"])
-        geom = f["geometry"]
-        polys = geom["coordinates"] if geom["type"] == "MultiPolygon" else [geom["coordinates"]]
-        # Sadece dış halkalar: il sınırları için delikler önemsiz.
-        rings = [[[round(x, 4), round(y, 4)] for x, y in poly[0]] for poly in polys]
-        provinces.append({"id": PLATES.index(name) + 1, "name": name, "rings": rings})
+        ids.append(int(f["properties"]["shapeISO"].split("-")[1]))
+        g = shapely.make_valid(shape(f["geometry"]))
+        geoms.append(shapely.MultiPolygon(polygons(g)))
+    assert sorted(ids) == list(range(1, 82)), "81 il bekleniyordu"
+    assert shapely.coverage_is_valid(geoms), "il sınırları üst üste biniyor"
 
-    provinces.sort(key=lambda p: p["id"])
-    assert [p["id"] for p in provinces] == list(range(1, 82))
+    simplified = shapely.coverage_simplify(geoms, TOLERANCE)
+    by_id = dict(zip(ids, simplified))
 
-    pts = [[pt for ring in p["rings"] for pt in ring] for p in provinces]
-    bbox = [(min(x for x, _ in ps), min(y for _, y in ps), max(x for x, _ in ps), max(y for _, y in ps)) for ps in pts]
+    provinces = []
+    shapes = []
+    for pid in range(1, 82):
+        g = by_id[pid]
+        rings = []
+        kept = []
+        for p in sorted(polygons(g), key=lambda p: -p.area):
+            km2 = project(p).area
+            if km2 < MIN_ISLAND_KM2 and rings:
+                continue
+            # Sadece dış halkalar: il sınırları için delikler önemsiz.
+            rings.append([[round(x, 4), round(y, 4)] for x, y in p.exterior.coords])
+            kept.append(p)
+        shape_kept = shapely.MultiPolygon(kept)
+        shapes.append(project(shape_kept))
+        c = shape_kept.representative_point()
+        provinces.append({"id": pid, "name": PLATES[pid - 1], "rings": rings,
+                          "center": [round(c.x, 4), round(c.y, 4)]})
 
     n = len(provinces)
     dist = [[0] * n for _ in range(n)]
     for i in range(n):
         for j in range(i + 1, n):
-            # Çok uzak çiftlerde tüm noktaları dolaşmamak için önce kaba bir alt sınır bulunur.
-            best = math.inf
-            for a in pts[i][::4]:
-                for b in pts[j][::4]:
-                    d = (a[0] - b[0]) ** 2 + (a[1] - b[1]) ** 2
-                    if d < best:
-                        best, ba, bb = d, a, b
-            # Ardından en yakın bölgenin çevresinde tam çözünürlükte arama.
-            coarse = haversine(ba, bb)
-            margin = coarse / 80.0 + 0.1  # derece cinsinden cömert pencere
-            ca = [a for a in pts[i] if abs(a[0] - bb[0]) < margin * 2 + 0.3 and abs(a[1] - bb[1]) < margin * 2 + 0.3]
-            cb = [b for b in pts[j] if abs(b[0] - ba[0]) < margin * 2 + 0.3 and abs(b[1] - ba[1]) < margin * 2 + 0.3]
-            km = min((haversine(a, b) for a in ca for b in cb), default=coarse)
-            km = min(km, coarse)
-            km = 0 if km < NEIGHBOR_KM else int(round(km))
+            if shapes[i].distance(shapes[j]) < NEIGHBOR_KM:
+                km = 0
+            else:
+                a, b = nearest_points(shapes[i], shapes[j])
+                km = int(round(haversine(unproject(a), unproject(b))))
             dist[i][j] = dist[j][i] = km
-
-    for p in provinces:
-        ps = [pt for ring in p["rings"] for pt in ring]
-        p["center"] = [round(sum(x for x, _ in ps) / len(ps), 4), round(sum(y for _, y in ps) / len(ps), 4)]
 
     out = {"provinces": provinces, "distances": dist}
     with open(DST, "w", encoding="utf-8") as fh:
         json.dump(out, fh, ensure_ascii=False, separators=(",", ":"))
 
     neighbors = {provinces[i]["name"]: [provinces[j]["name"] for j in range(n) if j != i and dist[i][j] == 0] for i in range(n)}
-    print("yazıldı:", DST)
-    for k in ("Ankara", "İstanbul", "Yalova", "Kilis", "Konya"):
+    print("yazıldı:", DST, "·", sum(len(r) for p in provinces for r in p["rings"]), "nokta")
+    print("komşu çifti:", sum(len(v) for v in neighbors.values()) // 2)
+    for k in ("Ankara", "İstanbul", "Bolu", "Zonguldak", "Kilis"):
         print(k, "komşular:", neighbors[k])
     print("Edirne-Hakkari:", dist[21][29], "km")
 

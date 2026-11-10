@@ -66,7 +66,7 @@ cd web && python3 -m http.server 8765
 cd web && npx vercel deploy --prod --yes
 
 # Veriyi yeniden üret (sonra web/data/ altına kopyala)
-python3 tools/build_data.py                      # iller → Atlas/Resources/provinces.json
+python3 tools/build_data.py                      # iller → Atlas/Resources/provinces.json (shapely >= 2.1 gerekir; kaynak tools/cache/'e indirilir, git'e girmez)
 python3 tools/build_world.py                     # ülkeler → Atlas/Resources/world.json (mesafesiz)
 python3 tools/country_names.py                   # yalnızca 5 dildeki ülke adlarını world.json'a ekler/günceller
 python3 tools/country_flags.py                   # ülkelere iki harfli ISO kodu (iso2, bayrak için); build_world.py'den sonra yeniden çalıştır
@@ -87,7 +87,7 @@ node tools/cdp.mjs http://127.0.0.1:8765/ 1280 800 1 adimlar.json <klasör>
 - **Her güncelleme GitHub'a da gider.** Depo: https://github.com/tanrikuluDEV/atlas (gizli/private, dal `main`). Bir iş bitince değişiklikler Türkçe bir mesajla commit edilip `git push` yapılır (kullanıcı bunu kalıcı olarak istedi). `gh`'de etkin hesap `azerozgurr` adıyla kayıtlı ama GitHub adı `tanrikuluDEV`; `halisahamobile` (azertanrikulu) hesabına geçme. `.gitignore` `build/`, `.env*` ve `.vercel/`'ı dışarıda tutar; `web/.env.local` asla commit edilmez. Commit mesajlarına `Co-Authored-By: Claude …` satırı **eklenmez** (GitHub'da Claude katkıda bulunan olarak görünüyordu; kullanıcı istemedi).
 - **Günlük bulmaca üç sürümde aynı olmalı.** `web/js/daily.js` Swift'teki `DailyPuzzle` ile birebir aynı sonucu verir (64 test durumuyla doğrulandı). Kategori tohumu (`GameCategory.seedIndex` ↔ `Category.seed`; Türkiye 0, Avrupa 1, Asya 2, Afrika 3, K. Amerika 4, G. Amerika 5, Okyanusya 6, Dünya 7), tohum, epoch (1 Ocak 2026) ya da yer sırası değişirse herkesin günlük bulmacası bozulur. Oyun mantığındaki değişiklikler genelde hem Swift'e hem `web/`'e uygulanmalı.
 - **Türkiye için eski anahtarlar korunur:** istatistik anahtarı `stats` / `stats.practice`, günlük kayıt anahtarı `daily.<gün>` (kullanıcının mevcut istatistikleri bunlarda).
-- **Web her yayında:** `web/js/version.js` içindeki `VERSION` ve `web/sw.js` içindeki `CACHE` (`atlas-vN`) birlikte artırılır. Veri dosyaları `?v=VERSION` ile istenir (eskiden `data/` 24 saat önbellekleniyordu ve dönen kullanıcılar eski `world.json` yüzünden ülke adlarını Türkçe görüyordu). Sayfa, yeni service worker devreye girince kendini yeniler; Ayarlar'da sürüm görünür. Şu an: Sürüm 14. `npx vercel deploy` ilk denemede ara sıra `"status": "error"` veriyor; tekrar denemek yetiyor (canlı `VERSION`'ı curl ile doğrula).
+- **Web her yayında:** `web/js/version.js` içindeki `VERSION` ve `web/sw.js` içindeki `CACHE` (`atlas-vN`) birlikte artırılır. Veri dosyaları `?v=VERSION` ile istenir (eskiden `data/` 24 saat önbellekleniyordu ve dönen kullanıcılar eski `world.json` yüzünden ülke adlarını Türkçe görüyordu). Sayfa, yeni service worker devreye girince kendini yeniler; Ayarlar'da sürüm görünür. Şu an: Sürüm 15. `npx vercel deploy` ilk denemede ara sıra `"status": "error"` veriyor; tekrar denemek yetiyor (canlı `VERSION`'ı curl ile doğrula).
 - **Gizli bilgi:** Vercel CLI `web/.env.local` dosyasına bir OIDC anahtarı yazar. `web/.vercelignore` bunu (`.env*`) hariç tutar; silinmemeli.
 - **Sistem süreçlerine dokunma:** Dock'u `killall Dock` ile yeniden başlatmak bir kez Dock'un geri gelmemesine ve masaüstünün kararmasına yol açtı; ardından Terminal'in Masaüstü erişimi de kayboldu. Dock, Finder gibi sistem süreçleri kullanıcıya sorulmadan yeniden başlatılmaz.
 - **Ekran görüntüsü:** Terminal'in ekran kaydı izni yok. Mac uygulaması için `-renderSnapshots`, iPhone için simülatör (`xcrun simctl io … screenshot`), web için headless Chrome'u DevTools protokolüyle süren bir Node betiği kullanıldı.
@@ -98,7 +98,7 @@ node tools/cdp.mjs http://127.0.0.1:8765/ 1280 800 1 adimlar.json <klasör>
 - Kategori seçici kartlı (Mac, iPhone, web): kategorinin küçük haritası turuncu, yer sayısı ve bugünkü günlük bulmacanın durumu ("Yeni bulmaca", "Devam ediyor · n", "✓ n tahminde bulundu", "Pes edildi").
 - Gösterim sırası (menü, ⌘1…⌘8, web seçici): Türkiye, Avrupa, Dünya, Asya, Afrika, K. Amerika, G. Amerika, Okyanusya. Kullanıcı Dünya'yı 3. sıraya istedi; bu sıra günlük bulmacayı etkilemez (tohum ayrı).
 - Kategoriler: Türkiye (81 il), Avrupa (48), Asya (51), Afrika (55), Kuzey Amerika (24, Orta Amerika ve Karayipler dahil), Güney Amerika (12), Okyanusya (14), Dünya (200).
-- Mesafe = iki yerin en yakın sınırları arası (köşe–kenar). Komşular 0 km (iller için < 2 km, ülkeler için < 5 km).
+- Mesafe = iki yerin en yakın sınırları arası (köşe–kenar). Komşular 0 km (iller ortak kenarı paylaşınca, ülkeler için < 5 km).
 - Her kategorinin kendi günlük bulmacası ve istatistikleri var; istatistikler Günlük ve Alıştırma olarak ayrı tutulur. Alıştırmada bitirilen her oyun sayılır; bitirilmeden bırakılan oyun sayılmaz.
 - Ayarlar'daki km anahtarı kapalıyken yalnızca kilometre gizlenir, "Komşu" bilgisi görünmeye devam eder.
 - Oyun bitince Enter yeni oyunu (alıştırma) başlatır; sonuç penceresinde "Yeni oyun" ilk ve seçili düğmedir.
@@ -133,7 +133,7 @@ node tools/cdp.mjs http://127.0.0.1:8765/ 1280 800 1 adimlar.json <klasör>
 - Animasyonlar: yeni tahminde 1,3 sn beyaz parlama; bulununca 2,6 sn yeşil nabız ve konfeti (azaltılmış hareket ayarında konfeti yok).
 
 **Veri (siyasi tercihler)**
-- Kaynak: Natural Earth 1:50m (ülkeler), cihadturhan/tr-geojson (iller).
+- Kaynak: Natural Earth 1:50m (ülkeler), geoBoundaries TUR ADM1 (iller, gbOpen, CC BY 4.0). İller 10 Kasım 2026'ya kadar cihadturhan/tr-geojson'dandı; o veri çok kabaydı (Zonguldak 22 nokta, Bolu ile arasında 15 km boşluk) ve 5 komşuluk eksik (Bolu–Zonguldak, Afyon–Burdur, Bilecik–Kocaeli, Çankırı–Kırıkkale, İstanbul–Kırklareli), 2 komşuluk fazlaydı (Bursa–Sakarya, Erzurum–Trabzon). Yeni veri ortak kenarları koruyarak sadeleştirilir (`shapely.coverage_simplify`, 0,005°): iki il aynı çizgiyi paylaşır, 200 komşu çifti.
 - Oyunda olanlar: BM üyeleri, Vatikan, Filistin, Kosova, Tayvan, Batı Sahra, Grönland, KKTC (ayrı ülke). Güney Kıbrıs "Güney Kıbrıs" adıyla.
 - Somaliland, Somali'ye birleştirildi. Bağımlı bölgeler (Porto Riko, Jersey…) yalnızca arka planda çiziliyor.
 - Türkiye, Rusya, Kıbrıs ve KKTC hem Avrupa hem Asya kategorisinde.
